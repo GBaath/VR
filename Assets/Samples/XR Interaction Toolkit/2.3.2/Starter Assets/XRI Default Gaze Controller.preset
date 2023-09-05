@@ -9,8 +9,7 @@ Preset:
   m_Name: XRI Default Gaze Controller
   m_TargetType:
     m_NativeTypeID: 114
-    m_ManagedTypePPtr: {fileID: 11500000, guid: caff514de9b15ad48ab85dcff5508221,
-      type: 3}
+    m_ManagedTypePPtr: {fileID: 11500000, guid: caff514de9b15ad48ab85dcff5508221, type: 3}
     m_ManagedTypeFallback: 
   m_Properties:
   - target: {fileID: 0}
@@ -100,8 +99,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_PositionAction.m_Reference
     value: 
-    objectReference: {fileID: 3220680263695665919, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
+    objectReference: {fileID: 3220680263695665919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   - target: {fileID: 0}
     propertyPath: m_RotationAction.m_UseReference
     value: 1
@@ -141,8 +139,47 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_RotationAction.m_Reference
     value: 
-    objectReference: {fileID: -5930349909990434036, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
+    objectReference: {fileID: -5930349909990434036, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_UseReference
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_Action.m_Name
+    value: Is Tracked
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_Action.m_Type
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_Action.m_ExpectedControlType
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_Action.m_Id
+    value: 5f045e74-fa5b-44d0-a0aa-b4da6d278c54
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_Action.m_SingletonActionBindings.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_Action.m_Flags
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_IsTrackedAction.m_Reference
+    value: 
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_TrackingStateAction.m_UseReference
     value: 1
@@ -182,8 +219,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_TrackingStateAction.m_Reference
     value: 
-    objectReference: {fileID: 2069149553511882089, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
+    objectReference: {fileID: 2069149553511882089, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   - target: {fileID: 0}
     propertyPath: m_SelectAction.m_UseReference
     value: 0
@@ -422,6 +458,46 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_UIPressActionValue.m_Reference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_UseReference
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_Action.m_Name
+    value: UI Scroll
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_Action.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_Action.m_ExpectedControlType
+    value: Vector2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_Action.m_Id
+    value: fc502128-1646-42d9-86a2-334a9ace91f6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_Action.m_SingletonActionBindings.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_Action.m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UIScrollAction.m_Reference
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
