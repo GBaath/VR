@@ -942,7 +942,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5686134208185362930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b42356282cc64da42a7e980fd337dc26, type: 3}
+  m_Script: {fileID: 11500000, guid: 6450dbc8d177fc54c880e2ef5c3b6c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pinchAnimationAction:
@@ -951,7 +951,7 @@ MonoBehaviour:
       m_Name: Pinch Animation
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 515f53e3-1f4b-424b-b79e-3b9abe01f000
+      m_Id: 32037aca-eccd-4323-b41d-13f722516f00
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -963,7 +963,7 @@ MonoBehaviour:
       m_Name: Grip Animation
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 048de59c-712a-440e-9a94-d29dee332db0
+      m_Id: 54ce3d47-b398-4d35-9312-cbc7d94b9502
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
