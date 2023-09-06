@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6634160019250341028}
   - component: {fileID: 4371708309417821615}
   - component: {fileID: 6527249808289045036}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: SM_Wep_Rifle_Gold_Trigger_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4344475611138100692}
   - component: {fileID: 877843959609915330}
   - component: {fileID: 5587445530727378643}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: SM_Wep_Rifle_Gold_Mag_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 2556434888900352694}
   - component: {fileID: 8887824040553205554}
   - component: {fileID: 8857784432671465027}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: SM_Wep_Rifle_Gold_Slide_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8431375904085293120}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: AttachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4697413521406551261}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: FiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 7243584724469648415}
   - component: {fileID: 652679306974607624}
   - component: {fileID: 8333556393896170108}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: SM_Wep_Rifle_Gold_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7392978460180643453}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.6906395, w: 0.7231992}
+  m_LocalRotation: {x: 0, y: 0, z: -0.6906426, w: 0.7231963}
   m_LocalPosition: {x: 2.3839998, y: 1.01, z: 0.883}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -493,7 +493,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 536870912
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
