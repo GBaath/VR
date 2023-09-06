@@ -145,7 +145,7 @@ namespace UnityEngine.XR.Content.Interaction
             return direction.normalized;
         }
 
-        void UpdateValue()
+         void UpdateValue()
         {
             var lookDirection = GetLookDirection();
             var lookAngle = Mathf.Atan2(lookDirection.z, lookDirection.y) * Mathf.Rad2Deg;
