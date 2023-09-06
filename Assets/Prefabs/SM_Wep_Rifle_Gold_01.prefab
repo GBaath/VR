@@ -632,9 +632,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7392978460180643453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63aee6a21632038468d2437326b7a19e, type: 3}
+  m_Script: {fileID: 11500000, guid: 39dc831dc44995649be5b88d342baf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1483399186347397756, guid: a3a4ac1b8067a9548af58c53b9d761f4, type: 3}
   shootingPoint: {fileID: 4697413521406551261}
-  firingSpeed: 8
+  firingSpeed: 5
