@@ -67,7 +67,7 @@ public class VRWC_WheelInteractable : XRBaseInteractable
         }
 
         // Instantiate new grab point at interactor's position.
-        grabPoint = new GameObject($"{transform.name}'s grabPoint", typeof(VRWC_GrabPoint), typeof(Rigidbody), typeof(FixedJoint));
+        grabPoint = new GameObject($"{transform.name}'s grabPoint", typeof(VRWC_GrabPoint), /*typeof(Rigidbody),*/ typeof(FixedJoint));
 
         grabPoint.transform.position = interactor.transform.position;
 
