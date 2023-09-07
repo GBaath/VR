@@ -34,6 +34,19 @@ public class LootPickup : MonoBehaviour
         transform.localScale = Vector3.one*lootResource.customScale;
 
     }
+    public void HighlightToggle(bool enabled)
+    {
+        if (enabled)
+        {
+            Shader.SetGlobalFloat("OutLine Size", 0.0025f);
+        }
+        else
+        {
+            Shader.SetGlobalFloat("OutLine Size", 0);
+        }
+    }
+
+
     void SetNewRandomLootResource()
     {
         lootResource = AssetLoader.instance.lootResources[Random.Range(0,AssetLoader.instance.lootResources.Capacity)];
