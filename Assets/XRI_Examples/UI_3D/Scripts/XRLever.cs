@@ -8,7 +8,7 @@ namespace UnityEngine.XR.Content.Interaction
     /// </summary>
     public class XRLever : XRBaseInteractable
     {
-        const float k_LeverDeadZone = 0.1f; // Prevents rapid switching between on and off states when right in the middle
+        protected const float k_LeverDeadZone = 0.1f; // Prevents rapid switching between on and off states when right in the middle
 
         [SerializeField]
         [Tooltip("The object that is visually grabbed and manipulated")]
@@ -16,29 +16,29 @@ namespace UnityEngine.XR.Content.Interaction
 
         [SerializeField]
         [Tooltip("The value of the lever")]
-        bool m_Value = false;
+        protected bool m_Value = false;
 
         [SerializeField]
         [Tooltip("If enabled, the lever will snap to the value position when released")]
-        bool m_LockToValue;
+        protected bool m_LockToValue;
 
         [SerializeField]
         [Tooltip("Angle of the lever in the 'on' position")]
         [Range(-90.0f, 90.0f)]
-        float m_MaxAngle = 90.0f;
+        protected float m_MaxAngle = 90.0f;
 
         [SerializeField]
         [Tooltip("Angle of the lever in the 'off' position")]
         [Range(-90.0f, 90.0f)]
-        float m_MinAngle = -90.0f;
+        protected float m_MinAngle = -90.0f;
 
         [SerializeField]
         [Tooltip("Events to trigger when the lever activates")]
-        UnityEvent m_OnLeverActivate = new UnityEvent();
+        protected UnityEvent m_OnLeverActivate = new UnityEvent();
 
         [SerializeField]
         [Tooltip("Events to trigger when the lever deactivates")]
-        UnityEvent m_OnLeverDeactivate = new UnityEvent();
+        protected UnityEvent m_OnLeverDeactivate = new UnityEvent();
 
         IXRSelectInteractor m_Interactor;
 
@@ -145,7 +145,7 @@ namespace UnityEngine.XR.Content.Interaction
             return direction.normalized;
         }
 
-         void UpdateValue()
+          protected void UpdateValue()
         {
             var lookDirection = GetLookDirection();
             var lookAngle = Mathf.Atan2(lookDirection.z, lookDirection.y) * Mathf.Rad2Deg;
@@ -170,7 +170,7 @@ namespace UnityEngine.XR.Content.Interaction
             SetValue(newValue);
         }
 
-        void SetValue(bool isOn, bool forceRotation = false)
+        protected virtual void SetValue(bool isOn, bool forceRotation = false)
         {
             if (m_Value == isOn)
             {
@@ -195,7 +195,7 @@ namespace UnityEngine.XR.Content.Interaction
                 SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
         }
 
-        void SetHandleAngle(float angle)
+        protected void SetHandleAngle(float angle)
         {
             if (m_Handle != null)
                 m_Handle.localRotation = Quaternion.Euler(angle, 0.0f, 0.0f);
