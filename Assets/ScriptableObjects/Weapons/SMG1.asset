@@ -21,3 +21,6 @@ MonoBehaviour:
   firingSound: {fileID: 8300000, guid: 2f79ccded1c77214d90207c48f343a50, type: 3}
   noAmmoSound: {fileID: 8300000, guid: e5748096dd878724dbf0b65ae74937dd, type: 3}
   ammoCount: 40
+  maxPitch: 1.2
+  minPitch: 0.8
+  bulletSpread: 2

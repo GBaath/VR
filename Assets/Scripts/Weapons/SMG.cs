@@ -14,6 +14,8 @@ public class SMG : MonoBehaviour
     private float lastFiredTime = 0f; // time the last bullet was fired
     private bool outOfAmmo = false;
     private XRGrabInteractable grabbable;
+    private float pitch;
+    private Vector3 originalSpread;
 
 
     private void Start()
@@ -33,10 +35,13 @@ public class SMG : MonoBehaviour
     }
     private void Update()
     {
-        if (isFiring && Time.time - lastFiredTime >= weaponStats.reloadTime)
+        if (weaponStats.SMG)
         {
-            FireBullet();
-            lastFiredTime = Time.time; // update the last fired time
+            if (isFiring && Time.time - lastFiredTime >= weaponStats.reloadTime)
+            {
+                FireBullet();
+                lastFiredTime = Time.time; // update the last fired time
+            }
         }
     }
     public void StartFiring(ActivateEventArgs arg)
@@ -58,7 +63,15 @@ public class SMG : MonoBehaviour
     }
     private void OutOfAmmoSound()
     {
+        aS.pitch = 1;
         aS.clip = weaponStats.noAmmoSound;
+        aS.Play();
+    }
+
+    private void FireSound()
+    {
+        aS.pitch = Random.Range(weaponStats.minPitch, weaponStats.maxPitch);
+        aS.clip = weaponStats.firingSound;
         aS.Play();
     }
     public void FireBullet()
@@ -73,18 +86,31 @@ public class SMG : MonoBehaviour
         }
         else
         {
-            aS.clip = weaponStats.firingSound;
-            aS.Play();
+            BulletSpread();
+            FireSound();
             GameObject spawnedBullet = Instantiate(weaponStats.projectilePrefab);
             spawnedBullet.transform.position = firingPoint.position;
             spawnedBullet.GetComponent<Rigidbody>().velocity = firingPoint.forward * weaponStats.bulletSpeed;
             Destroy(spawnedBullet, 5);
             currentAmmo -= 1;
-        }
-        if (hapticScript != null)
-        {
+            ResetBulletSpread();
             hapticScript.TriggerHapticPublic();
         }
 
+    }
+    private void ResetBulletSpread()
+    {     
+        //Reset
+        firingPoint.rotation = Quaternion.Euler(originalSpread);
+    }
+    private void BulletSpread()
+    {     
+        //Get start rotation
+        originalSpread = firingPoint.eulerAngles;
+        //Set spread
+        float spreadX = Random.Range(-weaponStats.bulletSpread, weaponStats.bulletSpread);
+        float spreadY = Random.Range(-weaponStats.bulletSpread, weaponStats.bulletSpread);
+        float spreadZ = Random.Range(-weaponStats.bulletSpread, weaponStats.bulletSpread);
+        firingPoint.rotation = Quaternion.Euler(firingPoint.eulerAngles.x + spreadX, firingPoint.eulerAngles.y + spreadY, firingPoint.eulerAngles.z + spreadZ);       
     }
 }

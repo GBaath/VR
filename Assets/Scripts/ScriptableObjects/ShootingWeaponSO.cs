@@ -14,4 +14,7 @@ public class ShootingWeaponSO : ScriptableObject
     public UnityEngine.AudioClip firingSound;
     public UnityEngine.AudioClip noAmmoSound;
     public int ammoCount;
+    public float maxPitch;
+    public float minPitch;
+    public float bulletSpread;
 }
