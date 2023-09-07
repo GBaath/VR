@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6418c095a23e6f14bb447285af5c21a8, type: 3}
+  m_Name: SMG1
+  m_EditorClassIdentifier: 
+  weaponName: SMG1
+  projectilePrefab: {fileID: 1483399186347397756, guid: a3a4ac1b8067a9548af58c53b9d761f4, type: 3}
+  reloadTime: 0.08
+  bulletSpeed: 20
+  SMG: 1
+  hapticDuration: 0.2
+  firingSound: {fileID: 8300000, guid: 2f79ccded1c77214d90207c48f343a50, type: 3}
+  noAmmoSound: {fileID: 8300000, guid: e5748096dd878724dbf0b65ae74937dd, type: 3}
+  ammoCount: 40

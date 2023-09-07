@@ -33,14 +33,7 @@ public class HapticInteractable : MonoBehaviour
             baseController = controllerInteractor;
         }
     }
-    //public void TriggerHaptic(BaseInteractionEventArgs eventArgs)
-    //{
-    //    if(eventArgs.interactorObject is XRBaseControllerInteractor controllerInteractor)
-    //    {
-    //        TriggerHaptic(controllerInteractor.xrController);
-    //    }
 
-    //}
     public void TriggerHapticPublic()
     {
         if (baseController == null) return;
