@@ -17,10 +17,10 @@ MonoBehaviour:
   reloadTime: 0.08
   bulletSpeed: 20
   SMG: 1
-  hapticDuration: 0.2
+  hapticDuration: 0.1
   firingSound: {fileID: 8300000, guid: 2f79ccded1c77214d90207c48f343a50, type: 3}
   noAmmoSound: {fileID: 8300000, guid: e5748096dd878724dbf0b65ae74937dd, type: 3}
-  ammoCount: 40
+  ammoCount: 1000
   maxPitch: 1.2
   minPitch: 0.8
-  bulletSpread: 2
+  bulletSpread: 4
