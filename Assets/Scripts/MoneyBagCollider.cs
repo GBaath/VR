@@ -15,7 +15,7 @@ public class MoneyBagCollider : MonoBehaviour
         {
             meshToChange.material = highlightMaterial;
             
-            Destroy(other);
+            Destroy(other.gameObject);
 
         }
     }
