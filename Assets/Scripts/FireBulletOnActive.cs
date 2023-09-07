@@ -7,13 +7,22 @@ public class FireBulletOnActive : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform shootingPoint;
-    public float firingSpeed;
+    [SerializeField] float reloadTime = 0.5f; // time between shots in seconds
+    public float bulletSpeed;
 
+
+    HapticInteractable hapticScript;
+
+    AudioSource aS;
+
+    private float lastFiredTime = 0f; // time the last bullet was fired
     private XRGrabInteractable grabbable;
     private bool isFiring = false; // Track firing state
 
     private void Start()
     {
+        aS = GetComponent<AudioSource>();
+        hapticScript = GetComponent<HapticInteractable>();
         grabbable = GetComponent<XRGrabInteractable>();
         grabbable.activated.AddListener(StartFiring);
         grabbable.deactivated.AddListener(StopFiring);
@@ -22,10 +31,10 @@ public class FireBulletOnActive : MonoBehaviour
 
     private void Update()
     {
-        // Check if firing is active
-        if (isFiring)
+        if (isFiring && Time.time - lastFiredTime >= reloadTime)
         {
-            FireBullet(); // Continuously fire bullets
+            FireBullet();
+            lastFiredTime = Time.time; // update the last fired time
         }
     }
 
@@ -45,9 +54,15 @@ public class FireBulletOnActive : MonoBehaviour
 
     private void FireBullet()
     {
+        if (hapticScript != null)
+        {
+
+            hapticScript.TriggerHapticPublic();
+        }
+        aS.Play();
         GameObject spawnedBullet = Instantiate(bulletPrefab);
         spawnedBullet.transform.position = shootingPoint.position;
-        spawnedBullet.GetComponent<Rigidbody>().velocity = shootingPoint.forward * firingSpeed;
+        spawnedBullet.GetComponent<Rigidbody>().velocity = shootingPoint.forward * bulletSpeed;
         Destroy(spawnedBullet, 5);
     }
 }
