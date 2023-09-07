@@ -16,10 +16,13 @@ public class SMG : MonoBehaviour
     private XRGrabInteractable grabbable;
     private float pitch;
     private Vector3 originalSpread;
+    [SerializeField] ParticleSystem cartrideParticles;
 
+    [SerializeField] Animator sliderAnimator;
 
     private void Start()
     {
+
         hapticScript = GetComponent<HapticInteractable>();
         //Add grab Listeners
         grabbable = GetComponent<XRGrabInteractable>();
@@ -39,6 +42,7 @@ public class SMG : MonoBehaviour
         {
             if (isFiring && Time.time - lastFiredTime >= weaponStats.reloadTime)
             {
+
                 FireBullet();
                 lastFiredTime = Time.time; // update the last fired time
             }
@@ -49,12 +53,25 @@ public class SMG : MonoBehaviour
         if (outOfAmmo)
         {
             OutOfAmmoSound();
+            return;
         }
+        if (sliderAnimator != null)
+        {
+
+            sliderAnimator.SetBool("Fire", true);
+        }
+        StartParticleEffect();
         isFiring = true;
     }
 
     public void StopFiring(DeactivateEventArgs arg)
     {
+        if (sliderAnimator != null)
+        {
+            sliderAnimator.SetBool("Fire", false);
+
+        }
+        StopParticleEffect();
         isFiring = false;
     }
     public void ObjectDropped(SelectExitEventArgs arg)
@@ -99,18 +116,33 @@ public class SMG : MonoBehaviour
 
     }
     private void ResetBulletSpread()
-    {     
+    {
         //Reset
         firingPoint.rotation = Quaternion.Euler(originalSpread);
     }
     private void BulletSpread()
-    {     
+    {
         //Get start rotation
         originalSpread = firingPoint.eulerAngles;
         //Set spread
         float spreadX = Random.Range(-weaponStats.bulletSpread, weaponStats.bulletSpread);
         float spreadY = Random.Range(-weaponStats.bulletSpread, weaponStats.bulletSpread);
         float spreadZ = Random.Range(-weaponStats.bulletSpread, weaponStats.bulletSpread);
-        firingPoint.rotation = Quaternion.Euler(firingPoint.eulerAngles.x + spreadX, firingPoint.eulerAngles.y + spreadY, firingPoint.eulerAngles.z + spreadZ);       
+        firingPoint.rotation = Quaternion.Euler(firingPoint.eulerAngles.x + spreadX, firingPoint.eulerAngles.y + spreadY, firingPoint.eulerAngles.z + spreadZ);
+    }
+    public void StartParticleEffect()
+    {
+        if (cartrideParticles != null)
+        {
+            cartrideParticles.Play();
+        }
+    }
+
+    public void StopParticleEffect()
+    {
+        if (cartrideParticles != null)
+        {
+            cartrideParticles.Stop();
+        }
     }
 }
