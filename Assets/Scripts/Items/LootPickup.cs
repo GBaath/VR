@@ -7,7 +7,7 @@ public class LootPickup : MonoBehaviour
 { 
     public LootResource lootResource;
 
-   
+    new private Renderer renderer;
 
     private void Start()
     {
@@ -26,23 +26,25 @@ public class LootPickup : MonoBehaviour
 
         var meshRenderer = gameObject.GetComponent<MeshRenderer>();
 
-        var renderer = gameObject.GetComponent<Renderer>();
+        renderer = gameObject.GetComponent<Renderer>();
 
         renderer.material = lootResource.material;
 
         GetComponent<Rigidbody>().mass = lootResource.customMass;
         transform.localScale = Vector3.one*lootResource.customScale;
 
-    }
+    }  
     public void HighlightToggle(bool enabled)
     {
         if (enabled)
         {
-            Shader.SetGlobalFloat("OutLine Size", 0.0025f);
+            renderer.materials[1].SetFloat("_Outline_Size", 0.0075f);
+            //Shader.SetGlobalFloat("OutLine Size", 0.0025f);
         }
         else
         {
-            Shader.SetGlobalFloat("OutLine Size", 0);
+            renderer.materials[1].SetFloat("_Outline_Size", 0f);
+            //Shader.SetGlobalFloat("OutLine Size", 0);
         }
     }
 
