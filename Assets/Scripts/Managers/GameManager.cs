@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(instance);
         }
-    }
 
+
+        SetAppSettings();
+    }
+    void SetAppSettings()
+    {
+        Application.targetFrameRate = 90;
+    }
 }
