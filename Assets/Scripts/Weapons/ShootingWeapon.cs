@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class SMG : MonoBehaviour
+public class ShootingWeapon : MonoBehaviour
 {
     public ShootingWeaponSO weaponStats;
     public HapticInteractable hapticScript;
@@ -14,15 +14,22 @@ public class SMG : MonoBehaviour
     private float lastFiredTime = 0f; // time the last bullet was fired
     private bool outOfAmmo = false;
     private XRGrabInteractable grabbable;
-    private float pitch;
     private Vector3 originalSpread;
     [SerializeField] ParticleSystem cartrideParticles;
+    [SerializeField] ParticleSystem fireParticles;
 
-    [SerializeField] Animator sliderAnimator;
+    [SerializeField] Animator fireAnimator;
+    [SerializeField] WeaponType currentWeaponType;
 
+    public enum WeaponType
+    {
+        SMG,
+        Pistol,
+        Shotgun
+
+    }
     private void Start()
     {
-
         hapticScript = GetComponent<HapticInteractable>();
         //Add grab Listeners
         grabbable = GetComponent<XRGrabInteractable>();
@@ -38,15 +45,19 @@ public class SMG : MonoBehaviour
     }
     private void Update()
     {
-        if (weaponStats.SMG)
-        {
-            if (isFiring && Time.time - lastFiredTime >= weaponStats.reloadTime)
-            {
 
-                FireBullet();
-                lastFiredTime = Time.time; // update the last fired time
-            }
+        switch (currentWeaponType)
+        {
+            case WeaponType.SMG:
+
+                if (isFiring && Time.time - lastFiredTime >= weaponStats.reloadTime)
+                {
+                    FireBullet();
+                    lastFiredTime = Time.time; // update the last fired time
+                }
+                break;
         }
+
     }
     public void StartFiring(ActivateEventArgs arg)
     {
@@ -55,24 +66,52 @@ public class SMG : MonoBehaviour
             OutOfAmmoSound();
             return;
         }
-        if (sliderAnimator != null)
+        if (fireAnimator != null)
         {
+            fireAnimator.SetBool("Fire", true);
+            
+        }
 
-            sliderAnimator.SetBool("Fire", true);
+        switch (currentWeaponType)
+        {
+            case WeaponType.SMG:
+                isFiring = true;
+                break;
+            case WeaponType.Pistol:
+                FireBullet();
+                break;
+            case WeaponType.Shotgun:
+                for (int i = 0; i < weaponStats.shotgunSlugs; i++)
+                {
+                    FireBullet();
+                }
+                currentAmmo -= 1;
+                break;
         }
         StartParticleEffect();
-        isFiring = true;
+
     }
 
     public void StopFiring(DeactivateEventArgs arg)
     {
-        if (sliderAnimator != null)
+        if (fireAnimator != null)
         {
-            sliderAnimator.SetBool("Fire", false);
+            switch (currentWeaponType)
+            {
+                case WeaponType.SMG:
+                    fireAnimator.SetBool("Fire", false);
+                    break;
+            }
+
 
         }
+        switch (currentWeaponType)
+        {
+            case WeaponType.SMG:
+                isFiring = false;
+                break;
+        }
         StopParticleEffect();
-        isFiring = false;
     }
     public void ObjectDropped(SelectExitEventArgs arg)
     {
@@ -109,16 +148,18 @@ public class SMG : MonoBehaviour
             spawnedBullet.transform.position = firingPoint.position;
             spawnedBullet.GetComponent<Rigidbody>().velocity = firingPoint.forward * weaponStats.bulletSpeed;
             Destroy(spawnedBullet, 5);
-            currentAmmo -= 1;
+            switch (currentWeaponType)
+            {
+                case WeaponType.SMG:
+                case WeaponType.Pistol:
+                    currentAmmo -= 1;
+                    break;
+            }
+
             ResetBulletSpread();
             hapticScript.TriggerHapticPublic();
         }
 
-    }
-    private void ResetBulletSpread()
-    {
-        //Reset
-        firingPoint.rotation = Quaternion.Euler(originalSpread);
     }
     private void BulletSpread()
     {
@@ -130,11 +171,20 @@ public class SMG : MonoBehaviour
         float spreadZ = Random.Range(-weaponStats.bulletSpread, weaponStats.bulletSpread);
         firingPoint.rotation = Quaternion.Euler(firingPoint.eulerAngles.x + spreadX, firingPoint.eulerAngles.y + spreadY, firingPoint.eulerAngles.z + spreadZ);
     }
+    private void ResetBulletSpread()
+    {
+        //Reset
+        firingPoint.rotation = Quaternion.Euler(originalSpread);
+    }
     public void StartParticleEffect()
     {
         if (cartrideParticles != null)
         {
             cartrideParticles.Play();
+        }
+        if (fireParticles != null)
+        {
+            fireParticles.Play();
         }
     }
 
@@ -144,5 +194,14 @@ public class SMG : MonoBehaviour
         {
             cartrideParticles.Stop();
         }
+        if ( fireParticles != null)
+        {
+            fireParticles.Stop();
+        }
+    }
+
+    public void StopShootingAnimation()
+    {
+        fireAnimator.SetBool("Fire", false);
     }
 }
