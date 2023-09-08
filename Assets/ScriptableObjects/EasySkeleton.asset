@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EasySkeleton
   m_EditorClassIdentifier: 
   maxHits: 2
-  movementSpeed: 1.5
-  followRange: 2
+  movementSpeed: 0.75
+  attackRange: 2
