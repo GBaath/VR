@@ -15,4 +15,5 @@ MonoBehaviour:
   lootProp: {fileID: 133446, guid: 72766e0bd6c1cde4eb35ec04e1325561, type: 3}
   material: {fileID: 2100000, guid: 42b64fdb315e3054ea757d8d1c4bcfa7, type: 2}
   value: 50
+  customScale: 0.25
   customMass: 1

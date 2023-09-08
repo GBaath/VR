@@ -38,13 +38,11 @@ public class LootPickup : MonoBehaviour
     {
         if (enabled)
         {
-            renderer.materials[1].SetFloat("_Outline_Size", 0.0075f);
-            //Shader.SetGlobalFloat("OutLine Size", 0.0025f);
+            renderer.materials[1].SetFloat("_Outline_Size", 0.0025f);
         }
         else
         {
             renderer.materials[1].SetFloat("_Outline_Size", 0f);
-            //Shader.SetGlobalFloat("OutLine Size", 0);
         }
     }
 

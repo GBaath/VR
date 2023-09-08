@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager instance;
+
+    public AssetLoader assetLoader;
+    public ScoreManager scoreManager;
+
+
+    void Awake()
+    {
+        if (instance && instance != this)
+        {
+            Destroy(this);
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+    }
+
+}
