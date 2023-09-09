@@ -18,6 +18,7 @@ public class HapticInteractable : MonoBehaviour
         interactable.activated.AddListener(SetController);
         interactable.deactivated.AddListener(RemoveController);
         
+        
     }
     public void RemoveController(BaseInteractionEventArgs eventArgs)
     {

@@ -36,6 +36,7 @@ public class ShootingWeapon : MonoBehaviour
         grabbable.activated.AddListener(StartFiring);
         grabbable.deactivated.AddListener(StopFiring);
         grabbable.selectExited.AddListener(ObjectDropped);
+        
         //SetStats
         hapticScript.duration = weaponStats.hapticDuration;
         currentAmmo = weaponStats.ammoCount;
