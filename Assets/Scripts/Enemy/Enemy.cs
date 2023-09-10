@@ -10,6 +10,19 @@ public class Enemy : MonoBehaviour
     [SerializeReference] EnemyData enemyData;
     [SerializeReference] ParticleSystem hitFX;
 
+    [Header("Dancing")]
+    public EnemyType enemyType = EnemyType.skeleton;
+    public enum EnemyType
+    {
+        skeleton,
+        goblin,
+        ghost
+    }
+
+    public bool isDancer = false;
+    public bool mayKillTime = true;
+    [SerializeField] float maxDanceDistance = 10;
+
     [HideInInspector] public bool isWaitingForOtherEnemies = true;
     bool mayAttack = true;
     bool isOutOfReach = false;
@@ -28,9 +41,12 @@ public class Enemy : MonoBehaviour
     // Magic numbers
     const string chaseTrigger = "chase";
     const string attackTrigger = "attack";
+    const string danceTrigger = "dance";
+    const string cheerTrigger = "cheer";
+    const string attackState = "attacking";
+    const string danceState = "swing_dance";
     const string animMovementSpeed = "movementSpeed";
     const string waitingToMove = "waitingToMove";
-    const string attackState = "attacking";
     const float attackRangeIncrease = 0.5f;
     const float checkWaitRate = 0.1f;
     const float chaseTurnSpeedMultiplier = 3;
@@ -62,6 +78,9 @@ public class Enemy : MonoBehaviour
 
         // Check whether or not other enemies are against the same target at the same time
         InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
+
+        // Dance or clap until any enemy of the same type finds the target
+        KillTime();
     }
 
     private void WaitForOtherEnemies()
@@ -82,9 +101,68 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void KillTime()
+    {
+        if (!isDancer && mayKillTime) { return; }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName(danceState)) { return; }
+
+        List<Enemy> cheeringEnemies = new();
+        foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.enemyType == enemyType && e.mayKillTime && !e.isDancer))
+        {
+            cheeringEnemies.Add(enemy);
+        }
+
+        if (cheeringEnemies.Count < 3) { return; }
+
+        anim.SetTrigger(danceTrigger);
+
+        foreach (Enemy cheeringEnemy in cheeringEnemies)
+        {
+            cheeringEnemy.transform.LookAt(transform.position);
+            cheeringEnemy.anim.SetTrigger(cheerTrigger);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (mayKillTime)
+        {
+            if (isDancer)
+            {
+                // Check the distance between target and dancer
+                if (Vector3.Distance(transform.position, target.transform.position) < maxDanceDistance)
+                {
+                    foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.enemyType == enemyType))
+                    {
+                        enemy.mayKillTime = false;
+                    }
+                }
+                else
+                {
+                    foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.enemyType == enemyType))
+                    {
+                        enemy.mayKillTime = true;
+                        enemy.KillTime();
+                    }
+                }
+            }
+            
+            return;
+        }
+        else if (isDancer)
+        {
+            // Check the distance between target and dancer
+            if (Vector3.Distance(transform.position, target.transform.position) >= maxDanceDistance)
+            {
+                foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.enemyType == enemyType))
+                {
+                    enemy.mayKillTime = true;
+                    enemy.KillTime();
+                }
+            }
+        }
+
         // Behaviour
         if (target && Vector3.Distance(transform.position, target.transform.position) >= attackRange)
         {
