@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5f14e5c18296b74998dcf1ebd3a9426, type: 3}
-  m_Name: EasySkeleton
+  m_Name: BasicSkeleton
   m_EditorClassIdentifier: 
   maxHits: 2
-  movementSpeed: 0.75
+  movementSpeed: 0.6
+  moveAnimSpeed: 0.8
   attackRange: 2
+  turnSpeed: 50
