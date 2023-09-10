@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeReference] EnemyData enemyData;
     [SerializeReference] ParticleSystem hitFX;
 
+    [SerializeReference] GameObject head;
+
     [Header("Dancing")]
     public EnemyType enemyType = EnemyType.skeleton;
     public enum EnemyType
@@ -20,12 +22,13 @@ public class Enemy : MonoBehaviour
     }
 
     public bool isDancer = false;
-    public bool mayKillTime = true;
     [SerializeField] float maxDanceDistance = 10;
 
-    [HideInInspector] public bool isWaitingForOtherEnemies = true;
+    [HideInInspector] public bool mayKillTime = true;
+    public bool isWaitingForOtherEnemies = true;
     bool mayAttack = true;
     bool isOutOfReach = false;
+    bool isDismembered = false;
 
     // Default EnemyData
     int maxHits;
@@ -34,6 +37,7 @@ public class Enemy : MonoBehaviour
     float moveAnimSpeed;
     float attackRange;
     float turnSpeed;
+    bool allowDismemberment;
 
     Vector3 lastPosition = Vector3.zero;
     int attackAnimationLoops = -1;
@@ -45,7 +49,7 @@ public class Enemy : MonoBehaviour
     const string cheerTrigger = "cheer";
     const string attackState = "attacking";
     const string danceState = "swing_dance";
-    const string animMovementSpeed = "movementSpeed";
+    const string animMovementSpeed = "animMoveSpeed";
     const string waitingToMove = "waitingToMove";
     const float attackRangeIncrease = 0.5f;
     const float checkWaitRate = 0.1f;
@@ -55,11 +59,15 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         EnemyData.onRefreshEnemyData += RefreshEnemyData;
+        CarlsTestBullet.onHitEnemy += DismemberBody;
+        // TODO: Bullet.onHitEnemy += DismemberBody;
     }
 
     private void OnDisable()
     {
         EnemyData.onRefreshEnemyData -= RefreshEnemyData;
+        CarlsTestBullet.onHitEnemy -= DismemberBody;
+        // TODO: Bullet.onHitEnemy -= DismemberBody;
     }
 
     void RefreshEnemyData()
@@ -69,6 +77,77 @@ public class Enemy : MonoBehaviour
         moveAnimSpeed = enemyData.moveAnimSpeed;
         attackRange = enemyData.attackRange;
         turnSpeed = enemyData.turnSpeed;
+        allowDismemberment = enemyData.allowDismemberment;
+    }
+
+    void DismemberBody(GameObject body, GameObject bullet)
+    {
+        if (body.transform.GetComponentInParent<Enemy>() != this || !allowDismemberment) { return; }
+
+        // "Remove" body part
+        body.transform.localScale = Vector3.zero;
+
+        bool lostHead = false;
+        foreach (Transform bodyPart in body.GetComponentsInChildren<Transform>().Where(b => b == head.transform))
+        {
+            lostHead = true;
+        }
+
+        // Spawn enemy without all other parts (this essentially spawns a body part)
+        GameObject newBody = Instantiate(gameObject, transform.position, Quaternion.identity);
+        GameObject impactedBodyPart = null;
+        List<GameObject> relatedTransforms = new();
+
+        // Find the dismembered body part
+        foreach (Transform bodyPartTransform in newBody.GetComponentsInChildren<Transform>().Where(b => b.transform.localScale == Vector3.zero))
+        {
+            bodyPartTransform.localScale = Vector3.one;
+            impactedBodyPart = bodyPartTransform.gameObject;
+            impactedBodyPart.transform.SetParent(newBody.transform);
+
+            relatedTransforms.Add(impactedBodyPart);
+            relatedTransforms.Add(newBody);
+        }
+
+        // Keep the transforms of related body parts
+        foreach (Transform bodyPartChildTransform in impactedBodyPart.GetComponentsInChildren<Transform>().Where(b => b.CompareTag(tag)))
+        {
+            relatedTransforms.Add(bodyPartChildTransform.gameObject);
+        }
+
+        // Set hip transform to the dismembered body part
+        Transform hip = newBody.transform.GetChild(1);
+        hip.transform.SetParent(impactedBodyPart.transform);
+        hip.transform.position = impactedBodyPart.transform.position;
+
+        // "Remove" unrelated body parts
+        foreach (Transform bodyPartTransform in newBody.GetComponentsInChildren<Transform>().Where(b => !relatedTransforms.Contains(b.gameObject)))
+        {
+            bodyPartTransform.localScale = Vector3.zero;
+        }
+
+        // Remove all logic (besides physics) from the body parts or the remains of this
+        if (lostHead)
+        {
+            newBody.GetComponent<Enemy>().anim.SetBool("isDismembered", true);
+            anim.enabled = false;
+            enabled = false;
+            Destroy(gameObject.GetComponent<Enemy>());
+        }
+        else
+        {
+            newBody.GetComponent<Enemy>().enabled = false;
+            newBody.GetComponent<Animator>().enabled = false;
+            Destroy(newBody.GetComponent<Enemy>());
+
+            anim.SetBool("isDismembered", true);
+        }
+
+        newBody.GetComponent<Enemy>().isDismembered = true;
+        isDismembered = true;
+
+        Rigidbody newRigidbody = newBody.GetComponent<Rigidbody>();
+        newRigidbody.AddForceAtPosition(bullet.GetComponent<Rigidbody>().velocity, body.transform.position, ForceMode.Impulse);
     }
 
     // Start is called before the first frame update
@@ -89,6 +168,7 @@ public class Enemy : MonoBehaviour
         float closestDistance = Mathf.Infinity;
         foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.target == target))
         {
+            // If I'm closest to my target
             if (Vector3.Distance(target.transform.position, enemy.transform.position) < closestDistance)
             {
                 closestDistance = Vector3.Distance(target.transform.position, enemy.transform.position);
@@ -147,7 +227,7 @@ public class Enemy : MonoBehaviour
                     }
                 }
             }
-            
+            // WOOHOO, LET'S KILL TIME!!!
             return;
         }
         else if (isDancer)
@@ -193,7 +273,6 @@ public class Enemy : MonoBehaviour
 
         if (!isWaitingForOtherEnemies)
         {
-            lastPosition = transform.position;
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.deltaTime);
 
             attackRange = enemyData.attackRange;
