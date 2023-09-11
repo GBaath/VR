@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public AssetLoader assetLoader;
     public ScoreManager scoreManager;
+    public RoomManager roomManager;
 
 
     void Awake()

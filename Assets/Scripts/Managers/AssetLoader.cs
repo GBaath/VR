@@ -21,6 +21,7 @@ public class AssetLoader : MonoBehaviour
     }
 
     public List<LootResource> lootResources;
+    public Material highlightMaterial;
 
 
 

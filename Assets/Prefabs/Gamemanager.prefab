@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetLoader: {fileID: 7298944921204846117}
   scoreManager: {fileID: 6612399513978968993}
+  roomManager: {fileID: 0}
 --- !u!114 &7298944921204846117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +65,7 @@ MonoBehaviour:
   lootResources:
   - {fileID: 11400000, guid: b136a17b9b6fded4eae09158aeb2b825, type: 2}
   - {fileID: 11400000, guid: e7659f5e628adc3478728f75e4df7046, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 285fb9c62c600fb409ff47962165f5c1, type: 2}
 --- !u!114 &6612399513978968993
 MonoBehaviour:
   m_ObjectHideFlags: 0
