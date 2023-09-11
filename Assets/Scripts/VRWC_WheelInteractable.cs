@@ -10,7 +10,8 @@ public class VRWC_WheelInteractable : XRBaseInteractable
 {
     Rigidbody m_Rigidbody;
 
-    float wheelRadius;
+    //float wheelRadius;
+    [SerializeField] private float meshColliderValue;
 
     bool onSlope = false;
     [SerializeField] bool hapticsEnabled = true;
@@ -27,7 +28,7 @@ public class VRWC_WheelInteractable : XRBaseInteractable
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        wheelRadius = GetComponent<SphereCollider>().radius;
+        //wheelRadius = GetComponent<SphereCollider>().radius;
 
         // Slope check is run in coroutine at optimized intervals.
         StartCoroutine(CheckForSlope());
@@ -102,7 +103,7 @@ public class VRWC_WheelInteractable : XRBaseInteractable
         while (grabPoint)
         {
             // If interactor drifts beyond the threshold distance from wheel, force deselection.
-            if (Vector3.Distance(transform.position, interactor.transform.position) >= wheelRadius + deselectionThreshold)
+            if (Vector3.Distance(transform.position, interactor.transform.position) >= meshColliderValue + deselectionThreshold)
             {
                 interactionManager.CancelInteractorSelection(interactor);
             }
