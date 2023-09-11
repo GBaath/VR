@@ -10,6 +10,7 @@ TagManager:
   - MiniWorldCamera
   - Water
   - Treasure
+  - EventTrigger
   layers:
   - Default
   - TransparentFX
