@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : MonoBehaviour
+public class RoomEntrance : MonoBehaviour
 {
     public GameObject previousRoom;
 
+    RoomBase roomBase;
 
-
-    public Room nextRoom;
-    [SerializeField] Transform nextRoomSpawnpoint;
+    public RoomEntrance nextRoomEntrance;
+    //[SerializeField] public Transform nextRoomSpawnpoint;
 
     public List <GameObject> enemies, loot, props;
 
@@ -19,16 +19,22 @@ public class Room : MonoBehaviour
     public void UnloadPrev()
     {
         previousRoom.SetActive(false);
+        //todo destroy and pool
     }
     public void LoadNext()
     {
-        nextRoom.Load();
+        nextRoomEntrance.LoadRoomContent();
     }
-    public void Load()
+    public void LoadRoomContent()
     {
-        nextRoom = Instantiate(GameManager.instance.roomManager.GetNewRoom().GetComponent<Room>());
-        nextRoom.previousRoom = gameObject;
-        nextRoom.transform.position = nextRoomSpawnpoint.position;
+        //TODO spawn modules from connectionpoint
+
+        ////spawn entrance module and set variables
+        var _new = Instantiate(GameManager.instance.roomManager.GetNewRoomBase(),transform.position,Quaternion.identity);
+        roomBase = _new.GetComponent<RoomBase>();
+        roomBase.entrance = this;
+        roomBase.transform.position = transform.position;
+
 
 
         if (!enemiesLoaded)
@@ -58,7 +64,7 @@ public class Room : MonoBehaviour
         }
         enemies[indexE].SetActive(true);
         indexE++;
-        Load();
+        LoadRoomContent();
     }
     public void LoadNextLoot()
     {
@@ -70,7 +76,7 @@ public class Room : MonoBehaviour
 
         loot[indexL].SetActive(true);
         indexL++;
-        Load();
+        LoadRoomContent();
     }
     public void LoadNextProp()
     {
@@ -81,6 +87,6 @@ public class Room : MonoBehaviour
         }
         props[indexP].SetActive(true);
         indexP++;
-        Load();
+        LoadRoomContent();
     }
 }

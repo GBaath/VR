@@ -14,4 +14,16 @@ public class Door : MonoBehaviour
         doorhandle.enabled = !_lock;
         locked = _lock;
     }
+    private void LinkAnchor()
+    {
+        GetComponent<HingeJoint>().connectedAnchor = transform.position;
+    }
+    private void Start()
+    {
+        LinkAnchor();
+    }
+    private void OnEnable()
+    {
+        LinkAnchor();
+    }
 }

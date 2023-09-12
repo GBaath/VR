@@ -105,5 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a4e058b97ac0141929a49a6a36cb2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomList:
-  - {fileID: 8737019846826064926, guid: 1ec20bec922dc1847967160d9a7a5bd5, type: 3}
+  roomBaseList:
+  - {fileID: 8737019846826064926, guid: aecc2904fc8583848a83b9301a70154d, type: 3}
+  roomExtensionList:
+  - {fileID: 5589313593156036153, guid: 7c0a105531fcb3845ba0565eee15a696, type: 3}
+  roomEntrance: {fileID: 5589313593156036153, guid: 4bacded88cbcda340bee83a057cfc761, type: 3}

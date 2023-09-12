@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    public List<GameObject> roomList; 
-
+    [SerializeField]private List<GameObject> roomBaseList, roomExtensionList;
+    public GameObject roomEntrance;
     
-    public GameObject GetNewRoom()
+    public GameObject GetNewRoomBase()
     {
-        return roomList[Random.Range(0,roomList.Count)];
+        return roomBaseList[Random.Range(0,roomBaseList.Count)];
+    }
+    public GameObject GetNewRoomExtension()
+    {
+        return roomExtensionList[Random.Range(0, roomExtensionList.Count)];
     }
 }

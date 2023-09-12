@@ -197,7 +197,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.75
@@ -230,7 +230,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -5327,10 +5327,10 @@ MonoBehaviour:
   linkedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Door, Assembly-CSharp
-        m_MethodName: Lock
-        m_Mode: 6
+      - m_Target: {fileID: 9064070969080059422}
+        m_TargetAssemblyTypeName: Room, Assembly-CSharp
+        m_MethodName: LoadNext
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5341,8 +5341,20 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 9064070969080059422}
         m_TargetAssemblyTypeName: Room, Assembly-CSharp
-        m_MethodName: Load
+        m_MethodName: UnloadPrev
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6804464494944435355}
+        m_TargetAssemblyTypeName: Door, Assembly-CSharp
+        m_MethodName: Lock
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5581,7 +5593,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.75
@@ -5614,7 +5626,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -10507,7 +10519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previousRoom: {fileID: 0}
   nextRoom: {fileID: 0}
-  nextRoomSpawnpoint: {fileID: 0}
+  nextRoomSpawnpoint: {fileID: 6455143193640374117}
   enemies: []
   loot: []
   props: []
@@ -10595,7 +10607,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 449052, guid: 939f27c57ef13654eafcf37ff873a454, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.375
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 449052, guid: 939f27c57ef13654eafcf37ff873a454, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10603,7 +10615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 449052, guid: 939f27c57ef13654eafcf37ff873a454, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.125
+      value: 9.875
       objectReference: {fileID: 0}
     - target: {fileID: 449052, guid: 939f27c57ef13654eafcf37ff873a454, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11423,7 +11435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 449052, guid: 939f27c57ef13654eafcf37ff873a454, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.875
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 449052, guid: 939f27c57ef13654eafcf37ff873a454, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11431,7 +11443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 449052, guid: 939f27c57ef13654eafcf37ff873a454, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.125
+      value: 9.875
       objectReference: {fileID: 0}
     - target: {fileID: 449052, guid: 939f27c57ef13654eafcf37ff873a454, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11721,6 +11733,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 16.125
       objectReference: {fileID: 0}
+    - target: {fileID: 4732209326359011543, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
+      propertyPath: m_Constraints
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 5589313593156036153, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
       propertyPath: m_Name
       value: LoaderDoor (1)
@@ -11735,6 +11751,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1820386222830629394, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
   m_PrefabInstance: {fileID: 6778622968135240510}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6804464494944435355 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 35133540377753509, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
+  m_PrefabInstance: {fileID: 6778622968135240510}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75e2445221907c4b9c5fb95e529b063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7377335293136982219
 PrefabInstance:
   m_ObjectHideFlags: 0
