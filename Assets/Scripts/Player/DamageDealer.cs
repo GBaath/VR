@@ -5,19 +5,20 @@ using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
 {
-    private Health health;
+    private Health player;
 
     private void Awake()
     {
-        health = FindObjectOfType<Health>();
+        player = FindObjectOfType<Health>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        Debug.Log("Collided");
+        if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Collided");
-            health.TakeDamage(20);
+            Debug.Log("Collided player");
+            player.GetComponent<Health>().TakeDamage(20);
         }
     }
 }

@@ -18,9 +18,8 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        //currentHealth = Mathf.Max(currentHealth - damage, 0);
-        currentHealth -= damage;
-        
+        currentHealth = Mathf.Max(currentHealth - damage, 0);
+
         if (currentHealth <= 20)
         {
             onAlmostDead?.Invoke();

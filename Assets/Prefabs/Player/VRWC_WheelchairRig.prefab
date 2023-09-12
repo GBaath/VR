@@ -979,8 +979,8 @@ GameObject:
   - component: {fileID: 3355997933869472933}
   - component: {fileID: 3355997933869472932}
   - component: {fileID: 3355997933869472930}
-  - component: {fileID: 3355997933869472953}
   - component: {fileID: 3355997933869472955}
+  - component: {fileID: 4905377892846536376}
   - component: {fileID: 3355997933869472934}
   m_Layer: 26
   m_Name: WheelL
@@ -998,7 +998,7 @@ Transform:
   m_GameObject: {fileID: 3355997933869472956}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.30480003, y: 0.3048, z: 0}
+  m_LocalPosition: {x: 0.299, y: 0.3048, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1106,6 +1106,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+  meshColliderValue: 0.2
   hapticsEnabled: 1
   deselectionThreshold: 0.25
   label1: {fileID: 0}
@@ -1153,27 +1154,6 @@ MonoBehaviour:
   useCustomCenterOfMass: 0
   centerOfMass: {x: 0, y: 0, z: 0}
   visualizeCenterOfMass: 0
---- !u!135 &3355997933869472953
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3355997933869472956}
-  m_Material: {fileID: 13400000, guid: ccc578a6dc21941c5b0d9a13d530285c, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.3048
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &3355997933869472955
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1270,6 +1250,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!64 &4905377892846536376
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355997933869472956}
+  m_Material: {fileID: 13400000, guid: ccc578a6dc21941c5b0d9a13d530285c, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6296406880743504499, guid: 238acc210949e4554ad8b8d2605ee941, type: 3}
 --- !u!153 &3355997933869472934
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1563,8 +1565,8 @@ GameObject:
   - component: {fileID: 3355997934027076923}
   - component: {fileID: 3355997934027076922}
   - component: {fileID: 3355997934027076920}
-  - component: {fileID: 3355997934027076927}
   - component: {fileID: 3355997934027076913}
+  - component: {fileID: 6642715812929463003}
   - component: {fileID: 3355997934027076924}
   m_Layer: 26
   m_Name: WheelR
@@ -1582,7 +1584,7 @@ Transform:
   m_GameObject: {fileID: 3355997934027076914}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.30480003, y: 0.3048, z: 0}
+  m_LocalPosition: {x: -0.294, y: 0.3048, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1690,6 +1692,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+  meshColliderValue: 0.2
   hapticsEnabled: 1
   deselectionThreshold: 0.25
   label1: {fileID: 0}
@@ -1737,27 +1740,6 @@ MonoBehaviour:
   useCustomCenterOfMass: 0
   centerOfMass: {x: 0, y: 0, z: 0}
   visualizeCenterOfMass: 0
---- !u!135 &3355997934027076927
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3355997934027076914}
-  m_Material: {fileID: 13400000, guid: ccc578a6dc21941c5b0d9a13d530285c, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.3048
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &3355997934027076913
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1854,6 +1836,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!64 &6642715812929463003
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355997934027076914}
+  m_Material: {fileID: 13400000, guid: ccc578a6dc21941c5b0d9a13d530285c, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6296406880743504499, guid: 238acc210949e4554ad8b8d2605ee941, type: 3}
 --- !u!153 &3355997934027076924
 ConfigurableJoint:
   m_ObjectHideFlags: 0
