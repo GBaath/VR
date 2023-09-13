@@ -13,10 +13,10 @@ public class HighlightGrab : MonoBehaviour
     Material highlightMaterial;
     XRGrabInteractable grabintr;
 
-
     void Start()
     {
         renderer = GetComponent<Renderer>();
+
         grabintr = GetComponent<XRGrabInteractable>();
 
         highlightMaterial = GameManager.instance.assetLoader.highlightMaterial;
@@ -25,10 +25,8 @@ public class HighlightGrab : MonoBehaviour
         materials.Add(highlightMaterial);
         renderer.SetMaterials(materials);
 
-
         grabintr.hoverEntered.AddListener(HighlightToggle);
         grabintr.hoverExited.AddListener(HighlightToggle);
-
     }
 
     private void HighlightToggle(HoverEnterEventArgs arg)

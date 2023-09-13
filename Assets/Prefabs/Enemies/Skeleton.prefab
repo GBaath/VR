@@ -716,7 +716,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3af704aaae9bce743bafc65d662bca26, type: 2}
+  - {fileID: -4555954050717990524, guid: abd49af30352c264a87bf378a72954ea, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1070,6 +1070,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 615016617877806971}
+  - component: {fileID: 3037396232290862800}
   m_Layer: 24
   m_Name: mixamorig:Hips
   m_TagString: Untagged
@@ -1095,6 +1096,27 @@ Transform:
   - {fileID: 26509810587869909}
   m_Father: {fileID: 4283345300893703435}
   m_LocalEulerAnglesHint: {x: 65.26807, y: -61.710457, z: -55.38211}
+--- !u!65 &3037396232290862800
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4286974111170000776}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0.075, z: 0}
 --- !u!1 &4505149822534887332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,7 +1316,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: afd9390e47743d24fa6e565ffec87235, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1317,10 +1339,15 @@ MonoBehaviour:
   anim: {fileID: 7308438811657037766}
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: b4e39c2c9c6c5854c9294b96f27f1e52, type: 2}
-  hitFX: {fileID: 19824050, guid: 66784c88e31f8984589a513a2eb9b1df, type: 3}
+  doHitFX: {fileID: 19824050, guid: 66784c88e31f8984589a513a2eb9b1df, type: 3}
+  getHitFX: {fileID: 19824050, guid: 581eceb924751f5458eff3649a42d56f, type: 3}
+  hips: {fileID: 4286974111170000776}
   head: {fileID: 2642277384956813986}
+  legs:
+  - {fileID: 3964948022955428711}
+  - {fileID: 4505149822534887332}
   enemyType: 0
-  isDancer: 0
+  isDancer: 1
   maxDanceDistance: 15
   mayKillTime: 1
   isWaitingForOtherEnemies: 1
@@ -1332,7 +1359,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4884179667896424898}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1344,8 +1371,8 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2185,8 +2212,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.4, z: 0.1}
-  m_Center: {x: 0, y: 0.125, z: 0}
+  m_Size: {x: 0.3, y: 0.3, z: 0.1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &8248617972780221883
 GameObject:
   m_ObjectHideFlags: 0
