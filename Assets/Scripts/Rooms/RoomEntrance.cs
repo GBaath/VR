@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class RoomEntrance : MonoBehaviour
 {
-    public GameObject previousRoom;
+    //roombase needs custom point because of transform stats
+    public Transform spawnpoint;
+    public RoomEntrance previousRoom;
+
+    //used from other scripts when loading and unloading
+    public Door loadDoor;
 
     RoomBase roomBase;
 
-    public RoomEntrance nextRoomEntrance;
-    //[SerializeField] public Transform nextRoomSpawnpoint;
+    [HideInInspector]public RoomEntrance nextRoomEntrance;
 
+    //info about loded objects in room
     public List <GameObject> enemies, loot, props;
 
     private bool enemiesLoaded, lootLoaded, propsLoaded;
@@ -18,7 +23,15 @@ public class RoomEntrance : MonoBehaviour
 
     public void UnloadPrev()
     {
-        previousRoom.SetActive(false);
+        try //fix for spawner room
+        {
+            previousRoom.roomBase.gameObject.SetActive(false);
+        }
+        catch { }
+
+        previousRoom.gameObject.SetActive(false);
+
+
         //todo destroy and pool
     }
     public void LoadNext()
@@ -27,13 +40,10 @@ public class RoomEntrance : MonoBehaviour
     }
     public void LoadRoomContent()
     {
-        //TODO spawn modules from connectionpoint
-
-        ////spawn entrance module and set variables
-        var _new = Instantiate(GameManager.instance.roomManager.GetNewRoomBase(),transform.position,Quaternion.identity);
+        ////spawn entrance module and set variables, correct transform connection is set from roombase
+        var _new = Instantiate(GameManager.instance.roomManager.GetNewRoomBase(),spawnpoint.position,Quaternion.identity);
         roomBase = _new.GetComponent<RoomBase>();
         roomBase.entrance = this;
-        roomBase.transform.position = transform.position;
 
 
 

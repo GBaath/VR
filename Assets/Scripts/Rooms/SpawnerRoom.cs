@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class SpawnerRoom : MonoBehaviour
 {
-    [SerializeField] RoomEntrance entrance;
+     RoomEntrance entrance;
     [SerializeField] Transform spawnPos;
 
     void Start()
     {
-        var _new = Instantiate(GameManager.instance.roomManager.roomEntrance, spawnPos.position, Quaternion.identity);
+        var _new = Instantiate(GameManager.instance.roomManager.roomEntrance, spawnPos.position, spawnPos.rotation);
 
         entrance = _new.GetComponent<RoomEntrance>();
+        entrance.previousRoom = GetComponent<RoomEntrance>();
         entrance.LoadRoomContent();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

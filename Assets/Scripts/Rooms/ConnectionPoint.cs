@@ -8,6 +8,7 @@ public class ConnectionsPoint : MonoBehaviour
     public RoomBase baseConnection;
 
 
+    //new random connection module from list
     public void SpawnRandomModule()
     {
         //connectionpoint has set rotation and pos
@@ -15,13 +16,14 @@ public class ConnectionsPoint : MonoBehaviour
         _new.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         isUsed = true;
     }
+    //spawn exit module and set some new refs for new room
     public void SpawnExitModule(out RoomEntrance spawned)
     {
-        var _new = Instantiate(GameManager.instance.roomManager.roomEntrance, transform);
-        _new.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        var _new = Instantiate(GameManager.instance.roomManager.roomEntrance,transform.position,transform.rotation);
         isUsed = true;
         spawned = _new.GetComponent<RoomEntrance>();
-        spawned.previousRoom = baseConnection.entrance.gameObject;
+        spawned.previousRoom = baseConnection.entrance;
+        //spawned.loadDoor = spawned.GetComponentInChildren<Door>();
     }
 
 }

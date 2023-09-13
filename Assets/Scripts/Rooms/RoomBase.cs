@@ -9,7 +9,7 @@ public class RoomBase : MonoBehaviour
     [SerializeField] Transform connectionspointsHolder;
     [SerializeField]List<ConnectionsPoint> connectionsPoints;
     [SerializeField] Transform roomBase;
-    public RoomEntrance entrance;
+    [HideInInspector] public RoomEntrance entrance;
     List<int> freeIndexes = new List<int>();
 
     private void Start()
@@ -23,16 +23,16 @@ public class RoomBase : MonoBehaviour
         SetEntryConnection();
         SpawnConnections();
     }
+    //places the roombase correctly for random connection point
     void SetEntryConnection()
     {
         int r = Random.Range(0, connectionsPoints.Count);
 
-
         connectionsPoints[r].isUsed = true;
+
 
         //connect to rotationpoint and connect
         roomBase.parent = connectionsPoints[r].transform;
-
 
         foreach (ConnectionsPoint c in connectionsPoints.Where(cp => !cp.GetComponent<ConnectionsPoint>().isUsed))
         {
@@ -41,19 +41,17 @@ public class RoomBase : MonoBehaviour
             freeIndexes.Add(connectionsPoints.IndexOf(c));
         }
 
-        //rotation transform magic
-        connectionsPoints[r].transform.position = entrance.transform.position;
-        connectionsPoints[r].transform.rotation = Quaternion.identity;
+        //rotation transform magic for correct pos
+        connectionsPoints[r].transform.position = entrance.spawnpoint.position;
+        connectionsPoints[r].transform.rotation = entrance.spawnpoint.rotation; ;
     }
     public void SpawnConnections()
     {
 
-        //spawn exit first
         //get random free point
         int index = freeIndexes[Random.Range(0, freeIndexes.Count)];
 
-
-        //spawning modules sets connection point as used
+        //spawn exit first
         connectionsPoints[index].SpawnExitModule(out entrance.nextRoomEntrance);
 
         //spawn new module on free space from roommanager
@@ -61,5 +59,12 @@ public class RoomBase : MonoBehaviour
         {
             c.SpawnRandomModule();
         }
+    }
+    public void LoadTrigger()
+    {
+        Debug.Log("trg");
+        entrance.UnloadPrev();
+        entrance.LoadNext();
+        entrance.loadDoor.Lock(true);
     }
 }

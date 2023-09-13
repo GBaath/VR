@@ -13,6 +13,7 @@ public class EventTrigger : MonoBehaviour
         {
             linkedEvent.Invoke();
             GetComponent<BoxCollider>().enabled = false;
+            gameObject.SetActive(false);
         }
     }
 }
