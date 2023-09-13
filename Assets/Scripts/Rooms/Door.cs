@@ -8,11 +8,18 @@ public class Door : MonoBehaviour
 {
     public bool locked;
     public XRGrabInteractable doorhandle;
+    [SerializeField] Rigidbody rb;
+    Quaternion initRot;
 
     public void Lock(bool _lock)
     {
         doorhandle.enabled = !_lock;
         locked = _lock;
+        rb.isKinematic = _lock;
+        transform.rotation = initRot;
+        Debug.Log(_lock);
+
+        //TODO CLOSE ANIM HERE
     }
     private void LinkAnchor()
     {
@@ -21,6 +28,7 @@ public class Door : MonoBehaviour
     private void Start()
     {
         LinkAnchor();
+        initRot = transform.rotation;
     }
     private void OnEnable()
     {

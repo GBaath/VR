@@ -51,11 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnpoint: {fileID: 8565862753929253790}
   previousRoom: {fileID: 0}
-  loadDoor: {fileID: 3525048939934900680}
+  loadDoor: {fileID: 5360261597984740560}
   nextRoomEntrance: {fileID: 0}
-  enemies: []
-  loot: []
-  props: []
 --- !u!1 &6363518626171471572
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,9 +224,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1820386222830629394, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
   m_PrefabInstance: {fileID: 3501456975303349869}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3525048939934900680 stripped
+--- !u!114 &5360261597984740560 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 35133540377753509, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8859940662951887549, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
   m_PrefabInstance: {fileID: 3501456975303349869}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4732209326359011543}
   - component: {fileID: 3432827582397985537}
   - component: {fileID: 6880403930024947633}
-  - component: {fileID: 35133540377753509}
+  - component: {fileID: 8859940662951887549}
   m_Layer: 11
   m_Name: LoaderDoor
   m_TagString: Untagged
@@ -59,7 +59,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -123,7 +123,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1550608, y: 1.7532012, z: 0.18493879}
   m_Center: {x: 0.6, y: 0.3, z: 0}
---- !u!114 &35133540377753509
+--- !u!114 &8859940662951887549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locked: 1
   doorhandle: {fileID: 8246470447886343069}
+  rb: {fileID: 4732209326359011543}
 --- !u!1 &7017682355921816263
 GameObject:
   m_ObjectHideFlags: 0

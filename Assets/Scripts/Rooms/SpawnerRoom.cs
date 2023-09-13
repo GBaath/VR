@@ -13,6 +13,10 @@ public class SpawnerRoom : MonoBehaviour
 
         entrance = _new.GetComponent<RoomEntrance>();
         entrance.previousRoom = GetComponent<RoomEntrance>();
-        entrance.LoadRoomContent();
+        entrance.SpawnRoomBase();
+    }
+    public void CloseDoor()
+    {
+        GetComponentInChildren<Door>().Lock(true);
     }
 }

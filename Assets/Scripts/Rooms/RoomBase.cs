@@ -12,6 +12,12 @@ public class RoomBase : MonoBehaviour
     [HideInInspector] public RoomEntrance entrance;
     List<int> freeIndexes = new List<int>();
 
+    //info about loded objects in room
+    public List<GameObject> enemies, loot, props;
+
+    private bool enemiesLoaded, lootLoaded, propsLoaded;
+    int indexE = 0, indexL = 0, indexP = 0;
+
     private void Start()
     {
         //link connections point transforms
@@ -62,9 +68,65 @@ public class RoomBase : MonoBehaviour
     }
     public void LoadTrigger()
     {
-        Debug.Log("trg");
         entrance.UnloadPrev();
         entrance.LoadNext();
         entrance.loadDoor.Lock(true);
+    }
+    public void LoadRoomcontent()
+    {
+        if (!enemiesLoaded)
+        {
+            Invoke(nameof(LoadNextEnemy), .1f);
+            return;
+        }
+
+        if (!lootLoaded)
+        {
+            Invoke(nameof(LoadNextLoot), .1f);
+            return;
+        }
+
+        if (!propsLoaded)
+        {
+            Invoke(nameof(LoadNextProp), .1f);
+            return;
+        }
+
+        entrance.nextRoomEntrance.loadDoor.Lock(false);
+    }
+
+    public void LoadNextEnemy()
+    {
+        if (indexE >= enemies.Count)
+        {
+            enemiesLoaded = true;
+            return;
+        }
+        enemies[indexE].SetActive(true);
+        indexE++;
+        LoadRoomcontent();
+    }
+    public void LoadNextLoot()
+    {
+        if (indexL >= loot.Count)
+        {
+            lootLoaded = true;
+            return;
+        }
+
+        loot[indexL].SetActive(true);
+        indexL++;
+        LoadRoomcontent();
+    }
+    public void LoadNextProp()
+    {
+        if (indexP >= props.Count)
+        {
+            propsLoaded = true;
+            return;
+        }
+        props[indexP].SetActive(true);
+        indexP++;
+        LoadRoomcontent();
     }
 }
