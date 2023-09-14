@@ -51,7 +51,6 @@ MonoBehaviour:
   assetLoader: {fileID: 7298944921204846117}
   scoreManager: {fileID: 6612399513978968993}
   roomManager: {fileID: 6447467580567506157}
-  player: {fileID: 3355997934270379128, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
 --- !u!114 &7298944921204846117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +66,11 @@ MonoBehaviour:
   lootResources:
   - {fileID: 11400000, guid: b136a17b9b6fded4eae09158aeb2b825, type: 2}
   - {fileID: 11400000, guid: e7659f5e628adc3478728f75e4df7046, type: 2}
+  - {fileID: 11400000, guid: 51d6d09e68c5eda4fa2152f16e2e9169, type: 2}
+  - {fileID: 11400000, guid: 294abffa23f47f149a8408e159dd82b9, type: 2}
+  - {fileID: 11400000, guid: df548fd718e138c4cb3f9e0067f9277d, type: 2}
+  - {fileID: 11400000, guid: 21b48f4d672b82044a4b89f1ad5e3a96, type: 2}
+  - {fileID: 11400000, guid: d411a933ed07b80409d1523760f41042, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 285fb9c62c600fb409ff47962165f5c1, type: 2}
 --- !u!114 &6612399513978968993
 MonoBehaviour:
