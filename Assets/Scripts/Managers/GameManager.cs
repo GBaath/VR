@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public ScoreManager scoreManager;
     public RoomManager roomManager;
 
-
     void Awake()
     {
         if (instance && instance != this)

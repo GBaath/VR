@@ -8,7 +8,7 @@ public class EnemyData : ScriptableObject
     public float moveAnimSpeed = 0.75f;
     public float attackRange = 2;
     public float turnSpeed = 25;
-    public bool allowDismemberment = true;
+    public bool allowCustomDismemberment = true;
 
     public delegate void OnRefreshEnemyData();
     public static OnRefreshEnemyData onRefreshEnemyData;

@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
     float moveAnimSpeed;
     float attackRange;
     float turnSpeed;
-    bool allowDismemberment;
+    bool allowCustomDismemberment;
 
     int attackAnimationLoops = -1;
 
@@ -100,16 +100,6 @@ public class Enemy : MonoBehaviour
         // TODO: Bullet.onHitEnemy -= DismemberBody;
     }
 
-    void RefreshEnemyData()
-    {
-        maxHits = enemyData.maxHits;
-        movementSpeed = enemyData.movementSpeed;
-        moveAnimSpeed = enemyData.moveAnimSpeed;
-        attackRange = enemyData.attackRange;
-        turnSpeed = enemyData.turnSpeed;
-        allowDismemberment = enemyData.allowDismemberment;
-    }
-
     void OnHit(GameObject bodyHit, GameObject bullet)
     {
         if (!isDismembered)
@@ -124,7 +114,13 @@ public class Enemy : MonoBehaviour
 
     void DismemberBody(GameObject limbHit, GameObject bullet)
     {
-        if (limbHit.transform.GetComponentInParent<Enemy>() != this || !allowDismemberment && !head && legs == null) { return; }
+        if (limbHit.transform.GetComponentInParent<Enemy>() != this && !head && legs == null) { return; }
+
+        if (!allowCustomDismemberment)
+        {
+            RagdollSetActive(true, limbHit, bullet);
+            return;
+        }
 
         // "Remove" limb
         limbHit.transform.localScale = Vector3.zero;
@@ -194,18 +190,16 @@ public class Enemy : MonoBehaviour
 
             newBody.GetComponent<Enemy>().iOnlyHaveUpperBody = true;
 
-            anim.enabled = false;
-            enabled = false;
+            //RagdollSetActive(true);
             //GetComponentInChildren<SkinnedMeshRenderer>().gameObject.AddComponent<HighlightGrab>();
             Destroy(this);
         }
-        else // This will remain to be the enemy
+        else // This will remain as enemy
         {
             if (iLostLeg)
                 anim.SetBool("isDismembered", true);
 
-            newBody.GetComponent<Enemy>().enabled = false;
-            newBody.GetComponent<Animator>().enabled = false;
+            //newBody.GetComponent<Enemy>().RagdollSetActive(true);
             //newBody.GetComponentInChildren<SkinnedMeshRenderer>().gameObject.AddComponent<HighlightGrab>();
             Destroy(newBody.GetComponent<Enemy>());
         }
@@ -221,13 +215,15 @@ public class Enemy : MonoBehaviour
 
     public void KillThisEnemy()
     {
-
+        // TODO: Destroy gameObject and trigger any onEnemyKilled events
     }
 
     // Start is called before the first frame update
     void Start()
     {
         RefreshEnemyData();
+
+        RagdollSetActive(false);
 
         // Check whether or not other enemies are against the same target at the same time
         InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
@@ -236,8 +232,43 @@ public class Enemy : MonoBehaviour
         KillTime();
     }
 
+    void RefreshEnemyData()
+    {
+        maxHits = enemyData.maxHits;
+        movementSpeed = enemyData.movementSpeed;
+        moveAnimSpeed = enemyData.moveAnimSpeed;
+        attackRange = enemyData.attackRange;
+        turnSpeed = enemyData.turnSpeed;
+        allowCustomDismemberment = enemyData.allowCustomDismemberment;
+    }
+
+    public void RagdollSetActive(bool enable, GameObject impactedLimb = null, GameObject impactProjectile = null)
+    {
+        GetComponent<BoxCollider>().enabled = !enable;
+        anim.enabled = !enable;
+        enabled = !enable;
+
+        // Get all colliders that also have character joint components
+        foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>()))
+        {
+            joint.enableCollision = enable;
+            joint.GetComponent<Collider>().enabled = enable;
+            joint.GetComponent<Rigidbody>().isKinematic = !enable;
+            joint.GetComponent<Rigidbody>().detectCollisions = enable;
+            joint.GetComponent<Rigidbody>().useGravity = enable;
+            //if (enable && joint.gameObject == impactedLimb)
+            //{
+            //    joint.breakForce = 1;
+            //    Debug.Log(impactedLimb);
+            //    //joint.GetComponent<Rigidbody>().AddExplosionForce(impactProjectile.GetComponent<Rigidbody>().velocity.y, impactedLimb.transform.position, 1, 10, ForceMode.Impulse);
+            //}
+        }
+    }
+
     void WaitForOtherEnemies()
     {
+        if (!target) { return; }
+
         // Get enemies closest to the same target
         float closestDistance = Mathf.Infinity;
         foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.target == target))
@@ -280,6 +311,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!target) { return; }
+
         if (mayKillTime)
         {
             if (isDancer)

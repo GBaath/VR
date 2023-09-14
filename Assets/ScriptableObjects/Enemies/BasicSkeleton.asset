@@ -17,4 +17,4 @@ MonoBehaviour:
   moveAnimSpeed: 0.8
   attackRange: 2
   turnSpeed: 50
-  allowDismemberment: 1
+  allowCustomDismemberment: 0
