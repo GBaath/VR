@@ -271,7 +271,12 @@ public class Enemy : MonoBehaviour
 
     void WaitForOtherEnemies()
     {
-        if (!target || isDead) { return; }
+        if (isDead) { return; }
+
+        if (!target)
+        {
+            target = Camera.main.gameObject;
+        }
 
         // Get enemies closest to the same target
         float closestDistance = Mathf.Infinity;
