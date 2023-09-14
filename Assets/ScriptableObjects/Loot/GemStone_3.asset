@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17831320050377840823e94afeebe735, type: 3}
+  m_Name: GemStone_3
+  m_EditorClassIdentifier: 
+  lootProp: {fileID: 125582, guid: 15091d7e6dee66e4997a3d048491e089, type: 3}
+  material: {fileID: 2100000, guid: 0574116a7188c654ab34fcd54a2d0ecc, type: 2}
+  value: 36
+  customScale: 1
+  customMass: 1
