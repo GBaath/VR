@@ -9,11 +9,12 @@ public class Health : MonoBehaviour
     [SerializeField] private int currentHealth;
     
     public UnityEvent onAlmostDead;
-    
+    private DamageIndicator damageVignetteImg;
 
     void Awake()
     {
         currentHealth = maxHealth;
+        damageVignetteImg = FindObjectOfType<DamageIndicator>();
     }
 
     public void TakeDamage(int damage)
@@ -22,6 +23,8 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 20)
         {
+            damageVignetteImg.flashSpeed = 1f;
+            damageVignetteImg.Flash();
             onAlmostDead?.Invoke();
         }
 

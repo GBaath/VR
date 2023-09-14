@@ -488,6 +488,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gamemanager
       objectReference: {fileID: 0}
+    - target: {fileID: 7298944921204846117, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: lootResources.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298944921204846117, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: lootResources.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 51d6d09e68c5eda4fa2152f16e2e9169, type: 2}
+    - target: {fileID: 7298944921204846117, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: lootResources.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 294abffa23f47f149a8408e159dd82b9, type: 2}
+    - target: {fileID: 7298944921204846117, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: lootResources.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 21b48f4d672b82044a4b89f1ad5e3a96, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -995,7 +1011,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5a92c89031c742a43b91851922689ec5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
