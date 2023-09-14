@@ -13,7 +13,7 @@ namespace UnityEngine
 
         private void Awake()
         {
-            if (instance  && instance != this)
+            if (instance && instance != this)
             {
                 Destroy(this);
                 Destroy(gameObject);
@@ -30,11 +30,11 @@ namespace UnityEngine
         {
             List<int> indexes = new List<int>();
 
-            foreach(PropResource pr in propResources.Where(p => p.propSize == size))
+            foreach (PropResource pr in propResources.Where(p => p.propSize == size))
             {
                 indexes.Add(propResources.IndexOf(pr));
             }
-            foreach(int i in indexes)
+            foreach (int i in indexes)
             {
                 if (propResources[i].propType != type)
                 {
@@ -42,7 +42,7 @@ namespace UnityEngine
                 }
             }
 
-            if(indexes.Count > 0)
+            if (indexes.Count > 0)
             {
                 int returnIndex = indexes[Random.Range(0, indexes.Count)];
                 return propResources[returnIndex];
@@ -89,7 +89,7 @@ namespace UnityEngine
         }
         public PropResource GetNewPropResource()
         {
-            return propResources[Random.Range(0,propResources.Count)];
+            return propResources[Random.Range(0, propResources.Count)];
         }
 
 

@@ -12,16 +12,6 @@ public class LineRendererScript : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        if (lineRenderer == null)
-        {
-            Debug.LogError("Line Renderer component is missing from the game object.");
-        }
-
-        if (pointA == null || pointB == null)
-        {
-            Debug.LogError("Point A or Point B is not assigned.");
-        }
-
         UpdateLineRenderer();
     }
 

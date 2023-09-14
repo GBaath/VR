@@ -104,7 +104,6 @@ public class RoomBase : MonoBehaviour
         if (indexE >= enemies.Count)
         {
             enemiesLoaded = true;
-            LoadRoomcontent();
             return;
         }
         enemies[indexE].SetActive(true);
@@ -116,7 +115,6 @@ public class RoomBase : MonoBehaviour
         if (indexL >= loot.Count)
         {
             lootLoaded = true;
-            LoadRoomcontent();
             return;
         }
 
@@ -129,7 +127,6 @@ public class RoomBase : MonoBehaviour
         if (indexP >= props.Count)
         {
             propsLoaded = true;
-            LoadRoomcontent();
             return;
         }
         props[indexP].SetActive(true);

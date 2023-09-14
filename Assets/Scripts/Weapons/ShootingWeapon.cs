@@ -206,7 +206,11 @@ public class ShootingWeapon : MonoBehaviour
 
     public void StopShootingAnimation()
     {
+        if(fireAnimator != null)
+        {
         fireAnimator.SetBool("Fire", false);
+
+        }
         
     }
 }
