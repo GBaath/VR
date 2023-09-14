@@ -29,12 +29,12 @@ public class DismemberBullet : MonoBehaviour
             }
         }
         transform.LookAt(new Vector3(closestEnemyTransform.position.x, closestEnemyTransform.position.y, closestEnemyTransform.position.z));
-        GetComponent<Rigidbody>().velocity = transform.forward * 5;
+        GetComponent<Rigidbody>().velocity = transform.forward * 10;
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!other.gameObject.GetComponent<DismemberBullet>())
+        if (!other.gameObject.GetComponent<DismemberBullet>() && other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             onHitEnemy(other.collider.gameObject, gameObject);
             Destroy(gameObject);

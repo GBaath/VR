@@ -6,7 +6,7 @@ using System.Linq;
 public class Enemy : MonoBehaviour
 {
     [SerializeReference] Animator anim;
-    [SerializeReference] GameObject target;
+    public GameObject target;
     [SerializeReference] EnemyData enemyData;
     [SerializeReference] ParticleSystem doHitFX;
     [SerializeReference] ParticleSystem getHitFX;
@@ -53,6 +53,8 @@ public class Enemy : MonoBehaviour
 
     bool mayAttack = true;
     bool isOutOfReach = false;
+    bool isDead = false;
+
     bool isDismembered = false;
     bool iLostUpperBody = false;
     bool iOnlyHaveUpperBody = false;
@@ -102,6 +104,14 @@ public class Enemy : MonoBehaviour
 
     void OnHit(GameObject bodyHit, GameObject bullet)
     {
+        if (isDead) { return; }
+
+        if (!allowCustomDismemberment)
+        {
+            RagdollSetActive(true, bodyHit, bullet);
+            return;
+        }
+
         if (!isDismembered)
         {
             DismemberBody(bodyHit, bullet);
@@ -112,15 +122,31 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void RagdollSetActive(bool enable, GameObject impactedLimb = null, GameObject impactProjectile = null)
+    {
+        GetComponent<BoxCollider>().enabled = !enable;
+        anim.enabled = !enable;
+        isDead = enable;
+
+        // Get all colliders that also have character joint components
+        foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>()))
+        {
+            joint.enableCollision = enable;
+            joint.GetComponent<Collider>().enabled = enable;
+            joint.GetComponent<Rigidbody>().isKinematic = !enable;
+            joint.GetComponent<Rigidbody>().detectCollisions = enable;
+            joint.GetComponent<Rigidbody>().useGravity = enable;
+
+            //if (enable && joint.gameObject == impactedLimb)
+            //{
+            //    gameObject.GetComponent<Rigidbody>().AddExplosionForce(1000, joint.transform.position, 10);
+            //}
+        }
+    }
+
     void DismemberBody(GameObject limbHit, GameObject bullet)
     {
         if (limbHit.transform.GetComponentInParent<Enemy>() != this && !head && legs == null) { return; }
-
-        if (!allowCustomDismemberment)
-        {
-            RagdollSetActive(true, limbHit, bullet);
-            return;
-        }
 
         // "Remove" limb
         limbHit.transform.localScale = Vector3.zero;
@@ -215,6 +241,7 @@ public class Enemy : MonoBehaviour
 
     public void KillThisEnemy()
     {
+        isDead = true;
         // TODO: Destroy gameObject and trigger any onEnemyKilled events
     }
 
@@ -242,32 +269,9 @@ public class Enemy : MonoBehaviour
         allowCustomDismemberment = enemyData.allowCustomDismemberment;
     }
 
-    public void RagdollSetActive(bool enable, GameObject impactedLimb = null, GameObject impactProjectile = null)
-    {
-        GetComponent<BoxCollider>().enabled = !enable;
-        anim.enabled = !enable;
-        enabled = !enable;
-
-        // Get all colliders that also have character joint components
-        foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>()))
-        {
-            joint.enableCollision = enable;
-            joint.GetComponent<Collider>().enabled = enable;
-            joint.GetComponent<Rigidbody>().isKinematic = !enable;
-            joint.GetComponent<Rigidbody>().detectCollisions = enable;
-            joint.GetComponent<Rigidbody>().useGravity = enable;
-            //if (enable && joint.gameObject == impactedLimb)
-            //{
-            //    joint.breakForce = 1;
-            //    Debug.Log(impactedLimb);
-            //    //joint.GetComponent<Rigidbody>().AddExplosionForce(impactProjectile.GetComponent<Rigidbody>().velocity.y, impactedLimb.transform.position, 1, 10, ForceMode.Impulse);
-            //}
-        }
-    }
-
     void WaitForOtherEnemies()
     {
-        if (!target) { return; }
+        if (!target || isDead) { return; }
 
         // Get enemies closest to the same target
         float closestDistance = Mathf.Infinity;
@@ -288,7 +292,7 @@ public class Enemy : MonoBehaviour
 
     void KillTime()
     {
-        if (!isDancer && mayKillTime) { return; }
+        if (!isDancer && mayKillTime || isDead) { return; }
         if (anim.GetCurrentAnimatorStateInfo(0).IsName(danceState)) { return; }
 
         List<Enemy> cheeringEnemies = new();
@@ -311,7 +315,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!target) { return; }
+        if (!target || isDead) { return; }
 
         if (mayKillTime)
         {
