@@ -117,6 +117,8 @@ public class ShootingWeapon : MonoBehaviour
     public void ObjectDropped(SelectExitEventArgs arg)
     {
         isFiring = false; // Stop firing when object is dropped
+        StopShootingAnimation();
+        StopParticleEffect();
     }
     private void OutOfAmmoSound()
     {
@@ -199,10 +201,12 @@ public class ShootingWeapon : MonoBehaviour
         {
             fireParticles.Stop();
         }
+       
     }
 
     public void StopShootingAnimation()
     {
         fireAnimator.SetBool("Fire", false);
+        
     }
 }

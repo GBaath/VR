@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Grenade : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Grenade : MonoBehaviour
     [SerializeField] UnityEngine.AudioClip explosion;
     [SerializeField] UnityEngine.AudioClip pinSound;
     [SerializeField] ParticleSystem explosionEffect;
+    [SerializeField] Collider pinGrab;
 
     private void Start()
     {
@@ -37,5 +39,13 @@ public class Grenade : MonoBehaviour
         {
             Invoke(nameof(ExplodeGrenade), fuseTime);
         }
+    }
+    public void ActivatePin()
+    {
+        pinGrab.enabled = true;
+    }
+    public void DeActivatePin()
+    {
+        pinGrab.enabled = false;
     }
 }

@@ -29,6 +29,8 @@ public class HapticInteractable : MonoBehaviour
     }
     public void SetController(BaseInteractionEventArgs eventArgs)
     {
+
+        Debug.Log("Set controller");
         if (eventArgs.interactorObject is XRBaseControllerInteractor controllerInteractor)
         {
             baseController = controllerInteractor;
@@ -37,7 +39,8 @@ public class HapticInteractable : MonoBehaviour
 
     public void TriggerHapticPublic()
     {
-        if (baseController == null) return;
+        if (baseController == null) { Debug.Log("no controller"); return; }
+        
         if (intensity > 0)
         {
             baseController.SendHapticImpulse(intensity, duration);
