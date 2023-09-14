@@ -12,6 +12,10 @@ public class RoomBase : MonoBehaviour
     [HideInInspector] public RoomEntrance entrance;
     List<int> freeIndexes = new List<int>();
 
+    [Tooltip("Leave empty for all")]
+    public List<PropResource.PropType> acceptedTypes;
+    public Material customRoomMaterial;
+
     //info about loded objects in room
     public List<GameObject> enemies, loot, props;
 
@@ -100,6 +104,7 @@ public class RoomBase : MonoBehaviour
         if (indexE >= enemies.Count)
         {
             enemiesLoaded = true;
+            LoadRoomcontent();
             return;
         }
         enemies[indexE].SetActive(true);
@@ -111,6 +116,7 @@ public class RoomBase : MonoBehaviour
         if (indexL >= loot.Count)
         {
             lootLoaded = true;
+            LoadRoomcontent();
             return;
         }
 
@@ -123,6 +129,7 @@ public class RoomBase : MonoBehaviour
         if (indexP >= props.Count)
         {
             propsLoaded = true;
+            LoadRoomcontent();
             return;
         }
         props[indexP].SetActive(true);
