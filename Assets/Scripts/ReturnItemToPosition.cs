@@ -37,7 +37,10 @@ public class ReturnItemToPosition : MonoBehaviour
         isAttachedOrGrabbed = false;
         Invoke(nameof(ReturnAfterDelay), 3f);
     }
-
+    public void ReturnNow()
+    {
+        transform.position = returnPosition.position;
+    }
     void ReturnAfterDelay()
     {
         if (!isAttachedOrGrabbed)
