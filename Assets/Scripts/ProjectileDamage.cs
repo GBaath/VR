@@ -36,7 +36,6 @@ public class ProjectileDamage : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other);
         if (!other.gameObject.GetComponent<ProjectileDamage>() && other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             //onHitEnemy(other.collider.gameObject, gameObject);

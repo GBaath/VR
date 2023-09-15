@@ -19,7 +19,14 @@ public class HealthProperty : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-        Debug.Log(currentHealth);
+
+        if (TryGetComponent(out Enemy enemy))
+        {
+            enemy.GetComponent<AudioSource>().clip = GameManager.instance.audioManager.enemyHit;
+            enemy.GetComponent<AudioSource>().Play();
+            //Debug.Log(enemy.GetComponent<AudioSource>().clip);
+            enemy.GetComponent<AudioSource>().clip = null;
+        }
 
         if (currentHealth <= 0)
         {

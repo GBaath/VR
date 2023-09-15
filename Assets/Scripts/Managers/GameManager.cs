@@ -7,9 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public AssetLoader assetLoader;
+    public AudioManager audioManager;
     public ScoreManager scoreManager;
     public RoomManager roomManager;
-
     void Awake()
     {
         if (instance && instance != this)

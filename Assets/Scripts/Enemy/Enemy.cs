@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
     bool mayAttack = true;
     bool isOutOfReach = false;
     int attackAnimationLoops = -1;
-    Color currentMaterialColor = Color.white;
+    Color decayColor = Color.white;
 
     bool isDismembered = false;
     bool iLostUpperBody = false;
@@ -244,8 +244,7 @@ public class Enemy : MonoBehaviour
         isDead = true;
         isWaitingForOtherEnemies = true;
 
-        Color newDecayColor = new(1f, 1f, 1f, 1f);
-        GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", currentMaterialColor);
+        Destroy(gameObject, 5);
     }
 
     // Start is called before the first frame update
@@ -322,6 +321,17 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+        {
+            // TODO: Color shit
+
+            //float currentDecayColor = decayColor.r;
+            //Mathf.MoveTowards(currentDecayColor, 0, 1f * Time.deltaTime);
+            //decayColor = new(currentDecayColor, currentDecayColor, currentDecayColor, 1);
+            //decayColor = new(0, 0, 0, 1);
+            //GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color", decayColor);
+        }
+
         if (!target || isDead) { return; }
 
         if (mayKillTime)

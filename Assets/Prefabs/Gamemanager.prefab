@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assetLoader: {fileID: 7298944921204846117}
+  audioManager: {fileID: 6302380686796714573}
   scoreManager: {fileID: 6612399513978968993}
   roomManager: {fileID: 6447467580567506157}
 --- !u!114 &7298944921204846117
@@ -71,6 +72,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: df548fd718e138c4cb3f9e0067f9277d, type: 2}
   - {fileID: 11400000, guid: 21b48f4d672b82044a4b89f1ad5e3a96, type: 2}
   - {fileID: 11400000, guid: d411a933ed07b80409d1523760f41042, type: 2}
+  propResources: []
   highlightMaterial: {fileID: 2100000, guid: 285fb9c62c600fb409ff47962165f5c1, type: 2}
 --- !u!114 &6612399513978968993
 MonoBehaviour:
@@ -98,6 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b50db599a7027d42869460307e7d2d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wheel1: {fileID: 0}
+  wheel2: {fileID: 0}
+  wheel3: {fileID: 0}
+  enemyHit: {fileID: 8300000, guid: d993cc4ceba59ee4a8055b46d0c9260e, type: 3}
 --- !u!114 &6447467580567506157
 MonoBehaviour:
   m_ObjectHideFlags: 0
