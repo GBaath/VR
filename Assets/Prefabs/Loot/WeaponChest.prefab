@@ -1002,6 +1002,7 @@ MonoBehaviour:
   - {fileID: 624495480733239840, guid: eb547eaf39813aa438cc5de055d6e09c, type: 3}
   - {fileID: 6568054534775339266, guid: 6c0b92eeea98aeb4bb7d4a230f522bb8, type: 3}
   - {fileID: 7605705754360485179, guid: bb28329d971affb49b2febf0c7c6e068, type: 3}
+  - {fileID: 5669342558763740323, guid: 28bd0562e8136de439700d2512da8f97, type: 3}
   spawnPoint: {fileID: 5098278888532431050}
 --- !u!1 &6833935817720954655
 GameObject:

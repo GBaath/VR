@@ -48,4 +48,12 @@ public class Grenade : MonoBehaviour
     {
         pinGrab.enabled = false;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Projectile"))
+        {
+            ExplodeGrenade();
+        }
+    }
 }
