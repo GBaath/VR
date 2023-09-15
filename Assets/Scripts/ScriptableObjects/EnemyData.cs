@@ -3,12 +3,12 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EnemyData : ScriptableObject
 {
-    public int maxHits = 2;
+    public int maxHealth = 5;
     public float movementSpeed = 0.75f;
     public float moveAnimSpeed = 0.75f;
     public float attackRange = 2;
     public float turnSpeed = 25;
-    public bool allowCustomDismemberment = true;
+    //public bool allowCustomDismemberment = false;
 
     public delegate void OnRefreshEnemyData();
     public static OnRefreshEnemyData onRefreshEnemyData;

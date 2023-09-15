@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7097196954028651139}
   - component: {fileID: 3771273619297782607}
   - component: {fileID: 4439906669673136653}
+  - component: {fileID: 2421349569141299960}
   m_Layer: 0
   m_Name: TNTBarrel
   m_TagString: Untagged
@@ -239,3 +240,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.57278526, y: 0.6998644, z: 0.5836056}
   m_Center: {x: 0.0006355643, y: 0.3499322, z: 0.0051000714}
+--- !u!114 &2421349569141299960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284236644727470135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40b1223c19547645891c5aa9e84681d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
+  deathTimer: 3

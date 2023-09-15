@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeReference] Animator anim;
     public GameObject target;
-    [SerializeReference] EnemyData enemyData;
+    public EnemyData enemyData;
     [SerializeReference] ParticleSystem doHitFX;
     [SerializeReference] ParticleSystem getHitFX;
 
@@ -51,9 +51,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    [HideInInspector] public bool isDead = false;
     bool mayAttack = true;
     bool isOutOfReach = false;
-    bool isDead = false;
 
     bool isDismembered = false;
     bool iLostUpperBody = false;
@@ -62,8 +62,6 @@ public class Enemy : MonoBehaviour
     bool isLaunched = false;
 
     // Default EnemyData
-    int maxHits;
-    int currentHits;
     float movementSpeed;
     float moveAnimSpeed;
     float attackRange;
@@ -91,14 +89,14 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         EnemyData.onRefreshEnemyData += RefreshEnemyData;
-        DismemberBullet.onHitEnemy += OnHit;
+        ProjectileDamage.onHitEnemy += OnHit;
         // TODO: Bullet.onHitEnemy += DismemberBody;
     }
 
     private void OnDisable()
     {
         EnemyData.onRefreshEnemyData -= RefreshEnemyData;
-        DismemberBullet.onHitEnemy -= OnHit;
+        ProjectileDamage.onHitEnemy -= OnHit;
         // TODO: Bullet.onHitEnemy -= DismemberBody;
     }
 
@@ -112,28 +110,27 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        if (!isDismembered)
-        {
-            DismemberBody(bodyHit, bullet);
-        }
-        else
-        {
-            KillThisEnemy();
-        }
+        //if (!isDismembered)
+        //{
+        //    DismemberBody(bodyHit, bullet);
+        //}
+        //else
+        //{
+        //    KillThisEnemy();
+        //}
     }
 
-    public void RagdollSetActive(bool enable, GameObject impactedLimb = null, GameObject impactProjectile = null)
+    public void RagdollSetActive(bool enable, GameObject limbHit = null, GameObject impactProjectile = null)
     {
-        if (impactedLimb == null || impactedLimb.transform.GetComponentInParent<Enemy>() != this) { return; }
-
         GetComponent<BoxCollider>().enabled = !enable;
         anim.enabled = !enable;
-        isDead = enable;
 
         // Get all colliders that also have character joint components
         foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>()))
         {
             joint.enableCollision = enable;
+            joint.enablePreprocessing = enable;
+            joint.enableProjection = enable;
             joint.GetComponent<Collider>().enabled = enable;
             joint.GetComponent<Rigidbody>().isKinematic = !enable;
             joint.GetComponent<Rigidbody>().detectCollisions = enable;
@@ -263,12 +260,11 @@ public class Enemy : MonoBehaviour
 
     void RefreshEnemyData()
     {
-        maxHits = enemyData.maxHits;
         movementSpeed = enemyData.movementSpeed;
         moveAnimSpeed = enemyData.moveAnimSpeed;
         attackRange = enemyData.attackRange;
         turnSpeed = enemyData.turnSpeed;
-        allowCustomDismemberment = enemyData.allowCustomDismemberment;
+        //allowCustomDismemberment = enemyData.allowCustomDismemberment;
     }
 
     void WaitForOtherEnemies()
