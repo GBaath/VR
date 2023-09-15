@@ -124,6 +124,8 @@ public class Enemy : MonoBehaviour
 
     public void RagdollSetActive(bool enable, GameObject impactedLimb = null, GameObject impactProjectile = null)
     {
+        if (impactedLimb == null || impactedLimb.transform.GetComponentInParent<Enemy>() != this) { return; }
+
         GetComponent<BoxCollider>().enabled = !enable;
         anim.enabled = !enable;
         isDead = enable;
