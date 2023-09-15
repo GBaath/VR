@@ -2,34 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private int currentHealth;
+    [SerializeField] private float maxHealth = 200;
+    [SerializeField] private float currentHealth;
     
     public UnityEvent onAlmostDead;
-    private DamageIndicator damageVignetteImg;
-
+    [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Image damageFlashImg;
+    [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Image damageLoopFlashingImg;
+    private float healthPercent;
+    private bool isDead = false;
     void Awake()
     {
         currentHealth = maxHealth;
-        damageVignetteImg = FindObjectOfType<DamageIndicator>();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Max(currentHealth - damage, 0);
+        damageFlashImg.GetComponent<Animator>().SetTrigger("DamageFlash");
 
-        if (currentHealth <= 20)
+        healthPercent = currentHealth / maxHealth;
+
+        if (currentHealth > 0 && healthPercent <= 0.2f && !isDead)
         {
-            damageVignetteImg.flashSpeed = 1f;
-            damageVignetteImg.Flash();
-            onAlmostDead?.Invoke();
+            damageLoopFlashingImg.GetComponent<Animator>().SetTrigger("DamageLoopFlash");
+            //onAlmostDead?.Invoke();
         }
 
         if (currentHealth == 0)
         {
+            isDead = true;
+            DisableFlashLoop();
             Die();
         }
     }
@@ -37,5 +44,10 @@ public class Health : MonoBehaviour
     private void Die()
     {
         // game over 
+    }
+
+    private void DisableFlashLoop()
+    {
+        damageLoopFlashingImg.GetComponent<Animator>().enabled = false;
     }
 }
