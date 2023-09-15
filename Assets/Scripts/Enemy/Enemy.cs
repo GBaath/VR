@@ -54,6 +54,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public bool isDead = false;
     bool mayAttack = true;
     bool isOutOfReach = false;
+    int attackAnimationLoops = -1;
+    Color currentMaterialColor = Color.white;
 
     bool isDismembered = false;
     bool iLostUpperBody = false;
@@ -67,8 +69,6 @@ public class Enemy : MonoBehaviour
     float attackRange;
     float turnSpeed;
     bool allowCustomDismemberment;
-
-    int attackAnimationLoops = -1;
 
     // Magic numbers
     const string chaseTrigger = "chase";
@@ -240,8 +240,12 @@ public class Enemy : MonoBehaviour
 
     public void KillThisEnemy()
     {
+        // TODO: Trigger any onEnemyKilled events
         isDead = true;
-        // TODO: Destroy gameObject and trigger any onEnemyKilled events
+        isWaitingForOtherEnemies = true;
+
+        Color newDecayColor = new(1f, 1f, 1f, 1f);
+        GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", currentMaterialColor);
     }
 
     // Start is called before the first frame update

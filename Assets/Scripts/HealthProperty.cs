@@ -32,7 +32,7 @@ public class HealthProperty : MonoBehaviour
         if (TryGetComponent(out Enemy enemy))
         {
             enemy.RagdollSetActive(true);
-            enemy.isDead = true;
+            enemy.KillThisEnemy();
         }
         else if (TryGetComponent(out ExplosiveBarrel eb))
         {
