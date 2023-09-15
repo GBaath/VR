@@ -20,7 +20,7 @@ MonoBehaviour:
   hapticDuration: 0.3
   firingSound: {fileID: 8300000, guid: 2f79ccded1c77214d90207c48f343a50, type: 3}
   noAmmoSound: {fileID: 8300000, guid: e5748096dd878724dbf0b65ae74937dd, type: 3}
-  ammoCount: 10
+  ammoCount: 1000
   maxPitch: 1.2
   minPitch: 0.8
   bulletSpread: 0
