@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DismemberBullet : MonoBehaviour
+public class ProjectileDamage : MonoBehaviour
 {
+    public int damage = 1;
+
     public bool isHoming = false;
 
     public delegate void OnHitEnemy(GameObject hitBodypart, GameObject bullet);
@@ -34,9 +36,9 @@ public class DismemberBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!other.gameObject.GetComponent<DismemberBullet>() && other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        if (!other.gameObject.GetComponent<ProjectileDamage>())
         {
-            onHitEnemy(other.collider.gameObject, gameObject);
+            //onHitEnemy(other.collider.gameObject, gameObject);
             Destroy(gameObject);
         }
     }
