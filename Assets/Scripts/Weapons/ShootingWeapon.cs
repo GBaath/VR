@@ -148,6 +148,7 @@ public class ShootingWeapon : MonoBehaviour
             BulletSpread();
             FireSound();
             GameObject spawnedBullet = Instantiate(weaponStats.projectilePrefab);
+            spawnedBullet.GetComponent<ProjectileDamage>().damage = weaponStats.damage;
             spawnedBullet.transform.position = firingPoint.position;
             spawnedBullet.GetComponent<Rigidbody>().velocity = firingPoint.forward * weaponStats.bulletSpeed;
             Destroy(spawnedBullet, 5);

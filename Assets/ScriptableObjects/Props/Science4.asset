@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81d4a9845e332bd4b888653c34aae034, type: 3}
-  m_Name: BookCase1
+  m_Name: Science4
   m_EditorClassIdentifier: 
-  propSize: 1
-  propType: 0
+  propSize: 2
+  propType: 5
   propMaterial: {fileID: 2100000, guid: 42b64fdb315e3054ea757d8d1c4bcfa7, type: 2}
-  propPrefab: {fileID: 132048, guid: e56ebb4a3996049479a45d35c3854e8c, type: 3}
+  propPrefab: {fileID: 155670, guid: 6d0d811f059a7bc4493f797177e42a41, type: 3}
   useActualPrefab: 0
