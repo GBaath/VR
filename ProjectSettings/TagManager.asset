@@ -11,6 +11,7 @@ TagManager:
   - Water
   - Treasure
   - EventTrigger
+  - Ground
   layers:
   - Default
   - TransparentFX

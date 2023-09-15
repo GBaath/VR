@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 3585501800706460558}
   - component: {fileID: 6226455259042483261}
   - component: {fileID: 5828346353990563719}
+  - component: {fileID: 8306411085276735249}
   m_Layer: 27
   m_Name: Grenade
   m_TagString: Untagged
@@ -524,6 +525,8 @@ MonoBehaviour:
   pinSound: {fileID: 8300000, guid: ca61138dc55c8484db0e0e1259a5f7a6, type: 3}
   explosionEffect: {fileID: 198146752706458318, guid: 5ed0a013702bd9f42847584f2fba7b21, type: 3}
   pinGrab: {fileID: 2260708298292537377}
+  dmgRadius: 3
+  damageAmount: 50
 --- !u!82 &6226455259042483261
 AudioSource:
   m_ObjectHideFlags: 0
@@ -642,6 +645,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b945fc7164617984c9a7d253f5cdfab7, type: 3}
+--- !u!114 &8306411085276735249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5669342558763740323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc74c5b66db51442bc7548e8c3d6a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 16777216
 --- !u!1 &6331171370564045846
 GameObject:
   m_ObjectHideFlags: 0

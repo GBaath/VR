@@ -5,6 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Grenade : MonoBehaviour
 {
+
     bool isArmed = false;
     public float fuseTime;
     AudioSource aS;
@@ -13,8 +14,15 @@ public class Grenade : MonoBehaviour
     [SerializeField] ParticleSystem explosionEffect;
     [SerializeField] Collider pinGrab;
 
+
+    //Damage
+    AoeDmg dmgScript;
+    public float dmgRadius;
+    public int damageAmount;
+
     private void Start()
     {
+        dmgScript = GetComponent<AoeDmg>();
         aS = GetComponent<AudioSource>();
     }
     public void ArmGrenade()
@@ -22,16 +30,15 @@ public class Grenade : MonoBehaviour
         aS.clip = pinSound;
         aS.Play();
         isArmed = true;
-        Debug.Log("Grenade is armed");
     }
 
     private void ExplodeGrenade()
     {
         Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
-        Debug.Log("BOOM explosion");
         Destroy(gameObject, 2);
         aS.clip = explosion;
         aS.Play();
+        dmgScript.DealAoEDamage(transform.position, damageAmount, dmgRadius);
     }
     public void StartFuse()
     {
@@ -56,4 +63,8 @@ public class Grenade : MonoBehaviour
             ExplodeGrenade();
         }
     }
+
+
+
+
 }

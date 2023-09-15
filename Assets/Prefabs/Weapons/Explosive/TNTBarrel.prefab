@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3771273619297782607}
   - component: {fileID: 4439906669673136653}
   - component: {fileID: 2421349569141299960}
+  - component: {fileID: 5275425624528577810}
   m_Layer: 0
   m_Name: TNTBarrel
   m_TagString: Untagged
@@ -219,6 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionParticles: {fileID: 19854588, guid: 53777b8572d1e7242bc90044f62667ce, type: 3}
+  dmgAmount: 50
+  dmgRadius: 3
 --- !u!65 &4439906669673136653
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -254,3 +257,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   deathTimer: 3
+--- !u!114 &5275425624528577810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284236644727470135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc74c5b66db51442bc7548e8c3d6a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 16777216

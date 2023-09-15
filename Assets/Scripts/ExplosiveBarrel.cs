@@ -7,15 +7,32 @@ public class ExplosiveBarrel : MonoBehaviour
     [SerializeField] ParticleSystem explosionParticles;
     AudioSource aS;
 
+    //Damage
+    AoeDmg dmgScript;
+    public int dmgAmount;
+    public float dmgRadius;
+
+
     private void Start()
     {
+        dmgScript = GetComponent<AoeDmg>();
         aS = GetComponent<AudioSource>();
     }
     public void Explode()
     {
+        //var _new =Instantiate(explosionParticles, transform.position, explosionParticles.transform.rotation);
+        //var aoegmd = _new.gameObject.AddComponent<AoeDmg>();
+        //aoegmd.DealAoEDamage();
         Instantiate(explosionParticles, transform.position, explosionParticles.transform.rotation);
+        DealDmg();
         aS.Play();
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject);
+
+        
+    }
+    void DealDmg()
+    {
+        dmgScript.DealAoEDamage(transform.position, dmgAmount, dmgRadius);
     }
 
 }

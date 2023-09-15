@@ -12,12 +12,13 @@ public class Crossbow : MonoBehaviour
     [SerializeField] Transform firingPoint;
     [SerializeField] float arrowSpeed = 40;
     HapticInteractable hapticScript;
+    [SerializeField]AudioSource fireAudioSource;
 
     //isLoaded for Arrow check and isArmed for slider check
     bool isArmed, isLoaded;
     private void Start()
     {
-
+        
         hapticScript = GetComponent<HapticInteractable>();
     }
     public void CheckValue()
@@ -41,7 +42,7 @@ public class Crossbow : MonoBehaviour
     {
         if (isLoaded && isArmed)
         {
-
+            
             DestroyArrow();
             reloadSlider.value = 1;
             isLoaded = false;
@@ -73,6 +74,7 @@ public class Crossbow : MonoBehaviour
         spawnedBullet.transform.rotation = firingPoint.rotation;
         spawnedBullet.GetComponent<Rigidbody>().velocity = firingPoint.forward * arrowSpeed;
         Destroy(spawnedBullet, 5);
+        fireAudioSource.Play();
 
     }
     public void AddArrow(SelectEnterEventArgs args)
@@ -92,6 +94,7 @@ public class Crossbow : MonoBehaviour
         isLoaded = false;
 
     }
+    
 
 
 
