@@ -24,7 +24,7 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
 
     }
 
-    void IDamageable.DestroyThis(float delay)
+    void IDamageable.WhenDestroyed(float delay)
     {
         Explode();
     }

@@ -22,7 +22,7 @@ public class HealthProperty : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            if (damageable != null) { damageable.DestroyThis(deathTimer); }
+            if (damageable != null) { damageable.WhenDestroyed(deathTimer); }
             else { Destroy(gameObject, deathTimer); }
         }
     }

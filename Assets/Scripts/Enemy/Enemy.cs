@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour, IDamageable
         GetComponent<AudioSource>().clip = null;
     }
 
-    void IDamageable.DestroyThis(float delay)
+    void IDamageable.WhenDestroyed(float delay)
     {
         RagdollSetActive(true);
         KillThisEnemy(delay);
