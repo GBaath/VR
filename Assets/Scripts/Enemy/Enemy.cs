@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeReference] Animator anim;
     public GameObject target;
@@ -89,36 +89,47 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         EnemyData.onRefreshEnemyData += RefreshEnemyData;
-        ProjectileDamage.onHitEnemy += OnHit;
         // TODO: Bullet.onHitEnemy += DismemberBody;
     }
 
     private void OnDisable()
     {
         EnemyData.onRefreshEnemyData -= RefreshEnemyData;
-        ProjectileDamage.onHitEnemy -= OnHit;
         // TODO: Bullet.onHitEnemy -= DismemberBody;
     }
 
-    void OnHit(GameObject bodyHit, GameObject bullet)
+    void IDamageable.TakeDamage(int amount)
     {
-        if (isDead) { return; }
-
-        if (!allowCustomDismemberment)
-        {
-            RagdollSetActive(true, bodyHit, bullet);
-            return;
-        }
-
-        //if (!isDismembered)
-        //{
-        //    DismemberBody(bodyHit, bullet);
-        //}
-        //else
-        //{
-        //    KillThisEnemy();
-        //}
+        GetComponent<AudioSource>().clip = GameManager.instance.audioManager.enemyHit;
+        GetComponent<AudioSource>().Play();
+        GetComponent<AudioSource>().clip = null;
     }
+
+    void IDamageable.DestroyThis(float delay)
+    {
+        RagdollSetActive(true);
+        KillThisEnemy(delay);
+    }
+
+    //void OnHit(GameObject bodyHit, GameObject bullet)
+    //{
+    //    if (isDead) { return; }
+
+    //    if (!allowCustomDismemberment)
+    //    {
+    //        RagdollSetActive(true, bodyHit, bullet);
+    //        return;
+    //    }
+
+    //    //if (!isDismembered)
+    //    //{
+    //    //    DismemberBody(bodyHit, bullet);
+    //    //}
+    //    //else
+    //    //{
+    //    //    KillThisEnemy();
+    //    //}
+    //}
 
     public void RagdollSetActive(bool enable, GameObject limbHit = null, GameObject impactProjectile = null)
     {
@@ -238,13 +249,13 @@ public class Enemy : MonoBehaviour
         newBody.GetComponent<Rigidbody>().AddForceAtPosition(bullet.GetComponent<Rigidbody>().velocity, limbHit.transform.position, ForceMode.Impulse);
     }
 
-    public void KillThisEnemy()
+    public void KillThisEnemy(float t = 5)
     {
         // TODO: Trigger any onEnemyKilled events
         isDead = true;
         isWaitingForOtherEnemies = true;
 
-        Destroy(gameObject, 5);
+        Destroy(gameObject, t);
     }
 
     // Start is called before the first frame update

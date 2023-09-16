@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosiveBarrel : MonoBehaviour
+public class ExplosiveBarrel : MonoBehaviour, IDamageable
 {
     [SerializeField] ParticleSystem explosionParticles;
     AudioSource aS;
@@ -18,6 +18,17 @@ public class ExplosiveBarrel : MonoBehaviour
         dmgScript = GetComponent<AoeDmg>();
         aS = GetComponent<AudioSource>();
     }
+
+    void IDamageable.TakeDamage(int amount)
+    {
+
+    }
+
+    void IDamageable.DestroyThis(float delay)
+    {
+        Explode();
+    }
+
     public void Explode()
     {
         //var _new =Instantiate(explosionParticles, transform.position, explosionParticles.transform.rotation);
@@ -30,9 +41,9 @@ public class ExplosiveBarrel : MonoBehaviour
 
         
     }
+
     void DealDmg()
     {
         dmgScript.DealAoEDamage(transform.position, dmgAmount, dmgRadius);
     }
-
 }

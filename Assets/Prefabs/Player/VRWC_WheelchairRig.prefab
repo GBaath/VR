@@ -1268,7 +1268,7 @@ GameObject:
   - component: {fileID: 3355997933681941769}
   m_Layer: 26
   m_Name: CasterL
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1464,7 +1464,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3355997933788464944}
   - component: {fileID: 3355997933788464945}
-  - component: {fileID: 7662048660386628619}
   m_Layer: 0
   m_Name: Camera Offset
   m_TagString: Untagged
@@ -1503,19 +1502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3355997934018186044}
---- !u!114 &7662048660386628619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3355997933788464947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c89ae330b33549438dd18fa721d8c58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wheelChair: {fileID: 3355997934270379128}
 --- !u!1 &3355997933869472956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,7 +1519,7 @@ GameObject:
   - component: {fileID: 3355997933869472934}
   m_Layer: 26
   m_Name: WheelL
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1655,7 +1641,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  meshColliderValue: 0.2
+  meshColliderValue: 3.01
   hapticsEnabled: 1
   deselectionThreshold: 0.25
   label1: {fileID: 0}
@@ -1937,7 +1923,7 @@ GameObject:
   - component: {fileID: 5955989839197484785}
   m_Layer: 26
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2119,7 +2105,7 @@ GameObject:
   - component: {fileID: 3355997934027076924}
   m_Layer: 26
   m_Name: WheelR
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2241,7 +2227,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  meshColliderValue: 0.2
+  meshColliderValue: 3.01
   hapticsEnabled: 1
   deselectionThreshold: 0.25
   label1: {fileID: 0}
@@ -2520,6 +2506,7 @@ GameObject:
   - component: {fileID: 3355997934270379108}
   - component: {fileID: 3355997934270379110}
   - component: {fileID: 5285393801485322089}
+  - component: {fileID: 6456433170840264166}
   m_Layer: 0
   m_Name: VRWC_WheelchairRig
   m_TagString: Untagged
@@ -2578,6 +2565,18 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 3355997933788464947}
   m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 1.1176
+--- !u!114 &6456433170840264166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355997934270379128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e8577bfff737349921f2be27289f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3355997934338465200
 GameObject:
   m_ObjectHideFlags: 0
@@ -2960,6 +2959,7 @@ GameObject:
   - component: {fileID: 3355997934936558555}
   - component: {fileID: 3355997934936558554}
   - component: {fileID: 3355997934936558557}
+  - component: {fileID: 7294834636955134457}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3187,6 +3187,18 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &7294834636955134457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355997934936558556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e8577bfff737349921f2be27289f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3355997935092670172
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,7 +3245,7 @@ GameObject:
   - component: {fileID: 3355997935213568931}
   m_Layer: 26
   m_Name: CasterR
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

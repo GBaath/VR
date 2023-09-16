@@ -14,7 +14,7 @@ public class AoeDmg : MonoBehaviour
             if (hitCollider.TryGetComponent(out HealthProperty health))
             {
                 Debug.Log("DamageDealt");
-                health.TakeDamage(damageAmount);                
+                health.LoseHealth(damageAmount);                
             }
         }
     }

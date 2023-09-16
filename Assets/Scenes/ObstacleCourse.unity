@@ -314,24 +314,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14f2c1b420369fb41a54a92077bb9e07, type: 3}
---- !u!1 &75993849 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3355997934936558556, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-  m_PrefabInstance: {fileID: 474512505}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &75993855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75993849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e8577bfff737349921f2be27289f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wheelChair: {fileID: 1415746991}
 --- !u!1 &151828791
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,30 +654,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3355997933681941771, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3355997933869472933, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      propertyPath: meshColliderValue
-      value: 3.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 3355997933869472956, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3355997934018186033, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3355997934027076914, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3355997934027076923, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      propertyPath: meshColliderValue
-      value: 3.01
-      objectReference: {fileID: 0}
     - target: {fileID: 3355997934270379108, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.822
@@ -740,21 +698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRWC_WheelchairRig
       objectReference: {fileID: 0}
-    - target: {fileID: 3355997934270379128, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 3355997935213568933, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3355997934936558556, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 75993855}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
 --- !u!1001 &476304796
 PrefabInstance:
@@ -1543,11 +1490,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
---- !u!1 &1415746991 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3355997934270379128, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-  m_PrefabInstance: {fileID: 474512505}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1753099519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2138,10 +2080,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5745938649881773124, guid: 9045217b9b29433469131189f4f0e110, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7212783402212190835, guid: 9045217b9b29433469131189f4f0e110, type: 3}
-      propertyPath: trigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

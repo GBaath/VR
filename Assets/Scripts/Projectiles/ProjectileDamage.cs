@@ -5,11 +5,7 @@ using UnityEngine;
 public class ProjectileDamage : MonoBehaviour
 {
     public int damage = 1;
-
     public bool isHoming = false;
-
-    public delegate void OnHitEnemy(GameObject hitBodypart, GameObject bullet);
-    public static OnHitEnemy onHitEnemy;
 
     void Start()
     {
@@ -36,9 +32,9 @@ public class ProjectileDamage : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!other.gameObject.GetComponent<ProjectileDamage>() && other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemies") && other.gameObject.TryGetComponent(out HealthProperty hp))
         {
-            //onHitEnemy(other.collider.gameObject, gameObject);
+            hp.LoseHealth(damage);
             Destroy(gameObject);
         }
     }
