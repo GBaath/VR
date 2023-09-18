@@ -162,6 +162,9 @@ public class ShootingWeapon : MonoBehaviour
 
             ResetBulletSpread();
             hapticScript.TriggerHapticPublic();
+
+
+            GameManager.instance.playerPhysicsBase.GetComponent<WeaponPhysicsMove>().ApplyWeaponForce(firingPoint.forward, weaponStats.knockBack);
         }
 
     }

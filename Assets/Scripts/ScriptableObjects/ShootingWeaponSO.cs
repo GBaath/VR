@@ -9,6 +9,7 @@ public class ShootingWeaponSO : ScriptableObject
     public GameObject projectilePrefab;
     public float reloadTime = 0.5f;
     public float bulletSpeed;
+    public float knockBack = 1;
     public int damage = 1;
     public float hapticDuration;
     public UnityEngine.AudioClip firingSound;

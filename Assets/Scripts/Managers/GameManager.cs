@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public GameObject playerPhysicsBase;
     public AssetLoader assetLoader;
     public AudioManager audioManager;
     public ScoreManager scoreManager;
