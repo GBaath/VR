@@ -102,6 +102,7 @@ public class VRWC_WheelInteractable : XRBaseInteractable
         // While this wheel has an active grabPoint.
         while (grabPoint)
         {
+            Debug.Log(Vector3.Distance(transform.position, interactor.transform.position));
             // If interactor drifts beyond the threshold distance from wheel, force deselection.
             if (Vector3.Distance(transform.position, interactor.transform.position) >= meshColliderValue + deselectionThreshold)
             {
