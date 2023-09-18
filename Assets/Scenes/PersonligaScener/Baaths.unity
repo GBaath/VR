@@ -2006,6 +2006,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gamemanager
       objectReference: {fileID: 0}
+    - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: roomBaseList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: roomBaseList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8737019846826064926, guid: df5f7c9014df77149b2ae66549654d17, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
