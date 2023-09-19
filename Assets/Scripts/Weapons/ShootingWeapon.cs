@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.UI;
 
 public class ShootingWeapon : MonoBehaviour
 {
@@ -12,8 +13,7 @@ public class ShootingWeapon : MonoBehaviour
     private AudioSource aS;
     bool isFiring;
     private float lastFiredTime = 0f; // time the last bullet was fired
-    private bool outOfAmmo = false;
-    private bool isReloading = false;
+
     private XRGrabInteractable grabbable;
     private Vector3 originalSpread;
     [SerializeField] ParticleSystem cartrideParticles;
@@ -22,6 +22,12 @@ public class ShootingWeapon : MonoBehaviour
     [SerializeField] Animator fireAnimator;
     [SerializeField] WeaponType currentWeaponType;
 
+    //Reload
+    [SerializeField]Canvas reloadCanvas;
+    [SerializeField] Image reloadCircle;
+    private bool outOfAmmo = false;
+    private bool isReloading = false;
+    
     public enum WeaponType
     {
         SMG,
@@ -31,6 +37,7 @@ public class ShootingWeapon : MonoBehaviour
     }
     private void Start()
     {
+        reloadCanvas.enabled = false;
         hapticScript = GetComponent<HapticInteractable>();
         //Add grab Listeners
         grabbable = GetComponent<XRGrabInteractable>();
@@ -192,18 +199,37 @@ public class ShootingWeapon : MonoBehaviour
 
     private void StartReload()
     {
+        reloadCanvas.enabled = true;
         if (isReloading) return;
         aS.clip = weaponStats.reloadSound;
         aS.Play();
         isReloading = true;
         Invoke(nameof(StopReload), weaponStats.reloadTime);
+        StartCoroutine(ReloadProgress());
     }
     private void StopReload()
     {
+        reloadCanvas.enabled = false;
+        reloadCircle.fillAmount = 0;
         currentAmmo = weaponStats.ammoCount;
         outOfAmmo = false;
         isReloading = false;
         aS.Stop();
+    }
+    //Reload progress for reload circle
+    private IEnumerator ReloadProgress()
+    {
+        float reloadTime = weaponStats.reloadTime;
+        float timePassed = 0f;
+
+        while (timePassed < reloadTime)
+        {
+            timePassed += Time.deltaTime;
+            reloadCircle.fillAmount = timePassed / reloadTime;
+            yield return null;
+        }
+
+        StopReload();
     }
 
     public void StartParticleEffect()
