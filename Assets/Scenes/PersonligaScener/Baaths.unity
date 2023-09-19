@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 0.72156864}
   m_SkyboxMaterial: {fileID: 2100000, guid: ef47336c2a1f84440af57fac118495ab, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 1661826993}
+  m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0.008367395, g: 0.0066615203, b: 0.0064875465, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -2006,6 +2006,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gamemanager
       objectReference: {fileID: 0}
+    - target: {fileID: 2481857431906020263, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: playerPhysicsBase
+      value: 
+      objectReference: {fileID: 943918096}
     - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
       propertyPath: roomBaseList.Array.size
       value: 2
@@ -2014,6 +2018,14 @@ PrefabInstance:
       propertyPath: roomBaseList.Array.data[1]
       value: 
       objectReference: {fileID: 8737019846826064926, guid: df5f7c9014df77149b2ae66549654d17, type: 3}
+    - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: roomExtensionList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: roomExtensionList.Array.data[1]
+      value: 
+      objectReference: {fileID: 5589313593156036153, guid: 7c0a105531fcb3845ba0565eee15a696, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12818,6 +12830,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8737019846826064926, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
   m_PrefabInstance: {fileID: 1354874816}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &689136756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9064070969080059422, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
+  m_PrefabInstance: {fileID: 1354874816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689136754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec214da6fe862d04eab26cde1b85e797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &694547636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15635,6 +15658,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 438576, guid: 42988b617e6b4924e88885352823ba7f, type: 3}
   m_PrefabInstance: {fileID: 943149598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &943918096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3355997934737179409, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
+  m_PrefabInstance: {fileID: 817267538}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &945702706
 PrefabInstance:
@@ -24128,6 +24156,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
+      propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
       propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 689136754}
@@ -24136,12 +24168,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1881190275}
     - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
+      propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 689136756}
+    - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
       propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
+      propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: LoadNext
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
       propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
+      propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: RoomEntrance, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
       propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
@@ -24149,6 +24193,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
       propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429571003974596232, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
+      propertyPath: linkedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6455143193640374117, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
@@ -24219,10 +24267,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9064070969080059422, guid: c575dad31c06d004386b86e87a12fa61, type: 3}
-      propertyPath: previousRoom
-      value: 
-      objectReference: {fileID: 1881190275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27275,7 +27319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1661826993
 Light:
   m_ObjectHideFlags: 0

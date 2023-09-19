@@ -17,19 +17,29 @@ public class RoomBase : MonoBehaviour
     public Material customRoomMaterial;
 
     //info about loded objects in room
-    public List<GameObject> enemies, loot, props;
+    public List<GameObject> enemies, loot, props, propSets;
 
-    private bool enemiesLoaded, lootLoaded, propsLoaded;
+    [SerializeField]private bool enemiesLoaded, lootLoaded, propsLoaded;
     int indexE = 0, indexL = 0, indexP = 0;
 
     private void Start()
     {
         //link connections point transforms
-        for (int i = 0; i < connectionspointsHolder.childCount; i++)
+        for (int j = 0; j < connectionspointsHolder.childCount; j++)
         {
-            connectionsPoints.Add(connectionspointsHolder.GetChild(i).GetComponent<ConnectionsPoint>());
-            connectionsPoints[i].baseConnection = this;
+            connectionsPoints.Add(connectionspointsHolder.GetChild(j).GetComponent<ConnectionsPoint>());
+            connectionsPoints[j].baseConnection = this;
         }
+        int i = Random.Range(0, propSets.Count);
+        propSets[i].SetActive(true);
+        //this might break ad add parent to list also
+        for (int j = 0; j < propSets[i].transform.childCount; j++)
+        {
+            props.Add(propSets[i].transform.GetChild(j).gameObject);
+        }
+
+
+
         SetEntryConnection();
         SpawnConnections();
     }
@@ -104,6 +114,7 @@ public class RoomBase : MonoBehaviour
         if (indexE >= enemies.Count)
         {
             enemiesLoaded = true;
+            LoadRoomcontent();
             return;
         }
         enemies[indexE].SetActive(true);
@@ -115,6 +126,7 @@ public class RoomBase : MonoBehaviour
         if (indexL >= loot.Count)
         {
             lootLoaded = true;
+            LoadRoomcontent();
             return;
         }
 
@@ -127,9 +139,15 @@ public class RoomBase : MonoBehaviour
         if (indexP >= props.Count)
         {
             propsLoaded = true;
+            LoadRoomcontent();
             return;
         }
         props[indexP].SetActive(true);
+
+        if(customRoomMaterial != null)
+        {
+            props[indexP].GetComponent<MeshRenderer>().sharedMaterial = customRoomMaterial;
+        }
         indexP++;
         LoadRoomcontent();
     }
