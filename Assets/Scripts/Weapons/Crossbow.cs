@@ -26,14 +26,14 @@ public class Crossbow : MonoBehaviour
 
         if (reloadSlider.value == 0)
         {
-            socketInteractor.socketActive = true;
+            //socketInteractor.socketActive = true;
             isArmed = true;
 
         }
         else
         {
             isArmed = false;
-            socketInteractor.socketActive = false;
+            //socketInteractor.socketActive = false;
 
         }
     }
@@ -52,7 +52,7 @@ public class Crossbow : MonoBehaviour
         }
         else
         {
-
+            reloadSlider.value = 0;
             Debug.Log("Cant shoot");
 
         }
@@ -81,12 +81,8 @@ public class Crossbow : MonoBehaviour
     {
 
         isLoaded = true;
-        //if (args.interactableObject.transform.TryGetComponent(out CrossbowArrow crossbowArrow))//If you got this do the method
-        //{
-        //    Debug.Log("AddArrow");
-        //    //crossbowArrow.InsertedInCrossbow();
-
-        //}
+        IXRSelectInteractable objName = socketInteractor.GetOldestInteractableSelected();
+        objName.transform.gameObject.GetComponent<XRGrabInteractable>().interactionLayers = InteractionLayerMask.GetMask("NoHands");
 
     }
     public void RemoveArrow(SelectExitEventArgs args)

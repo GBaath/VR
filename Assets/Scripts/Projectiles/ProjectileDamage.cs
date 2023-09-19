@@ -32,7 +32,7 @@ public class ProjectileDamage : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemies") && other.gameObject.TryGetComponent(out HealthProperty hp))
+        if ( other.gameObject.TryGetComponent(out HealthProperty hp)) //other.gameObject.layer == LayerMask.NameToLayer("Enemies") &&
         {
             hp.LoseHealth(damage);
             Destroy(gameObject);

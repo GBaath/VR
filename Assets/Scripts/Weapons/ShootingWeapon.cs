@@ -13,6 +13,7 @@ public class ShootingWeapon : MonoBehaviour
     bool isFiring;
     private float lastFiredTime = 0f; // time the last bullet was fired
     private bool outOfAmmo = false;
+    private bool isReloading = false;
     private XRGrabInteractable grabbable;
     private Vector3 originalSpread;
     [SerializeField] ParticleSystem cartrideParticles;
@@ -36,7 +37,7 @@ public class ShootingWeapon : MonoBehaviour
         grabbable.activated.AddListener(StartFiring);
         grabbable.deactivated.AddListener(StopFiring);
         grabbable.selectExited.AddListener(ObjectDropped);
-        
+
         //SetStats
         hapticScript.duration = weaponStats.hapticDuration;
         currentAmmo = weaponStats.ammoCount;
@@ -51,7 +52,7 @@ public class ShootingWeapon : MonoBehaviour
         {
             case WeaponType.SMG:
 
-                if (isFiring && Time.time - lastFiredTime >= weaponStats.reloadTime)
+                if (isFiring && Time.time - lastFiredTime >= weaponStats.fireRate)
                 {
                     FireBullet();
                     lastFiredTime = Time.time; // update the last fired time
@@ -67,10 +68,14 @@ public class ShootingWeapon : MonoBehaviour
             OutOfAmmoSound();
             return;
         }
-        if (fireAnimator != null)
+        else
         {
-            fireAnimator.SetBool("Fire", true);
             
+            if (fireAnimator != null)
+            {
+                fireAnimator.SetBool("Fire", true);
+
+            }
         }
 
         switch (currentWeaponType)
@@ -89,7 +94,6 @@ public class ShootingWeapon : MonoBehaviour
                 currentAmmo -= 1;
                 break;
         }
-        StartParticleEffect();
 
     }
 
@@ -139,12 +143,13 @@ public class ShootingWeapon : MonoBehaviour
         {
             if (outOfAmmo == false)
             {
-                OutOfAmmoSound();
+                StartReload();
                 outOfAmmo = true;
             }
         }
         else
         {
+            StartParticleEffect();
             BulletSpread();
             FireSound();
             GameObject spawnedBullet = Instantiate(weaponStats.projectilePrefab);
@@ -183,6 +188,24 @@ public class ShootingWeapon : MonoBehaviour
         //Reset
         firingPoint.rotation = Quaternion.Euler(originalSpread);
     }
+
+
+    private void StartReload()
+    {
+        if (isReloading) return;
+        aS.clip = weaponStats.reloadSound;
+        aS.Play();
+        isReloading = true;
+        Invoke(nameof(StopReload), weaponStats.reloadTime);
+    }
+    private void StopReload()
+    {
+        currentAmmo = weaponStats.ammoCount;
+        outOfAmmo = false;
+        isReloading = false;
+        aS.Stop();
+    }
+
     public void StartParticleEffect()
     {
         if (cartrideParticles != null)
@@ -201,20 +224,19 @@ public class ShootingWeapon : MonoBehaviour
         {
             cartrideParticles.Stop();
         }
-        if ( fireParticles != null)
+        if (fireParticles != null)
         {
             fireParticles.Stop();
         }
-       
+
     }
 
     public void StopShootingAnimation()
     {
-        if(fireAnimator != null)
+        if (fireAnimator != null)
         {
-        fireAnimator.SetBool("Fire", false);
-
+            fireAnimator.SetBool("Fire", false);
         }
-        
+
     }
 }
