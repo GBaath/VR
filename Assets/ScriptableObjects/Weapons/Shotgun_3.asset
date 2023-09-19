@@ -23,9 +23,9 @@ MonoBehaviour:
   firingSound: {fileID: 8300000, guid: f044397c95ac8cd40b6bc286980ec887, type: 3}
   noAmmoSound: {fileID: 8300000, guid: e5748096dd878724dbf0b65ae74937dd, type: 3}
   reloadSound: {fileID: 8300000, guid: d2c081a4b15682140bc364d7003377f9, type: 3}
-  ammoCount: 4
+  ammoCount: 6
   maxPitch: 1.2
   minPitch: 0.8
   bulletSpread: 5
-  shotgunSlugs: 8
-  Tier: 0
+  shotgunSlugs: 10
+  Tier: 2

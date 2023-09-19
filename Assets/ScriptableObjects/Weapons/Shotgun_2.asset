@@ -28,4 +28,4 @@ MonoBehaviour:
   minPitch: 0.8
   bulletSpread: 5
   shotgunSlugs: 8
-  Tier: 0
+  Tier: 1
