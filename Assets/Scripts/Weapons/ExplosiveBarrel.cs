@@ -12,7 +12,6 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
     public int dmgAmount;
     public float dmgRadius;
 
-
     private void Start()
     {
         dmgScript = GetComponent<AoeDmg>();
@@ -24,7 +23,7 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
 
     }
 
-    void IDamageable.WhenDestroyed(float delay)
+    void IDamageable.Die(float delay)
     {
         Explode();
     }

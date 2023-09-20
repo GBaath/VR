@@ -14,7 +14,7 @@ public class ProjectileDamage : MonoBehaviour
 
     private void HomeInOnEnemy()
     {
-        if (!isHoming) { return; }
+        if (!isHoming || !FindObjectOfType<Enemy>()) { return; }
 
         float closestDistance = Mathf.Infinity;
         Transform closestEnemyTransform = null;

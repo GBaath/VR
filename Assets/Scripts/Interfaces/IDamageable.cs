@@ -1,5 +1,5 @@
 public interface IDamageable
 {
     void TakeDamage(int amount);
-    void WhenDestroyed(float destroyDelay);
+    void Die(float destroyDelay);
 }
