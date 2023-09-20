@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1820386222830629394}
+  - component: {fileID: 2311001809178619425}
   m_Layer: 11
   m_Name: RoomModuleBlock
   m_TagString: Untagged
@@ -34,6 +35,19 @@ Transform:
   - {fileID: 6347459069072887309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2311001809178619425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589313593156036153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7384de9b148d73247bf7e9c5d0c35575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secretDoor: {fileID: 0}
 --- !u!1001 &2525512954922161715
 PrefabInstance:
   m_ObjectHideFlags: 0

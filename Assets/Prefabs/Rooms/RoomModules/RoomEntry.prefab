@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1820386222830629394}
   - component: {fileID: 5703267671459494568}
+  - component: {fileID: 4478996291385934569}
   m_Layer: 11
   m_Name: RoomEntry
   m_TagString: Untagged
@@ -55,6 +56,19 @@ MonoBehaviour:
   previousRoom: {fileID: 0}
   loadDoor: {fileID: 5360261597984740560}
   nextRoomEntrance: {fileID: 0}
+--- !u!114 &4478996291385934569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589313593156036153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7384de9b148d73247bf7e9c5d0c35575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secretDoor: {fileID: 0}
 --- !u!1 &6363518626171471572
 GameObject:
   m_ObjectHideFlags: 0

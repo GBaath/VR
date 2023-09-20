@@ -15,6 +15,7 @@ public class ConnectionsPoint : MonoBehaviour
         var _new = Instantiate(GameManager.instance.roomManager.GetNewRoomExtension(),transform);
         _new.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         isUsed = true;
+        _new.GetComponent<RoomModule>().AddPropsToBase(baseConnection);
     }
     //spawn exit module and set some new refs for new room
     public void SpawnExitModule(out RoomEntrance spawned)

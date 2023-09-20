@@ -17,7 +17,6 @@ public class Door : MonoBehaviour
         locked = _lock;
         rb.isKinematic = _lock;
         transform.rotation = initRot;
-        Debug.Log(_lock);
 
         //TODO CLOSE ANIM HERE
     }

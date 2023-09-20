@@ -17,7 +17,7 @@ public class RoomBase : MonoBehaviour
     public Material customRoomMaterial;
 
     //info about loded objects in room
-    public List<GameObject> enemies, loot, props, propSets;
+    public List<GameObject> enemies, loot, props, propSets, switchSpawnPoints;
 
     [SerializeField]private bool enemiesLoaded, lootLoaded, propsLoaded;
     int indexE = 0, indexL = 0, indexP = 0;
@@ -146,7 +146,8 @@ public class RoomBase : MonoBehaviour
 
         if(customRoomMaterial != null)
         {
-            props[indexP].GetComponent<MeshRenderer>().sharedMaterial = customRoomMaterial;
+            if (props[indexP].GetComponent<MeshRenderer>())
+                props[indexP].GetComponent<MeshRenderer>().sharedMaterial = customRoomMaterial;
         }
         indexP++;
         LoadRoomcontent();

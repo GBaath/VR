@@ -42,6 +42,7 @@ public class RoomEntrance : MonoBehaviour
         roomBase.entrance = this;
 
         roomBase.LoadRoomcontent();
+        loadDoor.Lock(false);
 
        
     }
