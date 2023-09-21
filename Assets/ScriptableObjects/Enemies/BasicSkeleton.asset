@@ -16,10 +16,10 @@ MonoBehaviour:
   movementSpeed: 0.6
   turnSpeed: 50
   attackAnimSpeed: 1.5
-  idleAnimation: {fileID: 7400000, guid: 36c4ea7c001dc8c4396ec6add2dd29f4, type: 2}
+  idleAnimation: {fileID: 7400000, guid: 159f27e82edf2b7478efa768aec6c76e, type: 2}
   confusedAnimation: {fileID: 7400000, guid: 9ea32605feb4726408e2aa3183064e6c, type: 2}
   surprisedAnimation: {fileID: 7400000, guid: 520989e89a26d034ca94aed6673e371c, type: 2}
-  chaseAnimation: {fileID: 7400000, guid: fcc70fb6d143399438dc61eeb28e0f84, type: 2}
-  attackAnimation: {fileID: 7400000, guid: 50b0a63333d1da64d939619f0f5df8d2, type: 2}
+  chaseAnimation: {fileID: 7400000, guid: 56c9ac307f7a09d46ad74921abcf5247, type: 2}
+  attackAnimation: {fileID: 7400000, guid: 8fd663a5d992e904db936589ee86e1d0, type: 2}
   danceAnimation: {fileID: 7400000, guid: 015db8e322a6720499c8aa43418baaeb, type: 2}
   cheerAnimation: {fileID: 7400000, guid: 290254da9bebc6646982def8bb0d5420, type: 2}
