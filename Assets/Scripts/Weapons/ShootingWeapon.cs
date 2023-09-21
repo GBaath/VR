@@ -22,6 +22,11 @@ public class ShootingWeapon : MonoBehaviour
     [SerializeField] Animator fireAnimator;
     [SerializeField] WeaponType currentWeaponType;
 
+
+    //For spining thing
+    public bool IsSelected;
+    [SerializeField]LootFloat lootFloatScript;
+
     //Reload
     [SerializeField]Canvas reloadCanvas;
     [SerializeField] Image reloadCircle;
@@ -264,5 +269,14 @@ public class ShootingWeapon : MonoBehaviour
             fireAnimator.SetBool("Fire", false);
         }
 
+    }
+
+    public void SetSelectTrue()
+    {
+        IsSelected = true;
+    }
+    public void SetSelectFalse()
+    {
+        IsSelected = false;
     }
 }
