@@ -26,7 +26,7 @@ public class RoomEntrance : MonoBehaviour
         catch { }
 
         previousRoom.gameObject.SetActive(false);
-
+        Destroy(previousRoom.gameObject);
 
         //todo destroy and pool
     }
