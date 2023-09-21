@@ -10555,6 +10555,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6609001934792292544, guid: ed91c3b9e3fc5544894790a5d14ffde6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 332a1ed8687cac84f923d3b74a32f507, type: 2}
     - target: {fileID: 919132149155446097, guid: ed91c3b9e3fc5544894790a5d14ffde6, type: 3}
       propertyPath: m_Name
       value: wheel_right
@@ -10915,6 +10919,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheelchair_main
       objectReference: {fileID: 0}
+    - target: {fileID: 2957198043894828847, guid: 9b203d3ae7d072041a2181a012e887f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 332a1ed8687cac84f923d3b74a32f507, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11099,6 +11107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheel_left
       objectReference: {fileID: 0}
+    - target: {fileID: 1570034430011630549, guid: 0fe7a9685a032a049a1b5850eb3ce5d0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 332a1ed8687cac84f923d3b74a32f507, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
