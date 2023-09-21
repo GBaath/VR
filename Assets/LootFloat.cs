@@ -12,6 +12,7 @@ public class LootFloat : MonoBehaviour
     ShootingWeapon weaponScript;
     Rigidbody rb;
     [SerializeField] GameObject tierEffectGO;
+    [SerializeField] GameObject statsDisplay;
     // Stats
 
     public float spinSpeed = 45.0f;
@@ -34,6 +35,10 @@ public class LootFloat : MonoBehaviour
         {
             tierEffectGO.SetActive(false);
         }
+        if(statsDisplay != null)
+        {
+            statsDisplay.SetActive(false);
+        }
 
         xrInteractable = GetComponent<XRBaseInteractable>();
         xrInteractable.onSelectEntered.AddListener(IsInSocketOrHand);
@@ -50,7 +55,7 @@ public class LootFloat : MonoBehaviour
     private void Update()
     {
 
-        Debug.Log("WeaponState: " + groundState);
+       
         switch (groundState)
         {
             case WeaponGroundState.OnGround:
@@ -82,6 +87,10 @@ public class LootFloat : MonoBehaviour
         {
             tierEffectGO.SetActive(true);
         }
+        if (statsDisplay != null)
+        {
+            statsDisplay.SetActive(true);
+        }
         initialPositionY = transform.position.y + yOffset;
         transform.rotation = Quaternion.Euler(90, 0, 0);
         groundState = WeaponGroundState.OnGround;
@@ -106,6 +115,10 @@ public class LootFloat : MonoBehaviour
         if (tierEffectGO != null)
         {
             tierEffectGO.SetActive(false);
+        }
+        if (statsDisplay != null)
+        {
+            statsDisplay.SetActive(false);
         }
         //if (rb != null)
         //{
