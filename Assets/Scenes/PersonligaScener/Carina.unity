@@ -642,8 +642,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-  damageFlashImg: {fileID: 1784430796}
-  damageLoopFlashingImg: {fileID: 1121442935}
+  damageFlashImg: {fileID: 1784430795}
+  damageLoopFlashingImg: {fileID: 1121442934}
 --- !u!1 &854047360
 GameObject:
   m_ObjectHideFlags: 0

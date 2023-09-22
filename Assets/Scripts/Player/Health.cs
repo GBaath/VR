@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     public UnityEvent onAlmostDead;
     [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Animator damageFlashImg;
     [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Animator damageLoopFlashingImg;
-    private float healthPercent;
+    [SerializeField] private float healthPercent;
     private bool isDead = false;
     private float damageCoolTime;
     private float maxDamageCoolTime = 5f;
@@ -47,7 +47,7 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Min(currentHealth + 1, maxHealth);
 
         isRestoringHealth = true;
-
+        UpdateHealthPercentage();
         timeSinceLastDamage = 0f;
         DisableFlashLoop();
     }
@@ -59,7 +59,7 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Max(currentHealth - damage, 0);
         damageFlashImg.SetBool("DamageOverlay", true);
         damageCoolTime = 0f;
-        healthPercent = currentHealth / maxHealth;
+        UpdateHealthPercentage();
 
         if (currentHealth > 0 && healthPercent <= 0.2f && !isDead)
         {
@@ -79,6 +79,11 @@ public class Health : MonoBehaviour
     private void Die()
     {
         // game over 
+    }
+
+    private void UpdateHealthPercentage()
+    {
+        healthPercent = currentHealth / maxHealth;
     }
 
     private void DisableFlashLoop()
