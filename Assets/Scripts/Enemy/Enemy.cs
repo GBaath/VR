@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         EnemyData.onRefreshEnemyData += RefreshEnemyData;
+        //GameManager.
     }
 
     private void OnDisable()
@@ -125,7 +126,9 @@ public class Enemy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     private void Start()
     {
-        if (GameManager.oneAtATime)
+        transform.Rotate(new Vector3(transform.rotation.x, Random.Range(0, 360), transform.rotation.z));
+
+        if (GameManager.instance.enemiesToChaseAtOnce > 0)
         {
             InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
         }
@@ -172,16 +175,20 @@ public class Enemy : MonoBehaviour, IDamageable
     void WaitForOtherEnemies()
     {
         if (isDead) { return; }
+        if (!target) { target = Camera.main.gameObject; }
+        //int enemiesAtOnce = GameManager.instance.enemiesToChaseAtOnce;
 
         // Get enemies closest to the same target
         float closestDistance = Mathf.Infinity;
         foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.target == target && e.fov.canSeeTarget))
         {
+            //enemiesAtOnce--;
+            //if (enemiesAtOnce <= 0) { return; }
             // If I'm closest to my target
             if (Vector3.Distance(target.transform.position, enemy.transform.position) < closestDistance)
             {
                 closestDistance = Vector3.Distance(target.transform.position, enemy.transform.position);
-                foreach (Enemy enemy2 in FindObjectsOfType<Enemy>().Where(e => e.target == target && e.fov.canSeeTarget))
+                foreach (Enemy enemy2 in FindObjectsOfType<Enemy>().Where(e => e.target != null && e.target == target && e.fov.canSeeTarget))
                 {
                     enemy2.isWaitingForOtherEnemies = true;
                 }

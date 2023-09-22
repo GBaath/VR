@@ -53,9 +53,7 @@ public class LootFloat : MonoBehaviour
     }
 
     private void Update()
-    {
-
-       
+    {      
         switch (groundState)
         {
             case WeaponGroundState.OnGround:
@@ -65,8 +63,6 @@ public class LootFloat : MonoBehaviour
             case WeaponGroundState.NotOnGround:
                 break;
         }
-
-
     }
 
     private void UpAndDown()
@@ -77,6 +73,7 @@ public class LootFloat : MonoBehaviour
     }
     private void Rotate()
     {
+        
         if (weaponScript.IsSelected) return;
         transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
     }

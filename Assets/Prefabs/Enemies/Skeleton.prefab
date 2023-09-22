@@ -2088,7 +2088,7 @@ MonoBehaviour:
     m_Bits: 67108864
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 7169
+    m_Bits: 8192
   canSeeTarget: 0
 --- !u!114 &2190578424470524643
 MonoBehaviour:
