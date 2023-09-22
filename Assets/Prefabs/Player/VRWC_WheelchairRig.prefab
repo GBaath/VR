@@ -2686,7 +2686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c272bb2c0dd4ea3843b02d925c797e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 3355997934018186044}
+  targetFrame: {fileID: 3355997934018186044}
 --- !u!1 &3355997933869472956
 GameObject:
   m_ObjectHideFlags: 0
@@ -3810,6 +3810,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e8577bfff737349921f2be27289f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraOffset: {fileID: 3355997933788464945}
+  xButton: {fileID: 1049225494371630964, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  yButton: {fileID: 6043033085996605989, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &3355997934338465200
 GameObject:
   m_ObjectHideFlags: 0
@@ -4206,8 +4209,6 @@ GameObject:
   - component: {fileID: 3355997934936558555}
   - component: {fileID: 3355997934936558554}
   - component: {fileID: 3355997934936558557}
-  - component: {fileID: 7294834636955134457}
-  - component: {fileID: 2206543837137757636}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4435,30 +4436,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &7294834636955134457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3355997934936558556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e8577bfff737349921f2be27289f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2206543837137757636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3355997934936558556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e8577bfff737349921f2be27289f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3355997935092670172
 GameObject:
   m_ObjectHideFlags: 0
@@ -5667,7 +5644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c272bb2c0dd4ea3843b02d925c797e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 3355997934018186044}
+  targetFrame: {fileID: 3355997934018186044}
 --- !u!114 &3355997935766689059
 MonoBehaviour:
   m_ObjectHideFlags: 0

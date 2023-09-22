@@ -48,10 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd15343553293c445862b8385d77afef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPhysicsBase: {fileID: 0}
   assetLoader: {fileID: 7298944921204846117}
   audioManager: {fileID: 6302380686796714573}
   scoreManager: {fileID: 6612399513978968993}
   roomManager: {fileID: 6447467580567506157}
+  enemiesToChaseAtOnce: 0
 --- !u!114 &7298944921204846117
 MonoBehaviour:
   m_ObjectHideFlags: 0

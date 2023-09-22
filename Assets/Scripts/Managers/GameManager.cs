@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
     public ScoreManager scoreManager;
     public RoomManager roomManager;
 
-    [Tooltip("Should enemies of the same type wait for the closest enemy to finish the job or go all in?")]
-    public static bool oneAtATime = false;
+    [Tooltip("DOESN'T WORK AT THE MOMENT! How many enemies may chase the target at once? Set value to (0) if they may chase without waiting altogether.")]
+    public int enemiesToChaseAtOnce = 0;
 
     void Awake()
     {
