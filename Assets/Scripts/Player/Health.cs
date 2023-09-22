@@ -11,8 +11,8 @@ public class Health : MonoBehaviour
     [SerializeField] private float currentHealth;
     
     public UnityEvent onAlmostDead;
-    [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Animator damageFlashImg;
-    [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Animator damageLoopFlashingImg;
+    [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Image damageFlashImg;
+    [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Image damageLoopFlashingImg;
     [SerializeField] private float healthPercent;
     private bool isDead = false;
     private float damageCoolTime;
@@ -22,9 +22,6 @@ public class Health : MonoBehaviour
     void Awake()
     {
         currentHealth = maxHealth;
-         damageFlashImg = GetComponent<Animator>();
-         damageLoopFlashingImg = GetComponent<Animator>();
-
     }
     
     private void Update()
@@ -57,14 +54,14 @@ public class Health : MonoBehaviour
         isRestoringHealth = false;
         
         currentHealth = Mathf.Max(currentHealth - damage, 0);
-        damageFlashImg.SetBool("DamageOverlay", true);
+        damageFlashImg.GetComponent<Animator>().SetBool("DamageOverlay", true);
         damageCoolTime = 0f;
         UpdateHealthPercentage();
 
         if (currentHealth > 0 && healthPercent <= 0.2f && !isDead)
         {
-            damageLoopFlashingImg.SetBool("DamageLoopOverlay", true);
-            damageFlashImg.SetBool("DamageOverlay", false);
+            damageLoopFlashingImg.GetComponent<Animator>().SetBool("DamageLoopOverlay", true);
+            damageFlashImg.GetComponent<Animator>().SetBool("DamageOverlay", false);
             //onAlmostDead?.Invoke();
         }
 
@@ -88,6 +85,6 @@ public class Health : MonoBehaviour
 
     private void DisableFlashLoop()
     {
-        damageLoopFlashingImg.SetBool("DamageLoopOverlay", false);
+        damageLoopFlashingImg.GetComponent<Animator>().SetBool("DamageLoopOverlay", false);
     }
 }
