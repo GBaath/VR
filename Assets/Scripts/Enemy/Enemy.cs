@@ -13,10 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeReference] ParticleSystem doHitFX;
     [SerializeReference] ParticleSystem getHitFX;
     [SerializeReference] AudioSource audioSource;
-
     [SerializeReference] GameObject hips;
-    [SerializeReference] GameObject head;
-    [SerializeReference] GameObject[] legs = new GameObject[2];
 
     public EnemyType enemyType = EnemyType.skeleton;
     public enum EnemyType
@@ -41,6 +38,7 @@ public class Enemy : MonoBehaviour, IDamageable
         attackTrigger = "attack",
         confuseTrigger = "confuse",
         surpriseTrigger = "stumble";
+        //wasAttackingBool = "wasAttacking";
 
     // Public variables
     /// <returns>A random limb from body.</returns>
@@ -67,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageable
     // Public non-references
     [HideInInspector] public IEnemyState previousState = new IdleEnemyState();
     [HideInInspector] public IEnemyState state = new IdleEnemyState();
-    [HideInInspector] public bool isWaitingForOtherEnemies = true;
+    [HideInInspector] public bool isWaitingForOtherEnemies = false;
     [HideInInspector] public Color decayColor = Color.white;
     [HideInInspector] public float maxDanceDistance = 10;
     [HideInInspector] public bool mayKillTime = true;
@@ -100,6 +98,11 @@ public class Enemy : MonoBehaviour, IDamageable
         EnemyData.onRefreshEnemyData -= RefreshEnemyData;
     }
 
+    private void Awake()
+    {
+        RefreshEnemyData();
+    }
+
     void IDamageable.TakeDamage(int amount)
     {
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
@@ -122,12 +125,18 @@ public class Enemy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     private void Start()
     {
-        RefreshEnemyData();
+        if (GameManager.oneAtATime)
+        {
+            InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
+        }
+        else
+        {
+            isWaitingForOtherEnemies = false;
+        }
 
         RagdollSetActive(false);
 
         // Check whether or not other enemies are against the same target at the same time
-        InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
 
         // Dance or clap until any enemy of the same type finds the target
         //StartDance();
@@ -163,8 +172,6 @@ public class Enemy : MonoBehaviour, IDamageable
     void WaitForOtherEnemies()
     {
         if (isDead) { return; }
-
-        if (!target) { target = Camera.main.gameObject; }
 
         // Get enemies closest to the same target
         float closestDistance = Mathf.Infinity;
@@ -215,6 +222,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (isDead) { state = state.Die(this); return; }
 
+        if (!target) { target = Camera.main.gameObject; }
         if (!target || isWaitingForOtherEnemies || !fov.canSeeTarget) { state = state.Idle(this); return; }
 
         if (Vector3.Distance(transform.position, target.transform.position) < fov.attackRadius + fov.currentAttackRadiusIncrease)

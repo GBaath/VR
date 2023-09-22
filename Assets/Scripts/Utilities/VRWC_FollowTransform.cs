@@ -7,19 +7,24 @@ using UnityEngine;
 public class VRWC_FollowTransform : MonoBehaviour
 {
     [Tooltip("Transform of the rigidbody to follow.")]
-    public Transform target;
+    public Transform targetFrame;
     Vector3 offset;
 
     void Start()
     {
-        offset = transform.localPosition - target.localPosition;
+        offset = transform.localPosition - targetFrame.localPosition;
     }
 
     void Update()
     {
-        Vector3 rotatedOffset = target.localRotation * offset;
-        transform.localPosition = target.localPosition + rotatedOffset;
+        Vector3 rotatedOffset = targetFrame.localRotation * offset;
+        transform.localPosition = targetFrame.localPosition + rotatedOffset;
 
-        transform.rotation = target.rotation;
+        transform.rotation = targetFrame.rotation;
+    }
+
+    public void SetOffset(Vector3 newPosition)
+    {
+        offset = newPosition;
     }
 }

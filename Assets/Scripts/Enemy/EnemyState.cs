@@ -47,15 +47,23 @@ public abstract class BaseEnemyState
         {
             startOfState = true;
             enemy.animTimer = 0;
+            ResetAllTriggers(enemy);
             if (!smoothTransition)
             {
-                ResetAllTriggers(enemy);
                 enemy.animator.SetFloat(enemy.animSpeed, enemy.animTimer);
             }
             enemy.fov.currentAttackRadiusIncrease = 0;
             enemy.attackAnimationLoops = 0;
             enemy.canDamage = false;
             enemy.previousState = (IEnemyState)this;
+            //if (PreviousStateEquals(enemy, new AttackEnemyState()))
+            //{
+            //    enemy.animator.SetBool(enemy.wasAttackingBool, true);
+            //}
+            //else
+            //{
+            //    enemy.animator.SetBool(enemy.wasAttackingBool, false);
+            //}
             return newState;
         }
         else { Debug.LogError("Couldn't find a state to change to!"); return (IEnemyState)this; }
@@ -233,7 +241,7 @@ public class AttackEnemyState : BaseEnemyState, IEnemyState
 
     IEnemyState IEnemyState.Chase(Enemy enemy)
     {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new SurprisedEnemyState(), enemy); }
+        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ChaseEnemyState(), enemy, true); }
         else { return this; }
     }
 
@@ -303,7 +311,7 @@ public class Attack2EnemyState : BaseEnemyState, IEnemyState
 
     IEnemyState IEnemyState.Chase(Enemy enemy)
     {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new SurprisedEnemyState(), enemy); }
+        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ChaseEnemyState(), enemy, true); }
         else { return this; }
     }
 

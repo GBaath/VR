@@ -21,7 +21,7 @@ public class FOVEditor : Editor
         Handles.DrawLine(fov.viewObject.transform.position, fov.viewObject.transform.position + viewAngle01 * fov.seeRadius);
         Handles.DrawLine(fov.viewObject.transform.position, fov.viewObject.transform.position + viewAngle02 * fov.seeRadius);
 
-        if (fov.canSeeTarget)
+        if (fov.canSeeTarget && fov.target)
         {
             Handles.color = Color.green;
             Handles.DrawLine(fov.viewObject.transform.position, fov.target.transform.position);

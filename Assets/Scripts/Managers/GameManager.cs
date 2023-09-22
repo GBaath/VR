@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     public AudioManager audioManager;
     public ScoreManager scoreManager;
     public RoomManager roomManager;
+
+    [Tooltip("Should enemies of the same type wait for the closest enemy to finish the job or go all in?")]
+    public static bool oneAtATime = false;
+
     void Awake()
     {
         if (instance && instance != this)
