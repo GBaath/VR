@@ -13,26 +13,31 @@ public class Crossbow : MonoBehaviour
     [SerializeField] float arrowSpeed = 40;
     HapticInteractable hapticScript;
     [SerializeField]AudioSource fireAudioSource;
+    [SerializeField] GameObject reloadArrowPrefab;
 
     //isLoaded for Arrow check and isArmed for slider check
     bool isArmed, isLoaded;
     private void Start()
     {
-        
+        reloadArrowPrefab.SetActive(false);
         hapticScript = GetComponent<HapticInteractable>();
     }
     public void CheckValue()
     {
-
+        Debug.Log("Checking Value");
         if (reloadSlider.value == 0)
         {
             //socketInteractor.socketActive = true;
             isArmed = true;
+            AddArrowNoReload();
 
         }
         else
         {
+
+            
             isArmed = false;
+            RemoveArrowNoReload();
             //socketInteractor.socketActive = false;
 
         }
@@ -52,7 +57,7 @@ public class Crossbow : MonoBehaviour
         }
         else
         {
-            reloadSlider.value = 0;
+            reloadSlider.value = 1;
             Debug.Log("Cant shoot");
 
         }
@@ -90,7 +95,18 @@ public class Crossbow : MonoBehaviour
         isLoaded = false;
 
     }
-    
+
+    public void AddArrowNoReload()
+    {
+        isLoaded = true;
+        reloadArrowPrefab.SetActive(true);
+
+    }
+    public void RemoveArrowNoReload()
+    {
+        isLoaded = false;
+        reloadArrowPrefab.SetActive(false);
+    }
 
 
 
