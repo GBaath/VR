@@ -126,6 +126,8 @@ public class Enemy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     private void Start()
     {
+        transform.Rotate(new Vector3(transform.rotation.x, Random.Range(0, 360), transform.rotation.z));
+
         if (GameManager.instance.enemiesToChaseAtOnce > 0)
         {
             InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
