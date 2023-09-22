@@ -7,9 +7,11 @@ using static UnityEngine.Rendering.DebugUI;
 
 namespace UnityEngine
 {
+
     public class AssetLoader : MonoBehaviour
     {
         public static AssetLoader instance;
+        public Material[] dungeonMaterials;
 
         private void Awake()
         {
