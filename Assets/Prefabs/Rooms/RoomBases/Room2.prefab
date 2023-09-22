@@ -780,6 +780,37 @@ Transform:
   - {fileID: 3772289100858406852}
   m_Father: {fileID: 8623073135477054900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7738132560716877826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7799409416504727757}
+  m_Layer: 0
+  m_Name: enemyHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7799409416504727757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738132560716877826}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -5, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7432669662392499806}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8294649729440310708
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,6 +874,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7799409416504727757}
   - {fileID: 6455143193640374117}
   - {fileID: 1599540800761954025}
   - {fileID: 8623073135477054900}
@@ -864,8 +896,8 @@ MonoBehaviour:
   connectionsPoints: []
   roomBase: {fileID: 8623073135477054900}
   entrance: {fileID: 0}
+  enemyHolder: {fileID: 7799409416504727757}
   acceptedTypes: 
-  customRoomMaterial: {fileID: 0}
   enemies: []
   loot: []
   props: []

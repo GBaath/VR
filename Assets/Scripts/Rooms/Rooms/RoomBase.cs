@@ -12,9 +12,11 @@ public class RoomBase : MonoBehaviour
     [HideInInspector] public RoomEntrance entrance;
     List<int> freeIndexes = new List<int>();
 
+    [SerializeField] Transform enemyHolder;
+
     [Tooltip("Leave empty for all")]
     public List<PropResource.PropType> acceptedTypes;
-    public Material customRoomMaterial;
+    private Material customRoomMaterial;
 
     //info about loded objects in room
     public List<GameObject> enemies, loot, props, propSets, switchSpawnPoints;
@@ -24,6 +26,8 @@ public class RoomBase : MonoBehaviour
 
     private void Start()
     {
+        customRoomMaterial = GameManager.instance.assetLoader.dungeonMaterials[Random.Range(0, GameManager.instance.assetLoader.dungeonMaterials.Length)];
+
         //link connections point transforms
         for (int j = 0; j < connectionspointsHolder.childCount; j++)
         {
@@ -37,6 +41,10 @@ public class RoomBase : MonoBehaviour
         {
             props.Add(propSets[i].transform.GetChild(j).gameObject);
         }
+        for (int j = 0; j < enemyHolder.childCount; j++)
+        {
+            enemies.Add(enemyHolder.GetChild(j).gameObject);
+        } 
 
 
 

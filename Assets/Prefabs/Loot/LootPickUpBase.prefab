@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8866866762974905186}
   - component: {fileID: 4839561124461476867}
   - component: {fileID: 923141263814633406}
+  - component: {fileID: -2149424089094109512}
   m_Layer: 10
   m_Name: LootPickUpBase
   m_TagString: Treasure
@@ -322,3 +323,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-2149424089094109512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647104292521744262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6e0e8c01fe82648b05a8bdb98c99c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials: []
