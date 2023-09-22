@@ -11,25 +11,60 @@ public class Health : MonoBehaviour
     [SerializeField] private float currentHealth;
     
     public UnityEvent onAlmostDead;
-    [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Image damageFlashImg;
-    [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Image damageLoopFlashingImg;
+    [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Animator damageFlashImg;
+    [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Animator damageLoopFlashingImg;
     private float healthPercent;
     private bool isDead = false;
+    private float damageCoolTime;
+    private float maxDamageCoolTime = 5f;
+    private bool isRestoringHealth = false;
+    private float timeSinceLastDamage;
     void Awake()
     {
         currentHealth = maxHealth;
+         damageFlashImg = GetComponent<Animator>();
+         damageLoopFlashingImg = GetComponent<Animator>();
+
+    }
+    
+    private void Update()
+    {
+
+        if (!isRestoringHealth)
+        {
+            damageCoolTime += Time.deltaTime;
+        }
+
+        if (damageCoolTime >= maxDamageCoolTime && !isDead)
+        {
+            AddToHealth();
+        }
+    }
+    
+    public void AddToHealth()
+    {
+        //currentHealth += 1f * maxCoolTime;
+        currentHealth = Mathf.Min(currentHealth + 1, maxHealth);
+
+        isRestoringHealth = true;
+
+        timeSinceLastDamage = 0f;
+        DisableFlashLoop();
     }
 
     public void TakeDamage(float damage)
     {
+        isRestoringHealth = false;
+        
         currentHealth = Mathf.Max(currentHealth - damage, 0);
-        damageFlashImg.GetComponent<Animator>().SetTrigger("DamageFlash");
-
+        damageFlashImg.SetBool("DamageOverlay", true);
+        damageCoolTime = 0f;
         healthPercent = currentHealth / maxHealth;
 
         if (currentHealth > 0 && healthPercent <= 0.2f && !isDead)
         {
-            damageLoopFlashingImg.GetComponent<Animator>().SetTrigger("DamageLoopFlash");
+            damageLoopFlashingImg.SetBool("DamageLoopOverlay", true);
+            damageFlashImg.SetBool("DamageOverlay", false);
             //onAlmostDead?.Invoke();
         }
 
@@ -48,6 +83,6 @@ public class Health : MonoBehaviour
 
     private void DisableFlashLoop()
     {
-        damageLoopFlashingImg.GetComponent<Animator>().enabled = false;
+        damageLoopFlashingImg.SetBool("DamageLoopOverlay", false);
     }
 }
