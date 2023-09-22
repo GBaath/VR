@@ -617,10 +617,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 346439443}
-    - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
-      propertyPath: obstructionMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4283345300893703435, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.83
@@ -763,14 +759,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 833379447688839368, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 833379447688839368, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
-      propertyPath: oneAtATime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: target
       value: 
@@ -1359,14 +1347,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 833379447688839368, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 833379447688839368, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
-      propertyPath: oneAtATime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: target
       value: 
@@ -1651,10 +1631,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 833379447688839368, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: target
       value: 
