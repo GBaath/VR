@@ -2076,9 +2076,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dda52fe202af264fa0a14e5a71180e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeRadius: 10
-  seeAngle: 180
-  attackRadius: 3
+  seeRadius: 20
+  seeAngle: 260
+  attackRadius: 1
   attackRadiusIncrease: 2
   currentAttackRadiusIncrease: 0
   target: {fileID: 0}
