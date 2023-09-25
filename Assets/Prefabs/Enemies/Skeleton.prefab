@@ -2057,7 +2057,6 @@ MonoBehaviour:
   animTimer: 0
   attackAnimationImpactTime: 0.28
   chaseTurnSpeedMultiplier: 3
-  attackRangeIncrease: 0.5
   attackAnimationLoops: -1
   checkWaitRate: 0.1
   attackAnimSpeed: 0
@@ -2077,12 +2076,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seeRadius: 20
-  seeAngle: 260
-  attackRadius: 1
-  attackRadiusIncrease: 2
-  currentAttackRadiusIncrease: 0
+  seeAngle: 180
+  attackRadius: 1.5
+  radiusIncrease: 1
+  currentRadiusIncrease: 0
   target: {fileID: 0}
-  viewObject: {fileID: 2642277384956813986}
+  viewObject: {fileID: 4884179667896424898}
   targetMask:
     serializedVersion: 2
     m_Bits: 67108864
