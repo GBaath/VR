@@ -26,6 +26,8 @@ public class MoneyBagCollider : MonoBehaviour
             GameManager.instance.scoreManager.score += loot.lootResource.value;
             GameManager.instance.scoreManager.UpdateUI();
 
+            AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.coins,transform.position);
+
             meshToChange.material = highlightMaterial;
             Destroy(other.gameObject);
         }

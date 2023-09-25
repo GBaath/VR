@@ -11,14 +11,16 @@ public class Door : MonoBehaviour
     [SerializeField] Rigidbody rb;
     Quaternion initRot;
 
+    private bool opened = false;
+
     public void Lock(bool _lock)
     {
         doorhandle.enabled = !_lock;
         locked = _lock;
         rb.isKinematic = _lock;
-        transform.rotation = initRot;
 
-        //TODO CLOSE ANIM HERE
+        //close
+        transform.rotation = initRot;
     }
     private void LinkAnchor()
     {
@@ -32,5 +34,14 @@ public class Door : MonoBehaviour
     private void OnEnable()
     {
         LinkAnchor();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && !opened)
+        {
+            AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.doorSqueak, transform.position);
+            opened = true;
+        }
     }
 }
