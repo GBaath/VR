@@ -10,11 +10,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip enemyHit;
     public AudioClip hitFeedback;
+    public AudioClip doorSqueak;
+    public AudioClip coins;
 
-
-
-    public void PlayClip(AudioClipData audioData)
-    {
-
-    }
 }

@@ -18,6 +18,8 @@ public class RoomBase : MonoBehaviour
     public List<PropResource.PropType> acceptedTypes;
     private Material customRoomMaterial;
 
+    [SerializeField] private List<Transform> rendererHolders;
+
     //info about loded objects in room
     public List<GameObject> enemies, loot, props, propSets, switchSpawnPoints;
 
@@ -46,10 +48,21 @@ public class RoomBase : MonoBehaviour
             enemies.Add(enemyHolder.GetChild(j).gameObject);
         } 
 
-
-
         SetEntryConnection();
         SpawnConnections();
+
+        foreach(var cp in connectionsPoints)
+        {
+            rendererHolders.Add(cp.transform);
+        }
+        //apply material to meshes
+        foreach(var holder in rendererHolders)
+        {
+            foreach (var mr in holder.GetComponentsInChildren<MeshRenderer>())
+            {
+                mr.material = customRoomMaterial;
+            }
+        }
     }
     //places the roombase correctly for random connection point
     void SetEntryConnection()

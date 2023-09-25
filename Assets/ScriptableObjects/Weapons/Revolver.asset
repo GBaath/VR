@@ -16,7 +16,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1483399186347397756, guid: a3a4ac1b8067a9548af58c53b9d761f4, type: 3}
   fireRate: 0.5
   reloadTime: 5
-  bulletSpeed: 40
+  bulletSpeed: 25
   knockBack: 3
   damage: 1
   hapticDuration: 0.3
