@@ -1,18 +1,18 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-
-public class LootFloat : MonoBehaviour
+public class CrossbowFloat : MonoBehaviour
 {
-    
     private WeaponGroundState groundState;
-    ShootingWeapon weaponScript;
+    //ShootingWeapon weaponScript;
     Rigidbody rb;
     [SerializeField] GameObject tierEffectGO;
     [SerializeField] GameObject statsDisplay;
+
+    private bool isSelected;
+
     // Stats
 
     public float spinSpeed = 45.0f;
@@ -30,12 +30,12 @@ public class LootFloat : MonoBehaviour
     {
         groundState = WeaponGroundState.NotOnGround;
         rb = GetComponent<Rigidbody>();
-        weaponScript = GetComponent<ShootingWeapon>();
+        
         if (tierEffectGO != null)
         {
             tierEffectGO.SetActive(false);
         }
-        if(statsDisplay != null)
+        if (statsDisplay != null)
         {
             statsDisplay.SetActive(false);
         }
@@ -53,7 +53,7 @@ public class LootFloat : MonoBehaviour
     }
 
     private void Update()
-    {      
+    {
         switch (groundState)
         {
             case WeaponGroundState.OnGround:
@@ -67,14 +67,14 @@ public class LootFloat : MonoBehaviour
 
     private void UpAndDown()
     {
-        if (weaponScript.IsSelected) return;
+        if (isSelected) return;
         newPositionY = initialPositionY + Mathf.Sin(Time.time * speed) * distance;
         transform.position = new Vector3(transform.position.x, newPositionY, transform.position.z);
     }
     private void Rotate()
     {
-        
-        if (weaponScript.IsSelected) return;
+
+        if (isSelected) return;
         transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
     }
     private void OnGround()
@@ -117,11 +117,26 @@ public class LootFloat : MonoBehaviour
         {
             statsDisplay.SetActive(false);
         }
+        //if (rb != null)
+        //{
+        //    rb.useGravity = true;
+        //    rb.isKinematic = false;
+        //}
     }
+    //public void SetSelectTrue()
+    //{
+    //    isSelected = true;
+    //}
+    //public void SetSelectFalse()
+    //{
+    //    isSelected = false;
+    //}
 }
-public enum WeaponGroundState
+public enum CrossbowGroundSate
 {
     OnGround,
     NotOnGround
 }
+
+
 
