@@ -15,8 +15,9 @@ public class Crossbow : MonoBehaviour
     [SerializeField]AudioSource fireAudioSource;
     [SerializeField] GameObject reloadArrowPrefab;
 
+
     //isLoaded for Arrow check and isArmed for slider check
-    bool isArmed, isLoaded;
+    bool isArmed, isLoaded,isSelected;
     private void Start()
     {
         reloadArrowPrefab.SetActive(false);
@@ -108,7 +109,14 @@ public class Crossbow : MonoBehaviour
         reloadArrowPrefab.SetActive(false);
     }
 
-
+    public void InWeaponSlot()
+    {
+        reloadSlider.enabled = false;
+    }
+    public void NotInWeaponSlot()
+    {
+        reloadSlider.enabled = true;
+    }
 
 
 }
