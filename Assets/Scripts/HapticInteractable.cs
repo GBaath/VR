@@ -16,9 +16,9 @@ public class HapticInteractable : MonoBehaviour
         if (interactable != null)
         {
             interactable.activated.AddListener(SetController);
-            interactable.deactivated.AddListener(RemoveController);
+            //interactable.deactivated.AddListener(RemoveController);
             interactable.hoverEntered.AddListener(HoverEnter);
-            interactable.hoverExited.AddListener(HoverExit);
+            //interactable.hoverExited.AddListener(HoverExit);
         }
     }
 
@@ -26,6 +26,7 @@ public class HapticInteractable : MonoBehaviour
     {
         if (eventArgs.interactorObject is XRBaseControllerInteractor controllerInteractor)
         {
+            
             baseController = null;
         }
     }
@@ -38,18 +39,18 @@ public class HapticInteractable : MonoBehaviour
         }
     }
 
-    public void HoverEnter(HoverEnterEventArgs eventArgs)
+    public void HoverEnter(BaseInteractionEventArgs eventArgs)
     {
-        if (eventArgs.interactor is XRBaseControllerInteractor controllerInteractor)
+        if (eventArgs.interactorObject is XRBaseControllerInteractor controllerInteractor)
         {
             baseController = controllerInteractor;
             TriggerHaptic(controllerInteractor.xrController);
         }
     }
 
-    public void HoverExit(HoverExitEventArgs eventArgs)
+    public void HoverExit(BaseInteractionEventArgs eventArgs)
     {
-        if (eventArgs.interactor is XRBaseControllerInteractor controllerInteractor)
+        if (eventArgs.interactorObject is XRBaseControllerInteractor controllerInteractor)
         {
             baseController = null;
         }

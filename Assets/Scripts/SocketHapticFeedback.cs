@@ -11,14 +11,10 @@ public class SocketHapticFeedback: MonoBehaviour
         {
             hapticScript.TriggerHapticPublic();
         }
-
-        
-
-
-        //HapticInteractable hapticInteractable = other.GetComponent<HapticInteractable>();
-        //if (hapticInteractable != null)
-        //{
-        //    hapticInteractable.TriggerHapticPublic();
-        //}
+        else
+        {
+            Debug.Log("Cant find script");
+        }
     }
+    
 }

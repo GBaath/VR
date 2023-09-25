@@ -4,10 +4,6 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 public class CrossbowSocket : MonoBehaviour
 {
-
-
-
-
     private XRSocketInteractor socketInteractor;
 
     private void Awake()
@@ -24,11 +20,6 @@ public class CrossbowSocket : MonoBehaviour
         {
             crossbowScript.InWeaponSlot();
         }
-        //Crossbow crossbow = interactable.GetComponent<Crossbow>();
-        //if (crossbow)
-        //{
-        //    crossbow.InWeaponSlot();
-        //}
     }
 
     private void OnObjectRemoved(XRBaseInteractable interactable)
@@ -38,11 +29,6 @@ public class CrossbowSocket : MonoBehaviour
         {
             crossbowScript.NotInWeaponSlot();
         }
-        //Crossbow crossbow = interactable.GetComponent<Crossbow>();
-        //if (crossbow)
-        //{
-        //    crossbow.NotInWeaponSlot();
-        //}
     }
 }
 
