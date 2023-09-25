@@ -168,7 +168,7 @@ public class ShootingWeapon : MonoBehaviour
             spawnedBullet.GetComponent<ProjectileDamage>().damage = weaponStats.damage;
             spawnedBullet.transform.position = firingPoint.position;
             spawnedBullet.GetComponent<Rigidbody>().velocity = firingPoint.forward * weaponStats.bulletSpeed;
-            Destroy(spawnedBullet, 5);
+            Destroy(spawnedBullet, 2);
             switch (currentWeaponType)
             {
                 case WeaponType.SMG:

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1025747542950533197}
   - component: {fileID: 2180271583760876932}
   - component: {fileID: -5291618873160336104}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2180271583760876932
 Rigidbody:
@@ -146,4 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a90557ebefd3834c940b8bf3dacf78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   isHoming: 0

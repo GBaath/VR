@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip wheel3;
 
     public AudioClip enemyHit;
+    public AudioClip hitFeedback;
 
 
 

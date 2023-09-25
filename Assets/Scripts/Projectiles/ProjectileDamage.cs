@@ -32,9 +32,11 @@ public class ProjectileDamage : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log(other.gameObject);
         if ( other.gameObject.TryGetComponent(out HealthProperty hp)) //other.gameObject.layer == LayerMask.NameToLayer("Enemies") &&
         {
             hp.LoseHealth(damage);
+            AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback,Camera.main.transform.position,1);
             Destroy(gameObject);
         }
     }
