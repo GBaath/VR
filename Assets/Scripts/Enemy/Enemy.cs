@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable
-{
+public class Enemy : MonoBehaviour, IDamageable {
     // Cached references
     public Animator animator;
     public GameObject target;
@@ -16,17 +14,16 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeReference] GameObject hips;
 
     public EnemyType enemyType = EnemyType.skeleton;
-    public enum EnemyType
-    {
+    public enum EnemyType {
         skeleton,
         goblin,
         ghost
     }
 
-    [Header("Animation Variables")]
+    [Header("Animation Strings")]
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
     public string currentState = "idle";
-    
+
     [Space, Tooltip("The speed of animations and transitions. Goes from 0 to 1 after 1s. Value cannot be changed outside the EnemyState StateMachine.")]
     public string animSpeed = "animSpeed";
 
@@ -37,26 +34,23 @@ public class Enemy : MonoBehaviour, IDamageable
         danceTrigger = "dance",
         attackTrigger = "attack",
         confuseTrigger = "confuse",
-        surpriseTrigger = "stumble";
-        //wasAttackingBool = "wasAttacking";
+        surpriseTrigger = "surprise";
 
     // Public variables
     /// <returns>A random limb from body.</returns>
-    public GameObject GetRandomLimb()
-    {
-        if (!hips) { Debug.LogError("can't find thicc hips"); return null; }
+    public GameObject GetRandomLimb() {
+        if (!hips) {
+            Debug.LogError("can't find thicc hips");
+            return null;
+        }
 
         List<GameObject> allLimbs = new();
-        foreach (Transform childTransform in hips.GetComponentInChildren<Transform>())
-        {
+        foreach (Transform childTransform in hips.GetComponentInChildren<Transform>()) {
             allLimbs.Add(childTransform.gameObject);
         }
-        if (allLimbs.Count > 0)
-        {
+        if (allLimbs.Count > 0) {
             return allLimbs[Random.Range(0, allLimbs.Count)];
-        }
-        else
-        {
+        } else {
             Debug.Log("can't return null limbs");
             return gameObject;
         }
@@ -78,7 +72,6 @@ public class Enemy : MonoBehaviour, IDamageable
     // Magic numbers
     [HideInInspector] public float attackAnimationImpactTime = 0.28f;
     [HideInInspector] public float chaseTurnSpeedMultiplier = 3;
-    [HideInInspector] public float attackRangeIncrease = 0.5f;
     [HideInInspector] public int attackAnimationLoops = 0;
     [HideInInspector] public float checkWaitRate = 0.1f;
 
@@ -88,30 +81,24 @@ public class Enemy : MonoBehaviour, IDamageable
     [HideInInspector] public float moveAnimSpeed;
     [HideInInspector] public float turnSpeed;
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         EnemyData.onRefreshEnemyData += RefreshEnemyData;
-        //GameManager.
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() {
         EnemyData.onRefreshEnemyData -= RefreshEnemyData;
     }
 
-    private void Awake()
-    {
+    private void Awake() {
         RefreshEnemyData();
     }
 
-    void IDamageable.TakeDamage(int amount)
-    {
+    void IDamageable.TakeDamage(int amount) {
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
         audioSource.Play();
     }
 
-    void IDamageable.Die(float delay)
-    {
+    void IDamageable.Die(float delay) {
         RagdollSetActive(true);
 
         // TODO: Trigger any onEnemyKilled events
@@ -124,16 +111,13 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     // Start is called before the first frame update
-    private void Start()
-    {
+    private void Start() {
+
         transform.Rotate(new Vector3(transform.rotation.x, Random.Range(0, 360), transform.rotation.z));
 
-        if (GameManager.instance.enemiesToChaseAtOnce > 0)
-        {
+        if (GameManager.instance.enemiesToChaseAtOnce > 0) {
             InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
-        }
-        else
-        {
+        } else {
             isWaitingForOtherEnemies = false;
         }
 
@@ -147,49 +131,46 @@ public class Enemy : MonoBehaviour, IDamageable
         state = state.Idle(this);
     }
 
-    void RefreshEnemyData()
-    {
+    void RefreshEnemyData() {
         movementSpeed = enemyData.movementSpeed;
         turnSpeed = enemyData.turnSpeed;
         attackAnimSpeed = enemyData.attackAnimSpeed;
     }
 
-    public void RagdollSetActive(bool enable)
-    {
-        GetComponent<BoxCollider>().enabled = !enable;
+    void RandomizeStartingStats() {
+        
+    }
+
+    public void RagdollSetActive(bool enable) {
+        //GetComponent<BoxCollider>().enabled = !enable;
         animator.enabled = !enable;
 
         // Get all colliders that also have character joint components
-        foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>()))
-        {
+        foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>())) {
             joint.enableCollision = enable;
             joint.enablePreprocessing = enable;
             joint.enableProjection = enable;
-            joint.GetComponent<Collider>().enabled = enable;
+            //joint.GetComponent<Collider>().enabled = enable;
             joint.GetComponent<Rigidbody>().isKinematic = !enable;
             joint.GetComponent<Rigidbody>().detectCollisions = enable;
             joint.GetComponent<Rigidbody>().useGravity = enable;
         }
     }
 
-    void WaitForOtherEnemies()
-    {
+    void WaitForOtherEnemies() {
         if (isDead) { return; }
         if (!target) { target = Camera.main.gameObject; }
         //int enemiesAtOnce = GameManager.instance.enemiesToChaseAtOnce;
 
         // Get enemies closest to the same target
         float closestDistance = Mathf.Infinity;
-        foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.target == target && e.fov.canSeeTarget))
-        {
+        foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.target == target && e.fov.canSeeTarget)) {
             //enemiesAtOnce--;
             //if (enemiesAtOnce <= 0) { return; }
             // If I'm closest to my target
-            if (Vector3.Distance(target.transform.position, enemy.transform.position) < closestDistance)
-            {
+            if (Vector3.Distance(target.transform.position, enemy.transform.position) < closestDistance) {
                 closestDistance = Vector3.Distance(target.transform.position, enemy.transform.position);
-                foreach (Enemy enemy2 in FindObjectsOfType<Enemy>().Where(e => e.target != null && e.target == target && e.fov.canSeeTarget))
-                {
+                foreach (Enemy enemy2 in FindObjectsOfType<Enemy>().Where(e => e.target != null && e.target == target && e.fov.canSeeTarget)) {
                     enemy2.isWaitingForOtherEnemies = true;
                 }
                 enemy.isWaitingForOtherEnemies = false;
@@ -197,15 +178,13 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    void StartDance()
-    {
+    void StartDance() {
         if (!isDancer && mayKillTime || isDead) { return; }
 
         //if (animator.GetCurrentAnimatorStateInfo(0).IsName(danceState)) { return; }
 
         List<Enemy> cheeringEnemies = new();
-        foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.enemyType == enemyType && e.mayKillTime && !e.isDancer))
-        {
+        foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.enemyType == enemyType && e.mayKillTime && !e.isDancer)) {
             cheeringEnemies.Add(enemy);
         }
 
@@ -221,47 +200,41 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         currentState = state.ToString();
         state = state.Update(this);
         animTimer += Time.deltaTime;
 
         if (isDead) { state = state.Die(this); return; }
-
         if (!target) { target = Camera.main.gameObject; }
-        if (!target || isWaitingForOtherEnemies || !fov.canSeeTarget) { state = state.Idle(this); return; }
-
-        if (Vector3.Distance(transform.position, target.transform.position) < fov.attackRadius + fov.currentAttackRadiusIncrease)
-        {
-            state = state.Attack(this); return;
+        if (!target || isWaitingForOtherEnemies || !fov.canSeeTarget) {
+            state = state.Idle(this);
+            return;
         }
-        else
-        {
+
+        if (Vector3.Distance(transform.position, target.transform.position) < fov.attackRadius + fov.currentRadiusIncrease) {
+            state = state.Attack(this); return;
+        } else {
             state = state.Chase(this); return;
         }
     }
 
-    public void TurnTowardsTarget(float turnSpeedMultiplier = 1)
-    {
+    public void TurnTowardsTarget(float turnSpeedMultiplier = 1) {
         Vector3 direction = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z) - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * turnSpeedMultiplier * Time.deltaTime);
         Debug.DrawRay(transform.position, direction);
     }
 
-    public void Chase()
-    {
+    public void Chase() {
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
     }
 
-    public void Attack()
-    {
+    public void Attack() {
         attackAnimationLoops++;
 
         Ray ray = new(new Vector3(transform.position.x, target.transform.position.y, transform.position.z), transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
+        if (Physics.Raycast(ray, out RaycastHit hit)) {
             ParticleSystem newHitFX = Instantiate(doHitFX, hit.transform.position, Quaternion.identity, transform);
             Destroy(newHitFX.gameObject, newHitFX.main.duration * 2);
 

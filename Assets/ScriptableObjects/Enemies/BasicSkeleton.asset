@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicSkeleton
   m_EditorClassIdentifier: 
   maxHealth: 5
-  movementSpeed: 0.6
+  movementSpeed: 2
   turnSpeed: 50
   attackAnimSpeed: 1.5
   idleAnimation: {fileID: 7400000, guid: 159f27e82edf2b7478efa768aec6c76e, type: 2}
