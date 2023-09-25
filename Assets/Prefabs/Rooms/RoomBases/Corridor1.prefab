@@ -617,6 +617,10 @@ MonoBehaviour:
   entrance: {fileID: 0}
   enemyHolder: {fileID: 8170885593448025154}
   acceptedTypes: 
+  rendererHolders:
+  - {fileID: 3301803660869452329}
+  - {fileID: 1263767528913756621}
+  - {fileID: 4685877277828025159}
   enemies: []
   loot: []
   props: []

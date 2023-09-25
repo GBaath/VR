@@ -20814,8 +20814,13 @@ MonoBehaviour:
   connectionsPoints: []
   roomBase: {fileID: 8623073135477054900}
   entrance: {fileID: 0}
-  enemyHolder: {fileID: 0}
+  enemyHolder: {fileID: 3553392990322549507}
   acceptedTypes: 
+  rendererHolders:
+  - {fileID: 6606451009525325682}
+  - {fileID: 5280394800861863898}
+  - {fileID: 794163355584964498}
+  - {fileID: 4821463349381077657}
   enemies: []
   loot: []
   props: []
