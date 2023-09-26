@@ -10376,7 +10376,7 @@ MonoBehaviour:
   linkedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2658905794430896515}
         m_TargetAssemblyTypeName: Door, Assembly-CSharp
         m_MethodName: Lock
         m_Mode: 6
@@ -17461,6 +17461,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
+--- !u!114 &2658905794430896515 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8859940662951887549, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
+  m_PrefabInstance: {fileID: 6778622968135240510}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75e2445221907c4b9c5fb95e529b063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5139115369181804844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1820386222830629394, guid: c8474c4fc9f8f4f4c8acda37b4dcd9aa, type: 3}
