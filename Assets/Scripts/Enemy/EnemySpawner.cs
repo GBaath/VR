@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
         GameObject newEnemy;
 
         if (!this.enemy && !enemy) { Debug.LogError("Enemy not specified! {2}"); return; }
-        else if (enemy != null) { newEnemy = Instantiate(enemy, transform.position, Quaternion.identity); }
-        else if (this.enemy) { newEnemy = Instantiate(this.enemy, transform.position, Quaternion.identity); }
+        else if (enemy != null) { newEnemy = Instantiate(enemy, transform); }
+        else if (this.enemy) { newEnemy = Instantiate(this.enemy, transform); }
     }
 }

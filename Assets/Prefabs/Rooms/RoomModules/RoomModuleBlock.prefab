@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secretDoor: {fileID: 0}
+  propSets: []
 --- !u!1001 &2525512954922161715
 PrefabInstance:
   m_ObjectHideFlags: 0

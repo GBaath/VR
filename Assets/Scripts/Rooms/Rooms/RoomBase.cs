@@ -62,12 +62,12 @@ public class RoomBase : MonoBehaviour
             foreach (var mr in holder.GetComponentsInChildren<MeshRenderer>())
             {
                 //mr.GetComponent<Renderer>().SetPropertyBlock()
-                mr.material = customRoomMaterial;
+                mr.material.mainTexture = customRoomMaterial.mainTexture;
             }
         }
         foreach (var mr in entrance.GetComponentsInChildren<MeshRenderer>())
         {
-            mr.material = customRoomMaterial;
+            mr.material.mainTexture = customRoomMaterial.mainTexture;
         }
     }
     //places the roombase correctly for random connection point
