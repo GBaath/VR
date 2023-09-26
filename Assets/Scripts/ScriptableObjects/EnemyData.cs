@@ -4,17 +4,43 @@ using UnityEngine;
 public class EnemyData : ScriptableObject {
 
     [Header("ENEMY DATA")]
-    public EnemyType enemyType;
+    [SerializeField] EnemyType enemyType;
+    public EnemyType TypeOfEnemy {
+        get { return enemyType; }
+    }
     public enum EnemyType {
         skeleton,
         goblin,
         ghost
     }
-    public int maxHealth = 5;
-    public float turnSpeed = 25f;
-    public float movementSpeed = 1f;
-    public float attackSpeedMultiplier = 1.5f;
-    public float animationSpeedMultiplier = 1f;
+    [SerializeField] float startSize = 1;
+    public float StartSize {
+        get { return startSize; }
+    }
+    [SerializeField] int maxHealth = 5;
+    public int MaxHealth {
+        get { return maxHealth; }
+    }
+    [SerializeField] float turnSpeed = 25f;
+    public float TurnSpeed {
+        get { return turnSpeed; }
+    }
+    [SerializeField] int attackDamage = 50;
+    public int AttackDamage {
+        get { return attackDamage; }
+    }
+    [SerializeField] float movementSpeed = 1f;
+    public float MovementSpeed {
+        get { return movementSpeed; }
+    }
+    [SerializeField] float attackSpeedMultiplier = 1.5f;
+    public float AttackSpeedMultiplier {
+        get { return attackSpeedMultiplier; }
+    }
+    [SerializeField] float animationSpeedMultiplier = 1f;
+    public float AnimationSpeedMultiplier {
+        get { return animationSpeedMultiplier; }
+    }
 
     [Header("ANIMATION DATA")]
     [Tooltip("The speed of animations and transitions. Goes from 0 to 1 after 1s. Value cannot be changed outside the EnemyState StateMachine.")]
@@ -42,8 +68,9 @@ public class EnemyData : ScriptableObject {
     public static OnRefreshEnemyData onRefreshEnemyData;
 
     public void RefreshEnemyData() {
-        if (Application.isPlaying)
+        if (Application.isPlaying) {
             onRefreshEnemyData();
+        }
         else {
             Debug.Log("Can't refresh enemy data while in editor, nor does it need to");
         }

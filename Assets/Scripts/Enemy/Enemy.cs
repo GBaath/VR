@@ -17,25 +17,6 @@ public class Enemy : MonoBehaviour, IDamageable {
     public string currentState = "idle";
 
     // Public variables
-    /// <returns>A random limb from body.</returns>
-    public GameObject GetRandomLimb() {
-        if (!hips) {
-            Debug.LogError("can't find thicc hips");
-            return null;
-        }
-
-        List<GameObject> allLimbs = new();
-        foreach (Transform childTransform in hips.GetComponentInChildren<Transform>()) {
-            allLimbs.Add(childTransform.gameObject);
-        }
-        if (allLimbs.Count > 0) {
-            return allLimbs[Random.Range(0, allLimbs.Count)];
-        } else {
-            Debug.Log("can't return null limbs");
-            return gameObject;
-        }
-    }
-
     public Animator Animator {
         get { return animator; }
     }
@@ -58,6 +39,25 @@ public class Enemy : MonoBehaviour, IDamageable {
         get { return fieldOfView; }
     }
 
+    /// <returns>A random limb from body.</returns>
+    public GameObject GetRandomLimb() {
+        if (!hips) {
+            Debug.LogError("can't find thicc hips");
+            return null;
+        }
+
+        List<GameObject> allLimbs = new();
+        foreach (Transform childTransform in hips.GetComponentInChildren<Transform>()) {
+            allLimbs.Add(childTransform.gameObject);
+        }
+        if (allLimbs.Count > 0) {
+            return allLimbs[Random.Range(0, allLimbs.Count)];
+        } else {
+            Debug.Log("can't return null limbs");
+            return gameObject;
+        }
+    }
+
     // Public non-references
     [HideInInspector] public IEnemyState previousState = new IdleEnemyState();
     [HideInInspector] public IEnemyState state = new IdleEnemyState();
@@ -65,12 +65,19 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public Color decayColor = Color.white;
     [HideInInspector] public float maxDanceDistance = 10;
     [HideInInspector] public bool mayKillTime = true;
+    [HideInInspector] public bool wasSpawned = false;
     [HideInInspector] public bool canDamage = true;
     [HideInInspector] public bool isDancer = false;
     [HideInInspector] public bool isCaster = false;
     [HideInInspector] public bool isDead = false;
     [HideInInspector] public float animTimer = 0;
     [HideInInspector] public float moveAnimSpeed;
+
+    // Stats
+    [HideInInspector] public int maxHealth;
+    [HideInInspector] public float turnSpeed;
+    [HideInInspector] public int attackDamage;
+    [HideInInspector] public float movementSpeed;
 
     // Magic numbers
     [HideInInspector] public float attackAnimationImpactTime = 0.28f;
@@ -114,10 +121,6 @@ public class Enemy : MonoBehaviour, IDamageable {
         //StartDance();
 
         state = state.Idle(this);
-    }
-
-    void RandomizeSizeAndStats() {
-
     }
 
     public void RagdollSetActive(bool enable) {
@@ -199,12 +202,12 @@ public class Enemy : MonoBehaviour, IDamageable {
     public void TurnTowardsTarget(float turnSpeedMultiplier = 1) {
         Vector3 direction = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z) - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, EnemyData.turnSpeed * turnSpeedMultiplier * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, EnemyData.TurnSpeed * turnSpeedMultiplier * Time.deltaTime);
         Debug.DrawRay(transform.position, direction);
     }
 
     public void Chase() {
-        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, EnemyData.movementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
+        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, EnemyData.MovementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
     }
 
     public void Attack() {
@@ -214,6 +217,10 @@ public class Enemy : MonoBehaviour, IDamageable {
         if (Physics.Raycast(ray, out RaycastHit hit)) {
             ParticleSystem newHitFX = Instantiate(doHitFX, hit.transform.position, Quaternion.identity, transform);
             Destroy(newHitFX.gameObject, newHitFX.main.duration * 2);
+
+            if (hit.transform.GetComponentInParent<Health>().TryGetComponent(out Health health)) {
+                health.TakeDamage(EnemyData.AttackDamage);
+            }
 
             // TODO: If target is within said range, damage it and/or all non-Enemy objects
         }

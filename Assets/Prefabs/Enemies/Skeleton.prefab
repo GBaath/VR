@@ -2047,6 +2047,8 @@ MonoBehaviour:
   isDead: 0
   animTimer: 0
   moveAnimSpeed: 0
+  maxHealth: 0
+  turnSpeed: 0
   attackAnimationImpactTime: 0.28
   chaseTurnSpeedMultiplier: 3
   attackAnimationLoops: -1
@@ -2075,7 +2077,7 @@ MonoBehaviour:
     m_Bits: 67108864
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 14336
   canSeeTarget: 0
 --- !u!114 &2190578424470524643
 MonoBehaviour:
