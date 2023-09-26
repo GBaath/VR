@@ -4,37 +4,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable {
     // Cached references
-    public Animator animator;
-    public GameObject target;
-    public EnemyData enemyData;
-    public FieldOfView fov;
+    [SerializeReference] GameObject hips;
+    [SerializeReference] Animator animator;
+    [SerializeReference] GameObject target;
+    [SerializeReference] EnemyData enemyData;
     [SerializeReference] ParticleSystem doHitFX;
     [SerializeReference] ParticleSystem getHitFX;
+    [SerializeReference] FieldOfView fieldOfView;
     [SerializeReference] AudioSource audioSource;
-    [SerializeReference] GameObject hips;
 
-    public EnemyType enemyType = EnemyType.skeleton;
-    public enum EnemyType {
-        skeleton,
-        goblin,
-        ghost
-    }
-
-    [Header("Animation Strings")]
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
     public string currentState = "idle";
-
-    [Space, Tooltip("The speed of animations and transitions. Goes from 0 to 1 after 1s. Value cannot be changed outside the EnemyState StateMachine.")]
-    public string animSpeed = "animSpeed";
-
-    [Space]
-    public string idleTrigger = "idle";
-    public string chaseTrigger = "chase",
-        cheerTrigger = "cheer",
-        danceTrigger = "dance",
-        attackTrigger = "attack",
-        confuseTrigger = "confuse",
-        surpriseTrigger = "surprise";
 
     // Public variables
     /// <returns>A random limb from body.</returns>
@@ -56,6 +36,28 @@ public class Enemy : MonoBehaviour, IDamageable {
         }
     }
 
+    public Animator Animator {
+        get { return animator; }
+    }
+
+    public GameObject Target {
+        get {
+            if (!target) {
+                return Camera.main.gameObject;
+            } else {
+                return target;
+            }
+        }
+    }
+
+    public EnemyData EnemyData {
+        get { return enemyData; }
+    }
+
+    public FieldOfView FieldOfView {
+        get { return fieldOfView; }
+    }
+
     // Public non-references
     [HideInInspector] public IEnemyState previousState = new IdleEnemyState();
     [HideInInspector] public IEnemyState state = new IdleEnemyState();
@@ -68,30 +70,13 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public bool isCaster = false;
     [HideInInspector] public bool isDead = false;
     [HideInInspector] public float animTimer = 0;
+    [HideInInspector] public float moveAnimSpeed;
 
     // Magic numbers
     [HideInInspector] public float attackAnimationImpactTime = 0.28f;
     [HideInInspector] public float chaseTurnSpeedMultiplier = 3;
     [HideInInspector] public int attackAnimationLoops = 0;
     [HideInInspector] public float checkWaitRate = 0.1f;
-
-    // Default EnemyData
-    [HideInInspector] public float attackAnimSpeed;
-    [HideInInspector] public float movementSpeed;
-    [HideInInspector] public float moveAnimSpeed;
-    [HideInInspector] public float turnSpeed;
-
-    private void OnEnable() {
-        EnemyData.onRefreshEnemyData += RefreshEnemyData;
-    }
-
-    private void OnDisable() {
-        EnemyData.onRefreshEnemyData -= RefreshEnemyData;
-    }
-
-    private void Awake() {
-        RefreshEnemyData();
-    }
 
     void IDamageable.TakeDamage(int amount) {
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
@@ -131,19 +116,13 @@ public class Enemy : MonoBehaviour, IDamageable {
         state = state.Idle(this);
     }
 
-    void RefreshEnemyData() {
-        movementSpeed = enemyData.movementSpeed;
-        turnSpeed = enemyData.turnSpeed;
-        attackAnimSpeed = enemyData.attackAnimSpeed;
-    }
+    void RandomizeSizeAndStats() {
 
-    void RandomizeStartingStats() {
-        
     }
 
     public void RagdollSetActive(bool enable) {
         //GetComponent<BoxCollider>().enabled = !enable;
-        animator.enabled = !enable;
+        Animator.enabled = !enable;
 
         // Get all colliders that also have character joint components
         foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>())) {
@@ -159,18 +138,17 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     void WaitForOtherEnemies() {
         if (isDead) { return; }
-        if (!target) { target = Camera.main.gameObject; }
         //int enemiesAtOnce = GameManager.instance.enemiesToChaseAtOnce;
 
         // Get enemies closest to the same target
         float closestDistance = Mathf.Infinity;
-        foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.target == target && e.fov.canSeeTarget)) {
+        foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.Target == Target && e.FieldOfView.canSeeTarget)) {
             //enemiesAtOnce--;
             //if (enemiesAtOnce <= 0) { return; }
             // If I'm closest to my target
-            if (Vector3.Distance(target.transform.position, enemy.transform.position) < closestDistance) {
-                closestDistance = Vector3.Distance(target.transform.position, enemy.transform.position);
-                foreach (Enemy enemy2 in FindObjectsOfType<Enemy>().Where(e => e.target != null && e.target == target && e.fov.canSeeTarget)) {
+            if (Vector3.Distance(Target.transform.position, enemy.transform.position) < closestDistance) {
+                closestDistance = Vector3.Distance(Target.transform.position, enemy.transform.position);
+                foreach (Enemy enemy2 in FindObjectsOfType<Enemy>().Where(e => e.Target != null && e.Target == Target && e.FieldOfView.canSeeTarget)) {
                     enemy2.isWaitingForOtherEnemies = true;
                 }
                 enemy.isWaitingForOtherEnemies = false;
@@ -178,26 +156,26 @@ public class Enemy : MonoBehaviour, IDamageable {
         }
     }
 
-    void StartDance() {
-        if (!isDancer && mayKillTime || isDead) { return; }
+    //void StartDance() {
+    //    if (!isDancer && mayKillTime || isDead) { return; }
 
-        //if (animator.GetCurrentAnimatorStateInfo(0).IsName(danceState)) { return; }
+    //    //if (animator.GetCurrentAnimatorStateInfo(0).IsName(danceState)) { return; }
 
-        List<Enemy> cheeringEnemies = new();
-        foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.enemyType == enemyType && e.mayKillTime && !e.isDancer)) {
-            cheeringEnemies.Add(enemy);
-        }
+    //    List<Enemy> cheeringEnemies = new();
+    //    foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.TypeOfEnemy == TypeOfEnemy && e.mayKillTime && !e.isDancer)) {
+    //        cheeringEnemies.Add(enemy);
+    //    }
 
-        if (cheeringEnemies.Count < 3) { return; }
+    //    if (cheeringEnemies.Count < 3) { return; }
 
-        //animator.SetTrigger(danceTrigger);
+    //    //animator.SetTrigger(danceTrigger);
 
-        //foreach (Enemy cheeringEnemy in cheeringEnemies)
-        //{
-        //    cheeringEnemy.transform.LookAt(transform.position);
-        //    cheeringEnemy.animator.SetTrigger(cheerTrigger);
-        //}
-    }
+    //    //foreach (Enemy cheeringEnemy in cheeringEnemies)
+    //    //{
+    //    //    cheeringEnemy.transform.LookAt(transform.position);
+    //    //    cheeringEnemy.animator.SetTrigger(cheerTrigger);
+    //    //}
+    //}
 
     // Update is called once per frame
     void Update() {
@@ -206,13 +184,12 @@ public class Enemy : MonoBehaviour, IDamageable {
         animTimer += Time.deltaTime;
 
         if (isDead) { state = state.Die(this); return; }
-        if (!target) { target = Camera.main.gameObject; }
-        if (!target || isWaitingForOtherEnemies || !fov.canSeeTarget) {
+        if (!Target || isWaitingForOtherEnemies || !FieldOfView.canSeeTarget) {
             state = state.Idle(this);
             return;
         }
 
-        if (Vector3.Distance(transform.position, target.transform.position) < fov.attackRadius + fov.currentRadiusIncrease) {
+        if (Vector3.Distance(transform.position, Target.transform.position) < FieldOfView.attackRadius + FieldOfView.currentRadiusIncrease) {
             state = state.Attack(this); return;
         } else {
             state = state.Chase(this); return;
@@ -220,20 +197,20 @@ public class Enemy : MonoBehaviour, IDamageable {
     }
 
     public void TurnTowardsTarget(float turnSpeedMultiplier = 1) {
-        Vector3 direction = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z) - transform.position;
+        Vector3 direction = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z) - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * turnSpeedMultiplier * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, EnemyData.turnSpeed * turnSpeedMultiplier * Time.deltaTime);
         Debug.DrawRay(transform.position, direction);
     }
 
     public void Chase() {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
+        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, EnemyData.movementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
     }
 
     public void Attack() {
         attackAnimationLoops++;
 
-        Ray ray = new(new Vector3(transform.position.x, target.transform.position.y, transform.position.z), transform.forward);
+        Ray ray = new(new Vector3(transform.position.x, Target.transform.position.y, transform.position.z), transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit)) {
             ParticleSystem newHitFX = Instantiate(doHitFX, hit.transform.position, Quaternion.identity, transform);
             Destroy(newHitFX.gameObject, newHitFX.main.duration * 2);

@@ -19,7 +19,6 @@ public class VRWC_FollowTransform : MonoBehaviour
     {
         Vector3 rotatedOffset = targetFrame.localRotation * offset;
         transform.localPosition = targetFrame.localPosition + rotatedOffset;
-
         transform.rotation = targetFrame.rotation;
     }
 

@@ -26,9 +26,9 @@ public abstract class BaseEnemyState {
     protected bool startOfState = true;
 
     protected void ResetAllTriggers(Enemy enemy) {
-        foreach (var param in enemy.animator.parameters) {
+        foreach (var param in enemy.Animator.parameters) {
             if (param.type == AnimatorControllerParameterType.Trigger) {
-                enemy.animator.ResetTrigger(param.name);
+                enemy.Animator.ResetTrigger(param.name);
             }
         }
     }
@@ -39,20 +39,12 @@ public abstract class BaseEnemyState {
             enemy.animTimer = 0;
             ResetAllTriggers(enemy);
             if (!smoothTransition) {
-                enemy.animator.SetFloat(enemy.animSpeed, enemy.animTimer);
+                enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer);
             }
-            enemy.fov.currentRadiusIncrease = 0;
+            enemy.FieldOfView.currentRadiusIncrease = 0;
             enemy.attackAnimationLoops = 0;
             enemy.canDamage = false;
             enemy.previousState = (IEnemyState)this;
-            //if (PreviousStateEquals(enemy, new AttackEnemyState()))
-            //{
-            //    enemy.animator.SetBool(enemy.wasAttackingBool, true);
-            //}
-            //else
-            //{
-            //    enemy.animator.SetBool(enemy.wasAttackingBool, false);
-            //}
             return newState;
         } else { Debug.LogError("Couldn't find a state to change to!"); return (IEnemyState)this; }
     }
@@ -68,8 +60,9 @@ public abstract class BaseEnemyState {
         } else { return false; }
     }
 
-    protected void AnimateState(Animator animator, string trigger) {
+    protected void AnimateState(Animator animator, string trigger, float speed = 1) {
         animator.SetTrigger(trigger);
+        animator.speed = speed;
     }
 
     protected bool PreviousStateEquals(Enemy enemy, IEnemyState state) {
@@ -101,10 +94,10 @@ public class IdleEnemyState : BaseEnemyState, IEnemyState {
             startOfState = false;
 
             enemy.animTimer = 1;
-            AnimateState(enemy.animator, enemy.idleTrigger);
-            if (!PreviousStateEquals(enemy, new ConfusedEnemyState())) { AnimateState(enemy.animator, enemy.idleTrigger); }
+            AnimateState(enemy.Animator, enemy.EnemyData.idleTrigger);
+            if (!PreviousStateEquals(enemy, new ConfusedEnemyState())) { AnimateState(enemy.Animator, enemy.EnemyData.idleTrigger); }
 
-            enemy.animator.SetFloat(enemy.animSpeed, enemy.animTimer);
+            enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer);
         }
         return this;
     }
@@ -112,33 +105,33 @@ public class IdleEnemyState : BaseEnemyState, IEnemyState {
 
 public class SurprisedEnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Attack(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.surprisedAnimation)) { return ChangeState(new AttackEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return ChangeState(new AttackEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Attack2(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.surprisedAnimation)) { return ChangeState(new Attack2EnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return ChangeState(new Attack2EnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Chase(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.surprisedAnimation)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
     }
 
     IEnemyState IEnemyState.Cheer(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.surprisedAnimation)) { return ChangeState(new CheerEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return ChangeState(new CheerEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Confuse(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.surprisedAnimation)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Dance(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.surprisedAnimation)) { return new DanceEnemyState(); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return new DanceEnemyState(); } else { return this; }
     }
 
     IEnemyState IEnemyState.Die(Enemy enemy) => ChangeState(new DeadEnemyState(), enemy);
 
     IEnemyState IEnemyState.Idle(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.surprisedAnimation)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
     }
 
     IEnemyState IEnemyState.Surprise(Enemy enemy) => this;
@@ -147,9 +140,9 @@ public class SurprisedEnemyState : BaseEnemyState, IEnemyState {
         if (startOfState) {
             startOfState = false;
 
-            AnimateState(enemy.animator, enemy.surpriseTrigger);
+            AnimateState(enemy.Animator, enemy.EnemyData.surpriseTrigger);
         }
-        enemy.animator.SetFloat(enemy.animSpeed, enemy.animTimer);
+        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer);
         enemy.TurnTowardsTarget(enemy.chaseTurnSpeedMultiplier);
         return this;
     }
@@ -178,9 +171,9 @@ public class ChaseEnemyState : BaseEnemyState, IEnemyState {
         if (startOfState) {
             startOfState = false;
 
-            AnimateState(enemy.animator, enemy.chaseTrigger);
+            AnimateState(enemy.Animator, enemy.EnemyData.chaseTrigger);
         }
-        enemy.animator.SetFloat(enemy.animSpeed, enemy.animTimer);
+        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer);
         enemy.TurnTowardsTarget(enemy.chaseTurnSpeedMultiplier);
         enemy.Chase();
         return this;
@@ -191,29 +184,29 @@ public class AttackEnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Attack(Enemy enemy) => this;
 
     IEnemyState IEnemyState.Attack2(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new Attack2EnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new Attack2EnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Chase(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
     }
 
     IEnemyState IEnemyState.Cheer(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Confuse(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Dance(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Die(Enemy enemy) => ChangeState(new DeadEnemyState(), enemy);
 
     IEnemyState IEnemyState.Idle(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Surprise(Enemy enemy) => this;
@@ -221,21 +214,21 @@ public class AttackEnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Update(Enemy enemy) {
         if (startOfState) {
             startOfState = false;
-            AnimateState(enemy.animator, enemy.attackTrigger);
+            AnimateState(enemy.Animator, enemy.EnemyData.attackTrigger);
             enemy.canDamage = true;
-            enemy.fov.currentRadiusIncrease = enemy.fov.radiusIncrease;
+            enemy.FieldOfView.currentRadiusIncrease = enemy.FieldOfView.radiusIncrease;
         }
 
-        if (!enemy.fov.canSeeTarget) { enemy.canDamage = false; }
+        if (!enemy.FieldOfView.canSeeTarget) { enemy.canDamage = false; }
 
-        if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.enemyData.attackAnimation, enemy.attackAnimSpeed) && enemy.canDamage) {
+        if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier) && enemy.canDamage) {
             enemy.canDamage = false;
             enemy.Attack();
         }
 
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { enemy.canDamage = true; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { enemy.canDamage = true; }
 
-        enemy.animator.SetFloat(enemy.animSpeed, enemy.animTimer + enemy.attackAnimationLoops);
+        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer + enemy.attackAnimationLoops);
         enemy.TurnTowardsTarget();
         return this;
     }
@@ -243,31 +236,31 @@ public class AttackEnemyState : BaseEnemyState, IEnemyState {
 
 public class Attack2EnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Attack(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new AttackEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new AttackEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Attack2(Enemy enemy) => this;
 
     IEnemyState IEnemyState.Chase(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
     }
 
     IEnemyState IEnemyState.Cheer(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Confuse(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Dance(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Die(Enemy enemy) => ChangeState(new DeadEnemyState(), enemy);
 
     IEnemyState IEnemyState.Idle(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Surprise(Enemy enemy) => this;
@@ -275,21 +268,21 @@ public class Attack2EnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Update(Enemy enemy) {
         if (startOfState) {
             startOfState = false;
-            AnimateState(enemy.animator, enemy.attackTrigger);
+            AnimateState(enemy.Animator, enemy.EnemyData.attackTrigger);
             enemy.canDamage = true;
-            enemy.fov.currentRadiusIncrease = enemy.fov.radiusIncrease;
+            enemy.FieldOfView.currentRadiusIncrease = enemy.FieldOfView.radiusIncrease;
         }
 
-        if (!enemy.fov.canSeeTarget) { enemy.canDamage = false; }
+        if (!enemy.FieldOfView.canSeeTarget) { enemy.canDamage = false; }
 
-        if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.enemyData.attackAnimation, enemy.attackAnimSpeed) && enemy.canDamage) {
+        if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier) && enemy.canDamage) {
             enemy.canDamage = false;
             enemy.Attack();
         }
 
-        if (AnimationEnded(enemy, enemy.enemyData.attackAnimation, enemy.attackAnimSpeed)) { enemy.canDamage = true; }
+        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.attackSpeedMultiplier)) { enemy.canDamage = true; }
 
-        enemy.animator.SetFloat(enemy.animSpeed, enemy.animTimer + enemy.attackAnimationLoops);
+        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer + enemy.attackAnimationLoops);
         enemy.TurnTowardsTarget();
         return this;
     }
@@ -297,44 +290,44 @@ public class Attack2EnemyState : BaseEnemyState, IEnemyState {
 
 public class ConfusedEnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Attack(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.confusedAnimation)) { return ChangeState(new SurprisedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.confusedAnimation)) { return ChangeState(new SurprisedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Attack2(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.confusedAnimation)) { return ChangeState(new SurprisedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.confusedAnimation)) { return ChangeState(new SurprisedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Chase(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.confusedAnimation)) { return ChangeState(new SurprisedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.confusedAnimation)) { return ChangeState(new SurprisedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Cheer(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.confusedAnimation)) { return ChangeState(new CheerEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.confusedAnimation)) { return ChangeState(new CheerEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Confuse(Enemy enemy) => this;
 
     IEnemyState IEnemyState.Dance(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.confusedAnimation)) { return ChangeState(new DanceEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.confusedAnimation)) { return ChangeState(new DanceEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Die(Enemy enemy) => ChangeState(new DeadEnemyState(), enemy);
 
     IEnemyState IEnemyState.Idle(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.confusedAnimation)) { return ChangeState(new IdleEnemyState(), enemy, true); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.confusedAnimation)) { return ChangeState(new IdleEnemyState(), enemy, true); } else { return this; }
     }
 
     IEnemyState IEnemyState.Surprise(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.enemyData.confusedAnimation)) { return ChangeState(new SurprisedEnemyState(), enemy); } else { return this; }
+        if (AnimationEnded(enemy, enemy.EnemyData.confusedAnimation)) { return ChangeState(new SurprisedEnemyState(), enemy); } else { return this; }
     }
 
     IEnemyState IEnemyState.Update(Enemy enemy) {
         if (startOfState) {
             startOfState = false;
 
-            AnimateState(enemy.animator, enemy.confuseTrigger);
+            AnimateState(enemy.Animator, enemy.EnemyData.confuseTrigger);
         }
-        enemy.animator.SetFloat(enemy.animSpeed, enemy.animTimer / AnimationLength(enemy.enemyData.confusedAnimation));
+        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer / AnimationLength(enemy.EnemyData.confusedAnimation));
         return this;
     }
 }

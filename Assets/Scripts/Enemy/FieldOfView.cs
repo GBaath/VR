@@ -23,7 +23,7 @@ public class FieldOfView : MonoBehaviour {
     void FOVCheck() {
         if (!target) {
             if (TryGetComponent(out Enemy enemy)) {
-                target = enemy.target;
+                target = enemy.Target;
             } else {
                 target = Camera.main.gameObject;
             }
@@ -38,10 +38,8 @@ public class FieldOfView : MonoBehaviour {
             if (/*Vector3.Angle(directionToTarget, transform.forward) < seeAngle / 2*/ true) {
                 float distanceToTarget = Vector3.Distance(viewObject.transform.position, target.position);
                 if (!Physics.Raycast(viewObject.transform.position, directionToTarget, distanceToTarget, obstructionMask)) {
-                    Debug.Log("1");
                     canSeeTarget = true;
                 } else {
-                    Debug.Log("a");
                     canSeeTarget = false;
                 }
             }
@@ -50,7 +48,6 @@ public class FieldOfView : MonoBehaviour {
             //    canSeeTarget = false;
             //}
         } else if (canSeeTarget) {
-            Debug.Log("c");
             canSeeTarget = false;
         }
     }

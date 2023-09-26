@@ -9,7 +9,7 @@ public class HealthProperty : MonoBehaviour
     {
         if (TryGetComponent(out Enemy enemy))
         {
-            maxHealth = enemy.enemyData.maxHealth;
+            maxHealth = enemy.EnemyData.maxHealth;
         }
         currentHealth = maxHealth;
     }
