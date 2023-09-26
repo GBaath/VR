@@ -21,13 +21,13 @@ public class RoomEntrance : MonoBehaviour
     {
         try //fix for spawner room
         {
-            previousRoom.roomBase.gameObject.SetActive(false);
-
+            //previousRoom.roomBase.gameObject.SetActive(false);
+            Destroy(previousRoom.roomBase.gameObject);
         }
         catch { }
 
-        previousRoom.gameObject.SetActive(false);
-
+        //previousRoom.gameObject.SetActive(false);
+        Destroy(previousRoom.gameObject);
 
         //todo destroy and pool
     }
