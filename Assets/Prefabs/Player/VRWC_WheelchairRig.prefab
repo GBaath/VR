@@ -1543,10 +1543,11 @@ GameObject:
   - component: {fileID: 3500775527218690622}
   - component: {fileID: 2629837806025098658}
   - component: {fileID: 1084607549100459716}
-  - component: {fileID: 6425395522305498526}
   - component: {fileID: 935143408048182812}
   - component: {fileID: 2294012831358655885}
   - component: {fileID: 5545812697372924468}
+  - component: {fileID: 1194143286279014989}
+  - component: {fileID: 4356741298163328614}
   m_Layer: 0
   m_Name: AttatchmentSocket (2)
   m_TagString: Untagged
@@ -1590,8 +1591,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5251868, y: 5.795728, z: 7.926749}
-  m_Center: {x: 1.2625945, y: -0.8621152, z: 1.3369484}
+  m_Size: {x: 3.5251868, y: 5.510266, z: 3.066113}
+  m_Center: {x: 1.2625941, y: -0.71936566, z: 0.5966155}
 --- !u!114 &1084607549100459716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1617,14 +1618,38 @@ MonoBehaviour:
   m_StartingTargetFilter: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6137598815827010200}
+      - m_Target: {fileID: 2169316792556671249}
         m_TargetAssemblyTypeName: AttachmentSoundScript, Assembly-CSharp
         m_MethodName: AttachSound
         m_Mode: 1
@@ -1639,7 +1664,7 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6137598815827010200}
+      - m_Target: {fileID: 2169316792556671249}
         m_TargetAssemblyTypeName: AttachmentSoundScript, Assembly-CSharp
         m_MethodName: RemoveSound
         m_Mode: 1
@@ -1671,18 +1696,6 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
---- !u!114 &6425395522305498526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2610219811538449588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 184003b162a10de429d9e861e4ee30f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &935143408048182812
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1805,6 +1818,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61142e3c77a5bc744acbd1d90d44629e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1194143286279014989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610219811538449588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184003b162a10de429d9e861e4ee30f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4356741298163328614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610219811538449588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61142e3c77a5bc744acbd1d90d44629e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2629015887350174470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,8 +1938,8 @@ GameObject:
   - component: {fileID: 4457256190993022465}
   - component: {fileID: 4419311641848497339}
   - component: {fileID: 6888311648449508384}
-  - component: {fileID: 6137598815827010200}
   - component: {fileID: 7538280171445802955}
+  - component: {fileID: 2169316792556671249}
   m_Layer: 0
   m_Name: AttatchmentSocket
   m_TagString: Untagged
@@ -1946,8 +1983,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5251868, y: 5.667028, z: 8.240817}
-  m_Center: {x: 1.2625945, y: 1.1116512, z: 1.3784003}
+  m_Size: {x: 3.5251868, y: 5.641168, z: 3.0774791}
+  m_Center: {x: 1.2625941, y: 1.6634225, z: 0.5202384}
 --- !u!114 &4457256190993022465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1980,7 +2017,7 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6137598815827010200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AttachmentSoundScript, Assembly-CSharp
         m_MethodName: AttachSound
         m_Mode: 1
@@ -1995,7 +2032,7 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6137598815827010200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AttachmentSoundScript, Assembly-CSharp
         m_MethodName: RemoveSound
         m_Mode: 1
@@ -2135,7 +2172,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6137598815827010200
+--- !u!114 &7538280171445802955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2732096965705660432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61142e3c77a5bc744acbd1d90d44629e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2169316792556671249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2149,18 +2198,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attachSound: {fileID: 8300000, guid: 6f4d5190b1441fb48880f25a61b94233, type: 3}
   removeSound: {fileID: 8300000, guid: 6f4d5190b1441fb48880f25a61b94233, type: 3}
---- !u!114 &7538280171445802955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2732096965705660432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61142e3c77a5bc744acbd1d90d44629e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2782454494023878473
 GameObject:
   m_ObjectHideFlags: 0
@@ -2728,6 +2765,7 @@ GameObject:
   - component: {fileID: 3355997933869472955}
   - component: {fileID: 4905377892846536376}
   - component: {fileID: 3355997933869472934}
+  - component: {fileID: 4790808302623487324}
   m_Layer: 26
   m_Name: WheelL
   m_TagString: Player
@@ -2804,6 +2842,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3355997933869472955}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4790808302623487324}
+        m_TargetAssemblyTypeName: HapticInteractable, Assembly-CSharp
+        m_MethodName: TriggerHapticPublic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3132,6 +3182,22 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &4790808302623487324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355997933869472956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4c0abe760b3dd4eb39fc5c23afa20a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spotinditactor: Hover
+  intensity: 0.052
+  duration: 0.2
+  shouldNotAutoListen: 0
 --- !u!1 &3355997934018186033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3326,6 +3392,7 @@ GameObject:
   - component: {fileID: 3355997934027076913}
   - component: {fileID: 6642715812929463003}
   - component: {fileID: 3355997934027076924}
+  - component: {fileID: 7014552990371680309}
   m_Layer: 26
   m_Name: WheelR
   m_TagString: Player
@@ -3399,9 +3466,9 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3355997934027076913}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 7014552990371680309}
+        m_TargetAssemblyTypeName: HapticInteractable, Assembly-CSharp
+        m_MethodName: TriggerHapticPublic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3730,6 +3797,22 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &7014552990371680309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355997934027076914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4c0abe760b3dd4eb39fc5c23afa20a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spotinditactor: Hover
+  intensity: 0.052
+  duration: 0.2
+  shouldNotAutoListen: 0
 --- !u!1 &3355997934270379128
 GameObject:
   m_ObjectHideFlags: 0
