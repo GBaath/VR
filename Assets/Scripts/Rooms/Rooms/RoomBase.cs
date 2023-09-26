@@ -17,6 +17,9 @@ public class RoomBase : MonoBehaviour
     [Tooltip("Leave empty for all")]
     public List<PropResource.PropType> acceptedTypes;
     private Material customRoomMaterial;
+    [SerializeField]private MaterialPropertyBlock customPropertyBlock;
+
+    [SerializeField] private List<Transform> rendererHolders;
 
     //info about loded objects in room
     public List<GameObject> enemies, loot, props, propSets, switchSpawnPoints;
@@ -46,10 +49,26 @@ public class RoomBase : MonoBehaviour
             enemies.Add(enemyHolder.GetChild(j).gameObject);
         } 
 
-
-
         SetEntryConnection();
         SpawnConnections();
+
+        foreach(var cp in connectionsPoints)
+        {
+            rendererHolders.Add(cp.transform);
+        }
+        //apply material to meshes
+        foreach(var holder in rendererHolders)
+        {
+            foreach (var mr in holder.GetComponentsInChildren<MeshRenderer>())
+            {
+                //mr.GetComponent<Renderer>().SetPropertyBlock()
+                mr.material = customRoomMaterial;
+            }
+        }
+        foreach (var mr in entrance.GetComponentsInChildren<MeshRenderer>())
+        {
+            mr.material = customRoomMaterial;
+        }
     }
     //places the roombase correctly for random connection point
     void SetEntryConnection()

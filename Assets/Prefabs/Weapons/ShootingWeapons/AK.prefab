@@ -653,7 +653,7 @@ MonoBehaviour:
   fireParticles: {fileID: 6179804971963976145}
   fireAnimator: {fileID: 8713790446652369846}
   currentWeaponType: 0
-  IsSelected: 0
+  isSelected: 0
   lootFloatScript: {fileID: 0}
   reloadCanvas: {fileID: 4853652518579520715}
   reloadCircle: {fileID: 7838391011842535457}
@@ -1538,7 +1538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4962244906548070591, guid: f2876f4d74d269b42b180c81605cdf5b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 91
       objectReference: {fileID: 0}
     - target: {fileID: 4962244906548070591, guid: f2876f4d74d269b42b180c81605cdf5b, type: 3}
       propertyPath: m_AnchoredPosition.y

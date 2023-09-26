@@ -421,7 +421,8 @@ MonoBehaviour:
   fireParticles: {fileID: 3183844384843175978}
   fireAnimator: {fileID: 0}
   currentWeaponType: 1
-  IsSelected: 0
+  isSelected: 0
+  lootFloatScript: {fileID: 0}
   reloadCanvas: {fileID: 3918470590409282119}
   reloadCircle: {fileID: 1872679520847849133}
 --- !u!114 &1546577930582818942
@@ -736,6 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tierEffectGO: {fileID: 724320866964695290}
+  statsDisplay: {fileID: 0}
   spinSpeed: 45
   speed: 1
   distance: 0.2

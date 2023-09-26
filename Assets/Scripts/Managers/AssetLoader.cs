@@ -12,6 +12,7 @@ namespace UnityEngine
     {
         public static AssetLoader instance;
         public Material[] dungeonMaterials;
+        public Texture materialMaps;
 
         private void Awake()
         {

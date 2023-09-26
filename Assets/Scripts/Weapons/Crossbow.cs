@@ -17,7 +17,8 @@ public class Crossbow : MonoBehaviour
 
 
     //isLoaded for Arrow check and isArmed for slider check
-    bool isArmed, isLoaded,isSelected;
+    bool isArmed, isLoaded;
+    public bool isSelected;
     private void Start()
     {
         reloadArrowPrefab.SetActive(false);
@@ -107,6 +108,15 @@ public class Crossbow : MonoBehaviour
     {
         isLoaded = false;
         reloadArrowPrefab.SetActive(false);
+    }
+
+    public void IsSelected()
+    {
+        isSelected = true;
+    }
+    public void IsNotSelected()
+    {
+        isSelected = false;
     }
 
     public void InWeaponSlot()

@@ -8,10 +8,10 @@ public class EnemyDataEditor : Editor
     {
         base.OnInspectorGUI();
 
-        EnemyData enemyData = (EnemyData)target;
-        if (GUILayout.Button("Refresh Enemy Data"))
-        {
-            enemyData.RefreshEnemyData();
-        }
+        //EnemyData enemyData = (EnemyData)target;
+        //if (GUILayout.Button("Refresh Enemy Data"))
+        //{
+        //    enemyData.RefreshEnemyData();
+        //}
     }
 }

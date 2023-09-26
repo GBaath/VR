@@ -67,14 +67,14 @@ public class LootFloat : MonoBehaviour
 
     private void UpAndDown()
     {
-        if (weaponScript.IsSelected) return;
+        if (weaponScript.isSelected) return;
         newPositionY = initialPositionY + Mathf.Sin(Time.time * speed) * distance;
         transform.position = new Vector3(transform.position.x, newPositionY, transform.position.z);
     }
     private void Rotate()
     {
         
-        if (weaponScript.IsSelected) return;
+        if (weaponScript.isSelected) return;
         transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
     }
     private void OnGround()
