@@ -74,10 +74,9 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public float moveAnimSpeed;
 
     // Stats
-    [HideInInspector] public int maxHealth;
-    [HideInInspector] public float turnSpeed;
-    [HideInInspector] public int attackDamage;
-    [HideInInspector] public float movementSpeed;
+    public float turnSpeed;
+    public int attackDamage;
+    public float movementSpeed;
 
     // Magic numbers
     [HideInInspector] public float attackAnimationImpactTime = 0.28f;
@@ -107,13 +106,15 @@ public class Enemy : MonoBehaviour, IDamageable {
 
         transform.Rotate(new Vector3(transform.rotation.x, Random.Range(0, 360), transform.rotation.z));
 
+        RagdollSetActive(false);
+
         if (GameManager.instance.enemiesToChaseAtOnce > 0) {
             InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
         } else {
             isWaitingForOtherEnemies = false;
         }
 
-        RagdollSetActive(false);
+        RandomizeSizeAndStats();
 
         // Check whether or not other enemies are against the same target at the same time
 
@@ -159,6 +160,23 @@ public class Enemy : MonoBehaviour, IDamageable {
         }
     }
 
+    void RandomizeSizeAndStats() {
+        float minScale = 0.2f;
+        float maxScale = 1.8f;
+        float randomScaleFloat = Random.Range(minScale, maxScale);
+        int scaleInt = 0;
+        for (int i = 0; i < randomScaleFloat / minScale; i++) {
+            scaleInt++;
+        }
+        if (transform.TryGetComponent(out HealthProperty hp)) {
+            hp.maxHealth = EnemyData.MaxHealth + scaleInt;
+        }
+        transform.localScale = new Vector3(EnemyData.StartSize * randomScaleFloat, EnemyData.StartSize * randomScaleFloat, EnemyData.StartSize * randomScaleFloat);
+        turnSpeed = EnemyData.TurnSpeed / randomScaleFloat;
+        attackDamage = (int)(EnemyData.AttackDamage * randomScaleFloat);
+        movementSpeed = EnemyData.MovementSpeed / randomScaleFloat;
+    }
+
     //void StartDance() {
     //    if (!isDancer && mayKillTime || isDead) { return; }
 
@@ -202,12 +220,12 @@ public class Enemy : MonoBehaviour, IDamageable {
     public void TurnTowardsTarget(float turnSpeedMultiplier = 1) {
         Vector3 direction = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z) - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, EnemyData.TurnSpeed * turnSpeedMultiplier * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * turnSpeedMultiplier * Time.deltaTime);
         Debug.DrawRay(transform.position, direction);
     }
 
     public void Chase() {
-        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, EnemyData.MovementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
+        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, movementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
     }
 
     public void Attack() {
@@ -219,7 +237,7 @@ public class Enemy : MonoBehaviour, IDamageable {
             Destroy(newHitFX.gameObject, newHitFX.main.duration * 2);
 
             if (hit.transform.GetComponentInParent<Health>().TryGetComponent(out Health health)) {
-                health.TakeDamage(EnemyData.AttackDamage);
+                health.TakeDamage(attackDamage);
             }
 
             // TODO: If target is within said range, damage it and/or all non-Enemy objects
