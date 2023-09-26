@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class SpawnWeaponInChest : MonoBehaviour
 {
+
+    public float chance1;
+    public float chance2;
+    public float chance3;
     public List<Color> colors;
     public List<Color> glowColors;
-    public List<GameObject> weapons;
+    public List<GameObject> Tier3;
+    public List<GameObject> Tier2;
+    public List<GameObject> Tier1;
+    private List<GameObject> weapons;
     [SerializeField] Transform spawnPoint;
     public ParticleSystem particlesGlow;
     public ParticleSystem particleSparkles;
@@ -14,6 +21,7 @@ public class SpawnWeaponInChest : MonoBehaviour
     public SkinnedMeshRenderer rayMeshRenderer;
     private void Start()
     {
+        weapons = PickList();
         SpawnWeapon();
         SetEffectColour();
     }
@@ -57,5 +65,19 @@ public class SpawnWeaponInChest : MonoBehaviour
         newMat.SetColor("_TintColor", newColor);
         rayMeshRenderer.material = newMat;
     }
+
+    List<GameObject> PickList()
+    {
+        float totalChance = chance1 + chance2 + chance3;
+        float randomValue = Random.Range(0f, totalChance);
+
+        if (randomValue <= chance1)
+            return Tier1;
+        else if (randomValue <= chance1 + chance2)
+            return Tier2;
+        else
+            return Tier3;
+    }
+
 
 }
