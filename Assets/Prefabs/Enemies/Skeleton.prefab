@@ -2028,24 +2028,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e1d13b5ced50d44baad8a4f1249b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hips: {fileID: 4286974111170000776}
   animator: {fileID: 7308438811657037766}
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: b4e39c2c9c6c5854c9294b96f27f1e52, type: 2}
-  fov: {fileID: 3391077371947669904}
   doHitFX: {fileID: 19824050, guid: 66784c88e31f8984589a513a2eb9b1df, type: 3}
   getHitFX: {fileID: 19824050, guid: 581eceb924751f5458eff3649a42d56f, type: 3}
+  fieldOfView: {fileID: 3391077371947669904}
   audioSource: {fileID: 4218071147520984787}
-  hips: {fileID: 4286974111170000776}
-  enemyType: 0
   currentState: IdleEnemyState
-  animSpeed: animSpeed
-  idleTrigger: idle
-  chaseTrigger: chase
-  cheerTrigger: cheer
-  danceTrigger: dance
-  attackTrigger: attack
-  confuseTrigger: confuse
-  surpriseTrigger: surprise
   isWaitingForOtherEnemies: 1
   decayColor: {r: 1, g: 1, b: 1, a: 1}
   maxDanceDistance: 10
@@ -2055,14 +2046,11 @@ MonoBehaviour:
   isCaster: 0
   isDead: 0
   animTimer: 0
+  moveAnimSpeed: 0
   attackAnimationImpactTime: 0.28
   chaseTurnSpeedMultiplier: 3
   attackAnimationLoops: -1
   checkWaitRate: 0.1
-  attackAnimSpeed: 0
-  movementSpeed: 0
-  moveAnimSpeed: 0
-  turnSpeed: 0
 --- !u!114 &3391077371947669904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,7 +2069,7 @@ MonoBehaviour:
   radiusIncrease: 1
   currentRadiusIncrease: 0
   target: {fileID: 0}
-  viewObject: {fileID: 4884179667896424898}
+  viewObject: {fileID: 2642277384956813986}
   targetMask:
     serializedVersion: 2
     m_Bits: 67108864
