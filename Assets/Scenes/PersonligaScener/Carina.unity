@@ -521,38 +521,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3355997934936558553, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
       insertIndex: -1
       addedObject: {fileID: 550217154}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3355997934270379128, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 826999769}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
 --- !u!4 &826999765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3355997933788464944, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
   m_PrefabInstance: {fileID: 826999764}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &826999766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3355997934270379128, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
-  m_PrefabInstance: {fileID: 826999764}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &826999769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826999766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d0f470e90939ea4fb748b5652541457, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 200
-  currentHealth: 0
-  healthPercent: 0
-  damageFlashImg: {fileID: 1784430795}
-  damageLoopFlashingImg: {fileID: 1121442934}
 --- !u!1 &854047360
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,11 +646,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1121442934 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7581071687910835482, guid: 78b173016d2068345b3a1f85816036fb, type: 3}
-  m_PrefabInstance: {fileID: 895376386366022702}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1369777302
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,11 +723,6 @@ Transform:
 Camera:
   m_CorrespondingSourceObject: {fileID: 3355997934936558552, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
   m_PrefabInstance: {fileID: 826999764}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1784430795 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7213680866989416294, guid: 78b173016d2068345b3a1f85816036fb, type: 3}
-  m_PrefabInstance: {fileID: 895376386366022702}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &895376386366022702
 PrefabInstance:

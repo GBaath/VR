@@ -14,16 +14,16 @@ public class DamageSounds : MonoBehaviour
  
      private void OnEnable()
      {
-         //health.onNearDeath += LowHealthSound;
-         //health.onResetHealth += ResetHealthSound;
-         //health.onhitDamage += RandomHitSound;
+         health.onNearDeath += LowHealthSound;
+         health.onResetHealth += ResetHealthSound;
+         health.onhitDamage += RandomHitSound;
      }
  
      private void OnDisable()
      {
-         //health.onNearDeath -= LowHealthSound;
-         //health.onResetHealth -= ResetHealthSound;
-         //health.onhitDamage -= RandomHitSound;
+         health.onNearDeath -= LowHealthSound;
+         health.onResetHealth -= ResetHealthSound;
+         health.onhitDamage -= RandomHitSound;
      }
  
      private void LowHealthSound()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
+using System;
 using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour, IDamageable
@@ -10,9 +10,15 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 200;
     [SerializeField] private float currentHealth;
     [SerializeField] private float healthPercent;
+    [SerializeField] private AudioSource audioSource;
     
     [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Animator damageFlashImg;
     [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Animator damageLoopFlashingImg;
+    
+    public event Action onDeath;
+    public event Action onNearDeath ;
+    public event Action onResetHealth;
+    public event Action onhitDamage;
 
     private bool isDead = false;
     private float damageCoolTime;
@@ -47,6 +53,7 @@ public class Health : MonoBehaviour, IDamageable
         UpdateHealthPercentage();
         timeSinceLastDamage = 0f;
         DisableFlashLoop();
+        onResetHealth();
     }
 
     private void UpdateHealthPercentage()
@@ -61,6 +68,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(int amount)
     {
+        //onhitDamage();
         isRestoringHealth = false;
         
         currentHealth = Mathf.Max(currentHealth - amount, 0);
@@ -71,6 +79,7 @@ public class Health : MonoBehaviour, IDamageable
         if (healthPercent <= 0.2f && !isDead)
         {
             damageLoopFlashingImg.SetBool("DamageLoopOverlay", true);
+            onNearDeath();
         }
 
         if (currentHealth == 0)
@@ -78,11 +87,13 @@ public class Health : MonoBehaviour, IDamageable
             isDead = true;
             DisableFlashLoop();
             Die(0.2f);
+            onResetHealth();
         }
     }
 
     public void Die(float destroyDelay)
     {
+        onDeath();
         Invoke(nameof(ResetScene), destroyDelay);
     }
 
