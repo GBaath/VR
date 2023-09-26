@@ -10,8 +10,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 200;
     [SerializeField] private float currentHealth;
     [SerializeField] private float healthPercent;
-    [SerializeField] private AudioSource audioSource;
-    
+
     [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Animator damageFlashImg;
     [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Animator damageLoopFlashingImg;
     
