@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 4953089081050247936}
   - component: {fileID: 2373135407980062066}
   m_Layer: 27
-  m_Name: Revolver
+  m_Name: Revolver 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71847efa87ddfa545a829b51e2902188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStats: {fileID: 11400000, guid: 971dc2a529af2854da96c5c16aa4d4d3, type: 2}
+  weaponStats: {fileID: 11400000, guid: 1a4b13a9954b5c64cbecb3c88eeaf6e6, type: 2}
   hapticScript: {fileID: 8797545281348125269}
   firingPoint: {fileID: 5761983307165353492}
   currentAmmo: 0

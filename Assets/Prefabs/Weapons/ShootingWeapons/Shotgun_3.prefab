@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 1372542031672875093}
   - component: {fileID: 2146483944636236206}
   m_Layer: 27
-  m_Name: Shotgun_1
+  m_Name: Shotgun_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71847efa87ddfa545a829b51e2902188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStats: {fileID: 11400000, guid: eab7738dadf37404b90eba7cce068fad, type: 2}
+  weaponStats: {fileID: 11400000, guid: 2cfce9281f03f414199caf16ccbfafb4, type: 2}
   hapticScript: {fileID: 1371214933226846401}
   firingPoint: {fileID: 555738975851629408}
   currentAmmo: 0

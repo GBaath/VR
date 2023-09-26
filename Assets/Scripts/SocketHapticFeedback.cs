@@ -11,10 +11,6 @@ public class SocketHapticFeedback: MonoBehaviour
         {
             hapticScript.TriggerHapticPublic();
         }
-        else
-        {
-            Debug.Log("Cant find script");
-        }
     }
     
 }

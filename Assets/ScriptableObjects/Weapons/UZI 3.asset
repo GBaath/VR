@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6418c095a23e6f14bb447285af5c21a8, type: 3}
-  m_Name: Revolver
+  m_Name: UZI 3
   m_EditorClassIdentifier: 
-  weaponName: Revolver
+  weaponName: UZI
   projectilePrefab: {fileID: 1483399186347397756, guid: a3a4ac1b8067a9548af58c53b9d761f4, type: 3}
-  fireRate: 0.5
+  fireRate: 0.08
   reloadTime: 5
   bulletSpeed: 25
-  knockBack: 3
-  damage: 2
-  hapticDuration: 0.3
-  firingSound: {fileID: 8300000, guid: 2f79ccded1c77214d90207c48f343a50, type: 3}
+  knockBack: 5
+  damage: 1
+  hapticDuration: 0.1
+  firingSound: {fileID: 8300000, guid: 6cced51f6d07bdc42ad84241389c2365, type: 3}
   noAmmoSound: {fileID: 8300000, guid: e5748096dd878724dbf0b65ae74937dd, type: 3}
   reloadSound: {fileID: 8300000, guid: d2c081a4b15682140bc364d7003377f9, type: 3}
-  ammoCount: 6
+  ammoCount: 50
   maxPitch: 1.2
   minPitch: 0.8
-  bulletSpread: 0.8
+  bulletSpread: 4
   shotgunSlugs: 0
-  Tier: 0
+  Tier: 2
