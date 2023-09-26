@@ -21074,6 +21074,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21205,6 +21209,10 @@ PrefabInstance:
     - target: {fileID: 3737510623631393655, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22934,6 +22942,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23664,6 +23676,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23795,6 +23811,10 @@ PrefabInstance:
     - target: {fileID: 3737510623631393655, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23993,6 +24013,10 @@ PrefabInstance:
     - target: {fileID: 3737510623631393655, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25092,6 +25116,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25157,6 +25185,10 @@ PrefabInstance:
     - target: {fileID: 3737510623631393655, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26361,6 +26393,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27046,6 +27082,10 @@ PrefabInstance:
     - target: {fileID: 3737510623631393655, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29388,6 +29428,10 @@ PrefabInstance:
     - target: {fileID: 3737510623631393655, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32249,6 +32293,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33703,6 +33751,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34174,6 +34226,10 @@ PrefabInstance:
     - target: {fileID: 3737510623631393655, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36508,6 +36564,10 @@ PrefabInstance:
     - target: {fileID: 3737510623631393655, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508850946472736621, guid: f756f6198a8b054428f76b5652062b4b, type: 3}
+      propertyPath: spawnEnemy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

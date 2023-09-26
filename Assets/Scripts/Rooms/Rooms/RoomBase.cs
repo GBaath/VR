@@ -17,6 +17,7 @@ public class RoomBase : MonoBehaviour
     [Tooltip("Leave empty for all")]
     public List<PropResource.PropType> acceptedTypes;
     private Material customRoomMaterial;
+    [SerializeField]private MaterialPropertyBlock customPropertyBlock;
 
     [SerializeField] private List<Transform> rendererHolders;
 
@@ -60,8 +61,13 @@ public class RoomBase : MonoBehaviour
         {
             foreach (var mr in holder.GetComponentsInChildren<MeshRenderer>())
             {
+                //mr.GetComponent<Renderer>().SetPropertyBlock()
                 mr.material = customRoomMaterial;
             }
+        }
+        foreach (var mr in entrance.GetComponentsInChildren<MeshRenderer>())
+        {
+            mr.material = customRoomMaterial;
         }
     }
     //places the roombase correctly for random connection point
