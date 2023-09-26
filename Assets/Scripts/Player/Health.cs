@@ -52,7 +52,7 @@ public class Health : MonoBehaviour, IDamageable
         UpdateHealthPercentage();
         timeSinceLastDamage = 0f;
         DisableFlashLoop();
-        //onResetHealth();
+        onResetHealth();
     }
 
     private void UpdateHealthPercentage()
