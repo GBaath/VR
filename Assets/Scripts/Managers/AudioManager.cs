@@ -12,5 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip hitFeedback;
     public AudioClip doorSqueak;
     public AudioClip coins;
+    public AudioClip heartbeat;
+    public AudioClip[] hurtSounds;
 
 }

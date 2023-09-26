@@ -114,6 +114,8 @@ MonoBehaviour:
   hitFeedback: {fileID: 8300000, guid: 54f4eb6eadc0adb40a583fafb144a153, type: 3}
   doorSqueak: {fileID: 8300000, guid: d19303051c4cd08499eef38cfdc52087, type: 3}
   coins: {fileID: 8300000, guid: 197dccc77bba3a641bd8a2cb3588b500, type: 3}
+  heartbeat: {fileID: 8300000, guid: 5f1113d0433fa164c83d77f87d6c736c, type: 3}
+  hurtSounds: []
 --- !u!114 &6447467580567506157
 MonoBehaviour:
   m_ObjectHideFlags: 0
