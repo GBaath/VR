@@ -533,7 +533,7 @@ MonoBehaviour:
   fireParticles: {fileID: 6020619584303310237}
   fireAnimator: {fileID: 0}
   currentWeaponType: 2
-  IsSelected: 0
+  isSelected: 0
   lootFloatScript: {fileID: 2146483944636236206}
   reloadCanvas: {fileID: 2594057475574606769}
   reloadCircle: {fileID: 892800831235284827}

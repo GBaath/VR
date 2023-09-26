@@ -24,7 +24,7 @@ public class ShootingWeapon : MonoBehaviour
 
 
     //For spining thing
-    public bool IsSelected;
+    public bool isSelected;
     [SerializeField]LootFloat lootFloatScript;
 
     //Reload
@@ -200,8 +200,6 @@ public class ShootingWeapon : MonoBehaviour
         //Reset
         firingPoint.rotation = Quaternion.Euler(originalSpread);
     }
-
-
     private void StartReload()
     {
         reloadCanvas.enabled = true;
@@ -233,7 +231,6 @@ public class ShootingWeapon : MonoBehaviour
             reloadCircle.fillAmount = timePassed / reloadTime;
             yield return null;
         }
-
         StopReload();
     }
 
@@ -259,7 +256,6 @@ public class ShootingWeapon : MonoBehaviour
         {
             fireParticles.Stop();
         }
-
     }
 
     public void StopShootingAnimation()
@@ -268,15 +264,14 @@ public class ShootingWeapon : MonoBehaviour
         {
             fireAnimator.SetBool("Fire", false);
         }
-
     }
 
     public void SetSelectTrue()
     {
-        IsSelected = true;
+        isSelected = true;
     }
     public void SetSelectFalse()
     {
-        IsSelected = false;
+        isSelected = false;
     }
 }

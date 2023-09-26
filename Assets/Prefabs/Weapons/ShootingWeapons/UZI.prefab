@@ -627,7 +627,7 @@ MonoBehaviour:
   fireParticles: {fileID: 6935336287647047935}
   fireAnimator: {fileID: 6606329587125999949}
   currentWeaponType: 0
-  IsSelected: 0
+  isSelected: 0
   lootFloatScript: {fileID: 0}
   reloadCanvas: {fileID: 2179915140678237654}
   reloadCircle: {fileID: 3615436234710361400}
@@ -698,7 +698,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8077701157098400404}
         m_TargetAssemblyTypeName: ShootingWeapon, Assembly-CSharp
-        m_MethodName: SetSelectFalse
+        m_MethodName: SetSelectTrue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
