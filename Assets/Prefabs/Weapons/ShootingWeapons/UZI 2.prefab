@@ -630,7 +630,8 @@ MonoBehaviour:
   isSelected: 0
   lootFloatScript: {fileID: 0}
   reloadCanvas: {fileID: 2179915140678237654}
-  reloadCircle: {fileID: 3615436234710361400}
+  reloadCircle: {fileID: 3592941640806746428}
+  canReloadBoost: 1
 --- !u!114 &5041919108498934252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,8 +644,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4c0abe760b3dd4eb39fc5c23afa20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Spotinditactor: 
   intensity: 0.8
   duration: 0.08
+  shouldNotAutoListen: 0
 --- !u!114 &8566322011606510649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1527,9 +1530,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6242851352063568608, guid: f9da24840c60a814295b88e6319d9f9c, type: 3}
   m_PrefabInstance: {fileID: 5252197170698770231}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3615436234710361400 stripped
+--- !u!114 &3592941640806746428 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8849310923734872591, guid: f9da24840c60a814295b88e6319d9f9c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8736767897628646923, guid: f9da24840c60a814295b88e6319d9f9c, type: 3}
   m_PrefabInstance: {fileID: 5252197170698770231}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

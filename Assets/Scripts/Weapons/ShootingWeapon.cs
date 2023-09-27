@@ -208,8 +208,8 @@ public class ShootingWeapon : MonoBehaviour
     private void StartReload()
     {
         Debug.Log("startreload");
-        reloadCanvas.enabled = true;
         if (isReloading) return;
+        reloadCanvas.enabled = true;
         aS.clip = weaponStats.reloadSound;
         aS.Play();
         isReloading = true;

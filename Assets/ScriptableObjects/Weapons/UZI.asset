@@ -23,7 +23,7 @@ MonoBehaviour:
   firingSound: {fileID: 8300000, guid: 6cced51f6d07bdc42ad84241389c2365, type: 3}
   noAmmoSound: {fileID: 8300000, guid: e5748096dd878724dbf0b65ae74937dd, type: 3}
   reloadSound: {fileID: 8300000, guid: d2c081a4b15682140bc364d7003377f9, type: 3}
-  ammoCount: 1000
+  ammoCount: 15
   maxPitch: 1.2
   minPitch: 0.8
   bulletSpread: 4
