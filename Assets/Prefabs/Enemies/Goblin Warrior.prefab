@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: hips
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: viewObject
+      value: 
+      objectReference: {fileID: 2988516257102499857}
     - target: {fileID: 4283345300893703435, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -132,6 +136,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78afc9a5cf122614b8349a7841a5a7d9, type: 3}
+--- !u!1 &2988516257102499857 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: 78afc9a5cf122614b8349a7841a5a7d9, type: 3}
+  m_PrefabInstance: {fileID: 5637959380962661237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5311071427399595166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 78afc9a5cf122614b8349a7841a5a7d9, type: 3}

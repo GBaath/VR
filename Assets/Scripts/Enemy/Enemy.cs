@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] AudioSource audioSource;
 
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
-    public string currentState = "idle";
+    public string currentState = "IdleEnemyState";
 
     // Public variables
     public Animator Animator {
@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public float maxDanceDistance = 10;
     [HideInInspector] public bool mayKillTime = true;
     [HideInInspector] public bool wasSpawned = false;
+    [HideInInspector] public float randomPitch = 1;
     [HideInInspector] public bool canDamage = true;
     [HideInInspector] public bool isDancer = false;
     [HideInInspector] public bool isCaster = false;
@@ -74,9 +75,10 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public float moveAnimSpeed;
 
     // Stats
-    public float turnSpeed;
-    public int attackDamage;
-    public float movementSpeed;
+    [HideInInspector] public float turnSpeed;
+    [HideInInspector] public int attackDamage;
+    [HideInInspector] public float movementSpeed;
+    [HideInInspector] public float animationSpeed;
 
     // Magic numbers
     [HideInInspector] public float attackAnimationImpactTime = 0.28f;
@@ -175,6 +177,8 @@ public class Enemy : MonoBehaviour, IDamageable {
         turnSpeed = EnemyData.TurnSpeed / randomScaleFloat;
         attackDamage = (int)(EnemyData.AttackDamage * randomScaleFloat);
         movementSpeed = EnemyData.MovementSpeed / randomScaleFloat;
+        animationSpeed = EnemyData.AnimationSpeedMultiplier / randomScaleFloat;
+        randomPitch = randomScaleFloat;
     }
 
     //void StartDance() {
