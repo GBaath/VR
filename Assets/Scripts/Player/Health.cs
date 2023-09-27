@@ -78,7 +78,7 @@ public class Health : MonoBehaviour, IDamageable
         if (healthPercent <= 0.2f && !isDead)
         {
             damageLoopFlashingImg.SetBool("DamageLoopOverlay", true);
-            onNearDeath();
+            //onNearDeath();
         }
 
         if (currentHealth == 0)
@@ -86,13 +86,13 @@ public class Health : MonoBehaviour, IDamageable
             isDead = true;
             DisableFlashLoop();
             Die(0.2f);
-            onResetHealth();
+            //onResetHealth();
         }
     }
 
     public void Die(float destroyDelay)
     {
-        onDeath();
+        //onDeath();
         Invoke(nameof(ResetScene), destroyDelay);
     }
 
