@@ -31,18 +31,26 @@ public class ProjectileDamage : MonoBehaviour {
         GetComponent<Rigidbody>().velocity = transform.forward * homingSpeed;
     }
 
-    private void OnCollisionEnter(Collision other) {
+    private void OnHit(Transform otherTransform) {
         if (fromEnemy) {
-            if (other.gameObject.GetComponentInParent<Health>() && other.gameObject.GetComponentInParent<Health>().TryGetComponent(out Health health)) {
+            if (otherTransform.GetComponentInParent<Health>() && otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health health)) {
                 health.TakeDamage(damage);
                 Destroy(gameObject);
             }
         } else {
-            if (other.gameObject.GetComponentInParent<HealthProperty>() && other.gameObject.TryGetComponent(out HealthProperty hp)) {
+            if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.TryGetComponent(out HealthProperty hp)) {
                 hp.LoseHealth(damage);
                 AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, Camera.main.transform.position, 1);
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        OnHit(other.transform);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        OnHit(other.transform);
     }
 }
