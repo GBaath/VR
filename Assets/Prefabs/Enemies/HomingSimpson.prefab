@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4023118134872785974}
+  - component: {fileID: 7664485980444714660}
   - component: {fileID: 4773416564741257963}
   - component: {fileID: 5936388331521532920}
   m_Layer: 24
-  m_Name: HomingHead
+  m_Name: HomingSimpson
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,6 +36,20 @@ Transform:
   - {fileID: 2773680550090646689}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7664485980444714660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154133761265404682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40b1223c19547645891c5aa9e84681d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
+  deathTimer: 0
 --- !u!114 &4773416564741257963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,9 +63,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
-  fromEnemy: 1
   isHoming: 1
   homingSpeed: 2
+  fromEnemy: 1
 --- !u!54 &5936388331521532920
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4948,6 +4963,7 @@ GameObject:
   - component: {fileID: 8516485367373818945}
   - component: {fileID: 2552330585391064503}
   - component: {fileID: 8220139767040600616}
+  - component: {fileID: 4684971264822420832}
   m_Layer: 24
   m_Name: Collider
   m_TagString: Untagged
@@ -5030,12 +5046,34 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3647052958532574651, guid: 88a7389de50d1ad4baf8636f6086f508, type: 3}
+--- !u!64 &4684971264822420832
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8537335213768158046}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 16384
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5

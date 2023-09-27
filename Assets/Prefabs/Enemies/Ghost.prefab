@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1538672882317751456}
   serializedVersion: 2
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: -0.009, z: -0.096}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -751,7 +751,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.01
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 8
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -987,21 +987,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.81353706
-          inSlope: -2.1819816
-          outSlope: -2.1819816
+          value: 1
+          inSlope: -0.58772314
+          outSlope: -0.58772314
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.70901597
+          outWeight: 0.27980772
         - serializedVersion: 3
-          time: 0.41960466
+          time: 1
           value: 0
-          inSlope: -2
-          outSlope: -2
+          inSlope: -1.500767
+          outSlope: -1.500767
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.22819382
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1563,8 +1563,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.11307418
-          value: 0.85221744
+          time: 0.18796432
+          value: -0.24367261
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1990,7 +1990,7 @@ ParticleSystem:
     radial:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 180
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -2043,7 +2043,7 @@ ParticleSystem:
     speedModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.005
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -2093,7 +2093,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
   InheritVelocityModule:
     enabled: 0
     m_Mode: 0
@@ -4906,9 +4906,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  fromEnemy: 1
   isHoming: 0
   homingSpeed: 0
+  fromEnemy: 1
 --- !u!54 &7009334582295839593
 Rigidbody:
   m_ObjectHideFlags: 0

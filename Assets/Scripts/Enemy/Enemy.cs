@@ -37,8 +37,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     /// <returns>A random limb from body.</returns>
     public GameObject GetRandomLimb() {
         if (!hips) {
-            Debug.LogError("can't find thicc hips");
-            return null;
+            return gameObject;
         }
 
         List<GameObject> allLimbs = new();
@@ -48,7 +47,6 @@ public class Enemy : MonoBehaviour, IDamageable {
         if (allLimbs.Count > 0) {
             return allLimbs[Random.Range(0, allLimbs.Count)];
         } else {
-            Debug.Log("can't return null limbs");
             return gameObject;
         }
     }
@@ -79,20 +77,17 @@ public class Enemy : MonoBehaviour, IDamageable {
     const float movementSpeedVariation = 0.5f;
     const float checkWaitRate = 0.1f;
 
-    void IDamageable.TakeDamage(int amount) {
+    public virtual void TakeDamage(int amount) {
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
         audioSource.Play();
     }
-    void IDamageable.Die(float delay) {
+    public virtual void Die(float delay) {
+        Destroy(gameObject, delay);
+        if (!hips) { return; }
         RagdollSetActive(true);
-
-        // TODO: Trigger any onEnemyKilled events
         isDead = true;
         isWaitingForOtherEnemies = true;
-
         state = state.Die(this);
-
-        Destroy(gameObject, delay);
     }
     private void Start() {
 
@@ -114,8 +109,16 @@ public class Enemy : MonoBehaviour, IDamageable {
         //GetComponent<BoxCollider>().enabled = !enable;
         Animator.enabled = !enable;
 
+        List<Transform> allChildren = new();
+        allChildren.Clear();
+        List<Transform> limbs = new();
+        limbs.Clear();
+        foreach (Transform childTransform in GetComponentInChildren<Transform>()) {
+            allChildren.Add(childTransform);
+        }
         // Get all colliders that also have character joint components
         foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>())) {
+            limbs.Add(joint.transform);
             joint.enableCollision = enable;
             joint.enablePreprocessing = enable;
             joint.enableProjection = enable;
@@ -123,6 +126,13 @@ public class Enemy : MonoBehaviour, IDamageable {
             joint.GetComponent<Rigidbody>().isKinematic = !enable;
             joint.GetComponent<Rigidbody>().detectCollisions = enable;
             joint.GetComponent<Rigidbody>().useGravity = enable;
+        }
+        if (enable) {
+            foreach (Transform child in allChildren) {
+                if (!limbs.Contains(child)) {
+                    Destroy(child.gameObject);
+                }
+            }
         }
     }
     void WaitForOtherEnemies() {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomingSimpson : MonoBehaviour
+public class HomingBulletLauncer : MonoBehaviour
 {
     [SerializeField] bool trigger;
     [SerializeReference] GameObject homingBullet;

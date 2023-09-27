@@ -5,19 +5,15 @@ public class HealthProperty : MonoBehaviour {
     int currentHealth;
 
     private void Start() {
-        if (TryGetComponent(out Enemy enemy)) {
-            if (!enemy.wasSpawned) {
-                maxHealth = enemy.EnemyData.MaxHealth;
-            }
+        if (TryGetComponent(out Enemy enemy) && enemy.EnemyData) {
+            maxHealth = enemy.EnemyData.MaxHealth;
         }
         currentHealth = maxHealth;
     }
 
     public void LoseHealth(int amount) {
         currentHealth -= amount;
-
         if (TryGetComponent(out IDamageable damageable)) { damageable.TakeDamage(amount); }
-
         if (currentHealth <= 0) {
             if (damageable != null) { damageable.Die(deathTimer); } else { Destroy(gameObject, deathTimer); }
         }
