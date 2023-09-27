@@ -85,6 +85,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public float chaseTurnSpeedMultiplier = 3;
     [HideInInspector] public int attackAnimationLoops = 0;
     [HideInInspector] public float checkWaitRate = 0.1f;
+    readonly float movementSpeedVariation = 0.5f;
 
     void IDamageable.TakeDamage(int amount) {
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
@@ -163,8 +164,8 @@ public class Enemy : MonoBehaviour, IDamageable {
     }
 
     void RandomizeSizeAndStats() {
-        float minScale = 0.2f;
-        float maxScale = 1.8f;
+        float minScale = 0.6f;
+        float maxScale = 1.4f;
         float randomScaleFloat = Random.Range(minScale, maxScale);
         int scaleInt = 0;
         for (int i = 0; i < randomScaleFloat / minScale; i++) {
@@ -176,7 +177,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         transform.localScale = new Vector3(EnemyData.StartSize * randomScaleFloat, EnemyData.StartSize * randomScaleFloat, EnemyData.StartSize * randomScaleFloat);
         turnSpeed = EnemyData.TurnSpeed / randomScaleFloat;
         attackDamage = (int)(EnemyData.AttackDamage * randomScaleFloat);
-        movementSpeed = EnemyData.MovementSpeed / randomScaleFloat;
+        movementSpeed = EnemyData.MovementSpeed / (randomScaleFloat / movementSpeedVariation);
         animationSpeed = EnemyData.AnimationSpeedMultiplier / randomScaleFloat;
         randomPitch = randomScaleFloat;
     }

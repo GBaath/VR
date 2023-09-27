@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: BasicSkeleton
   m_EditorClassIdentifier: 
   enemyType: 0
+  startSize: 1
   maxHealth: 5
   turnSpeed: 25
   attackDamage: 50
-  movementSpeed: 2
+  movementSpeed: 1.5
   attackSpeedMultiplier: 1.5
   animationSpeedMultiplier: 1
   animSpeed: animSpeed
