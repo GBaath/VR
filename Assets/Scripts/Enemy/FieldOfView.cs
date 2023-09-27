@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour {
-    public float seeRadius = 8;
+    public float seeRadius;
     [Range(0, 360)] public float seeAngle = 90;
 
     public float attackRadius = 3;
@@ -43,10 +43,6 @@ public class FieldOfView : MonoBehaviour {
                     canSeeTarget = false;
                 }
             }
-            //} else {
-            //    Debug.Log("b");
-            //    canSeeTarget = false;
-            //}
         } else if (canSeeTarget) {
             canSeeTarget = false;
         }

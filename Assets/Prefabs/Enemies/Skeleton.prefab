@@ -1985,7 +1985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4283345300893703435}
-  - component: {fileID: 833379447688839368}
+  - component: {fileID: 6143571589556153577}
   - component: {fileID: 3391077371947669904}
   - component: {fileID: 2190578424470524643}
   - component: {fileID: 7308438811657037766}
@@ -2017,7 +2017,7 @@ Transform:
   - {fileID: 615016617877806971}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &833379447688839368
+--- !u!114 &6143571589556153577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2033,30 +2033,26 @@ MonoBehaviour:
   animator: {fileID: 7308438811657037766}
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: b4e39c2c9c6c5854c9294b96f27f1e52, type: 2}
-  doHitFX: {fileID: 19824050, guid: 66784c88e31f8984589a513a2eb9b1df, type: 3}
   getHitFX: {fileID: 19824050, guid: 581eceb924751f5458eff3649a42d56f, type: 3}
   fieldOfView: {fileID: 3391077371947669904}
   audioSource: {fileID: 4218071147520984787}
   currentState: IdleEnemyState
-  isWaitingForOtherEnemies: 1
+  isWaitingForOtherEnemies: 0
   decayColor: {r: 1, g: 1, b: 1, a: 1}
   maxDanceDistance: 10
   mayKillTime: 1
   wasSpawned: 0
+  randomPitch: 1
   canDamage: 1
-  isDancer: 1
+  isDancer: 0
   isCaster: 0
   isDead: 0
   animTimer: 0
-  moveAnimSpeed: 0
   turnSpeed: 0
   attackDamage: 0
   movementSpeed: 0
-  animationSpeed: 0
-  attackAnimationImpactTime: 0.28
   chaseTurnSpeedMultiplier: 3
-  attackAnimationLoops: -1
-  checkWaitRate: 0.1
+  attackAnimationLoops: 0
 --- !u!114 &3391077371947669904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2069,7 +2065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dda52fe202af264fa0a14e5a71180e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeRadius: 20
+  seeRadius: 10
   seeAngle: 180
   attackRadius: 1.5
   radiusIncrease: 1
@@ -2178,16 +2174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d33e67d1fc0fd4d48898eb2755579a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipDatas:
-  - clip: {fileID: 8300000, guid: 9f0b21a0be7bbab449c74b5d8b68dc65, type: 3}
-    pitchRange: 0
-    volume: 0
-  - clip: {fileID: 8300000, guid: 6f4d5190b1441fb48880f25a61b94233, type: 3}
-    pitchRange: 0
-    volume: 0
-  - clip: {fileID: 8300000, guid: 6f4d5190b1441fb48880f25a61b94233, type: 3}
-    pitchRange: 0
-    volume: 0
 --- !u!82 &4218071147520984787
 AudioSource:
   m_ObjectHideFlags: 0

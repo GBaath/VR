@@ -2,20 +2,17 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "New EnemyData", fileName = "EnemyData")]
 public class EnemyData : ScriptableObject {
-
     [Header("ENEMY DATA")]
-    [SerializeField] EnemyType enemyType;
-    public EnemyType TypeOfEnemy {
-        get { return enemyType; }
+    [SerializeField] float baseScale = 1;
+    public float BaseScale {
+        get { return baseScale; }
     }
-    public enum EnemyType {
-        skeleton,
-        goblin,
-        ghost
+    [SerializeField] float minScale = 0.6f, maxScale = 1.4f;
+    public float MinScale {
+        get { return minScale; }
     }
-    [SerializeField] float startSize = 1;
-    public float StartSize {
-        get { return startSize; }
+    public float MaxScale {
+        get { return maxScale; }
     }
     [SerializeField] int maxHealth = 5;
     public int MaxHealth {

@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5f14e5c18296b74998dcf1ebd3a9426, type: 3}
-  m_Name: BasicSkeleton
+  m_Name: Skeleton
   m_EditorClassIdentifier: 
   enemyType: 0
-  startSize: 1
+  baseScale: 1
+  minScale: 0.6
+  maxScale: 1.4
   maxHealth: 5
   turnSpeed: 25
   attackDamage: 50
   movementSpeed: 1.5
   attackSpeedMultiplier: 1.5
-  animationSpeedMultiplier: 1
-  animSpeed: animProgress
+  animProgress: animProgress
   idleAnimation: {fileID: 7400000, guid: 159f27e82edf2b7478efa768aec6c76e, type: 2}
   chaseAnimation: {fileID: 7400000, guid: 56c9ac307f7a09d46ad74921abcf5247, type: 2}
   cheerAnimation: {fileID: 7400000, guid: 290254da9bebc6646982def8bb0d5420, type: 2}

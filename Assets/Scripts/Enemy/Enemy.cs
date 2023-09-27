@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] Animator animator;
     [SerializeReference] GameObject target;
     [SerializeReference] EnemyData enemyData;
-    //[SerializeReference] ParticleSystem doHitFX;
     [SerializeReference] ParticleSystem getHitFX;
     [SerializeReference] FieldOfView fieldOfView;
     [SerializeReference] AudioSource audioSource;
@@ -20,7 +19,6 @@ public class Enemy : MonoBehaviour, IDamageable {
     public Animator Animator {
         get { return animator; }
     }
-
     public GameObject Target {
         get {
             if (!target) {
@@ -30,15 +28,12 @@ public class Enemy : MonoBehaviour, IDamageable {
             }
         }
     }
-
     public EnemyData EnemyData {
         get { return enemyData; }
     }
-
     public FieldOfView FieldOfView {
         get { return fieldOfView; }
     }
-
     /// <returns>A random limb from body.</returns>
     public GameObject GetRandomLimb() {
         if (!hips) {
@@ -57,7 +52,6 @@ public class Enemy : MonoBehaviour, IDamageable {
             return gameObject;
         }
     }
-
     // Public non-references
     [HideInInspector] public IEnemyState previousState = new IdleEnemyState();
     [HideInInspector] public IEnemyState state = new IdleEnemyState();
@@ -80,17 +74,15 @@ public class Enemy : MonoBehaviour, IDamageable {
     //[HideInInspector] public float animationSpeed;
 
     // Magic numbers
-    [HideInInspector] public float attackAnimationImpactTime = 0.28f;
     [HideInInspector] public float chaseTurnSpeedMultiplier = 3;
     [HideInInspector] public int attackAnimationLoops = 0;
-    [HideInInspector] public float checkWaitRate = 0.1f;
-    readonly float movementSpeedVariation = 0.5f;
+    const float movementSpeedVariation = 0.5f;
+    const float checkWaitRate = 0.1f;
 
     void IDamageable.TakeDamage(int amount) {
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
         audioSource.Play();
     }
-
     void IDamageable.Die(float delay) {
         RagdollSetActive(true);
 
@@ -102,8 +94,6 @@ public class Enemy : MonoBehaviour, IDamageable {
 
         Destroy(gameObject, delay);
     }
-
-    // Start is called before the first frame update
     private void Start() {
 
         transform.Rotate(new Vector3(transform.rotation.x, Random.Range(0, 360), transform.rotation.z));
@@ -118,14 +108,8 @@ public class Enemy : MonoBehaviour, IDamageable {
 
         RandomizeSizeAndStats();
 
-        // Check whether or not other enemies are against the same target at the same time
-
-        // Dance or clap until any enemy of the same type finds the target
-        //StartDance();
-
         state = state.Idle(this);
     }
-
     public void RagdollSetActive(bool enable) {
         //GetComponent<BoxCollider>().enabled = !enable;
         Animator.enabled = !enable;
@@ -141,7 +125,6 @@ public class Enemy : MonoBehaviour, IDamageable {
             joint.GetComponent<Rigidbody>().useGravity = enable;
         }
     }
-
     void WaitForOtherEnemies() {
         if (isDead) { return; }
         //int enemiesAtOnce = GameManager.instance.enemiesToChaseAtOnce;
@@ -161,10 +144,9 @@ public class Enemy : MonoBehaviour, IDamageable {
             }
         }
     }
-
     void RandomizeSizeAndStats() {
-        float minScale = 0.6f;
-        float maxScale = 1.4f;
+        float minScale = EnemyData.MinScale;
+        float maxScale = EnemyData.MaxScale;
         float randomScaleFloat = Random.Range(minScale, maxScale);
         int scaleInt = 0;
         for (int i = 0; i < randomScaleFloat / minScale; i++) {
@@ -173,15 +155,13 @@ public class Enemy : MonoBehaviour, IDamageable {
         if (transform.TryGetComponent(out HealthProperty hp)) {
             hp.maxHealth = EnemyData.MaxHealth + scaleInt;
         }
-        transform.localScale = new Vector3(EnemyData.StartSize * randomScaleFloat, EnemyData.StartSize * randomScaleFloat, EnemyData.StartSize * randomScaleFloat);
+        transform.localScale = new Vector3(EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat);
         turnSpeed = EnemyData.TurnSpeed / randomScaleFloat;
         attackDamage = (int)(EnemyData.AttackDamage * randomScaleFloat);
         movementSpeed = EnemyData.MovementSpeed / (randomScaleFloat / movementSpeedVariation);
         //animationSpeed = EnemyData.AnimationSpeedMultiplier / randomScaleFloat;
         randomPitch = randomScaleFloat;
     }
-
-    // Update is called once per frame
     void Update() {
         currentState = state.ToString();
         state = state.Update(this);
@@ -198,37 +178,29 @@ public class Enemy : MonoBehaviour, IDamageable {
             state = state.Chase(this); return;
         }
     }
-
     public void TurnTowardsTarget(float turnSpeedMultiplier = 1) {
         Vector3 direction = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z) - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * turnSpeedMultiplier * Time.deltaTime);
         Debug.DrawRay(transform.position, direction);
     }
-
     public void Chase() {
         transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, movementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
     }
-
     public void TryAttack() {
         if (canDamage) {
             canDamage = false;
+            attackAnimationLoops++;
             Attack();
         }
     }
-
-    public void Attack() {
-        attackAnimationLoops++;
+    public virtual void Attack() {
+        // Melee is default enemy attack style
         Ray ray = new(new Vector3(transform.position.x, Target.transform.position.y, transform.position.z), transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit)) {
-            //ParticleSystem newHitFX = Instantiate(doHitFX, hit.transform.position, Quaternion.identity, transform);
-            //Destroy(newHitFX.gameObject, newHitFX.main.duration * 2);
-
             if (hit.transform.GetComponentInParent<Health>().TryGetComponent(out Health health)) {
                 health.TakeDamage(attackDamage);
             }
-
-            // TODO: If target is within said range, damage it and/or all non-Enemy objects
         }
     }
 }
