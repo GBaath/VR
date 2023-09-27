@@ -53,7 +53,10 @@ public abstract class BaseEnemyState {
         return animationClip.length / animationSpeed;
     }
 
-    protected bool AnimationEnded(Enemy enemy, AnimationClip animationClip, float animationSpeed = 1) {
+    protected bool AnimationEnded(Enemy enemy, AnimationClip animationClip, float animationSpeed = 0) {
+        if (animationSpeed == 0) {
+            animationSpeed = enemy.animationSpeed;
+        }
         if (enemy.animTimer >= AnimationLength(animationClip, animationSpeed)) {
             enemy.animTimer = 0;
             return true;
