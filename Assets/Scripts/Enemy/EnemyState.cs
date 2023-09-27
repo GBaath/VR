@@ -39,7 +39,7 @@ public abstract class BaseEnemyState {
             enemy.animTimer = 0;
             ResetAllTriggers(enemy);
             if (!smoothTransition) {
-                enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer);
+                enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer);
             }
             enemy.FieldOfView.currentRadiusIncrease = 0;
             enemy.attackAnimationLoops = 0;
@@ -53,19 +53,15 @@ public abstract class BaseEnemyState {
         return animationClip.length / animationSpeed;
     }
 
-    protected bool AnimationEnded(Enemy enemy, AnimationClip animationClip, float animationSpeed = 0) {
-        if (animationSpeed == 0) {
-            animationSpeed = enemy.animationSpeed;
-        }
-        if (enemy.animTimer >= AnimationLength(animationClip, animationSpeed)) {
+    protected bool AnimationEnded(Enemy enemy, AnimationClip animationClip, float specialAnimationSpeed = 1) {
+        if (enemy.animTimer >= AnimationLength(animationClip, specialAnimationSpeed)) {
             enemy.animTimer = 0;
             return true;
         } else { return false; }
     }
 
-    protected void AnimateState(Animator animator, string trigger, float speed = 1) {
-        animator.SetTrigger(trigger);
-        animator.speed = speed;
+    protected void AnimateState(Enemy enemy, string trigger) {
+        enemy.Animator.SetTrigger(trigger);
     }
 
     protected bool PreviousStateEquals(Enemy enemy, IEnemyState state) {
@@ -97,10 +93,10 @@ public class IdleEnemyState : BaseEnemyState, IEnemyState {
             startOfState = false;
 
             enemy.animTimer = 1;
-            AnimateState(enemy.Animator, enemy.EnemyData.idleTrigger);
-            if (!PreviousStateEquals(enemy, new ConfusedEnemyState())) { AnimateState(enemy.Animator, enemy.EnemyData.idleTrigger); }
+            AnimateState(enemy, enemy.EnemyData.idleTrigger);
+            if (!PreviousStateEquals(enemy, new ConfusedEnemyState())) { AnimateState(enemy, enemy.EnemyData.idleTrigger); }
 
-            enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer);
+            enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer);
         }
         return this;
     }
@@ -143,9 +139,9 @@ public class SurprisedEnemyState : BaseEnemyState, IEnemyState {
         if (startOfState) {
             startOfState = false;
 
-            AnimateState(enemy.Animator, enemy.EnemyData.surpriseTrigger);
+            AnimateState(enemy, enemy.EnemyData.surpriseTrigger);
         }
-        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer);
+        enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer);
         enemy.TurnTowardsTarget(enemy.chaseTurnSpeedMultiplier);
         return this;
     }
@@ -174,9 +170,9 @@ public class ChaseEnemyState : BaseEnemyState, IEnemyState {
         if (startOfState) {
             startOfState = false;
 
-            AnimateState(enemy.Animator, enemy.EnemyData.chaseTrigger);
+            AnimateState(enemy, enemy.EnemyData.chaseTrigger);
         }
-        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer);
+        enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer);
         enemy.TurnTowardsTarget(enemy.chaseTurnSpeedMultiplier);
         enemy.Chase();
         return this;
@@ -217,21 +213,16 @@ public class AttackEnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Update(Enemy enemy) {
         if (startOfState) {
             startOfState = false;
-            AnimateState(enemy.Animator, enemy.EnemyData.attackTrigger);
+            AnimateState(enemy, enemy.EnemyData.attackTrigger);
             enemy.canDamage = true;
             enemy.FieldOfView.currentRadiusIncrease = enemy.FieldOfView.radiusIncrease;
         }
 
         if (!enemy.FieldOfView.canSeeTarget) { enemy.canDamage = false; }
 
-        //if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier) && enemy.canDamage) {
-        //    enemy.canDamage = false;
-        //    enemy.Attack();
-        //}
-
         if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier)) { enemy.canDamage = true; }
 
-        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer + enemy.attackAnimationLoops);
+        enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer + enemy.attackAnimationLoops);
         enemy.TurnTowardsTarget();
         return this;
     }
@@ -271,21 +262,16 @@ public class Attack2EnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Update(Enemy enemy) {
         if (startOfState) {
             startOfState = false;
-            AnimateState(enemy.Animator, enemy.EnemyData.attackTrigger);
+            AnimateState(enemy, enemy.EnemyData.attackTrigger);
             enemy.canDamage = true;
             enemy.FieldOfView.currentRadiusIncrease = enemy.FieldOfView.radiusIncrease;
         }
 
         if (!enemy.FieldOfView.canSeeTarget) { enemy.canDamage = false; }
 
-        //if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier) && enemy.canDamage) {
-        //    enemy.canDamage = false;
-        //    enemy.Attack();
-        //}
-
         if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier)) { enemy.canDamage = true; }
 
-        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer + enemy.attackAnimationLoops);
+        enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer + enemy.attackAnimationLoops);
         enemy.TurnTowardsTarget();
         return this;
     }
@@ -328,9 +314,9 @@ public class ConfusedEnemyState : BaseEnemyState, IEnemyState {
         if (startOfState) {
             startOfState = false;
 
-            AnimateState(enemy.Animator, enemy.EnemyData.confuseTrigger);
+            AnimateState(enemy, enemy.EnemyData.confuseTrigger);
         }
-        enemy.Animator.SetFloat(enemy.EnemyData.animSpeed, enemy.animTimer / AnimationLength(enemy.EnemyData.confusedAnimation));
+        enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer / AnimationLength(enemy.EnemyData.confusedAnimation));
         return this;
     }
 }

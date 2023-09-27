@@ -72,13 +72,12 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public bool isCaster = false;
     [HideInInspector] public bool isDead = false;
     [HideInInspector] public float animTimer = 0;
-    [HideInInspector] public float moveAnimSpeed;
 
     // Stats
     [HideInInspector] public float turnSpeed;
     [HideInInspector] public int attackDamage;
     [HideInInspector] public float movementSpeed;
-    [HideInInspector] public float animationSpeed;
+    //[HideInInspector] public float animationSpeed;
 
     // Magic numbers
     [HideInInspector] public float attackAnimationImpactTime = 0.28f;
@@ -178,7 +177,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         turnSpeed = EnemyData.TurnSpeed / randomScaleFloat;
         attackDamage = (int)(EnemyData.AttackDamage * randomScaleFloat);
         movementSpeed = EnemyData.MovementSpeed / (randomScaleFloat / movementSpeedVariation);
-        animationSpeed = EnemyData.AnimationSpeedMultiplier / randomScaleFloat;
+        //animationSpeed = EnemyData.AnimationSpeedMultiplier / randomScaleFloat;
         randomPitch = randomScaleFloat;
     }
 

@@ -20,7 +20,7 @@ MonoBehaviour:
   movementSpeed: 1.5
   attackSpeedMultiplier: 1.5
   animationSpeedMultiplier: 1
-  animSpeed: animSpeed
+  animSpeed: animProgress
   idleAnimation: {fileID: 7400000, guid: 159f27e82edf2b7478efa768aec6c76e, type: 2}
   chaseAnimation: {fileID: 7400000, guid: 56c9ac307f7a09d46ad74921abcf5247, type: 2}
   cheerAnimation: {fileID: 7400000, guid: 290254da9bebc6646982def8bb0d5420, type: 2}

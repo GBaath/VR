@@ -37,14 +37,10 @@ public class EnemyData : ScriptableObject {
     public float AttackSpeedMultiplier {
         get { return attackSpeedMultiplier; }
     }
-    [SerializeField] float animationSpeedMultiplier = 1f;
-    public float AnimationSpeedMultiplier {
-        get { return animationSpeedMultiplier; }
-    }
 
     [Header("ANIMATION DATA")]
-    [Tooltip("The speed of animations and transitions. Goes from 0 to 1 after 1s. Value cannot be changed outside the EnemyState StateMachine.")]
-    public string animSpeed = "animSpeed";
+    [Tooltip("Goes from 0 to 1, and acts as progress from start to end of animation.")]
+    public string animProgress = "animProgress";
 
     [Space]
     public AnimationClip idleAnimation;
