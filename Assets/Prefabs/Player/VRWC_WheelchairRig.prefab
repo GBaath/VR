@@ -3896,7 +3896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e8577bfff737349921f2be27289f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempTransform: {fileID: 0}
   cameraOffset: {fileID: 3355997933788464945}
   xButton: {fileID: 1049225494371630964, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   yButton: {fileID: 6043033085996605989, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -10037,8 +10036,56 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 524615441040706373, guid: 78b173016d2068345b3a1f85816036fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4017923582665408489}
+    - targetCorrespondingSourceObject: {fileID: 4163488674848845183, guid: 78b173016d2068345b3a1f85816036fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 801362397510924123}
   m_SourcePrefab: {fileID: 100100000, guid: 78b173016d2068345b3a1f85816036fb, type: 3}
+--- !u!1 &43324913021597704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 524615441040706373, guid: 78b173016d2068345b3a1f85816036fb, type: 3}
+  m_PrefabInstance: {fileID: 566931498372510541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4017923582665408489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43324913021597704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2918d6cf528bc844a9f412bbdde5afd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitClips:
+  - {fileID: 8300000, guid: 8c22b31e07430bf4f8a772c5e6054646, type: 3}
+  - {fileID: 8300000, guid: 2d579a99190d19a4c80c5aca5c5f19af, type: 3}
+  - {fileID: 8300000, guid: c128d39f7adb27841bc03d7def372055, type: 3}
+  - {fileID: 8300000, guid: c1ee6a17fab35b041a462a0331b9b9f0, type: 3}
+  heartBeat: {fileID: 0}
+--- !u!1 &4474761454645616178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4163488674848845183, guid: 78b173016d2068345b3a1f85816036fb, type: 3}
+  m_PrefabInstance: {fileID: 566931498372510541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &801362397510924123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4474761454645616178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2918d6cf528bc844a9f412bbdde5afd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitClips: []
+  heartBeat: {fileID: 8300000, guid: c491afc0addac0c4db578f5781feb632, type: 3}
 --- !u!95 &7188309840519146539 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7213680866989416294, guid: 78b173016d2068345b3a1f85816036fb, type: 3}
