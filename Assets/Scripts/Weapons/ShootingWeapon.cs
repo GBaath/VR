@@ -32,6 +32,8 @@ public class ShootingWeapon : MonoBehaviour
     [SerializeField] Image reloadCircle;
     private bool outOfAmmo = false;
     private bool isReloading = false;
+    public bool canReloadBoost = true;
+    IEnumerator reloadFail;
     
     public enum WeaponType
     {
@@ -77,7 +79,10 @@ public class ShootingWeapon : MonoBehaviour
     {
         if (outOfAmmo)
         {
-            OutOfAmmoSound();
+            if(isReloading&&canReloadBoost)
+                BoostReloadCheck();
+            else
+                OutOfAmmoSound();
             return;
         }
         else
@@ -202,22 +207,28 @@ public class ShootingWeapon : MonoBehaviour
     }
     private void StartReload()
     {
+        Debug.Log("startreload");
         reloadCanvas.enabled = true;
         if (isReloading) return;
         aS.clip = weaponStats.reloadSound;
         aS.Play();
         isReloading = true;
-        Invoke(nameof(StopReload), weaponStats.reloadTime);
+        reloadCircle.fillAmount = 0;
+        //Invoke(nameof(StopReload), weaponStats.reloadTime);
         StartCoroutine(ReloadProgress());
     }
     private void StopReload()
     {
+        Debug.Log("stop erload");
+        StopCoroutine(ReloadProgress());
         reloadCanvas.enabled = false;
         reloadCircle.fillAmount = 0;
         currentAmmo = weaponStats.ammoCount;
         outOfAmmo = false;
         isReloading = false;
         aS.Stop();
+        aS.clip = weaponStats.reloadSound;
+        aS.Play();
     }
     //Reload progress for reload circle
     private IEnumerator ReloadProgress()
@@ -225,13 +236,47 @@ public class ShootingWeapon : MonoBehaviour
         float reloadTime = weaponStats.reloadTime;
         float timePassed = 0f;
 
-        while (timePassed < reloadTime)
+        while (timePassed < reloadTime&&reloadCircle.fillAmount<1)
         {
             timePassed += Time.deltaTime;
             reloadCircle.fillAmount = timePassed / reloadTime;
             yield return null;
         }
         StopReload();
+    }
+    IEnumerator LerpreLoadFail(float duration)
+    {
+        float time = 0;
+        Color startValue = Color.red;
+        Color endValue = Color.white;
+        canReloadBoost = false;
+        while (time < duration)
+        {
+            reloadCircle.color = Color.Lerp(startValue, endValue, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        reloadCircle.color = endValue;
+        canReloadBoost = true;
+    }
+    private void BoostReloadCheck()
+    {
+        if (!isReloading)
+            return;
+        //within 10% of .5 hardcoded reload timer
+        if (Mathf.Abs(.5f - reloadCircle.fillAmount) < .1f)
+        {
+            reloadCircle.fillAmount = 1;
+
+            //StopCoroutine(ReloadProgress());
+            //StopReload();
+        }
+        else
+        {
+            reloadFail = LerpreLoadFail(1);
+            StopCoroutine(reloadFail);
+            StartCoroutine(reloadFail);
+        }
     }
 
     public void StartParticleEffect()
