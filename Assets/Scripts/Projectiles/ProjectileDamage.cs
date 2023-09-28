@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Linq;
 
 public class ProjectileDamage : MonoBehaviour {
     public int damage = 1;
@@ -40,22 +39,17 @@ public class ProjectileDamage : MonoBehaviour {
         if (fromEnemy) {
             if (otherTransform.GetComponentInParent<Health>() && otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth)) {
                 playerHealth.TakeDamage(damage);
-                Destroy(gameObject);
             }
         } else {
             if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.TryGetComponent(out HealthProperty hp)) {
                 hp.LoseHealth(damage);
                 AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, Camera.main.transform.position, 1);
-                Destroy(gameObject);
             }
         }
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision other) {
-        OnHit(other.transform);
-    }
-
-    private void OnTriggerEnter(Collider other) {
         OnHit(other.transform);
     }
 }
