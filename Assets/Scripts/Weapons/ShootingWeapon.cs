@@ -233,6 +233,8 @@ public class ShootingWeapon : MonoBehaviour
     //Reload progress for reload circle
     private IEnumerator ReloadProgress()
     {
+        StopParticleEffect();
+        StopShootingAnimation();
         float reloadTime = weaponStats.reloadTime;
         float timePassed = 0f;
 
