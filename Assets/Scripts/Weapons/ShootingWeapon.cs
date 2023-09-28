@@ -111,6 +111,14 @@ public class ShootingWeapon : MonoBehaviour
                 currentAmmo -= 1;
                 break;
         }
+        if (currentAmmo <= 0)
+        {
+            if (!outOfAmmo)
+            {
+                Invoke(nameof(StartReload),0.7f);
+                outOfAmmo = true;
+            }
+        }
 
     }
 
