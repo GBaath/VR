@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Ghost : Enemy {
     [SerializeReference] GameObject homingHead;
-    [SerializeReference] GameObject handLimb;
-    [SerializeReference] List<GameObject> destroyWhenKilled = new();
+    [SerializeReference] Transform spawnHeadPoint;
+    //[SerializeReference] List<Transform> destroyWhenKilled = new();
 
-    public override void Die(float delay) {
-        base.Die(delay);
-        foreach (GameObject item in destroyWhenKilled) {
-            Destroy(item);
-        }
-    }
+    //public override void Die(float delay) {
+    //    base.Die(delay);
+    //    foreach (Transform item in destroyWhenKilled) {
+    //        Destroy(item.gameObject);
+    //    }
+    //}
 
     public override void Attack() {
-        if (!homingHead || !handLimb) { return; }
-        GameObject newHomingHead = Instantiate(homingHead, handLimb.transform.position, Quaternion.identity);
+        if (!homingHead || !spawnHeadPoint) { return; }
+        GameObject newHomingHead = Instantiate(homingHead, spawnHeadPoint.position, Quaternion.identity);
         if (newHomingHead.TryGetComponent(out ProjectileDamage pd)) {
             pd.damage = attackDamage;
         }
