@@ -1,26 +1,28 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
-    [SerializeField] GameObject enemy;
+    [SerializeField] List<Enemy> enemies = new();
     [SerializeField] bool spawnEnemy = false;
 
     private void Update() {
         if (spawnEnemy) {
             spawnEnemy = false;
-            if (enemy) {
-                SpawnEnemy(enemy);
+            if (enemies.Count >= 1) {
+                int randomEnemyID = Random.Range(0, enemies.Count);
+                SpawnEnemy(enemies[randomEnemyID]);
             } else {
                 Debug.LogError("Enemy not specified!");
             }
         }
     }
 
-    public void SpawnEnemy(GameObject enemy = null) {
+    public void SpawnEnemy(Enemy enemy = null) {
         GameObject newEnemy;
         if (enemy) {
-            newEnemy = Instantiate(enemy, transform.position, Quaternion.identity, transform);
-        } else if (this.enemy) {
-            newEnemy = Instantiate(this.enemy, transform.position, Quaternion.identity, transform);
+            newEnemy = Instantiate(enemy.gameObject, transform.position, Quaternion.identity, transform);
+        } else if (enemies.Count >= 1) {
+            newEnemy = Instantiate(enemies[Random.Range(0, enemies.Count)].gameObject, transform.position, Quaternion.identity, transform);
         } else {
             Debug.LogError("Enemy not specified!");
             return;

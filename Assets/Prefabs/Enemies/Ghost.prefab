@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1538672882318017584}
   - component: {fileID: 1538672882337328222}
   - component: {fileID: 1538672882335452364}
-  m_Layer: 1
+  m_Layer: 24
   m_Name: FX_Trap_AcidHead_Acid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5030,7 +5030,7 @@ GameObject:
   - component: {fileID: 7623991461113324620}
   - component: {fileID: 7623991461116191852}
   - component: {fileID: 7623991461115094700}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: SM_Chr_Attach_Hat_Samurai_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5080,7 +5080,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: efb9fc6bdd4a0864386a75af53af30cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5182,6 +5182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 6854132619777362474, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: efb9fc6bdd4a0864386a75af53af30cc, type: 2}
     m_RemovedComponents:
     - {fileID: 6143571589556153577, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
     m_RemovedGameObjects: []
@@ -5197,6 +5201,11 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 6090430112339569560}
   m_SourcePrefab: {fileID: 100100000, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+--- !u!1 &455905993420717428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2642277384956813986, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+  m_PrefabInstance: {fileID: 2520033774057955286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1006400286932616774 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
@@ -5251,6 +5260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hips: {fileID: 1839317339416520798}
+  head: {fileID: 455905993420717428}
   animator: {fileID: 5157817005474641936}
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 322f44f8dcfb0e748b99dde587f90cbe, type: 2}
@@ -5276,3 +5286,5 @@ MonoBehaviour:
   attackAnimationLoops: 0
   homingHead: {fileID: 154133761265404682, guid: 17b07479fe64bf54b828378325a9a40f, type: 3}
   handLimb: {fileID: 3533063739548445595}
+  destroyWhenKilled:
+  - {fileID: 3533063739548445595}

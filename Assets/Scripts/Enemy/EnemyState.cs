@@ -24,7 +24,6 @@ public interface IEnemyState {
 
 public abstract class BaseEnemyState {
     protected bool startOfState = true;
-
     protected void ResetAllTriggers(Enemy enemy) {
         foreach (var param in enemy.Animator.parameters) {
             if (param.type == AnimatorControllerParameterType.Trigger) {
@@ -169,11 +168,13 @@ public class ChaseEnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Update(Enemy enemy) {
         if (startOfState) {
             startOfState = false;
-
             AnimateState(enemy, enemy.EnemyData.chaseTrigger);
         }
         enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer);
         enemy.TurnTowardsTarget(enemy.chaseTurnSpeedMultiplier);
+        if (enemy.Head) {
+            enemy.Head.transform.LookAt(enemy.Target.transform);
+        }
         enemy.Chase();
         return this;
     }

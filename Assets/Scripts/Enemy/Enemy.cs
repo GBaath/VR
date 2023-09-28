@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable {
     // Cached references
     [SerializeReference] GameObject hips;
+    [SerializeReference] GameObject head;
     [SerializeReference] Animator animator;
     [SerializeReference] GameObject target;
     [SerializeReference] EnemyData enemyData;
@@ -13,9 +14,18 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] AudioSource audioSource;
 
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
-    public string currentState = "IdleEnemyState";
+    [SerializeField] string currentState = "IdleEnemyState";
 
     // Public variables
+    public GameObject Head {
+        get { if (head) {
+                return head;
+            } else {
+                Debug.LogWarning("Reference to head is missing!");
+                return null;
+            }
+        }
+    }
     public Animator Animator {
         get { return animator; }
     }
@@ -36,10 +46,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     }
     /// <returns>A random limb from body.</returns>
     public GameObject GetRandomLimb() {
-        if (!hips) {
-            return gameObject;
-        }
-
+        if (!hips) { return gameObject; }
         List<GameObject> allLimbs = new();
         foreach (Transform childTransform in hips.GetComponentInChildren<Transform>()) {
             allLimbs.Add(childTransform.gameObject);
@@ -83,11 +90,11 @@ public class Enemy : MonoBehaviour, IDamageable {
     }
     public virtual void Die(float delay) {
         Destroy(gameObject, delay);
-        if (!hips) { return; }
-        RagdollSetActive(true);
-        isDead = true;
         isWaitingForOtherEnemies = true;
         state = state.Die(this);
+        isDead = true;
+        if (!hips) { return; }
+        RagdollSetActive(true);
     }
     private void Start() {
 
@@ -108,17 +115,8 @@ public class Enemy : MonoBehaviour, IDamageable {
     public void RagdollSetActive(bool enable) {
         //GetComponent<BoxCollider>().enabled = !enable;
         Animator.enabled = !enable;
-
-        List<Transform> allChildren = new();
-        allChildren.Clear();
-        List<Transform> limbs = new();
-        limbs.Clear();
-        foreach (Transform childTransform in GetComponentInChildren<Transform>()) {
-            allChildren.Add(childTransform);
-        }
         // Get all colliders that also have character joint components
         foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>())) {
-            limbs.Add(joint.transform);
             joint.enableCollision = enable;
             joint.enablePreprocessing = enable;
             joint.enableProjection = enable;
@@ -126,13 +124,6 @@ public class Enemy : MonoBehaviour, IDamageable {
             joint.GetComponent<Rigidbody>().isKinematic = !enable;
             joint.GetComponent<Rigidbody>().detectCollisions = enable;
             joint.GetComponent<Rigidbody>().useGravity = enable;
-        }
-        if (enable) {
-            foreach (Transform child in allChildren) {
-                if (!limbs.Contains(child)) {
-                    Destroy(child.gameObject);
-                }
-            }
         }
     }
     void WaitForOtherEnemies() {
@@ -208,7 +199,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         // Melee is default enemy attack style
         Ray ray = new(new Vector3(transform.position.x, Target.transform.position.y, transform.position.z), transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit)) {
-            if (hit.transform.GetComponentInParent<Health>().TryGetComponent(out Health health)) {
+            if (hit.transform.GetComponentInParent<Health>() && hit.transform.GetComponentInParent<Health>().TryGetComponent(out Health health)) {
                 health.TakeDamage(attackDamage);
             }
         }

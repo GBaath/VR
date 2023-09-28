@@ -21,12 +21,16 @@ public class FieldOfView : MonoBehaviour {
     }
 
     void FOVCheck() {
+        TryGetComponent(out Enemy enemy);
         if (!target) {
-            if (TryGetComponent(out Enemy enemy)) {
+            if (enemy) {
                 target = enemy.Target;
             } else {
                 target = Camera.main.gameObject;
             }
+        }
+        if (enemy.Head) {
+            viewObject = enemy.Head;
         }
 
         Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentRadiusIncrease, targetMask);

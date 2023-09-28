@@ -2030,6 +2030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hips: {fileID: 4286974111170000776}
+  head: {fileID: 2642277384956813986}
   animator: {fileID: 7308438811657037766}
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: b4e39c2c9c6c5854c9294b96f27f1e52, type: 2}
