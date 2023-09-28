@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 65461566911716182}
   m_Layer: 13
   m_Name: SM_Env_Tiles_07
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
