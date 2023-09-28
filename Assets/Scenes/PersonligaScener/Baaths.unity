@@ -16325,6 +16325,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRWC_WheelchairRig
       objectReference: {fileID: 0}
+    - target: {fileID: 4457256190993022465, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 817267539}
+    - target: {fileID: 4457256190993022465, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 817267539}
+    - target: {fileID: 4457256190993022465, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AttachSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457256190993022465, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AttachSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457256190993022465, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AttachmentSoundScript, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7203535005102516966, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -16342,6 +16362,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
+--- !u!114 &817267539 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2169316792556671249, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
+  m_PrefabInstance: {fileID: 817267538}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd559d9c667fa442ae1e0b3214e8ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &817267541 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8757812856859192651, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}

@@ -408,6 +408,10 @@ MonoBehaviour:
   arrowSpeed: 40
   fireAudioSource: {fileID: 8418627129597198639}
   reloadArrowPrefab: {fileID: 2729148536553776160}
+  hand:
+    m_Bits: 2097152
+  noInteraction:
+    m_Bits: 4194304
   isSelected: 0
 --- !u!54 &7107019309539640347
 Rigidbody:
@@ -668,8 +672,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4c0abe760b3dd4eb39fc5c23afa20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Spotinditactor: 
   intensity: 1
   duration: 0.1
+  shouldNotAutoListen: 0
 --- !u!114 &5932607281974553252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,8 +803,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.035671532, y: 0.027709484, z: 0.25171122}
-  m_Center: {x: -0.006034404, y: -0.018451095, z: -0.027073428}
+  m_Size: {x: 0.035671532, y: 0.027709484, z: 0.11700073}
+  m_Center: {x: -0.006034404, y: -0.018451095, z: -0.09442867}
 --- !u!114 &6252221483664350431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2115,8 +2121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4c0abe760b3dd4eb39fc5c23afa20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Spotinditactor: 
   intensity: 0.3
   duration: 0.1
+  shouldNotAutoListen: 0
 --- !u!1001 &7164071817411407212
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,6 +14,8 @@ public class Crossbow : MonoBehaviour
     HapticInteractable hapticScript;
     [SerializeField]AudioSource fireAudioSource;
     [SerializeField] GameObject reloadArrowPrefab;
+    public InteractionLayerMask hand;
+    public InteractionLayerMask noInteraction;
 
 
     //isLoaded for Arrow check and isArmed for slider check
@@ -44,18 +46,24 @@ public class Crossbow : MonoBehaviour
 
         }
     }
-
+    [System.Obsolete]
     public void FireArrow(ActivateEventArgs arg)
     {
         if (isLoaded && isArmed)
         {
             
             DestroyArrow();
-            reloadSlider.value = 1;
+
             isLoaded = false;
             isArmed = false;
             Fire();
+            //reloadSlider.interactionLayers = hand;
+            // Force the slider to drop if it's selected.
 
+            
+            Invoke(nameof(EnableInteractionSlider),0.3f);
+            reloadSlider.value = 1;
+            reloadSlider.enabled = false;
         }
         else
         {
@@ -63,6 +71,10 @@ public class Crossbow : MonoBehaviour
             Debug.Log("Cant shoot");
 
         }
+    }
+    public void EnableInteractionSlider()
+    {
+        reloadSlider.enabled = true;
     }
     private void DestroyArrow()
     {

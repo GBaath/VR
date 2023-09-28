@@ -5,26 +5,26 @@ public class FlamethrowerRadius : MonoBehaviour
 {
 
 
-    public delegate void EnemyEnteredEvent(Enemy Enemy);
-    public delegate void EnemyExitedEvent(Enemy Enemy);
+    public delegate void EnemyEnteredEvent(HealthProperty health);
+    public delegate void EnemyExitedEvent(HealthProperty health);
 
     public event EnemyEnteredEvent OnEnemyEnter;
     public event EnemyEnteredEvent OnEnemyExit;
 
-    private List<Enemy> EnemiesInRadius = new List<Enemy>();
+    private List<HealthProperty> EnemiesInRadius = new List<HealthProperty>();
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Enemy>(out Enemy enemy))
+        if (other.TryGetComponent<HealthProperty>(out HealthProperty health))
         {
-            EnemiesInRadius.Add(enemy);
-            OnEnemyEnter?.Invoke(enemy);
+            EnemiesInRadius.Add(health);
+            OnEnemyEnter?.Invoke(health);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<Enemy>(out Enemy enemy))
+        if (other.TryGetComponent<HealthProperty>(out HealthProperty enemy))
         {
             EnemiesInRadius.Remove(enemy);
             OnEnemyExit?.Invoke(enemy);
@@ -33,9 +33,9 @@ public class FlamethrowerRadius : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (Enemy enemy in EnemiesInRadius)
+        foreach (HealthProperty health in EnemiesInRadius)
         {
-            OnEnemyExit?.Invoke(enemy);
+            OnEnemyExit?.Invoke(health);
         }
 
         EnemiesInRadius.Clear();
