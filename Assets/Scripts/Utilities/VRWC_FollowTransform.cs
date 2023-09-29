@@ -8,7 +8,10 @@ public class VRWC_FollowTransform : MonoBehaviour
 {
     [Tooltip("Transform of the rigidbody to follow.")]
     public Transform target;
-    public Vector3 OffsetPosition {
+    public Vector3 extraVector = new (0, 0, 0);
+
+    public Vector3 OffsetPosition
+    {
         get { return offsetPosition; }
         set { offsetPosition = value; }
     }
@@ -21,8 +24,12 @@ public class VRWC_FollowTransform : MonoBehaviour
 
     void Update()
     {
+
         Vector3 rotatedOffset = target.localRotation * offsetPosition;
-        transform.localPosition = target.localPosition + rotatedOffset;
+        transform.localPosition = target.localPosition + rotatedOffset + extraVector;
         transform.rotation = target.rotation;
     }
+
+
+
 }
