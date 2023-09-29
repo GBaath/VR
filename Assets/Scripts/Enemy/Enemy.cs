@@ -13,8 +13,6 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] ParticleSystem getHitFX;
     [SerializeReference] FieldOfView fieldOfView;
     [SerializeReference] AudioSource audioSource;
-    MaterialPropertyBlock propertyBlock;
-    SkinnedMeshRenderer renderer;
 
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
     [SerializeField] protected string currentState = "IdleEnemyState";
@@ -86,13 +84,19 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public int attackAnimationLoops = 0;
     const float movementSpeedVariation = 0.5f;
     const float checkWaitRate = 0.1f;
+    float currentMaterialColor = 0f;
+
+    // Private variables
+    MaterialPropertyBlock propertyBlock;
+    new SkinnedMeshRenderer renderer;
+    float randomScaleFloat;
 
     public virtual void TakeDamage(int amount) {
         FieldOfView.canSeeTarget = true;
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
         audioSource.Play();
 
-        DoDmgFlash(.1f);
+        SetDmgFlash();
     }
     public virtual void Die(float delay) {
         Destroy(gameObject, delay);
@@ -102,31 +106,40 @@ public class Enemy : MonoBehaviour, IDamageable {
         if (!hips) { return; }
         RagdollSetActive(true);
     }
+    void SetDmgFlash() {
+        currentMaterialColor = 0.4f;
+        propertyBlock.SetColor("_EmissionColor", new Color(currentMaterialColor, currentMaterialColor, currentMaterialColor));
+        propertyBlock.SetFloat("_EmissionIntensity", currentMaterialColor);
+        renderer.SetPropertyBlock(propertyBlock);
+    }
+    void LessenDmgFlash() {
+        currentMaterialColor = Mathf.MoveTowards(currentMaterialColor, 0, 1.25f * Time.deltaTime);
+        propertyBlock.SetColor("_EmissionColor", new Color(currentMaterialColor, currentMaterialColor, currentMaterialColor));
+        propertyBlock.SetFloat("_EmissionIntensity", currentMaterialColor);
+        renderer.SetPropertyBlock(propertyBlock);
+    }
     protected virtual void Start() {
+        renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        propertyBlock = new MaterialPropertyBlock();
+        propertyBlock.SetColor("_EmissionColor", Color.black);
+        propertyBlock.SetFloat("_EmissionIntensity", 0);
+        renderer.SetPropertyBlock(propertyBlock);
 
         transform.Rotate(new Vector3(transform.rotation.x, Random.Range(0, 360), transform.rotation.z));
-
         RagdollSetActive(false);
+        RandomizeSizeAndStats();
 
         if (GameManager.instance.enemiesToChaseAtOnce > 0) {
             InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
         } else {
             isWaitingForOtherEnemies = false;
         }
-
-        RandomizeSizeAndStats();
-
         state = state.Idle(this);
-
-
-        renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        propertyBlock = new MaterialPropertyBlock();
-        ResetDmgFlash();
     }
     protected void RandomizeSizeAndStats() {
         float minScale = EnemyData.MinScale;
         float maxScale = EnemyData.MaxScale;
-        float randomScaleFloat = Random.Range(minScale, maxScale);
+        randomScaleFloat = Random.Range(minScale, maxScale);
         int scaleInt = 0;
         for (int i = 0; i < randomScaleFloat / minScale; i++) {
             scaleInt++;
@@ -150,9 +163,10 @@ public class Enemy : MonoBehaviour, IDamageable {
             joint.enablePreprocessing = enable;
             joint.enableProjection = enable;
             //joint.GetComponent<Collider>().enabled = enable;
-            joint.GetComponent<Rigidbody>().isKinematic = !enable;
-            joint.GetComponent<Rigidbody>().detectCollisions = enable;
-            joint.GetComponent<Rigidbody>().useGravity = enable;
+            joint.TryGetComponent(out Rigidbody rb);
+            rb.isKinematic = !enable;
+            rb.detectCollisions = enable;
+            rb.useGravity = enable;
         }
     }
     void WaitForOtherEnemies() {
@@ -175,14 +189,10 @@ public class Enemy : MonoBehaviour, IDamageable {
         }
     }
     protected virtual void Update() {
-        if (Input.GetMouseButtonDown(0))
-        {
-            DoDmgFlash(.05f);
-            Debug.Log("click");
-        }
         currentState = state.ToString();
         state = state.Update(this);
         animTimer += Time.deltaTime;
+        LessenDmgFlash();
 
         if (isDead) { state = state.Die(this); return; }
         if (!Target || isWaitingForOtherEnemies || !FieldOfView.canSeeTarget) {
@@ -194,7 +204,6 @@ public class Enemy : MonoBehaviour, IDamageable {
         } else {
             state = state.Chase(this); return;
         }
-
     }
     public void TurnTowardsTarget(float turnSpeedMultiplier = 1) {
         Vector3 direction = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z) - transform.position;
@@ -220,21 +229,5 @@ public class Enemy : MonoBehaviour, IDamageable {
                 health.TakeDamage(attackDamage);
             }
         }
-    }
-
-    void DoDmgFlash(float time)
-    {
-        CancelInvoke(nameof(ResetDmgFlash));
-
-        propertyBlock.SetColor("_EmissionColor", Color.white);
-        propertyBlock.SetFloat("_EmissionIntensity", .75f);
-        renderer.SetPropertyBlock(propertyBlock);
-        Invoke(nameof(ResetDmgFlash), time);
-    }
-    void ResetDmgFlash()
-    {
-        propertyBlock.SetFloat("_EmissionIntensity", 0); 
-        propertyBlock.SetColor("_EmissionColor", Color.black);
-        renderer.SetPropertyBlock(propertyBlock);
     }
 }
