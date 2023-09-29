@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Ghost : Enemy {
@@ -14,7 +12,7 @@ public class Ghost : Enemy {
     //    }
     //}
 
-    public override void Attack() {
+    protected override void Attack() {
         if (!homingHead || !spawnHeadPoint) { return; }
         GameObject newHomingHead = Instantiate(homingHead, spawnHeadPoint.position, Quaternion.identity);
         if (newHomingHead.TryGetComponent(out ProjectileDamage pd)) {

@@ -42,8 +42,6 @@ public class EnemyData : ScriptableObject {
     [Space]
     public AnimationClip idleAnimation;
     public AnimationClip chaseAnimation,
-        cheerAnimation,
-        danceAnimation,
         attackAnimation,
         confusedAnimation,
         surprisedAnimation;
@@ -51,8 +49,6 @@ public class EnemyData : ScriptableObject {
     [Space]
     public string idleTrigger = "idle";
     public string chaseTrigger = "chase",
-        cheerTrigger = "cheer",
-        danceTrigger = "dance",
         attackTrigger = "attack",
         confuseTrigger = "confuse",
         surpriseTrigger = "surprise";
@@ -63,8 +59,7 @@ public class EnemyData : ScriptableObject {
     public void RefreshEnemyData() {
         if (Application.isPlaying) {
             onRefreshEnemyData();
-        }
-        else {
+        } else {
             Debug.Log("Can't refresh enemy data while in editor, nor does it need to");
         }
     }
