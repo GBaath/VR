@@ -39,14 +39,22 @@ public class ProjectileDamage : MonoBehaviour {
         if (fromEnemy) {
             if (otherTransform.GetComponentInParent<Health>() && otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth)) {
                 playerHealth.TakeDamage(damage);
+                Destroy(gameObject);
+                return;
             }
         } else {
-            if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.TryGetComponent(out HealthProperty hp)) {
+            if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.GetComponentInParent<HealthProperty>().TryGetComponent(out HealthProperty hp)) {
                 hp.LoseHealth(damage);
                 AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, Camera.main.transform.position, 1);
+                Destroy(gameObject);
+                return;
             }
         }
-        Destroy(gameObject);
+        if (!fromEnemy && otherTransform.GetComponentInParent<ProjectileDamage>() && otherTransform.GetComponentInParent<ProjectileDamage>().fromEnemy) {
+            Destroy(otherTransform.gameObject);
+            Destroy(gameObject);
+            Debug.Log("death");
+        }
     }
 
     private void OnCollisionEnter(Collision other) {

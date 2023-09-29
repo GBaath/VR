@@ -29,7 +29,7 @@ public class FieldOfView : MonoBehaviour {
             viewObject = enemy.Head;
         }
 
-        Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentRadiusIncrease, targetMask);
+        Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentRadiusIncrease * 5, targetMask);
 
         if (rangeChecks.Length != 0) {
             Transform target = rangeChecks[0].transform;

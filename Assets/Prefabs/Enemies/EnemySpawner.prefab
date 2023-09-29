@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da07564be715bf40a2ff3dfc4f309ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 6143571589556153577, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
-  - {fileID: 6090430112339569560, guid: 4faf963fa770117418253b252f9e2077, type: 3}
+  enemyChanceList:
+  - enemy: {fileID: 6143571589556153577, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+    chance: 70
+  - enemy: {fileID: 6090430112339569560, guid: 4faf963fa770117418253b252f9e2077, type: 3}
+    chance: 30
   spawnEnemy: 1
