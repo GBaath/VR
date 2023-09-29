@@ -28,7 +28,7 @@ public class RoomEntrance : MonoBehaviour
 
         //previousRoom.gameObject.SetActive(false);
         Destroy(previousRoom.gameObject);
-
+        GameManager.instance.dw.DestroyWeaponsOnGround();
         //todo destroy and pool
     }
     public void LoadNext()
@@ -37,15 +37,26 @@ public class RoomEntrance : MonoBehaviour
     }
     public void SpawnRoomBase()
     {
-        ////spawn entrance module and set variables, correct transform connection is set from roombase
-        var _new = Instantiate(GameManager.instance.roomManager.GetNewRoomBase(),spawnpoint.position,Quaternion.identity);
-        roomBase = _new.GetComponent<RoomBase>();
-        roomBase.entrance = this;
+        GameObject _new;
+        if (GameManager.instance.roomManager.nextIsCorridor)
+        {
+            _new = Instantiate(GameManager.instance.roomManager.GetNewCorridor(), spawnpoint.position, Quaternion.identity);
+            roomBase = _new.GetComponent<RoomBase>();
+            roomBase.entrance = this;
+        }
+        else
+        {
+            ////spawn entrance module and set variables, correct transform connection is set from roombase
+            _new = Instantiate(GameManager.instance.roomManager.GetNewRoomBase(),spawnpoint.position,Quaternion.identity);
+            roomBase = _new.GetComponent<RoomBase>();
+            roomBase.entrance = this;
+        }
 
         roomBase.LoadRoomcontent();
         loadDoor.Lock(false);
 
         GameManager.instance.roomManager.roomsPassed++;
+        GameManager.instance.roomManager.nextIsCorridor = !GameManager.instance.roomManager.nextIsCorridor;
     }
 
 }

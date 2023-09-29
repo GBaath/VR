@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6612399513978968993}
   - component: {fileID: 6302380686796714573}
   - component: {fileID: 6447467580567506157}
+  - component: {fileID: 1027750661547293631}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MonoBehaviour:
   audioManager: {fileID: 6302380686796714573}
   scoreManager: {fileID: 6612399513978968993}
   roomManager: {fileID: 6447467580567506157}
+  dw: {fileID: 1027750661547293631}
   enemiesToChaseAtOnce: 0
 --- !u!114 &7298944921204846117
 MonoBehaviour:
@@ -136,4 +138,19 @@ MonoBehaviour:
   - {fileID: 8737019846826064926, guid: aecc2904fc8583848a83b9301a70154d, type: 3}
   roomExtensionList:
   - {fileID: 5589313593156036153, guid: 7c0a105531fcb3845ba0565eee15a696, type: 3}
+  corridorList: []
   roomEntrance: {fileID: 5589313593156036153, guid: 4bacded88cbcda340bee83a057cfc761, type: 3}
+  nextIsCorridor: 0
+  roomsPassed: 0
+--- !u!114 &1027750661547293631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304448052528672774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274375731a8221348ba97b6d6086e825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
