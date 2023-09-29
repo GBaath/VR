@@ -3899,8 +3899,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xrCamera: {fileID: 3355997934936558553}
   cameraOffset: {fileID: 3355997933788464944}
-  resetTarget: {fileID: 6385076365368182562}
-  followtransform: {fileID: 0}
+  resetTarget: {fileID: 4061427088008083078}
+  followtransform: {fileID: 3355997933788464945}
   xButton: {fileID: 1049225494371630964, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   yButton: {fileID: 6043033085996605989, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &738235958335570346
