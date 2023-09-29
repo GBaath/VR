@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] AudioSource audioSource;
 
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
-    [SerializeField] string currentState = "IdleEnemyState";
+    [SerializeField] protected string currentState = "IdleEnemyState";
 
     // Public variables
     public GameObject Head {
@@ -32,7 +32,8 @@ public class Enemy : MonoBehaviour, IDamageable {
     public GameObject Target {
         get {
             if (!target) {
-                return Camera.main.gameObject;
+                target = Camera.main.gameObject;
+                return target;
             } else {
                 return target;
             }
@@ -73,10 +74,9 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public float animTimer = 0;
 
     // Stats
-    [HideInInspector] public float turnSpeed;
-    [HideInInspector] public int attackDamage;
-    [HideInInspector] public float movementSpeed;
-    //[HideInInspector] public float animationSpeed;
+    protected float turnSpeed;
+    protected int attackDamage;
+    protected float movementSpeed;
 
     // Magic numbers
     [HideInInspector] public float chaseTurnSpeedMultiplier = 3;
@@ -85,6 +85,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     const float checkWaitRate = 0.1f;
 
     public virtual void TakeDamage(int amount) {
+        FieldOfView.canSeeTarget = true;
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
         audioSource.Play();
     }
@@ -96,7 +97,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         if (!hips) { return; }
         RagdollSetActive(true);
     }
-    private void Start() {
+    protected virtual void Start() {
 
         transform.Rotate(new Vector3(transform.rotation.x, Random.Range(0, 360), transform.rotation.z));
 
@@ -112,7 +113,25 @@ public class Enemy : MonoBehaviour, IDamageable {
 
         state = state.Idle(this);
     }
-    public void RagdollSetActive(bool enable) {
+    protected void RandomizeSizeAndStats() {
+        float minScale = EnemyData.MinScale;
+        float maxScale = EnemyData.MaxScale;
+        float randomScaleFloat = Random.Range(minScale, maxScale);
+        int scaleInt = 0;
+        for (int i = 0; i < randomScaleFloat / minScale; i++) {
+            scaleInt++;
+        }
+        if (transform.TryGetComponent(out HealthProperty hp)) {
+            hp.maxHealth = EnemyData.MaxHealth + scaleInt;
+        }
+        transform.localScale = new Vector3(EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat);
+        turnSpeed = EnemyData.TurnSpeed / randomScaleFloat;
+        attackDamage = (int)(EnemyData.AttackDamage * randomScaleFloat);
+        movementSpeed = EnemyData.MovementSpeed / (randomScaleFloat / movementSpeedVariation);
+        //animationSpeed = EnemyData.AnimationSpeedMultiplier / randomScaleFloat;
+        randomPitch = randomScaleFloat;
+    }
+    void RagdollSetActive(bool enable) {
         //GetComponent<BoxCollider>().enabled = !enable;
         Animator.enabled = !enable;
         // Get all colliders that also have character joint components
@@ -145,25 +164,7 @@ public class Enemy : MonoBehaviour, IDamageable {
             }
         }
     }
-    void RandomizeSizeAndStats() {
-        float minScale = EnemyData.MinScale;
-        float maxScale = EnemyData.MaxScale;
-        float randomScaleFloat = Random.Range(minScale, maxScale);
-        int scaleInt = 0;
-        for (int i = 0; i < randomScaleFloat / minScale; i++) {
-            scaleInt++;
-        }
-        if (transform.TryGetComponent(out HealthProperty hp)) {
-            hp.maxHealth = EnemyData.MaxHealth + scaleInt;
-        }
-        transform.localScale = new Vector3(EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat);
-        turnSpeed = EnemyData.TurnSpeed / randomScaleFloat;
-        attackDamage = (int)(EnemyData.AttackDamage * randomScaleFloat);
-        movementSpeed = EnemyData.MovementSpeed / (randomScaleFloat / movementSpeedVariation);
-        //animationSpeed = EnemyData.AnimationSpeedMultiplier / randomScaleFloat;
-        randomPitch = randomScaleFloat;
-    }
-    void Update() {
+    protected virtual void Update() {
         currentState = state.ToString();
         state = state.Update(this);
         animTimer += Time.deltaTime;
@@ -195,7 +196,7 @@ public class Enemy : MonoBehaviour, IDamageable {
             Attack();
         }
     }
-    public virtual void Attack() {
+    protected virtual void Attack() {
         // Melee is default enemy attack style
         Ray ray = new(new Vector3(transform.position.x, Target.transform.position.y, transform.position.z), transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit)) {

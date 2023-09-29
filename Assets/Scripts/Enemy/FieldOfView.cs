@@ -23,11 +23,7 @@ public class FieldOfView : MonoBehaviour {
     void FOVCheck() {
         TryGetComponent(out Enemy enemy);
         if (!target) {
-            if (enemy) {
-                target = enemy.Target;
-            } else {
-                target = Camera.main.gameObject;
-            }
+            target = enemy.Target;
         }
         if (enemy.Head) {
             viewObject = enemy.Head;
