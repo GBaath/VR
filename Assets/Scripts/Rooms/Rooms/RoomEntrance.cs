@@ -45,7 +45,7 @@ public class RoomEntrance : MonoBehaviour
         roomBase.LoadRoomcontent();
         loadDoor.Lock(false);
 
-       
+        GameManager.instance.roomManager.roomsPassed++;
     }
 
 }

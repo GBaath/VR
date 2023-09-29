@@ -6,6 +6,8 @@ public class RoomManager : MonoBehaviour
 {
     [SerializeField]private List<GameObject> roomBaseList, roomExtensionList;
     public GameObject roomEntrance;
+
+    public int roomsPassed;
     
     public GameObject GetNewRoomBase()
     {

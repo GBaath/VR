@@ -12,20 +12,26 @@ public class EnemySpawner : MonoBehaviour {
                 int randomEnemyID = Random.Range(0, enemies.Count);
                 SpawnEnemy(enemies[randomEnemyID]);
             } else {
-                Debug.LogError("Enemy not specified!");
+                Debug.LogWarning("Enemy not specified!");
             }
         }
     }
 
-    public void SpawnEnemy(Enemy enemy = null) {
+    public void SpawnEnemy(Enemy enemyToSpawn = null) {
         GameObject newEnemy;
-        if (enemy) {
-            newEnemy = Instantiate(enemy.gameObject, transform.position, Quaternion.identity, transform);
+        if (enemyToSpawn) {
+            newEnemy = Instantiate(enemyToSpawn.gameObject, transform.position, Quaternion.identity, transform);
         } else if (enemies.Count >= 1) {
             newEnemy = Instantiate(enemies[Random.Range(0, enemies.Count)].gameObject, transform.position, Quaternion.identity, transform);
         } else {
-            Debug.LogError("Enemy not specified!");
+            Debug.LogWarning("Enemy not specified!");
             return;
         }
+        if (!newEnemy.TryGetComponent(out Enemy enemy)) {
+            Debug.LogWarning("Enemy script missing!");
+            return;
+        }
+        enemy.movementSpeed += GameManager.instance.roomManager.roomsPassed / 10;
+        if (TryGetComponent(out HealthProperty hp)) { hp.maxHealth += GameManager.instance.roomManager.roomsPassed / 10; }
     }
 }
