@@ -175,7 +175,11 @@ public class Enemy : MonoBehaviour, IDamageable {
         }
     }
     protected virtual void Update() {
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            DoDmgFlash(.05f);
+            Debug.Log("click");
+        }
         currentState = state.ToString();
         state = state.Update(this);
         animTimer += Time.deltaTime;
