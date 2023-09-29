@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] ParticleSystem getHitFX;
     [SerializeReference] FieldOfView fieldOfView;
     [SerializeReference] AudioSource audioSource;
+    MaterialPropertyBlock propertyBlock;
+    SkinnedMeshRenderer renderer;
 
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
     [SerializeField] protected string currentState = "IdleEnemyState";
@@ -88,6 +91,8 @@ public class Enemy : MonoBehaviour, IDamageable {
         FieldOfView.canSeeTarget = true;
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
         audioSource.Play();
+
+        DoDmgFlash(.1f);
     }
     public virtual void Die(float delay) {
         Destroy(gameObject, delay);
@@ -112,6 +117,11 @@ public class Enemy : MonoBehaviour, IDamageable {
         RandomizeSizeAndStats();
 
         state = state.Idle(this);
+
+
+        renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        propertyBlock = new MaterialPropertyBlock();
+        ResetDmgFlash();
     }
     protected void RandomizeSizeAndStats() {
         float minScale = EnemyData.MinScale;
@@ -165,6 +175,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         }
     }
     protected virtual void Update() {
+
         currentState = state.ToString();
         state = state.Update(this);
         animTimer += Time.deltaTime;
@@ -179,6 +190,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         } else {
             state = state.Chase(this); return;
         }
+
     }
     public void TurnTowardsTarget(float turnSpeedMultiplier = 1) {
         Vector3 direction = new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z) - transform.position;
@@ -204,5 +216,21 @@ public class Enemy : MonoBehaviour, IDamageable {
                 health.TakeDamage(attackDamage);
             }
         }
+    }
+
+    void DoDmgFlash(float time)
+    {
+        CancelInvoke(nameof(ResetDmgFlash));
+
+        propertyBlock.SetColor("_EmissionColor", Color.white);
+        propertyBlock.SetFloat("_EmissionIntensity", .75f);
+        renderer.SetPropertyBlock(propertyBlock);
+        Invoke(nameof(ResetDmgFlash), time);
+    }
+    void ResetDmgFlash()
+    {
+        propertyBlock.SetFloat("_EmissionIntensity", 0); 
+        propertyBlock.SetColor("_EmissionColor", Color.black);
+        renderer.SetPropertyBlock(propertyBlock);
     }
 }
