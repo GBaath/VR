@@ -3,7 +3,14 @@ using UnityEngine.InputSystem;
 
 public class HeadsetUtilities : MonoBehaviour
 {
-    public VRWC_FollowTransform cameraOffset;
+
+
+    [SerializeField] Transform xrCamera;
+    [SerializeField] Transform cameraOffset;
+    [SerializeField] Transform resetTarget;
+    [SerializeField] VRWC_FollowTransform followtransform;
+
+    private float angle;
     public InputActionReference xButton;
     public InputActionReference yButton;
 
@@ -23,14 +30,23 @@ public class HeadsetUtilities : MonoBehaviour
     {
         if (xButton.action.triggered && yButton.action.IsPressed() || xButton.action.IsPressed() && yButton.action.triggered || Input.GetKeyDown(KeyCode.Space))
         {
-            ResetHeadsetPosition(transform.position);
+            ResetPosition();
         }
+
+    }
+    public void ResetPosition()
+    {
+        // Calculate the rotated offset at the current frame.
+        Vector3 rotatedOffset = followtransform.target.localRotation * followtransform.OffsetPosition;
+
+        // Calculate the desired offset to align cameraOffset to target's position.
+        Vector3 newExtraVector = resetTarget.localPosition - xrCamera.localPosition - rotatedOffset;
+
+        // Retain the Y value from the current extraVector
+        newExtraVector.y = followtransform.extraVector.y;
+
+        followtransform.extraVector = newExtraVector;
     }
 
-    public void ResetHeadsetPosition(Vector3 newPosition)
-    {
-        cameraOffset.transform.position = newPosition;
-        cameraOffset.OffsetPosition = cameraOffset.transform.position;
-        Debug.Log("camera offset set at " + newPosition + "!");
-    }
+
 }
