@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     // Stats
     protected float turnSpeed;
     protected int attackDamage;
-    protected float movementSpeed;
+    [HideInInspector] public float movementSpeed;
 
     // Magic numbers
     [HideInInspector] public float chaseTurnSpeedMultiplier = 3;
@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         for (int i = 0; i < randomScaleFloat / minScale; i++) {
             scaleInt++;
         }
-        if (transform.TryGetComponent(out HealthProperty hp)) {
+        if (TryGetComponent(out HealthProperty hp)) {
             hp.maxHealth = EnemyData.MaxHealth + scaleInt;
         }
         transform.localScale = new Vector3(EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat);

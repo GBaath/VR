@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class HealthProperty : MonoBehaviour {
-    public int maxHealth = 1, deathTimer = 3;
-    int currentHealth;
+    public float maxHealth = 1, deathTimer = 3;
+    float currentHealth;
 
     private void Start() {
         if (TryGetComponent(out Enemy enemy) && enemy.EnemyData) {
