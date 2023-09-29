@@ -28,7 +28,7 @@ public class HeadsetUtilities : MonoBehaviour
 
     void Update()
     {
-        if (xButton.action.triggered && yButton.action.IsPressed() || xButton.action.IsPressed() && yButton.action.triggered || Input.GetKeyDown(KeyCode.Space))
+        if (xButton.action.triggered && yButton.action.IsPressed() || xButton.action.IsPressed() && yButton.action.triggered)
         {
             ResetPosition();
         }
