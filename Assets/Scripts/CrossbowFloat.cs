@@ -10,6 +10,7 @@ public class CrossbowFloat : MonoBehaviour
     Rigidbody rb;
     [SerializeField] GameObject tierEffectGO;
     [SerializeField] GameObject statsDisplay;
+    [SerializeField] Crossbow crossbow;
 
     private bool isSelected;
 
@@ -79,7 +80,7 @@ public class CrossbowFloat : MonoBehaviour
     }
     private void OnGround()
     {
-
+        crossbow.InWeaponSlot();
         if (tierEffectGO != null)
         {
             tierEffectGO.SetActive(true);

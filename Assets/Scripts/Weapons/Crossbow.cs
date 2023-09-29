@@ -16,15 +16,18 @@ public class Crossbow : MonoBehaviour
     [SerializeField] GameObject reloadArrowPrefab;
     public InteractionLayerMask hand;
     public InteractionLayerMask noInteraction;
-
+    private XRGrabInteractable grabbable;
 
     //isLoaded for Arrow check and isArmed for slider check
     bool isArmed, isLoaded;
     public bool isSelected;
     private void Start()
     {
+        grabbable = GetComponent<XRGrabInteractable>();
         reloadArrowPrefab.SetActive(false);
         hapticScript = GetComponent<HapticInteractable>();
+        NotInWeaponSlot();
+        grabbable.selectEntered.AddListener(IsInHand);
     }
     public void CheckValue()
     {
@@ -138,6 +141,14 @@ public class Crossbow : MonoBehaviour
     public void NotInWeaponSlot()
     {
         reloadSlider.enabled = true;
+    }
+    [System.Obsolete]
+    public void IsInHand(SelectEnterEventArgs args)
+    {
+        if (args.interactor is XRBaseControllerInteractor)
+        {
+            reloadSlider.enabled = true;
+        }
     }
 
 
