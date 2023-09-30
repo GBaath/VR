@@ -1171,6 +1171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4c0abe760b3dd4eb39fc5c23afa20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &979867788 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4061427088008083078, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
+  m_PrefabInstance: {fileID: 1086319329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1018941121 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3355997933788464944, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
@@ -1505,11 +1510,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4061427088008083078, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.949
+      value: 1.247
       objectReference: {fileID: 0}
     - target: {fileID: 4061427088008083078, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.232
+      value: 0.045
       objectReference: {fileID: 0}
     - target: {fileID: 4457256190993022465, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
       propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1622,7 +1627,7 @@ PrefabInstance:
     - target: {fileID: 6456433170840264166, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
       propertyPath: resetTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 979867788}
     - target: {fileID: 6456433170840264166, guid: d04ad2de10bfe410b92adec059bc0154, type: 3}
       propertyPath: cameraOffset
       value: 
@@ -1771,6 +1776,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 274375731a8221348ba97b6d6086e825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1286732672 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2059622781397870007, guid: 6ff324a530cfc3a46904b8f125c5d485, type: 3}
+  m_PrefabInstance: {fileID: 885205618364609713}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3074cd0b9ef4604fabe0e0cb9d11a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1288625726
@@ -3553,6 +3569,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6252221483664350431, guid: 6ff324a530cfc3a46904b8f125c5d485, type: 3}
+      propertyPath: crossbow
+      value: 
+      objectReference: {fileID: 1286732672}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

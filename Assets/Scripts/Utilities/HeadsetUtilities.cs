@@ -9,6 +9,7 @@ public class HeadsetUtilities : MonoBehaviour
     [SerializeField] Transform cameraOffset;
     [SerializeField] Transform resetTarget;
     [SerializeField] VRWC_FollowTransform followtransform;
+    [SerializeField] VRWC_FollowTransform followtransformtwo;
 
     private float angle;
     public InputActionReference xButton;
@@ -36,17 +37,37 @@ public class HeadsetUtilities : MonoBehaviour
     }
     public void ResetPosition()
     {
-        // Calculate the rotated offset at the current frame.
-        Vector3 rotatedOffset = followtransform.target.localRotation * followtransform.OffsetPosition;
+        Vector3 desiredCameraPosition = resetTarget.position;
+        Vector3 currentHeadPositionRelativeToOffset = cameraOffset.InverseTransformPoint(xrCamera.position);
 
-        // Calculate the desired offset to align cameraOffset to target's position.
-        Vector3 newExtraVector = resetTarget.localPosition - xrCamera.localPosition - rotatedOffset;
+        Vector3 adjustedPosition = desiredCameraPosition - currentHeadPositionRelativeToOffset;
+        cameraOffset.position = adjustedPosition;
 
-        // Retain the Y value from the current extraVector
-        newExtraVector.y = followtransform.extraVector.y;
+        // Update the offset for VRWC_FollowTransform
+        followtransform.OffsetPosition = cameraOffset.position - followtransform.target.position;
 
-        followtransform.extraVector = newExtraVector;
+        // Reset the extraVector
+        followtransform.extraVector = Vector3.zero;
     }
+
+
+
+
+    //public void ResetPosition()
+    //{
+    //    // Calculate the rotated offset at the current frame.
+    //    Vector3 rotatedOffset = followtransform.target.localRotation * followtransform.OffsetPosition;
+
+    //    // Calculate the desired offset to align cameraOffset to target's position.
+    //    Vector3 newExtraVector = resetTarget.localPosition - cameraOffset.localPosition - rotatedOffset;
+
+
+    //    // Retain the Y value from the current extraVector
+    //    newExtraVector.y = followtransform.extraVector.y;
+
+    //    //followtransformtwo.extraVector = newExtraVector;
+    //    followtransform.extraVector = newExtraVector;
+    //}
 
 
 }

@@ -41,7 +41,6 @@ public class SpawnWeaponInChest : MonoBehaviour
                 SetGlowColour(glowColors[0]);
                 break;
             case WeaponTier.Tier2_Advanced:
-                //main.startColor = colors[1];
                 SetParticelColours(1);
                 SetGlowColour(glowColors[1]);
                 break;
