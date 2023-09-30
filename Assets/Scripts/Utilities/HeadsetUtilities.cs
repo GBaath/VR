@@ -39,14 +39,9 @@ public class HeadsetUtilities : MonoBehaviour
     {
         Vector3 desiredCameraPosition = resetTarget.position;
         Vector3 currentHeadPositionRelativeToOffset = cameraOffset.InverseTransformPoint(xrCamera.position);
-
         Vector3 adjustedPosition = desiredCameraPosition - currentHeadPositionRelativeToOffset;
         cameraOffset.position = adjustedPosition;
-
-        // Update the offset for VRWC_FollowTransform
         followtransform.OffsetPosition = cameraOffset.position - followtransform.target.position;
-
-        // Reset the extraVector
         followtransform.extraVector = Vector3.zero;
     }
 
