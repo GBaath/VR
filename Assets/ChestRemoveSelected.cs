@@ -9,25 +9,35 @@ public class ChestRemoveSelected : MonoBehaviour
 
     XRSocketInteractor socket;
 
+
+
+    ShootingWeapon sw;
+
     void Start()
     {
         socket = GetComponent<XRSocketInteractor>();
     }
 
-    ShootingWeapon sw;
-
-
-   public void SetNotSelected()
-    {
-        Invoke(nameof(nono), 0.1f);
-    }
-    private void nono()
+    //public void SetNotSelected()
+    //{
+    //    Invoke(nameof(nono), 0.1f);
+    //}
+    public void RemoveFromChest()
     {
         IXRSelectInteractable objName = socket.GetOldestInteractableSelected();
         sw = objName.transform.gameObject.GetComponent<ShootingWeapon>();
         if (sw != null)
         {
-            sw.isSelected = false;
+            sw.isInChest = false;
+        }
+    }
+    public void InstertedInChest()
+    {
+        IXRSelectInteractable objName = socket.GetOldestInteractableSelected();
+        sw = objName.transform.gameObject.GetComponent<ShootingWeapon>();
+        if (sw != null)
+        {
+            sw.isInChest = true;
         }
     }
 }

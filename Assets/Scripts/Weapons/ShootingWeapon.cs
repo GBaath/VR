@@ -34,6 +34,9 @@ public class ShootingWeapon : MonoBehaviour
     private bool isReloading = false;
     public bool canReloadBoost = true;
     IEnumerator reloadFail;
+
+    //chest check
+    public bool isInChest;
     
     public enum WeaponType
     {
