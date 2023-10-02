@@ -2515,9 +2515,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 943918096}
     - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
-      propertyPath: roomBaseList.Array.size
-      value: 5
+      propertyPath: corridorList.Array.size
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: roomBaseList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: corridorList.Array.data[0]
+      value: 
+      objectReference: {fileID: 8737019846826064926, guid: 0c092d3125266a143bb0b99915ee1405, type: 3}
+    - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
+      propertyPath: corridorList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8737019846826064926, guid: 0c092d3125266a143bb0b99915ee1405, type: 3}
     - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
       propertyPath: roomBaseList.Array.data[1]
       value: 
@@ -2525,11 +2537,11 @@ PrefabInstance:
     - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
       propertyPath: roomBaseList.Array.data[2]
       value: 
-      objectReference: {fileID: 8737019846826064926, guid: 0c092d3125266a143bb0b99915ee1405, type: 3}
+      objectReference: {fileID: 8737019846826064926, guid: da2fa5346c7ff8140a6a7f9fef54e3f2, type: 3}
     - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
       propertyPath: roomBaseList.Array.data[3]
       value: 
-      objectReference: {fileID: 8737019846826064926, guid: da2fa5346c7ff8140a6a7f9fef54e3f2, type: 3}
+      objectReference: {fileID: 8737019846826064926, guid: ce6b7a26703893c44a3fb532a78642d2, type: 3}
     - target: {fileID: 6447467580567506157, guid: 3c099a52c20897e47a5d3e3f592cc3cb, type: 3}
       propertyPath: roomBaseList.Array.data[4]
       value: 
