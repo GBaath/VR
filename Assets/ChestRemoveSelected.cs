@@ -12,7 +12,7 @@ public class ChestRemoveSelected : MonoBehaviour
 
 
     ShootingWeapon sw;
-
+    Crossbow cb;
     void Start()
     {
         socket = GetComponent<XRSocketInteractor>();
@@ -30,6 +30,14 @@ public class ChestRemoveSelected : MonoBehaviour
         {
             sw.isInChest = false;
         }
+        else if (sw == null)
+        {
+            cb = objName.transform.gameObject.GetComponent<Crossbow>();
+        }
+        if(cb != null)
+        {
+            cb.isInChest = false;
+        }
     }
     public void InstertedInChest()
     {
@@ -38,6 +46,14 @@ public class ChestRemoveSelected : MonoBehaviour
         if (sw != null)
         {
             sw.isInChest = true;
+        }
+        else if (sw == null)
+        {
+            cb = objName.transform.gameObject.GetComponent<Crossbow>();
+        }
+        if(cb != null)
+        {
+            cb.isInChest = true;
         }
     }
 }

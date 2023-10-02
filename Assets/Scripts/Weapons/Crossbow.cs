@@ -21,6 +21,7 @@ public class Crossbow : MonoBehaviour
     //isLoaded for Arrow check and isArmed for slider check
     bool isArmed, isLoaded;
     public bool isSelected;
+    public bool isInChest;
     private void Start()
     {
         grabbable = GetComponent<XRGrabInteractable>();
