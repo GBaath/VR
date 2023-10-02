@@ -21,6 +21,12 @@ public class SpawnWeaponInChest : MonoBehaviour
     public SkinnedMeshRenderer rayMeshRenderer;
     private void Start()
     {
+        //weapons = PickList();
+        //SpawnWeapon();
+        //SetEffectColour();
+    }
+    private void OnEnable()
+    {
         weapons = PickList();
         SpawnWeapon();
         SetEffectColour();
@@ -33,7 +39,7 @@ public class SpawnWeaponInChest : MonoBehaviour
     private void SetEffectColour()
     {
         WeaponTier tier = spawnedWeapon.GetComponent<ShootingWeapon>().weaponStats.Tier;
-        
+
         switch (tier)
         {
             case WeaponTier.Tier1_Basic:
@@ -41,7 +47,6 @@ public class SpawnWeaponInChest : MonoBehaviour
                 SetGlowColour(glowColors[0]);
                 break;
             case WeaponTier.Tier2_Advanced:
-                //main.startColor = colors[1];
                 SetParticelColours(1);
                 SetGlowColour(glowColors[1]);
                 break;

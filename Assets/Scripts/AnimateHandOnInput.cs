@@ -4,12 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class AnimateHandOnInput : MonoBehaviour
 {
-
     [SerializeField] InputActionProperty pinchAnimationAction;
     [SerializeField] InputActionProperty gripAnimationAction;
     [SerializeField] Animator handAnimator;
-
-
  
     void Update()
     {

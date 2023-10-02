@@ -150,6 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   isHoming: 0
+  homingSpeed: 10
+  fromEnemy: 0
 --- !u!1 &5796099083995078562
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,15 @@ using UnityEngine.InputSystem;
 
 public class HeadsetUtilities : MonoBehaviour
 {
-    public VRWC_FollowTransform cameraOffset;
+
+
+    [SerializeField] Transform xrCamera;
+    [SerializeField] Transform cameraOffset;
+    [SerializeField] Transform resetTarget;
+    [SerializeField] VRWC_FollowTransform followtransform;
+    [SerializeField] VRWC_FollowTransform followtransformtwo;
+
+    private float angle;
     public InputActionReference xButton;
     public InputActionReference yButton;
 
@@ -21,16 +29,40 @@ public class HeadsetUtilities : MonoBehaviour
 
     void Update()
     {
-        if (xButton.action.triggered && yButton.action.IsPressed() || xButton.action.IsPressed() && yButton.action.triggered || Input.GetKeyDown(KeyCode.Space))
+        if (xButton.action.triggered && yButton.action.IsPressed() || xButton.action.IsPressed() && yButton.action.triggered)
         {
-            ResetHeadsetPosition(transform.position);
+            ResetPosition();
         }
+
+    }
+    public void ResetPosition()
+    {
+        Vector3 desiredCameraPosition = resetTarget.position;
+        Vector3 currentHeadPositionRelativeToOffset = cameraOffset.InverseTransformPoint(xrCamera.position);
+        Vector3 adjustedPosition = desiredCameraPosition - currentHeadPositionRelativeToOffset;
+        cameraOffset.position = adjustedPosition;
+        followtransform.OffsetPosition = cameraOffset.position - followtransform.target.position;
+        followtransform.extraVector = Vector3.zero;
     }
 
-    public void ResetHeadsetPosition(Vector3 newPosition)
-    {
-        cameraOffset.transform.position = newPosition;
-        cameraOffset.OffsetPosition = cameraOffset.transform.position;
-        Debug.Log("camera offset set at " + newPosition + "!");
-    }
+
+
+
+    //public void ResetPosition()
+    //{
+    //    // Calculate the rotated offset at the current frame.
+    //    Vector3 rotatedOffset = followtransform.target.localRotation * followtransform.OffsetPosition;
+
+    //    // Calculate the desired offset to align cameraOffset to target's position.
+    //    Vector3 newExtraVector = resetTarget.localPosition - cameraOffset.localPosition - rotatedOffset;
+
+
+    //    // Retain the Y value from the current extraVector
+    //    newExtraVector.y = followtransform.extraVector.y;
+
+    //    //followtransformtwo.extraVector = newExtraVector;
+    //    followtransform.extraVector = newExtraVector;
+    //}
+
+
 }

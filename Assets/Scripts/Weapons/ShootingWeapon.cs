@@ -34,6 +34,9 @@ public class ShootingWeapon : MonoBehaviour
     private bool isReloading = false;
     public bool canReloadBoost = true;
     IEnumerator reloadFail;
+
+    //chest check
+    public bool isInChest;
     
     public enum WeaponType
     {
@@ -110,6 +113,14 @@ public class ShootingWeapon : MonoBehaviour
                 }
                 currentAmmo -= 1;
                 break;
+        }
+        if (currentAmmo <= 0)
+        {
+            if (!outOfAmmo)
+            {
+                Invoke(nameof(StartReload),0.7f);
+                outOfAmmo = true;
+            }
         }
 
     }
@@ -233,6 +244,8 @@ public class ShootingWeapon : MonoBehaviour
     //Reload progress for reload circle
     private IEnumerator ReloadProgress()
     {
+        StopParticleEffect();
+        StopShootingAnimation();
         float reloadTime = weaponStats.reloadTime;
         float timePassed = 0f;
 

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public AudioManager audioManager;
     public ScoreManager scoreManager;
     public RoomManager roomManager;
+    public DestroyWeapons dw;
 
     [Tooltip("DOESN'T WORK AT THE MOMENT! How many enemies may chase the target at once? Set value to (0) if they may chase without waiting altogether.")]
     public int enemiesToChaseAtOnce = 0;

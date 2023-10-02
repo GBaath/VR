@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour {
-    public float seeRadius = 8;
+    public float seeRadius;
     [Range(0, 360)] public float seeAngle = 90;
 
     public float attackRadius = 3;
@@ -21,15 +21,15 @@ public class FieldOfView : MonoBehaviour {
     }
 
     void FOVCheck() {
+        TryGetComponent(out Enemy enemy);
         if (!target) {
-            if (TryGetComponent(out Enemy enemy)) {
-                target = enemy.Target;
-            } else {
-                target = Camera.main.gameObject;
-            }
+            target = enemy.Target;
+        }
+        if (enemy.Head) {
+            viewObject = enemy.Head;
         }
 
-        Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentRadiusIncrease, targetMask);
+        Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentRadiusIncrease * 5, targetMask);
 
         if (rangeChecks.Length != 0) {
             Transform target = rangeChecks[0].transform;
@@ -43,10 +43,6 @@ public class FieldOfView : MonoBehaviour {
                     canSeeTarget = false;
                 }
             }
-            //} else {
-            //    Debug.Log("b");
-            //    canSeeTarget = false;
-            //}
         } else if (canSeeTarget) {
             canSeeTarget = false;
         }

@@ -4,21 +4,13 @@
 //using UnityEngine.InputSystem;
 //using UnityEngine.Pool;
 
-//[DisallowMultipleComponent]
 //public class Flamethrower : MonoBehaviour
 //{
-//    [SerializeField]
-//    private ParticleSystem ShootingSystem;
-//    [SerializeField]
-//    private ParticleSystem OnFireSystemPrefab;
-//    [SerializeField]
-//    private FlamethrowerRadius AttackRadius;
-
-//    [Space]
-//    [SerializeField]
-//    private int BurningDPS = 5;
-//    [SerializeField]
-//    private float BurnDuration = 3f;
+//    [SerializeField] private ParticleSystem ShootingSystem;
+//    [SerializeField] private ParticleSystem OnFireSystemPrefab;
+//    [SerializeField] private FlamethrowerRadius AttackRadius;
+//    [SerializeField] private int BurningDPS = 5;
+//    [SerializeField] private float BurnDuration = 3f;
 
 //    private ObjectPool<ParticleSystem> OnFirePool;
 
@@ -51,35 +43,35 @@
 //        }
 //    }
 
-//    private void HandleEnemyDeath(Enemy Enemy)
+//    private void HandleEnemyDeath(HealthProperty health)
 //    {
-//        Enemy.Health.OnDeath -= HandleEnemyDeath;
-//        if (EnemyParticleSystems.ContainsKey(Enemy))
+//        health.OnDeath -= HandleEnemyDeath;
+//        if (EnemyParticleSystems.ContainsKey(health))
 //        {
-//            StartCoroutine(DelayedDisableBurn(Enemy, EnemyParticleSystems[Enemy], BurnDuration));
-//            EnemyParticleSystems.Remove(Enemy);
+//            StartCoroutine(DelayedDisableBurn(health, EnemyParticleSystems[health], BurnDuration));
+//            EnemyParticleSystems.Remove(health);
 //        }
 //    }
 
-//    private IEnumerator DelayedDisableBurn(Enemy Enemy, ParticleSystem Instance, float Duration)
+//    private IEnumerator DelayedDisableBurn(Health health, ParticleSystem Instance, float Duration)
 //    {
 //        ParticleSystem.MainModule main = Instance.main;
 //        main.loop = false;
 //        yield return new WaitForSeconds(Duration);
 //        Instance.gameObject.SetActive(false);
-//        if (Enemy.TryGetComponent<IBurnable>(out IBurnable burnable))
+//        if (health.TryGetComponent<IBurnable>(out IBurnable burnable))
 //        {
 //            burnable.StopBurning();
 //        }
 //    }
 
-//    private void StopDamagingEnemy(Enemy Enemy)
+//    private void StopDamagingEnemy(HealthProperty health)
 //    {
-//        Enemy.Health.OnDeath -= HandleEnemyDeath;
-//        if (EnemyParticleSystems.ContainsKey(Enemy))
+//        health.OnDeath -= HandleEnemyDeath;
+//        if (EnemyParticleSystems.ContainsKey(health))
 //        {
-//            StartCoroutine(DelayedDisableBurn(Enemy, EnemyParticleSystems[Enemy], BurnDuration));
-//            EnemyParticleSystems.Remove(Enemy);
+//            StartCoroutine(DelayedDisableBurn(health, EnemyParticleSystems[health], BurnDuration));
+//            EnemyParticleSystems.Remove(health);
 //        }
 //    }
 

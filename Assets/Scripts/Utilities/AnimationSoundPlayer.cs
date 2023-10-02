@@ -1,8 +1,20 @@
 using UnityEngine;
+using System.Collections;
 
 public class AnimationSoundPlayer : MonoBehaviour {
     public void PlayClip(AudioData audioData) {
         CustomPlayClipAtPoint(audioData.GetRandomClip(), transform.position, audioData.volume, audioData.pitchBase, Random.Range(-audioData.pitchRange, audioData.pitchRange));
+    }
+
+    public void PlayClipSequence(AudioData audioData) {
+        CustomPlayClipAtPoint(audioData.randomClipList[0], transform.position, audioData.volume, audioData.pitchBase, Random.Range(-audioData.pitchRange, audioData.pitchRange));
+        StartCoroutine(PlayClipAfterSeconds(audioData, 0, audioData.randomClipList[0].length));
+        StartCoroutine(PlayClipAfterSeconds(audioData, 2, audioData.randomClipList[0].length + audioData.randomClipList[0].length));
+    }
+
+    IEnumerator PlayClipAfterSeconds(AudioData audioData, int clipID, float t) {
+        yield return new WaitForSeconds(t);
+        CustomPlayClipAtPoint(audioData.randomClipList[clipID], transform.position, audioData.volume, audioData.pitchBase, Random.Range(-audioData.pitchRange, audioData.pitchRange));
     }
 
     public void CustomPlayClipAtPoint(AudioClip clip, Vector3 position, [UnityEngine.Internal.DefaultValue("1.0F")] float volume, float pitchBase, float pitch) {

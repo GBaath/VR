@@ -328,7 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 109434732395451517}
   - component: {fileID: 109434732388006827}
-  - component: {fileID: 4070751953258286229}
+  - component: {fileID: 3063559994291253200}
   m_Layer: 0
   m_Name: Left Hand Model
   m_TagString: Untagged
@@ -374,7 +374,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4070751953258286229
+--- !u!114 &3063559994291253200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 109434732395284509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6450dbc8d177fc54c880e2ef5c3b6c9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b069901416f1de42889c20a02e25668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pinchAnimationAction:
@@ -392,7 +392,7 @@ MonoBehaviour:
       m_Name: Pinch Animation
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: ed323fd6-5629-4233-b876-02d1aefbccea
+      m_Id: fa745035-8c3a-42e0-923f-ea79bb894b32
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -404,7 +404,7 @@ MonoBehaviour:
       m_Name: Grip Animation
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 483746e8-74e8-4a61-bee1-a2aba946e97c
+      m_Id: 6f16fa7a-e2c5-4484-8da9-ce9a2b432e9d
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
