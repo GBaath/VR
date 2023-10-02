@@ -50,7 +50,7 @@ public class IdleDragonState : BaseDragonState, IDragonState {
     }
 
     IDragonState IDragonState.Update(Dragon dragon) {
-        if (dragon.animProgress >= 8) {
+        if (dragon.animProgress >= 2) {
             return ChangeState(new PrepareAttackDragonState(), dragon);
         } else {
             return this;
@@ -72,7 +72,7 @@ public class PrepareAttackDragonState : BaseDragonState, IDragonState {
     }
 
     IDragonState IDragonState.Update(Dragon dragon) {
-        if (dragon.animProgress >= 5) {
+        if (dragon.animProgress >= 2) {
             return ChangeState(new AttackDragonState(), dragon);
         } else {
             return this;
@@ -194,10 +194,16 @@ public class Dragon : MonoBehaviour, IDamageable {
         LessenDmgFlash();
 
         foreach (FireballData fireballData in activeFireballDatas) {
-            if (fireballData.fireball.transform.position == fireballData.destination) {
-                Destroy(fireballData.shadow);
-                Destroy(fireballData.fireball);
+            if (fireballData.fireball == null) {
+                if (fireballData.shadow != null) {
+                    Destroy(fireballData.shadow);
+                }
                 activeFireballDatas.Remove(fireballData);
+                return;
+            }
+            if (fireballData.fireball.transform.position == fireballData.destination) {
+                Destroy(fireballData.fireball);
+                Destroy(fireballData.shadow);
                 return;
             }
             if (fireballData.fireball.transform.position == fireballData.targetPos) {
@@ -234,7 +240,7 @@ public class Dragon : MonoBehaviour, IDamageable {
         fireballData.speed = fireballSpeed / 4;
         GameObject newShadow = Instantiate(fireballShadow, fireballData.destination, Quaternion.identity);
         fireballData.destinationDelta = Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination);
-        newShadow.transform.localScale = new Vector3(0, 0, 0);
+        newShadow.transform.localScale = Vector3.zero;
         fireballData.shadow = newShadow;
     }
 }

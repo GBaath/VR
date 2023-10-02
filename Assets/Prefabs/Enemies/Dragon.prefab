@@ -5699,6 +5699,8 @@ GameObject:
   - component: {fileID: 8647919221578326300}
   - component: {fileID: 6686703194089285526}
   - component: {fileID: 7525217407933283963}
+  - component: {fileID: 4803651933633818444}
+  - component: {fileID: 6147799926882854756}
   m_Layer: 24
   m_Name: Dragon
   m_TagString: Untagged
@@ -5769,6 +5771,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4803651933633818444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7591266035748079431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40b1223c19547645891c5aa9e84681d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  deathTimer: 3
+--- !u!65 &6147799926882854756
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7591266035748079431}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 6, z: 5}
+  m_Center: {x: 0, y: 3, z: -2}
 --- !u!1 &7603144729632772646
 GameObject:
   m_ObjectHideFlags: 0
@@ -6082,13 +6119,13 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 7ec250eb63d0d1a438aa95a34355f480, type: 3}
-  - {fileID: -6629797300637803691, guid: 7ec250eb63d0d1a438aa95a34355f480, type: 3}
-  - {fileID: -6922793697723135513, guid: 7ec250eb63d0d1a438aa95a34355f480, type: 3}
-  - {fileID: 4874126678125670354, guid: 7ec250eb63d0d1a438aa95a34355f480, type: 3}
-  - {fileID: -2813467912831258332, guid: 7ec250eb63d0d1a438aa95a34355f480, type: 3}
-  - {fileID: -3846018093981099296, guid: 7ec250eb63d0d1a438aa95a34355f480, type: 3}
-  - {fileID: -8274133419916619345, guid: 7ec250eb63d0d1a438aa95a34355f480, type: 3}
+  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
+  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
+  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
+  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
+  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
+  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
+  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

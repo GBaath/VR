@@ -12,13 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f14e5c18296b74998dcf1ebd3a9426, type: 3}
   m_Name: Ghost
   m_EditorClassIdentifier: 
-  baseScale: 1.25
-  minScale: 0.6
-  maxScale: 1.4
   maxHealth: 5
   turnSpeed: 25
-  attackDamage: 50
-  movementSpeed: 1.5
+  attackDamage: 35
+  movementSpeed: 1.25
   attackSpeedMultiplier: 1.5
   animProgress: animProgress
   idleAnimation: {fileID: 7400000, guid: 159f27e82edf2b7478efa768aec6c76e, type: 2}

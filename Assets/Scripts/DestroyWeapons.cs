@@ -12,7 +12,7 @@ public class DestroyWeapons : MonoBehaviour
 
         foreach (ShootingWeapon weapon in foundWeapons)
         {
-            if (!weapon.isSelected)
+            if (!weapon.isSelected && !weapon.isInChest)
             {
                 Destroy(weapon.gameObject);
             }

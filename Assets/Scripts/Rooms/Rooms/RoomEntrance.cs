@@ -11,7 +11,7 @@ public class RoomEntrance : MonoBehaviour
     //used from other scripts when loading and unloading
     public Door loadDoor;
 
-    RoomBase roomBase;
+    public RoomBase roomBase;
 
     [HideInInspector]public RoomEntrance nextRoomEntrance;
 
@@ -23,11 +23,12 @@ public class RoomEntrance : MonoBehaviour
         {
             //previousRoom.roomBase.gameObject.SetActive(false);
             Destroy(previousRoom.roomBase.gameObject);
+            Destroy(previousRoom.gameObject);
         }
-        catch { }
+        catch { Destroy(previousRoom.gameObject); }
 
         //previousRoom.gameObject.SetActive(false);
-        Destroy(previousRoom.gameObject);
+  
         GameManager.instance.dw.DestroyWeaponsOnGround();
         //todo destroy and pool
     }

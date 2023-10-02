@@ -512,7 +512,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &8387137399596666133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,6 +537,7 @@ MonoBehaviour:
   lootFloatScript: {fileID: 2146483944636236206}
   reloadCanvas: {fileID: 2594057475574606769}
   reloadCircle: {fileID: 892800831235284827}
+  canReloadBoost: 1
 --- !u!114 &1371214933226846401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,8 +550,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4c0abe760b3dd4eb39fc5c23afa20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Spotinditactor: 
   intensity: 1
   duration: 0
+  shouldNotAutoListen: 0
 --- !u!114 &2433064550531741849
 MonoBehaviour:
   m_ObjectHideFlags: 0

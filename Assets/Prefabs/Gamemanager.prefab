@@ -136,9 +136,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomBaseList:
   - {fileID: 8737019846826064926, guid: aecc2904fc8583848a83b9301a70154d, type: 3}
+  - {fileID: 8737019846826064926, guid: df5f7c9014df77149b2ae66549654d17, type: 3}
+  - {fileID: 8737019846826064926, guid: da2fa5346c7ff8140a6a7f9fef54e3f2, type: 3}
+  - {fileID: 8737019846826064926, guid: ce6b7a26703893c44a3fb532a78642d2, type: 3}
   roomExtensionList:
   - {fileID: 5589313593156036153, guid: 7c0a105531fcb3845ba0565eee15a696, type: 3}
-  corridorList: []
+  - {fileID: 5589313593156036153, guid: 7c0a105531fcb3845ba0565eee15a696, type: 3}
+  - {fileID: 5589313593156036153, guid: ad24b25647e13c94484c48608840b7b7, type: 3}
+  corridorList:
+  - {fileID: 8737019846826064926, guid: 0c092d3125266a143bb0b99915ee1405, type: 3}
+  - {fileID: 8737019846826064926, guid: 54aca98add042ec469ef1ab941151cca, type: 3}
   roomEntrance: {fileID: 5589313593156036153, guid: 4bacded88cbcda340bee83a057cfc761, type: 3}
   nextIsCorridor: 0
   roomsPassed: 0

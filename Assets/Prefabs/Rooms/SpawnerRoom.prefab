@@ -10675,6 +10675,7 @@ MonoBehaviour:
   spawnpoint: {fileID: 0}
   previousRoom: {fileID: 0}
   loadDoor: {fileID: 0}
+  roomBase: {fileID: 0}
   nextRoomEntrance: {fileID: 0}
 --- !u!114 &6197178154157509635
 MonoBehaviour:

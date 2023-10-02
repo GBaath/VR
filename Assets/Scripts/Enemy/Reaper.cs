@@ -1,10 +1,8 @@
 using UnityEngine;
-public class Reaper : Enemy
-{
+public class Reaper : Enemy {
     [SerializeField] float movementSpeedMultiplier = 0.001f;
     protected override void Start() {
-        state = new ChaseEnemyState();
-        RandomizeSizeAndStats();
+        base.Start();
         movementSpeed = movementSpeedMultiplier;
     }
 
