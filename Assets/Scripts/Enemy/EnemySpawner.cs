@@ -40,6 +40,8 @@ public class EnemySpawner : MonoBehaviour {
 
     public void SpawnEnemy(Enemy enemyToSpawn = null) {
         GameObject newEnemy;
+        int randomSpawnChance = Random.Range(1, 100) + GameManager.instance.roomManager.roomsPassed * 10;
+        if (randomSpawnChance < 50) { return; }
         if (enemyToSpawn) {
             newEnemy = Instantiate(enemyToSpawn.gameObject, transform.position, Quaternion.identity, transform);
         } else if (enemyChanceList.Count >= 1) {
