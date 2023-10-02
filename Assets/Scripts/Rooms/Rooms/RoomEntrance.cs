@@ -23,6 +23,7 @@ public class RoomEntrance : MonoBehaviour
         {
             //previousRoom.roomBase.gameObject.SetActive(false);
             Destroy(previousRoom.roomBase.gameObject);
+            Destroy(previousRoom.gameObject);
         }
         catch { Destroy(previousRoom.gameObject); }
 
