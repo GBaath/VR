@@ -53,7 +53,6 @@ public class ProjectileDamage : MonoBehaviour {
         if (!fromEnemy && otherTransform.GetComponentInParent<ProjectileDamage>() && otherTransform.GetComponentInParent<ProjectileDamage>().fromEnemy) {
             Destroy(otherTransform.gameObject);
             Destroy(gameObject);
-            Debug.Log("death");
         }
     }
 
