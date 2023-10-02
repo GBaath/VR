@@ -1994,7 +1994,7 @@ GameObject:
   - component: {fileID: -7496127939997723599}
   - component: {fileID: 4218071147520984787}
   m_Layer: 24
-  m_Name: Skeleton
+  m_Name: NormalSkeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

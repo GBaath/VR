@@ -10,14 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5f14e5c18296b74998dcf1ebd3a9426, type: 3}
-  m_Name: Skeleton
+  m_Name: TinySkeleton
   m_EditorClassIdentifier: 
-  baseScale: 1.25
-  minScale: 0.6
-  maxScale: 1.4
   maxHealth: 5
-  turnSpeed: 25
-  attackDamage: 50
+  attackDamage: 25
   movementSpeed: 1.5
   attackSpeedMultiplier: 1.5
   animProgress: animProgress

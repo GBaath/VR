@@ -127,7 +127,11 @@ public class Enemy : MonoBehaviour, IDamageable {
 
         transform.Rotate(new Vector3(transform.rotation.x, Random.Range(0, 360), transform.rotation.z));
         RagdollSetActive(false);
-        RandomizeSizeAndStats();
+
+        turnSpeed = EnemyData.TurnSpeed;
+        attackDamage = EnemyData.AttackDamage;
+        movementSpeed = EnemyData.MovementSpeed;
+        //RandomizeSizeAndStats();
 
         if (GameManager.instance.enemiesToChaseAtOnce > 0) {
             InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
@@ -136,24 +140,24 @@ public class Enemy : MonoBehaviour, IDamageable {
         }
         state = state.Idle(this);
     }
-    protected void RandomizeSizeAndStats() {
-        float minScale = EnemyData.MinScale;
-        float maxScale = EnemyData.MaxScale;
-        randomScaleFloat = Random.Range(minScale, maxScale);
-        int scaleInt = 0;
-        for (int i = 0; i < randomScaleFloat / minScale; i++) {
-            scaleInt++;
-        }
-        if (TryGetComponent(out HealthProperty hp)) {
-            hp.maxHealth = EnemyData.MaxHealth + scaleInt;
-        }
-        transform.localScale = new Vector3(EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat);
-        turnSpeed = EnemyData.TurnSpeed / randomScaleFloat;
-        attackDamage = (int)(EnemyData.AttackDamage * randomScaleFloat);
-        movementSpeed = EnemyData.MovementSpeed / (randomScaleFloat / movementSpeedVariation);
-        //animationSpeed = EnemyData.AnimationSpeedMultiplier / randomScaleFloat;
-        randomPitch = randomScaleFloat;
-    }
+    //protected void RandomizeSizeAndStats() {
+    //    float minScale = EnemyData.MinScale;
+    //    float maxScale = EnemyData.MaxScale;
+    //    randomScaleFloat = Random.Range(minScale, maxScale);
+    //    int scaleInt = 0;
+    //    for (int i = 0; i < randomScaleFloat / minScale; i++) {
+    //        scaleInt++;
+    //    }
+    //    if (TryGetComponent(out HealthProperty hp)) {
+    //        hp.maxHealth = EnemyData.MaxHealth + scaleInt;
+    //    }
+    //    transform.localScale = new Vector3(EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat, EnemyData.BaseScale * randomScaleFloat);
+    //    turnSpeed = EnemyData.TurnSpeed / randomScaleFloat;
+    //    attackDamage = (int)(EnemyData.AttackDamage * randomScaleFloat);
+    //    movementSpeed = EnemyData.MovementSpeed / (randomScaleFloat / movementSpeedVariation);
+    //    //animationSpeed = EnemyData.AnimationSpeedMultiplier / randomScaleFloat;
+    //    randomPitch = randomScaleFloat;
+    //}
     void RagdollSetActive(bool enable) {
         //GetComponent<BoxCollider>().enabled = !enable;
         Animator.enabled = !enable;

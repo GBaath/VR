@@ -2,23 +2,23 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "New EnemyData", fileName = "EnemyData")]
 public class EnemyData : ScriptableObject {
+    //[SerializeField] float baseScale = 1;
+    //public float BaseScale {
+    //    get { return baseScale; }
+    //}
+    //[SerializeField] float minScale = 0.6f, maxScale = 1.4f;
+    //public float MinScale {
+    //    get { return minScale; }
+    //}
+    //public float MaxScale {
+    //    get { return maxScale; }
+    //}
     [Header("ENEMY DATA")]
-    [SerializeField] float baseScale = 1;
-    public float BaseScale {
-        get { return baseScale; }
-    }
-    [SerializeField] float minScale = 0.6f, maxScale = 1.4f;
-    public float MinScale {
-        get { return minScale; }
-    }
-    public float MaxScale {
-        get { return maxScale; }
-    }
     [SerializeField] int maxHealth = 5;
     public int MaxHealth {
         get { return maxHealth; }
     }
-    [SerializeField] float turnSpeed = 25f;
+    float turnSpeed = 25f;
     public float TurnSpeed {
         get { return turnSpeed; }
     }
