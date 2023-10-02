@@ -7,16 +7,18 @@ public class LootPickup : MonoBehaviour
 { 
     public LootResource lootResource;
 
-    new private Renderer renderer;
+    Renderer renderer;
 
-    private void Start()
+    private void OnEnable   ()
     {
         if (lootResource == null)
             SetNewRandomLootResource();
 
         //failed load
         if (lootResource == null)
+        {
             return;
+        }
 
         var meshFilter = gameObject.GetComponent<MeshFilter>();
         meshFilter.mesh = lootResource.lootProp.GetComponent<MeshFilter>().sharedMesh;
@@ -32,8 +34,13 @@ public class LootPickup : MonoBehaviour
 
         GetComponent<Rigidbody>().mass = lootResource.customMass;
         transform.localScale = Vector3.one*lootResource.customScale;
+        Invoke(nameof(startgrav),2f);
 
     }  
+    void startgrav()
+    {
+        GetComponent<Rigidbody>().useGravity = true;
+    }
     public void HighlightToggle(bool enabled)
     {
         if (enabled)
