@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Meshes/coin.meta
 guid: b321f546c4a31de4281433ae9b494139
+========
+guid: c264489849fe16a40b74071c2510676b
+>>>>>>>> e8be030e1456c045a580862beb2d2d5c2f5cd1e8:Assets/Scripts/Weapons/Flamethrower.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

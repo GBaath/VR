@@ -224,10 +224,10 @@ public class AttackEnemyState : BaseEnemyState, IEnemyState {
 
         if (!enemy.FieldOfView.canSeeTarget) { enemy.canDamage = false; }
 
-        if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier) && enemy.canDamage) {
-            enemy.canDamage = false;
-            enemy.Attack();
-        }
+        //if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier) && enemy.canDamage) {
+        //    enemy.canDamage = false;
+        //    enemy.Attack();
+        //}
 
         if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier)) { enemy.canDamage = true; }
 
@@ -278,10 +278,10 @@ public class Attack2EnemyState : BaseEnemyState, IEnemyState {
 
         if (!enemy.FieldOfView.canSeeTarget) { enemy.canDamage = false; }
 
-        if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier) && enemy.canDamage) {
-            enemy.canDamage = false;
-            enemy.Attack();
-        }
+        //if (enemy.animTimer >= enemy.attackAnimationImpactTime * AnimationLength(enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier) && enemy.canDamage) {
+        //    enemy.canDamage = false;
+        //    enemy.Attack();
+        //}
 
         if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier)) { enemy.canDamage = true; }
 

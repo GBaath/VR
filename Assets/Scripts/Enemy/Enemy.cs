@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] Animator animator;
     [SerializeReference] GameObject target;
     [SerializeReference] EnemyData enemyData;
-    [SerializeReference] ParticleSystem doHitFX;
+    //[SerializeReference] ParticleSystem doHitFX;
     [SerializeReference] ParticleSystem getHitFX;
     [SerializeReference] FieldOfView fieldOfView;
     [SerializeReference] AudioSource audioSource;
@@ -181,27 +181,6 @@ public class Enemy : MonoBehaviour, IDamageable {
         randomPitch = randomScaleFloat;
     }
 
-    //void StartDance() {
-    //    if (!isDancer && mayKillTime || isDead) { return; }
-
-    //    //if (animator.GetCurrentAnimatorStateInfo(0).IsName(danceState)) { return; }
-
-    //    List<Enemy> cheeringEnemies = new();
-    //    foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(e => e.TypeOfEnemy == TypeOfEnemy && e.mayKillTime && !e.isDancer)) {
-    //        cheeringEnemies.Add(enemy);
-    //    }
-
-    //    if (cheeringEnemies.Count < 3) { return; }
-
-    //    //animator.SetTrigger(danceTrigger);
-
-    //    //foreach (Enemy cheeringEnemy in cheeringEnemies)
-    //    //{
-    //    //    cheeringEnemy.transform.LookAt(transform.position);
-    //    //    cheeringEnemy.animator.SetTrigger(cheerTrigger);
-    //    //}
-    //}
-
     // Update is called once per frame
     void Update() {
         currentState = state.ToString();
@@ -213,7 +192,6 @@ public class Enemy : MonoBehaviour, IDamageable {
             state = state.Idle(this);
             return;
         }
-
         if (Vector3.Distance(transform.position, Target.transform.position) < FieldOfView.attackRadius + FieldOfView.currentRadiusIncrease) {
             state = state.Attack(this); return;
         } else {
@@ -232,13 +210,19 @@ public class Enemy : MonoBehaviour, IDamageable {
         transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, movementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
     }
 
+    public void TryAttack() {
+        if (canDamage) {
+            canDamage = false;
+            Attack();
+        }
+    }
+
     public void Attack() {
         attackAnimationLoops++;
-
         Ray ray = new(new Vector3(transform.position.x, Target.transform.position.y, transform.position.z), transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit)) {
-            ParticleSystem newHitFX = Instantiate(doHitFX, hit.transform.position, Quaternion.identity, transform);
-            Destroy(newHitFX.gameObject, newHitFX.main.duration * 2);
+            //ParticleSystem newHitFX = Instantiate(doHitFX, hit.transform.position, Quaternion.identity, transform);
+            //Destroy(newHitFX.gameObject, newHitFX.main.duration * 2);
 
             if (hit.transform.GetComponentInParent<Health>().TryGetComponent(out Health health)) {
                 health.TakeDamage(attackDamage);
@@ -247,100 +231,4 @@ public class Enemy : MonoBehaviour, IDamageable {
             // TODO: If target is within said range, damage it and/or all non-Enemy objects
         }
     }
-    #region Unused
-    //void DismemberBody(GameObject limbHit, GameObject bullet)
-    //{
-    //    if (limbHit.transform.GetComponentInParent<Enemy>() != this && !head && legs == null) { return; }
-
-    //    // "Remove" limb
-    //    limbHit.transform.localScale = Vector3.zero;
-
-    //    iLostLeg = false;
-    //    foreach (GameObject leg in legs)
-    //    {
-    //        foreach (Transform limb in limbHit.GetComponentsInChildren<Transform>().Where(l => l == leg.transform))
-    //        {
-    //            iLostLeg = true;
-    //        }
-    //    }
-
-    //    iLostUpperBody = false;
-    //    foreach (Transform limb in head.GetComponentsInParent<Transform>().Where(l => l == limbHit.transform))
-    //    {
-    //        iLostUpperBody = true;
-    //    }
-
-    //    bool iLostHead = false;
-    //    foreach (Transform limb in limbHit.GetComponentsInChildren<Transform>().Where(b => b == head.transform))
-    //    {
-    //        iLostHead = true;
-    //    }
-
-    //    // Spawn enemy without all other parts (this essentially spawns a body part)
-    //    GameObject newBody = Instantiate(gameObject, transform.position, Quaternion.identity);
-    //    GameObject impactedLimb = null;
-    //    List<GameObject> relatedTransforms = new();
-
-    //    // Find the dismembered body part
-    //    foreach (Transform limbTransform in newBody.GetComponentsInChildren<Transform>().Where(b => b.transform.localScale == Vector3.zero))
-    //    {
-    //        limbTransform.localScale = Vector3.one;
-    //        impactedLimb = limbTransform.gameObject;
-    //        impactedLimb.transform.SetParent(newBody.transform);
-
-    //        relatedTransforms.Add(impactedLimb);
-    //        relatedTransforms.Add(newBody);
-    //    }
-
-    //    // Keep the transforms of related body parts
-    //    foreach (Transform limbChildTransform in impactedLimb.GetComponentsInChildren<Transform>().Where(b => b.CompareTag(tag)))
-    //    {
-    //        relatedTransforms.Add(limbChildTransform.gameObject);
-    //    }
-
-    //    // Set hip transform to the dismembered body part
-    //    Transform hipTransform = newBody.transform.GetChild(1);
-    //    hipTransform.SetParent(impactedLimb.transform);
-    //    hipTransform.position = impactedLimb.transform.position;
-
-    //    // "Remove" unrelated body parts
-    //    foreach (Transform limbTransform in newBody.GetComponentsInChildren<Transform>().Where(b => !relatedTransforms.Contains(b.gameObject)))
-    //    {
-    //        limbTransform.localScale = Vector3.zero;
-    //        limbTransform.position = hipTransform.position;
-    //    }
-
-    //    if (iLostUpperBody) // The dismembered body will be the new enemy
-    //    {
-    //        if (iLostHead)
-    //            newBody.GetComponent<Enemy>().KillThisEnemy();
-
-    //        if (iLostLeg)
-    //            newBody.GetComponent<Enemy>().anim.SetBool("isDismembered", true);
-
-    //        newBody.GetComponent<Enemy>().iOnlyHaveUpperBody = true;
-
-    //        //RagdollSetActive(true);
-    //        //GetComponentInChildren<SkinnedMeshRenderer>().gameObject.AddComponent<HighlightGrab>();
-    //        Destroy(this);
-    //    }
-    //    else // This will remain as enemy
-    //    {
-    //        if (iLostLeg)
-    //            anim.SetBool("isDismembered", true);
-
-    //        //newBody.GetComponent<Enemy>().RagdollSetActive(true);
-    //        //newBody.GetComponentInChildren<SkinnedMeshRenderer>().gameObject.AddComponent<HighlightGrab>();
-    //        Destroy(newBody.GetComponent<Enemy>());
-    //    }
-
-    //    newBody.GetComponent<Enemy>().isDismembered = true;
-    //    isDismembered = true;
-
-    //    ParticleSystem newLimbFX = Instantiate(getHitFX, newBody.transform.position, Quaternion.identity);
-    //    Destroy(newLimbFX, newLimbFX.main.duration * 2);
-
-    //    newBody.GetComponent<Rigidbody>().AddForceAtPosition(bullet.GetComponent<Rigidbody>().velocity, limbHit.transform.position, ForceMode.Impulse);
-    //}
-    #endregion
 }
