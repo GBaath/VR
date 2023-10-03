@@ -10,6 +10,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 200;
     [SerializeField] private float currentHealth;
     [SerializeField] private float healthPercent;
+    [SerializeField] DisableCanvas highScoreCanvas;
 
 
     [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Animator damageFlashImg;
@@ -101,6 +102,8 @@ public class Health : MonoBehaviour, IDamageable
 
     private void ResetScene()
     {
+        Debug.Log("WTF???");
+        highScoreCanvas.Enable();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
