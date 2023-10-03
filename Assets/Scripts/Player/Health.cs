@@ -101,6 +101,6 @@ public class Health : MonoBehaviour, IDamageable
 
     private void ResetScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(0);
     }
 }
