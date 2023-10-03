@@ -24,20 +24,25 @@ public class ChestRemoveSelected : MonoBehaviour
     //}
     public void RemoveFromChest()
     {
-        IXRSelectInteractable objName = socket.GetOldestInteractableSelected();
-        sw = objName.transform.gameObject.GetComponent<ShootingWeapon>();
-        if (sw != null)
+        try
         {
-            sw.isInChest = false;
+            IXRSelectInteractable objName = socket.GetOldestInteractableSelected();
+            objName.transform.gameObject.TryGetComponent<ShootingWeapon>(out sw);
+            if (sw != null)
+            {
+                sw.isInChest = false;
+            }
+            else if (sw == null)
+            {
+                objName.transform.gameObject.TryGetComponent<Crossbow>(out cb);
+            }
+            if (cb != null)
+            {
+                cb.isInChest = false;
+            }
+
         }
-        else if (sw == null)
-        {
-            cb = objName.transform.gameObject.GetComponent<Crossbow>();
-        }
-        if(cb != null)
-        {
-            cb.isInChest = false;
-        }
+        catch { }
     }
     public void InstertedInChest()
     {
