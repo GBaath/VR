@@ -146,6 +146,8 @@ MonoBehaviour:
   lootFloatScript: {fileID: 0}
   reloadCanvas: {fileID: 2838721104086258751}
   reloadCircle: {fileID: 646554525545963733}
+  canReloadBoost: 1
+  isInChest: 0
 --- !u!114 &8797545281348125269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,8 +160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4c0abe760b3dd4eb39fc5c23afa20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Spotinditactor: 
   intensity: 1
   duration: 0
+  shouldNotAutoListen: 0
 --- !u!54 &8304594823494141010
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1038,6 +1042,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198076924919084778, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
+      propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198076924919084778, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
