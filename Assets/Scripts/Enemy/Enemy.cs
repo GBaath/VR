@@ -46,6 +46,8 @@ public class Enemy : MonoBehaviour, IDamageable {
     public FieldOfView FieldOfView {
         get { return fieldOfView; }
     }
+
+
     /// <returns>A random limb from body.</returns>
     public GameObject GetRandomLimb() {
         if (!hips) { return gameObject; }
@@ -90,11 +92,12 @@ public class Enemy : MonoBehaviour, IDamageable {
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer renderer;
 
+    //bool IDamageable.IsDead { get => isDead; set => isDead = value; }
     public virtual void TakeDamage(int amount, GameObject source) {
         FieldOfView.canSeeTarget = true;
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
         audioSource.Play();
-        TakeKnockback(amount, source);
+        TakeKnockback(amount, Camera.main.gameObject);
         SetDmgFlash();
     }
     public virtual void Die(float delay) {
