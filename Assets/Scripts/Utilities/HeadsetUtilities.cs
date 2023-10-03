@@ -42,6 +42,9 @@ public class HeadsetUtilities : MonoBehaviour
         cameraOffset.position = adjustedPosition;
         followtransform.OffsetPosition = cameraOffset.position - followtransform.target.position;
         followtransform.extraVector = Vector3.zero;
+
+
+        followtransform.offsetRotation = Quaternion.Euler(0, -xrCamera.localEulerAngles.y, 0);//Quaternion.Inverse(Quaternion.FromToRotation(xrCamera.eulerAngles,resetTarget.eulerAngles));
     }
 
 
