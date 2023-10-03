@@ -99,7 +99,7 @@ public class ScoreSaver : MonoBehaviour
 
         for (int i = 0; i < highScoresData.highScores.Count; i++)
         {
-            scoresString += (i + 1).ToString() + ".     " + highScoresData.highScores[i].score.ToString() + " - Rooms: " + highScoresData.highScores[i].levelReached.ToString() + "\n";
+            scoresString += (i + 1).ToString() + ".Score:" + highScoresData.highScores[i].score.ToString() + " - Rooms: " + highScoresData.highScores[i].levelReached.ToString() + "\n";
         }
 
         bestScoreText.text = scoresString;

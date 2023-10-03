@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     GameObject spawnFX = null;
 
     //bool IDamageable.IsDead { get => isDead; set => isDead = value; }
-    public virtual void TakeDamage(int amount, bool isDead) {
+    public virtual void TakeDamage(float amount, bool isDead) {
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
         audioSource.Play();
         SetDmgFlash();

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class ProjectileDamage : MonoBehaviour {
-    public int damage = 1;
+    public float damage = 1;
     public bool isHoming = false;
     public float homingSpeed = 10;
     public bool fromEnemy = false;

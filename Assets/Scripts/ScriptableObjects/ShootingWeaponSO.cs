@@ -11,7 +11,7 @@ public class ShootingWeaponSO : ScriptableObject
     public float reloadTime = 3;
     public float bulletSpeed;
     public float knockBack = 1;
-    public int damage = 1;
+    public float damage = 1;
     public float hapticDuration;
     public UnityEngine.AudioClip firingSound;
     public UnityEngine.AudioClip noAmmoSound;

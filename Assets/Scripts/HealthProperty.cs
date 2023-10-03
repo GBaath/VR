@@ -12,7 +12,7 @@ public class HealthProperty : MonoBehaviour {
         currentHealth = maxHealth;
     }
 
-    public void LoseHealth(int amount, GameObject source = null) {
+    public void LoseHealth(float amount, GameObject source = null) {
         TryGetComponent(out IDamageable damageable);
         currentHealth -= amount;
         bool isLastBlow = currentHealth <= 0;

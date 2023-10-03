@@ -151,7 +151,7 @@ public class Dragon : MonoBehaviour, IDamageable {
         get { return animator; }
     }
 
-    public virtual void TakeDamage(int amount, bool isDead) {
+    public virtual void TakeDamage(float amount, bool isDead) {
         SetDmgFlash();
     }
 
