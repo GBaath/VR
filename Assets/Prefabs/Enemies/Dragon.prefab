@@ -5783,7 +5783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40b1223c19547645891c5aa9e84681d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 100
   deathTimer: 3
 --- !u!65 &6147799926882854756
 BoxCollider:
@@ -6119,13 +6119,13 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
-  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
-  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
-  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
-  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
-  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
-  - {fileID: 2100000, guid: 42e8d1e39313f91489454d14f45f103d, type: 2}
+  - {fileID: 2100000, guid: a6e4b9fc05805d848b0309009afa3dc1, type: 2}
+  - {fileID: 2100000, guid: a491b62f39624a34c8aa7aaa7edb9d7c, type: 2}
+  - {fileID: 2100000, guid: e31fd59401aad3747990f06e06debc6d, type: 2}
+  - {fileID: 2100000, guid: a491b62f39624a34c8aa7aaa7edb9d7c, type: 2}
+  - {fileID: 2100000, guid: a491b62f39624a34c8aa7aaa7edb9d7c, type: 2}
+  - {fileID: 2100000, guid: a491b62f39624a34c8aa7aaa7edb9d7c, type: 2}
+  - {fileID: 2100000, guid: a491b62f39624a34c8aa7aaa7edb9d7c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

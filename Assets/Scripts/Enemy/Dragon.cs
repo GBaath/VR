@@ -151,11 +151,11 @@ public class Dragon : MonoBehaviour, IDamageable {
         get { return animator; }
     }
 
-    void IDamageable.TakeDamage(int amount) {
+    public virtual void TakeDamage(int amount, GameObject source) {
         SetDmgFlash();
     }
 
-    void IDamageable.Die(float destroyDelay) {
+    public virtual void Die(float destroyDelay) {
         state = state.Die(this);
     }
 

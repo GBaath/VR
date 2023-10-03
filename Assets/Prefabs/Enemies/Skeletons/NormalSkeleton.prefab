@@ -116,7 +116,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &8461219007963677208
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -279,7 +279,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &2409526587032636575
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -535,7 +535,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &1493741121104086438
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -666,7 +666,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &7028269720261262366
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -859,7 +859,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &7879423796254351889
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1259,7 +1259,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &8555163085928942885
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1445,7 +1445,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &7387454710934326968
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1702,7 +1702,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &837145710282729310
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1833,7 +1833,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &2878173517612666998
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2065,10 +2065,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seeRadius: 10
+  seeRadiusIncrease: 20
+  currentSeeRadiusIncrease: 0
   seeAngle: 180
   attackRadius: 1.5
-  radiusIncrease: 1
-  currentRadiusIncrease: 0
+  attackRadiusIncrease: 1
+  currentAttackRadiusIncrease: 0
   target: {fileID: 0}
   viewObject: {fileID: 2642277384956813986}
   targetMask:
@@ -2159,8 +2161,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.6561314, y: 1.5, z: 0.3}
-  m_Center: {x: 0.013686642, y: 0.75, z: 0}
+  m_Size: {x: 0.6, y: 1.5, z: 0.3}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &-7496127939997723599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2365,7 +2367,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &3375680782263892719
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2678,7 +2680,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &3166428015919588770
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2821,7 +2823,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &5764676893008169213
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -3006,7 +3008,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &2062975470401600122
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -3272,7 +3274,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &4154234114922229651
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -3552,7 +3554,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &7010278183784003728
 CharacterJoint:
   m_ObjectHideFlags: 0

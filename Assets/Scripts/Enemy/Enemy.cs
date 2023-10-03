@@ -89,13 +89,12 @@ public class Enemy : MonoBehaviour, IDamageable {
     // Private variables
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer renderer;
-    float randomScaleFloat;
 
-    public virtual void TakeDamage(int amount) {
+    public virtual void TakeDamage(int amount, GameObject source) {
         FieldOfView.canSeeTarget = true;
         audioSource.clip = GameManager.instance.audioManager.enemyHit;
         audioSource.Play();
-
+        TakeKnockback(amount, source);
         SetDmgFlash();
     }
     public virtual void Die(float delay) {
@@ -118,6 +117,14 @@ public class Enemy : MonoBehaviour, IDamageable {
         propertyBlock.SetFloat("_EmissionIntensity", currentMaterialColor);
         renderer.SetPropertyBlock(propertyBlock);
     }
+    void TakeKnockback(float dmg, GameObject dmgSource) {
+        if (dmgSource == null) { return; }
+        Vector3 directionVector = new Vector3(
+            transform.position.x, transform.position.y, transform.position.z) -
+            new Vector3(dmgSource.transform.position.x, transform.position.y, dmgSource.transform.position.z);
+
+        transform.position += 0.2f * dmg * (1 / transform.localScale.y) * directionVector.normalized;
+    }
     protected virtual void Start() {
         renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         propertyBlock = new MaterialPropertyBlock();
@@ -131,7 +138,6 @@ public class Enemy : MonoBehaviour, IDamageable {
         turnSpeed = EnemyData.TurnSpeed;
         attackDamage = EnemyData.AttackDamage;
         movementSpeed = EnemyData.MovementSpeed;
-        //RandomizeSizeAndStats();
 
         if (GameManager.instance.enemiesToChaseAtOnce > 0) {
             InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
@@ -141,18 +147,19 @@ public class Enemy : MonoBehaviour, IDamageable {
         state = state.Idle(this);
     }
     void RagdollSetActive(bool enable) {
-        //GetComponent<BoxCollider>().enabled = !enable;
+        GetComponent<BoxCollider>().enabled = !enable;
         Animator.enabled = !enable;
         // Get all colliders that also have character joint components
-        foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>())) {
-            joint.enableCollision = enable;
+        foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>()) {
             joint.enablePreprocessing = enable;
             joint.enableProjection = enable;
-            //joint.GetComponent<Collider>().enabled = enable;
+            joint.enableCollision = enable;
+            joint.TryGetComponent(out Collider collider);
+            collider.enabled = enable;
             joint.TryGetComponent(out Rigidbody rb);
-            rb.isKinematic = !enable;
             rb.detectCollisions = enable;
             rb.useGravity = enable;
+            rb.isKinematic = !enable;
         }
     }
     void WaitForOtherEnemies() {
@@ -185,7 +192,7 @@ public class Enemy : MonoBehaviour, IDamageable {
             state = state.Idle(this);
             return;
         }
-        if (Vector3.Distance(transform.position, Target.transform.position) < FieldOfView.attackRadius + FieldOfView.currentRadiusIncrease) {
+        if (Vector3.Distance(transform.position, Target.transform.position) < FieldOfView.attackRadius + FieldOfView.currentAttackRadiusIncrease) {
             state = state.Attack(this); return;
         } else {
             state = state.Chase(this); return;

@@ -9,10 +9,10 @@ public class FOVEditor : Editor
         FieldOfView fov = (FieldOfView)target;
 
         Handles.color = Color.white;
-        Handles.DrawWireArc(fov.viewObject.transform.position, Vector3.up, Vector3.forward, 360, fov.seeRadius + fov.currentRadiusIncrease);
+        Handles.DrawWireArc(fov.viewObject.transform.position, Vector3.up, Vector3.forward, 360, fov.seeRadius + fov.currentSeeRadiusIncrease);
 
         Handles.color = Color.red;
-        Handles.DrawWireArc(fov.viewObject.transform.position, Vector3.up, Vector3.forward, 360, fov.attackRadius + fov.currentRadiusIncrease);
+        Handles.DrawWireArc(fov.viewObject.transform.position, Vector3.up, Vector3.forward, 360, fov.attackRadius + fov.currentAttackRadiusIncrease);
 
         Vector3 viewAngle01 = DirectionFromAngle(fov.viewObject.transform.eulerAngles.y, -fov.seeAngle / 2);
         Vector3 viewAngle02 = DirectionFromAngle(fov.viewObject.transform.eulerAngles.y, fov.seeAngle / 2);
