@@ -3898,10 +3898,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e8577bfff737349921f2be27289f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xrCamera: {fileID: 3355997934936558553}
   cameraOffset: {fileID: 3355997933788464944}
   resetTarget: {fileID: 4061427088008083078}
   followtransform: {fileID: 3355997933788464945}
-  followtransformtwo: {fileID: 0}
   xButton: {fileID: 1049225494371630964, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   yButton: {fileID: 6043033085996605989, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &738235958335570346
