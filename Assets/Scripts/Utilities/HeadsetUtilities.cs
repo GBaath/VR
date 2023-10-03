@@ -9,7 +9,6 @@ public class HeadsetUtilities : MonoBehaviour
     [SerializeField] Transform cameraOffset;
     [SerializeField] Transform resetTarget;
     [SerializeField] VRWC_FollowTransform followtransform;
-    [SerializeField] VRWC_FollowTransform followtransformtwo;
 
     private float angle;
     public InputActionReference xButton;
