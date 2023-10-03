@@ -18,7 +18,7 @@ MonoBehaviour:
   reloadTime: 5
   bulletSpeed: 25
   knockBack: 10
-  damage: 10
+  damage: 7
   hapticDuration: 0.5
   firingSound: {fileID: 8300000, guid: 312a8bee677eacd4fb1c79979fdcaecb, type: 3}
   noAmmoSound: {fileID: 8300000, guid: e5748096dd878724dbf0b65ae74937dd, type: 3}
@@ -27,5 +27,5 @@ MonoBehaviour:
   maxPitch: 1.2
   minPitch: 0.8
   bulletSpread: 5
-  shotgunSlugs: 10
+  shotgunSlugs: 16
   Tier: 2
