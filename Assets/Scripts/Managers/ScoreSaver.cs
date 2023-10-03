@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
+[System.Serializable]
+public class ScoreData
+{
+    public int score;
+    public int levelReached;
+}
 [System.Serializable]
 public class HighScoresData
 {
-    public List<int> highScores = new List<int>();
+    public List<ScoreData> highScores = new List<ScoreData>();
 }
 public class ScoreSaver : MonoBehaviour
 {
@@ -19,7 +24,7 @@ public class ScoreSaver : MonoBehaviour
     //For saving score
     public HighScoresData highScoresData = new HighScoresData(); // Use the HighScoresData object directly
     private const string highScoreKeyString = "HighScores"; //Key for getting HighScores
-    private const int MaxNumberOfHighScores = 5; //Number of highscores i can save
+    private const int MaxNumberOfHighScores = 10; //Number of highscores i can save
 
 
     private static ScoreSaver _instance;
@@ -37,8 +42,9 @@ public class ScoreSaver : MonoBehaviour
     }
     void Start()
     {
+        DisplayHighScores();
         //UpdateScore();
-        LoadHighScores();
+        //LoadHighScores();
     }
 
     //public void UpdateScore()
@@ -57,13 +63,14 @@ public class ScoreSaver : MonoBehaviour
 
 
     //TODO: add highscore functionallity that saves the best score to player prefs.
-    public void SaveHighScore(int score)
+    public void SaveHighScore(int score, int levelReached)
     {
-        highScoresData.highScores.Add(score);
-        highScoresData.highScores.Sort((a, b) => b.CompareTo(a)); // Sort in descending order, need to use this more often now that i know what it is
+        highScoresData.highScores.Add(new ScoreData { score = score, levelReached = levelReached });
+        highScoresData.highScores.Sort((a, b) => b.score.CompareTo(a.score));
+
         if (highScoresData.highScores.Count > MaxNumberOfHighScores)
         {
-            highScoresData.highScores.RemoveAt(MaxNumberOfHighScores); // Remove the lowest score
+            highScoresData.highScores.RemoveAt(MaxNumberOfHighScores);
         }
         SaveHighScores();
     }
@@ -86,23 +93,23 @@ public class ScoreSaver : MonoBehaviour
     }
     public void DisplayHighScores()
     {
-        LoadHighScores(); // Ensure the latest scores are loaded from PlayerPrefs
+        LoadHighScores();
 
-        string scoresString = " "; /*= "High Scores:\n";*/
+        string scoresString = " ";
 
         for (int i = 0; i < highScoresData.highScores.Count; i++)
         {
-            scoresString += (i + 1).ToString() + ".     " + highScoresData.highScores[i].ToString() + "\n";
+            scoresString += (i + 1).ToString() + ".     " + highScoresData.highScores[i].score.ToString() + " - Rooms: " + highScoresData.highScores[i].levelReached.ToString() + "\n";
         }
 
         bestScoreText.text = scoresString;
     }
+
     [ContextMenu("OnDeath")]
     public void OnDeath()
     {
-        SaveHighScore(ScoreManager.instance.score);
-        //DisplayHighScores();
-
+        SaveHighScore(ScoreManager.instance.score, GameManager.instance.roomManager.roomsPassed);
+        DisplayHighScores();
     }
 
 }
