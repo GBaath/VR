@@ -337,6 +337,9 @@ public class DeadEnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Surprise(Enemy enemy) => this;
 
     IEnemyState IEnemyState.Update(Enemy enemy) {
+        if (startOfState) {
+            startOfState = false;
+        }
         // Decay
         return this;
     }

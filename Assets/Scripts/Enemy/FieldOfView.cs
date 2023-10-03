@@ -39,18 +39,21 @@ public class FieldOfView : MonoBehaviour {
         Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentSeeRadiusIncrease, targetMask);
 
         if (rangeChecks.Length != 0) {
-            Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - viewObject.transform.position).normalized;
-
-            if (/*Vector3.Angle(directionToTarget, transform.forward) < seeAngle / 2*/ true) {
-                float distanceToTarget = Vector3.Distance(viewObject.transform.position, target.position);
-                if (!Physics.Raycast(viewObject.transform.position, directionToTarget, distanceToTarget, obstructionMask)) {
-                    canSeeTarget = true;
+            foreach (Collider item in rangeChecks) {
+                Transform target = item.transform;
+                Vector3 directionToTarget = (target.position - viewObject.transform.position).normalized;
+                if (Vector3.Angle(directionToTarget, transform.forward) < seeAngle / 2) {
+                    float distanceToTarget = Vector3.Distance(viewObject.transform.position, target.position);
+                    if (Physics.Raycast(viewObject.transform.position, directionToTarget, distanceToTarget, obstructionMask)) {
+                        canSeeTarget = false;
+                    } else {
+                        canSeeTarget = true;
+                    }
                 } else {
                     canSeeTarget = false;
                 }
             }
-        } else if (canSeeTarget) {
+        } else {
             canSeeTarget = false;
         }
     }

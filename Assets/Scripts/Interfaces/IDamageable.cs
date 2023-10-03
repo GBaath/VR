@@ -1,7 +1,6 @@
 using UnityEngine;
 public interface IDamageable
 {
-    //bool IsDead { get; set; }
-    void TakeDamage(int amount, GameObject source = null);
+    void TakeDamage(int amount, bool isDead = false);
     void Die(float destroyDelay);
 }
