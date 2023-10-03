@@ -6,7 +6,13 @@ public class DestroyWeapons : MonoBehaviour
 {
 
     [ContextMenu("Destroy weapons")]
+
+    
     public void DestroyWeaponsOnGround()
+    {
+        Invoke(nameof(InvokeThisTest), 0.1f);
+    }
+    public void InvokeThisTest()
     {
         ShootingWeapon[] foundWeapons = FindObjectsOfType<ShootingWeapon>();
 
@@ -18,9 +24,9 @@ public class DestroyWeapons : MonoBehaviour
             }
         }
         Crossbow[] foundCrossbows = FindObjectsOfType<Crossbow>();
-        foreach(Crossbow crossbow in foundCrossbows)
+        foreach (Crossbow crossbow in foundCrossbows)
         {
-            if (!crossbow.isSelected)
+            if (!crossbow.isSelected && !crossbow.isInChest)
             {
                 Destroy(crossbow.gameObject);
             }
