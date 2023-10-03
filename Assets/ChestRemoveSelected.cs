@@ -11,51 +11,55 @@ public class ChestRemoveSelected : MonoBehaviour
 
 
 
-    ShootingWeapon sw;
-    Crossbow cb;
+    public ShootingWeapon sw;
+    public Crossbow cb;
     void Start()
     {
         socket = GetComponent<XRSocketInteractor>();
     }
 
-    //public void SetNotSelected()
-    //{
-    //    Invoke(nameof(nono), 0.1f);
-    //}
     public void RemoveFromChest()
     {
- 
+        try
+        {
             IXRSelectInteractable objName = socket.GetOldestInteractableSelected();
-            objName.transform.gameObject.TryGetComponent<ShootingWeapon>(out sw);
-            if (sw != null)
+
+            // Try to get the ShootingWeapon component
+            if (objName.transform.gameObject.TryGetComponent<ShootingWeapon>(out sw) && sw != null)
             {
                 sw.isInChest = false;
+                sw = null;  // Reset sw
+                return;  // Exit the method once the operation is successful
             }
-            else if (sw == null)
-            {
-                objName.transform.gameObject.TryGetComponent<Crossbow>(out cb);
-            }
-        if (cb != null)
-        {
-            cb.isInChest = false;
 
+            // Try to get the Crossbow component if ShootingWeapon wasn't found
+            if (objName.transform.gameObject.TryGetComponent<Crossbow>(out cb) && cb != null)
+            {
+                cb.isInChest = false;
+                cb = null;  // Reset cb
+            }
         }
+        catch { /* Handle exceptions if needed */ }
     }
+
     public void InstertedInChest()
     {
         IXRSelectInteractable objName = socket.GetOldestInteractableSelected();
-        sw = objName.transform.gameObject.GetComponent<ShootingWeapon>();
-        if (sw != null)
+
+        // Try to get the ShootingWeapon component
+        if (objName.transform.gameObject.TryGetComponent<ShootingWeapon>(out sw) && sw != null)
         {
             sw.isInChest = true;
+            sw = null;  // Reset sw
+            return;  // Exit the method once the operation is successful
         }
-        else if (sw == null)
-        {
-            cb = objName.transform.gameObject.GetComponent<Crossbow>();
-        }
-        if(cb != null)
+
+        // Try to get the Crossbow component if ShootingWeapon wasn't found
+        if (objName.transform.gameObject.TryGetComponent<Crossbow>(out cb) && cb != null)
         {
             cb.isInChest = true;
+            cb = null;  // Reset cb
         }
     }
+
 }
