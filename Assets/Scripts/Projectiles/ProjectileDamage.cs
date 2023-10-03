@@ -38,13 +38,15 @@ public class ProjectileDamage : MonoBehaviour {
     private void OnHit(Transform otherTransform) {
         if (fromEnemy) {
             if (otherTransform.GetComponentInParent<Health>() && otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth)) {
-                playerHealth.TakeDamage(damage);
+                // Damage player
+                playerHealth.TakeDamage(damage, gameObject);
                 Destroy(gameObject);
                 return;
             }
         } else {
-            if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.GetComponentInParent<HealthProperty>().TryGetComponent(out HealthProperty hp)) {
-                hp.LoseHealth(damage);
+            if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.GetComponentInParent<HealthProperty>().TryGetComponent(out HealthProperty enemyHP)) {
+                // Damage enemy
+                enemyHP.LoseHealth(damage, GameManager.instance.playerPhysicsBase);
                 AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, Camera.main.transform.position, 1);
                 Destroy(gameObject);
                 return;

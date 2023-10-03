@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour {
     public float seeRadius;
+    public float seeRadiusIncrease = 20;
+    [HideInInspector] public float currentSeeRadiusIncrease;
     [Range(0, 360)] public float seeAngle = 90;
 
     public float attackRadius = 3;
-    public float radiusIncrease = 1;
-    [HideInInspector] public float currentRadiusIncrease;
+    public float attackRadiusIncrease = 1;
+    [HideInInspector] public float currentAttackRadiusIncrease;
 
     public GameObject target;
     public GameObject viewObject;
@@ -29,7 +31,12 @@ public class FieldOfView : MonoBehaviour {
             viewObject = enemy.Head;
         }
 
-        Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentRadiusIncrease * 5, targetMask);
+        if (canSeeTarget) {
+            currentSeeRadiusIncrease = seeRadiusIncrease;
+        } else {
+            currentSeeRadiusIncrease = 0;
+        }
+        Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentSeeRadiusIncrease, targetMask);
 
         if (rangeChecks.Length != 0) {
             Transform target = rangeChecks[0].transform;

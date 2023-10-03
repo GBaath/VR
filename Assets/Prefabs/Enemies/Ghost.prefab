@@ -99,10 +99,6 @@ PrefabInstance:
       propertyPath: attackRadius
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
-      propertyPath: radiusIncrease
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3441273848279400291, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -252,8 +248,6 @@ MonoBehaviour:
   isCaster: 0
   isDead: 0
   animTimer: 0
-  turnSpeed: 0
-  attackDamage: 0
   movementSpeed: 0
   chaseTurnSpeedMultiplier: 3
   attackAnimationLoops: 0

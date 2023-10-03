@@ -11,11 +11,19 @@ public class HealthProperty : MonoBehaviour {
         currentHealth = maxHealth;
     }
 
-    public void LoseHealth(int amount) {
+    public void LoseHealth(int amount, GameObject source = null) {
         currentHealth -= amount;
-        if (TryGetComponent(out IDamageable damageable)) { damageable.TakeDamage(amount); }
+        TryGetComponent(out IDamageable damageable);
         if (currentHealth <= 0) {
-            if (damageable != null) { damageable.Die(deathTimer); } else { Destroy(gameObject, deathTimer); }
+            if (damageable != null) {
+                damageable.Die(deathTimer);
+            } else {
+                Destroy(gameObject, deathTimer);
+            }
+            return;
+        }
+        if (amount > 0) {
+            damageable.TakeDamage(amount, source);
         }
     }
 }

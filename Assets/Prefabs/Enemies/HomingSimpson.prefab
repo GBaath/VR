@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7664485980444714660}
   - component: {fileID: 4773416564741257963}
   - component: {fileID: 5936388331521532920}
-  m_Layer: 24
+  m_Layer: 23
   m_Name: HomingSimpson
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 2773680550090646689}
   - component: {fileID: 2773680550110137551}
   - component: {fileID: 2773680550108867677}
-  m_Layer: 24
+  m_Layer: 23
   m_Name: FX_Trap_AcidHead_Acid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4963,7 +4963,7 @@ GameObject:
   - component: {fileID: 8516485367373818945}
   - component: {fileID: 2552330585391064503}
   - component: {fileID: 8220139767040600616}
-  m_Layer: 24
+  m_Layer: 23
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5045,7 +5045,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5068,7 +5068,7 @@ GameObject:
   - component: {fileID: 8341801663013624759}
   - component: {fileID: 4930267309940904978}
   - component: {fileID: 7173993098793410776}
-  m_Layer: 24
+  m_Layer: 23
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

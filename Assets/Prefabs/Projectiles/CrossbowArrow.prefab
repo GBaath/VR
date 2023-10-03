@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3498206093706948018}
   - component: {fileID: 1718408491489774938}
   - component: {fileID: 1663160952015741117}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CrossbowArrow
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1820107657963448194}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}

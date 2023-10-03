@@ -67,7 +67,7 @@ public class Health : MonoBehaviour, IDamageable
         damageLoopFlashingImg.SetBool("DamageLoopOverlay", false);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, GameObject source = null)
     {
         //onhitDamage();
         isRestoringHealth = false;

@@ -37,7 +37,7 @@ public abstract class BaseEnemyState {
             if (!smoothTransition) {
                 enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer);
             }
-            enemy.FieldOfView.currentRadiusIncrease = 0;
+            enemy.FieldOfView.currentAttackRadiusIncrease = 0;
             enemy.attackAnimationLoops = 0;
             enemy.canDamage = false;
             enemy.previousState = (IEnemyState)this;
@@ -157,9 +157,9 @@ public class ChaseEnemyState : BaseEnemyState, IEnemyState {
         }
         enemy.Animator.SetFloat(enemy.EnemyData.animProgress, enemy.animTimer);
         enemy.TurnTowardsTarget(enemy.chaseTurnSpeedMultiplier);
-        if (enemy.Head) {
-            enemy.Head.transform.LookAt(enemy.Target.transform);
-        }
+        //if (enemy.Head) {
+        //    enemy.Head.transform.LookAt(enemy.Target.transform);
+        //}
         enemy.Chase();
         return this;
     }
@@ -197,7 +197,7 @@ public class AttackEnemyState : BaseEnemyState, IEnemyState {
             startOfState = false;
             AnimateState(enemy, enemy.EnemyData.attackTrigger);
             enemy.canDamage = true;
-            enemy.FieldOfView.currentRadiusIncrease = enemy.FieldOfView.radiusIncrease;
+            enemy.FieldOfView.currentAttackRadiusIncrease = enemy.FieldOfView.attackRadiusIncrease;
         }
 
         if (!enemy.FieldOfView.canSeeTarget) { enemy.canDamage = false; }
