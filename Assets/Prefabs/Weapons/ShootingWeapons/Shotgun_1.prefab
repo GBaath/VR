@@ -538,6 +538,7 @@ MonoBehaviour:
   reloadCanvas: {fileID: 2594057475574606769}
   reloadCircle: {fileID: 892800831235284827}
   canReloadBoost: 1
+  isInChest: 0
 --- !u!114 &1371214933226846401
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -105,6 +105,7 @@ public class ShootingWeapon : MonoBehaviour
                 break;
             case WeaponType.Pistol:
                 FireBullet();
+                Invoke(nameof(StopParticleEffect), 0.05f);
                 break;
             case WeaponType.Shotgun:
                 for (int i = 0; i < weaponStats.shotgunSlugs; i++)
@@ -118,7 +119,7 @@ public class ShootingWeapon : MonoBehaviour
         {
             if (!outOfAmmo)
             {
-                Invoke(nameof(StartReload),0.7f);
+                Invoke(nameof(StartReload),0.1f);
                 outOfAmmo = true;
             }
         }
@@ -218,7 +219,6 @@ public class ShootingWeapon : MonoBehaviour
     }
     private void StartReload()
     {
-        Debug.Log("startreload");
         if (isReloading) return;
         reloadCanvas.enabled = true;
         aS.clip = weaponStats.reloadSound;
@@ -230,7 +230,6 @@ public class ShootingWeapon : MonoBehaviour
     }
     private void StopReload()
     {
-        Debug.Log("stop erload");
         StopCoroutine(ReloadProgress());
         reloadCanvas.enabled = false;
         reloadCircle.fillAmount = 0;

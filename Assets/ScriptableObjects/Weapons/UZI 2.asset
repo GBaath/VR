@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: UZI
   projectilePrefab: {fileID: 1483399186347397756, guid: a3a4ac1b8067a9548af58c53b9d761f4, type: 3}
-  fireRate: 0.08
+  fireRate: 0.12
   reloadTime: 3
   bulletSpeed: 25
   knockBack: 5
