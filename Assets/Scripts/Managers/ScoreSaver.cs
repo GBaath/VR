@@ -42,8 +42,9 @@ public class ScoreSaver : MonoBehaviour
     }
     void Start()
     {
+        DisplayHighScores();
         //UpdateScore();
-        LoadHighScores();
+        //LoadHighScores();
     }
 
     //public void UpdateScore()
@@ -98,7 +99,7 @@ public class ScoreSaver : MonoBehaviour
 
         for (int i = 0; i < highScoresData.highScores.Count; i++)
         {
-            scoresString += (i + 1).ToString() + ".     " + highScoresData.highScores[i].score.ToString() + " - Level: " + highScoresData.highScores[i].levelReached.ToString() + "\n";
+            scoresString += (i + 1).ToString() + ".     " + highScoresData.highScores[i].score.ToString() + " - Rooms: " + highScoresData.highScores[i].levelReached.ToString() + "\n";
         }
 
         bestScoreText.text = scoresString;
@@ -107,8 +108,8 @@ public class ScoreSaver : MonoBehaviour
     [ContextMenu("OnDeath")]
     public void OnDeath()
     {
-        int currentLevel = GameManager.instance.roomManager.roomsPassed; 
-        SaveHighScore(ScoreManager.instance.score, currentLevel);
+        SaveHighScore(ScoreManager.instance.score, GameManager.instance.roomManager.roomsPassed);
+        DisplayHighScores();
     }
 
 }
