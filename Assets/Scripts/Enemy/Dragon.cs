@@ -136,7 +136,7 @@ public class Dragon : MonoBehaviour, IDamageable {
     public AnimationClip prepareAttackAnimation;
     public AnimationClip attackAnimation;
     public AnimationClip dieAnimation;
-    [SerializeField] protected string currentState = "IdleDragonState";
+    [SerializeField] protected string currentState = new IdleDragonState().ToString();
 
     [HideInInspector] public IDragonState previousState = new IdleDragonState();
     [HideInInspector] public float animProgress = 0;
@@ -151,7 +151,7 @@ public class Dragon : MonoBehaviour, IDamageable {
         get { return animator; }
     }
 
-    public virtual void TakeDamage(int amount, GameObject source) {
+    public virtual void TakeDamage(int amount, bool isDead) {
         SetDmgFlash();
     }
 

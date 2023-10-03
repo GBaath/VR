@@ -18,7 +18,7 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
         aS = GetComponent<AudioSource>();
     }
 
-    void IDamageable.TakeDamage(int amount, GameObject source)
+    void IDamageable.TakeDamage(int amount, bool isDead)
     {
 
     }

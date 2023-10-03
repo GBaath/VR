@@ -2034,7 +2034,7 @@ MonoBehaviour:
   animator: {fileID: 7308438811657037766}
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: b4e39c2c9c6c5854c9294b96f27f1e52, type: 2}
-  getHitFX: {fileID: 19824050, guid: 581eceb924751f5458eff3649a42d56f, type: 3}
+  deathFX: {fileID: 7066763031991719493, guid: 36d790134c3367e4bb9cef6d8cea1dd3, type: 3}
   fieldOfView: {fileID: 3391077371947669904}
   audioSource: {fileID: 4218071147520984787}
   currentState: IdleEnemyState
@@ -2047,7 +2047,6 @@ MonoBehaviour:
   canDamage: 1
   isDancer: 0
   isCaster: 0
-  isDead: 0
   animTimer: 0
   movementSpeed: 0
   chaseTurnSpeedMultiplier: 3
@@ -2094,6 +2093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   deathTimer: 5
+  isDead: 0
 --- !u!95 &7308438811657037766
 Animator:
   serializedVersion: 5

@@ -19,7 +19,7 @@ public class ProjectileDamage : MonoBehaviour {
         } else {
             if (!FindAnyObjectByType<HealthProperty>()) { return; }
             foreach (HealthProperty hp in FindObjectsOfType<HealthProperty>()) {
-                if (hp.TryGetComponent(out Enemy enemy) && enemy.isDead) { continue; }
+                if (hp.TryGetComponent(out Enemy enemy) && enemy.state == new DeadEnemyState()) { continue; }
                 if (Vector3.Distance(transform.position, hp.transform.position) < closestDistance) {
                     closestDistance = Vector3.Distance(transform.position, hp.transform.position);
                     if (enemy) {
@@ -36,24 +36,26 @@ public class ProjectileDamage : MonoBehaviour {
     }
 
     private void OnHit(Transform otherTransform) {
+        // Main Camera must have the layer 'MainCamera'
+        if (!fromEnemy && otherTransform.CompareTag("MainCamera")) {
+            otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth);
+            //playerHealth.TakeDamage(666);
+            playerHealth.Die(0.2f);
+            return;
+        }
         if (fromEnemy) {
             if (otherTransform.GetComponentInParent<Health>() && otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth)) {
                 // Damage player
-                playerHealth.TakeDamage(damage, gameObject);
+                playerHealth.TakeDamage(damage);
                 Destroy(gameObject);
                 return;
             }
         } else {
             if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.GetComponentInParent<HealthProperty>().TryGetComponent(out HealthProperty enemyHP)) {
                 // Damage enemy
-                if (GameManager.instance.playerPhysicsBase.GetComponentInParent<Health>()) {
-                    GameManager.instance.playerPhysicsBase.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth);
-                    enemyHP.LoseHealth(damage);
-                } else {
-                    enemyHP.LoseHealth(damage);
-                }
                 if (!enemyHP.isDead)
                     AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, Camera.main.transform.position, 1);
+                enemyHP.LoseHealth(damage);
                 Destroy(gameObject);
                 return;
             }

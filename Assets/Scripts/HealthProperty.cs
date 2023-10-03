@@ -13,18 +13,19 @@ public class HealthProperty : MonoBehaviour {
     }
 
     public void LoseHealth(int amount, GameObject source = null) {
-        currentHealth -= amount;
         TryGetComponent(out IDamageable damageable);
-        if (currentHealth <= 0) {
+        currentHealth -= amount;
+        bool isLastBlow = currentHealth <= 0;
+        if (amount > 0 && !isDead) {
+            damageable.TakeDamage(amount, isLastBlow);
+        }
+        if (isLastBlow) { isDead = true; }
+        if (isDead) {
             if (damageable != null) {
                 damageable.Die(deathTimer);
             } else {
                 Destroy(gameObject, deathTimer);
             }
-            return;
-        }
-        if (amount > 0) {
-            damageable.TakeDamage(amount, source);
         }
     }
 }
