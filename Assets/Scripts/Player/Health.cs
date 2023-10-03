@@ -11,6 +11,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private float currentHealth;
     [SerializeField] private float healthPercent;
 
+
     [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Animator damageFlashImg;
     [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Animator damageLoopFlashingImg;
     
@@ -24,6 +25,7 @@ public class Health : MonoBehaviour, IDamageable
     private float maxDamageCoolTime = 5f;
     private bool isRestoringHealth = false;
     private float timeSinceLastDamage;
+    
     
     void Awake()
     {
@@ -93,6 +95,7 @@ public class Health : MonoBehaviour, IDamageable
     public void Die(float destroyDelay)
     {
         //onDeath();
+        ScoreSaver.Instance.OnDeath();
         Invoke(nameof(ResetScene), destroyDelay);
     }
 
