@@ -17,7 +17,7 @@ MonoBehaviour:
   fireRate: 0.5
   reloadTime: 5
   bulletSpeed: 25
-  knockBack: 10
+  knockBack: 6
   damage: 5
   hapticDuration: 0.5
   firingSound: {fileID: 8300000, guid: 312a8bee677eacd4fb1c79979fdcaecb, type: 3}

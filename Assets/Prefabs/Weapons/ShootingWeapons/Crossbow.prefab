@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 4422664194169338143}
   - component: {fileID: 4390482998342567892}
   - component: {fileID: 6252221483664350431}
+  - component: {fileID: 3053288184362871251}
   m_Layer: 27
   m_Name: Crossbow
   m_TagString: Untagged
@@ -825,6 +826,27 @@ MonoBehaviour:
   speed: 1
   distance: 0.2
   yOffset: 0.5
+--- !u!65 &3053288184362871251
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4280820321046063806}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.15590772, y: 0.028439134, z: 0.16635215}
+  m_Center: {x: -0.0065513104, y: 0.0052197725, z: 0.04620111}
 --- !u!1 &5455953211009801627
 GameObject:
   m_ObjectHideFlags: 0
