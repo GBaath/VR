@@ -322,10 +322,13 @@ public class ShootingWeapon : MonoBehaviour
             fireAnimator.SetBool("Fire", false);
         }
     }
-
-    public void SetSelectTrue()
+    private void invokeSelectTrue()
     {
         isSelected = true;
+    }
+    public void SetSelectTrue()
+    {
+        Invoke(nameof(invokeSelectTrue), 0.1f);
     }
     public void SetSelectFalse()
     {
