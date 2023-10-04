@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3737510623631393655}
   - component: {fileID: 8508850946472736621}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: EntitySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,17 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da07564be715bf40a2ff3dfc4f309ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyChanceList:
-  - enemy: {fileID: 4121539691223021577, guid: 72687812d34d272438b577562f26641f, type: 3}
+  entityChanceList:
+  - entity: {fileID: 3438754275894660386, guid: 72687812d34d272438b577562f26641f, type: 3}
     chance: 10
-  - enemy: {fileID: 655336025758677984, guid: ddf1be5948a8dcc42991a56c02d108c6, type: 3}
+  - entity: {fileID: 2275011521590808267, guid: ddf1be5948a8dcc42991a56c02d108c6, type: 3}
     chance: 10
-  - enemy: {fileID: 6143571589556153577, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+  - entity: {fileID: 4884179667896424898, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+    chance: 10
+  - entity: {fileID: 1086190359182233684, guid: 7e0f1f5de1a37bd4db263d10d9cc378a, type: 3}
+    chance: 10
+  - entity: {fileID: 8064929054712499686, guid: 198e8244ef1afc347a60a1535d85d438, type: 3}
+    chance: 10
+  - entity: {fileID: 7003346848246187540, guid: 4faf963fa770117418253b252f9e2077, type: 3}
     chance: 20
-  - enemy: {fileID: 1844402341131396479, guid: 7e0f1f5de1a37bd4db263d10d9cc378a, type: 3}
-    chance: 10
-  - enemy: {fileID: 8747728214204774605, guid: 198e8244ef1afc347a60a1535d85d438, type: 3}
-    chance: 10
-  - enemy: {fileID: 6090430112339569560, guid: 4faf963fa770117418253b252f9e2077, type: 3}
-    chance: 40
-  spawnEnemy: 1
+  - entity: {fileID: 4728321696403498725, guid: 49afd1a50d31ee84fbea7aadb4717b06, type: 3}
+    chance: 30
+  spawnEntity: 1

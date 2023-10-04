@@ -49,7 +49,7 @@ public class IdleDragonState : BaseDragonState, IDragonState {
 
     IDragonState IDragonState.Update(Dragon dragon) {
         if (dragon.animProgress >= 2) {
-            return ChangeState(new PrepareAttackDragonState(), dragon);
+            return ChangeState(new AttackDragonState(), dragon);
         } else {
             return this;
         }
@@ -121,7 +121,7 @@ public class DeadDragonState : BaseDragonState, IDragonState {
 
 public class FireballData {
     public GameObject fireball;
-    public GameObject shadow = null;
+    public GameObject indicator = null;
     public float speed;
     public Vector3 targetPos;
     public Vector3 destination;
@@ -142,7 +142,6 @@ public class Dragon : MonoBehaviour, IDamageable {
 
     [SerializeField] DestructableObject Destruction;
 
-
     [SerializeField] protected string currentState = new IdleDragonState().ToString();
 
     [HideInInspector] public IDragonState previousState = new IdleDragonState();
@@ -161,7 +160,6 @@ public class Dragon : MonoBehaviour, IDamageable {
 
     public virtual void TakeDamage(float amount, bool isDead) {
         SetDmgFlash();
-        LaunchFireball();
     }
 
     public virtual void Die(float destroyDelay) {
@@ -189,7 +187,7 @@ public class Dragon : MonoBehaviour, IDamageable {
         //originPosition = transform.position;
     }
 
-    public static Vector3 RandomPointInBounds(Bounds bounds) {
+    Vector3 RandomPointInBounds(Bounds bounds) {
         Vector3 point = new(
             Random.Range(bounds.min.x, bounds.max.x),
             Random.Range(bounds.min.y, bounds.max.y),
@@ -198,6 +196,7 @@ public class Dragon : MonoBehaviour, IDamageable {
     }
 
     private void Update() {
+        if (state == new DeadDragonState()) { return; }
         currentState = state.ToString();
         state = state.Update(this);
         animProgress += Time.deltaTime;
@@ -205,15 +204,15 @@ public class Dragon : MonoBehaviour, IDamageable {
 
         foreach (FireballData fireballData in activeFireballDatas) {
             if (fireballData.fireball == null) {
-                if (fireballData.shadow != null) {
-                    Destroy(fireballData.shadow);
+                if (fireballData.indicator != null) {
+                    Destroy(fireballData.indicator);
                 }
                 activeFireballDatas.Remove(fireballData);
                 return;
             }
             if (fireballData.fireball.transform.position == fireballData.destination) {
                 Destroy(fireballData.fireball);
-                Destroy(fireballData.shadow);
+                Destroy(fireballData.indicator);
                 return;
             }
             if (fireballData.fireball.transform.position == fireballData.targetPos) {
@@ -223,8 +222,8 @@ public class Dragon : MonoBehaviour, IDamageable {
                     Mathf.MoveTowards(fireballData.fireball.transform.position.x, fireballData.targetPos.x, fireballData.speed * Time.deltaTime),
                     Mathf.MoveTowards(fireballData.fireball.transform.position.y, fireballData.targetPos.y, fireballData.speed * Time.deltaTime),
                     Mathf.MoveTowards(fireballData.fireball.transform.position.z, fireballData.targetPos.z, fireballData.speed * Time.deltaTime));
-                if (fireballData.shadow != null) {
-                    fireballData.shadow.transform.localScale = new Vector3(
+                if (fireballData.indicator != null) {
+                    fireballData.indicator.transform.localScale = new Vector3(
                         1.5f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta, 0,
                         1.5f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta);
                 }
@@ -251,15 +250,15 @@ public class Dragon : MonoBehaviour, IDamageable {
         GameObject newShadow = Instantiate(fireballShadow, fireballData.destination, Quaternion.identity);
         fireballData.destinationDelta = Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination);
         newShadow.transform.localScale = Vector3.zero;
-        fireballData.shadow = newShadow;
+        fireballData.indicator = newShadow;
     }
     [ContextMenu("Die")]
     public void CrumbleDown() {
-        //originPosition = new Vector3(
-        //    originPosition.x,
-        //    Mathf.MoveTowards(originPosition.y, originPosition.y - 6, 3f * Time.deltaTime),
-        //    originPosition.z);
-        //transform.position = originPosition;
+        foreach (FireballData item in activeFireballDatas) {
+            Destroy(item.fireball);
+            Destroy(item.indicator);
+        }
+        activeFireballDatas.Clear();
         Destruction.DestructableDie();
     }
 }

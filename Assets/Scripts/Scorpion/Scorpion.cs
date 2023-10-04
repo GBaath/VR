@@ -9,7 +9,6 @@ public interface IScorpionState {
 public abstract class ScorpionBaseState {
     protected IScorpionState ChangeState(IScorpionState newState, Scorpion scorpion) {
         if (newState != null) {
-            //scorpion.animProgress = 0;
             return newState;
         } else {
             Debug.LogError("Couldn't find a state to change to!");
@@ -23,7 +22,10 @@ public class CarelessScorpionState : ScorpionBaseState, IScorpionState {
 
     IScorpionState IScorpionState.Flee(Scorpion scorpion) => ChangeState(new FleeingScorpionState(), scorpion);
 
-    IScorpionState IScorpionState.Update(Scorpion scorpion) => this;
+    IScorpionState IScorpionState.Update(Scorpion scorpion) {
+        
+        return this;
+    }
 }
 
 public class FleeingScorpionState : ScorpionBaseState, IScorpionState {
@@ -38,11 +40,11 @@ public class FleeingScorpionState : ScorpionBaseState, IScorpionState {
 }
 
 public class Scorpion : MonoBehaviour, IDamageable {
-    //[HideInInspector] public float animProgress = 0;
     [SerializeField] protected string currentState = new CarelessScorpionState().ToString();
     IScorpionState state = new CarelessScorpionState();
     [SerializeField] float movementSpeed = 1;
-    [SerializeField] GameObject target;
+    public GameObject target;
+    [SerializeReference] FieldOfView fov;
 
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer[] renderer;
@@ -50,6 +52,7 @@ public class Scorpion : MonoBehaviour, IDamageable {
     float currentMaterialColor = 0f;
 
     void IDamageable.TakeDamage(float amount, bool isDead) {
+        fov.canSeeTarget = true;
         SetDmgFlash();
     }
 
@@ -90,7 +93,7 @@ public class Scorpion : MonoBehaviour, IDamageable {
         if (!target) {
             target = Camera.main.gameObject;
         }
-
+        fov.target = target;
         renderer = GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (var skinnedMeshRenderer in renderer) {
             propertyBlock = new MaterialPropertyBlock();
@@ -111,7 +114,7 @@ public class Scorpion : MonoBehaviour, IDamageable {
         currentState = state.ToString();
         state = state.Update(this);
 
-        if (Vector3.Distance(transform.position, target.transform.position) < 5) {
+        if (fov.canSeeTarget) {
             state = state.Flee(this);
         } else {
             state = state.Careless(this);

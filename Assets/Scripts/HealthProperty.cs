@@ -13,11 +13,11 @@ public class HealthProperty : MonoBehaviour {
     }
 
     public void LoseHealth(float amount, GameObject source = null) {
-        TryGetComponent(out IDamageable damageable);
         currentHealth -= amount;
         bool isLastBlow = currentHealth <= 0;
-        if (damageable == null)
+        if (!TryGetComponent(out IDamageable damageable)) {
             return;
+        }
         if (amount > 0 && !isDead) {
             damageable.TakeDamage(amount, isLastBlow);
         }

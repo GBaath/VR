@@ -8880,9 +8880,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5961782007994426283}
-  - component: {fileID: 973799592033484490}
-  - component: {fileID: 7489544594861327258}
   - component: {fileID: 7643496117968921442}
+  - component: {fileID: 949172467650389090}
+  - component: {fileID: 7489544594861327258}
+  - component: {fileID: 973799592033484490}
   - component: {fileID: 1871192246847994556}
   m_Layer: 24
   m_Name: Scorpion
@@ -8900,7 +8901,7 @@ Transform:
   m_GameObject: {fileID: 4728321696403498725}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.29902625, y: -1, z: -2.6888607}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8913,6 +8914,65 @@ Transform:
   - {fileID: 6893746415512828071}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7643496117968921442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4728321696403498725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e238bc539d4754b97adcab85a77db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: CarelessScorpionState
+  movementSpeed: 1
+  target: {fileID: 0}
+  fov: {fileID: 949172467650389090}
+--- !u!114 &949172467650389090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4728321696403498725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dda52fe202af264fa0a14e5a71180e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seeRadius: 8
+  seeRadiusIncrease: 4
+  currentSeeRadiusIncrease: 0
+  seeAngle: 360
+  attackRadius: 0
+  attackRadiusIncrease: 0
+  currentAttackRadiusIncrease: 0
+  target: {fileID: 0}
+  viewObject: {fileID: 4728321696403498725}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 67108864
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 14336
+  canSeeTarget: 0
+--- !u!114 &7489544594861327258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4728321696403498725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40b1223c19547645891c5aa9e84681d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  deathTimer: 3
+  isDead: 0
 --- !u!95 &973799592033484490
 Animator:
   serializedVersion: 5
@@ -8934,36 +8994,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7489544594861327258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4728321696403498725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d40b1223c19547645891c5aa9e84681d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5
-  deathTimer: 3
-  isDead: 0
---- !u!114 &7643496117968921442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4728321696403498725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02e238bc539d4754b97adcab85a77db6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: CarelessScorpionState
-  movementSpeed: 1
-  target: {fileID: 0}
 --- !u!65 &1871192246847994556
 BoxCollider:
   m_ObjectHideFlags: 0

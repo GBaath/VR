@@ -12,7 +12,7 @@ public class DestructableObject : MonoBehaviour
     {
             destructableObject = Instantiate(destructionPrefab, transform.position, transform.rotation);
             destructableObject.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
-            Destroy(this.gameObject);     
+            Destroy(this.gameObject);
     }
 
 }
