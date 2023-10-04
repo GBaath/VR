@@ -119,7 +119,7 @@ public class ShootingWeapon : MonoBehaviour
         {
             if (!outOfAmmo)
             {
-                Invoke(nameof(StartReload),0.1f);
+                Invoke(nameof(StartReload),0.3f);
                 outOfAmmo = true;
             }
         }
