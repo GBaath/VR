@@ -153,7 +153,7 @@ public class Dragon : MonoBehaviour, IDamageable {
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer renderer;
     float currentMaterialColor = 0f;
-    Vector3 originPosition = Vector3.zero;
+    //Vector3 originPosition = Vector3.zero;
 
     public Animator Animator {
         get { return animator; }
@@ -186,8 +186,7 @@ public class Dragon : MonoBehaviour, IDamageable {
         propertyBlock.SetColor("_EmissionColor", Color.black);
         propertyBlock.SetFloat("_EmissionIntensity", 0);
         renderer.SetPropertyBlock(propertyBlock);
-
-        originPosition = transform.position;
+        //originPosition = transform.position;
     }
 
     public static Vector3 RandomPointInBounds(Bounds bounds) {
@@ -234,9 +233,9 @@ public class Dragon : MonoBehaviour, IDamageable {
     }
 
     public void LaunchFireball() {
+        if (fireArea == null) { return; }
         GameObject newFireball = Instantiate(fireballProjectile, firePoint.position, Quaternion.identity);
         Vector3 fireballImpactArea = RandomPointInBounds(fireArea.bounds);
-
         FireballData newFireballData = new();
         newFireballData.fireball = newFireball;
         newFireballData.speed = fireballSpeed;

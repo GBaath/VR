@@ -12,7 +12,7 @@ public class DestructionSetup : MonoBehaviour
     public float explosionRadius;
     public float upwardModifier;
 
-    public float disablePhysicTimer = 10;
+    public float disablePhysicTimer = 4;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +57,7 @@ public class DestructionSetup : MonoBehaviour
             yield return new WaitForSeconds(disablePhysicTimer);
             Destroy(rb);
         }
-        Invoke(nameof(DestroyPieces), 30f);
+        Invoke(nameof(DestroyPieces), 5f);
     }
     private void DestroyPieces()
     {
