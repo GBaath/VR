@@ -16,6 +16,8 @@ public class HealthProperty : MonoBehaviour {
         TryGetComponent(out IDamageable damageable);
         currentHealth -= amount;
         bool isLastBlow = currentHealth <= 0;
+        if (damageable == null)
+            return;
         if (amount > 0 && !isDead) {
             damageable.TakeDamage(amount, isLastBlow);
         }
