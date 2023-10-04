@@ -19,6 +19,7 @@ public class ProfileCredit : MonoBehaviour {
     }
 
     public void EnableThis() {
+        if (!voiceClip) { return; }
         DisableAll();
         foreach (GameObject toggleObject in objectsToToggle) {
             toggleObject.SetActive(true);

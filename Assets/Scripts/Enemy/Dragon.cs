@@ -139,6 +139,10 @@ public class Dragon : MonoBehaviour, IDamageable {
     public AnimationClip prepareAttackAnimation;
     public AnimationClip attackAnimation;
     public AnimationClip dieAnimation;
+
+    [SerializeField] DestructableObject Destruction;
+
+
     [SerializeField] protected string currentState = new IdleDragonState().ToString();
 
     [HideInInspector] public IDragonState previousState = new IdleDragonState();
@@ -149,7 +153,7 @@ public class Dragon : MonoBehaviour, IDamageable {
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer renderer;
     float currentMaterialColor = 0f;
-    Vector3 originPosition = Vector3.zero;
+    //Vector3 originPosition = Vector3.zero;
 
     public Animator Animator {
         get { return animator; }
@@ -182,8 +186,7 @@ public class Dragon : MonoBehaviour, IDamageable {
         propertyBlock.SetColor("_EmissionColor", Color.black);
         propertyBlock.SetFloat("_EmissionIntensity", 0);
         renderer.SetPropertyBlock(propertyBlock);
-
-        originPosition = transform.position;
+        //originPosition = transform.position;
     }
 
     public static Vector3 RandomPointInBounds(Bounds bounds) {
@@ -230,9 +233,9 @@ public class Dragon : MonoBehaviour, IDamageable {
     }
 
     public void LaunchFireball() {
+        if (fireArea == null) { return; }
         GameObject newFireball = Instantiate(fireballProjectile, firePoint.position, Quaternion.identity);
         Vector3 fireballImpactArea = RandomPointInBounds(fireArea.bounds);
-
         FireballData newFireballData = new();
         newFireballData.fireball = newFireball;
         newFireballData.speed = fireballSpeed;
@@ -250,12 +253,13 @@ public class Dragon : MonoBehaviour, IDamageable {
         newShadow.transform.localScale = Vector3.zero;
         fireballData.shadow = newShadow;
     }
-
+    [ContextMenu("Die")]
     public void CrumbleDown() {
-        originPosition = new Vector3(
-            originPosition.x,
-            Mathf.MoveTowards(originPosition.y, originPosition.y - 6, 3f * Time.deltaTime),
-            originPosition.z);
-        transform.position = originPosition;
+        //originPosition = new Vector3(
+        //    originPosition.x,
+        //    Mathf.MoveTowards(originPosition.y, originPosition.y - 6, 3f * Time.deltaTime),
+        //    originPosition.z);
+        //transform.position = originPosition;
+        Destruction.DestructableDie();
     }
 }

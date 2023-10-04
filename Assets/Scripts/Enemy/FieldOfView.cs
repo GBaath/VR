@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour {
-    public float seeRadius;
+    public float seeRadius = 10;
     public float seeRadiusIncrease = 20;
     [HideInInspector] public float currentSeeRadiusIncrease;
     [Range(0, 360)] public float seeAngle = 90;

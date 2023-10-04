@@ -5754,6 +5754,8 @@ GameObject:
   - component: {fileID: 7525217407933283963}
   - component: {fileID: 4803651933633818444}
   - component: {fileID: 6147799926882854756}
+  - component: {fileID: 4255864950655221465}
+  - component: {fileID: 4378913538963350386}
   m_Layer: 24
   m_Name: Dragon
   m_TagString: Untagged
@@ -5802,6 +5804,7 @@ MonoBehaviour:
   prepareAttackAnimation: {fileID: 0}
   attackAnimation: {fileID: 0}
   dieAnimation: {fileID: 0}
+  Destruction: {fileID: 4255864950655221465}
   currentState: IdleDragonState
   animProgress: 0
 --- !u!95 &7525217407933283963
@@ -5861,6 +5864,47 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 6, z: 5}
   m_Center: {x: 0, y: 3, z: -2}
+--- !u!114 &4255864950655221465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7591266035748079431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2ef0b28f192224391b23f1e262c6d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destructionPrefab: {fileID: 4246792405085776552, guid: 77221883fcd3eab4bb2f401ac2dd58a3, type: 3}
+  canBeShot: 1
+--- !u!54 &4378913538963350386
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7591266035748079431}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7603144729632772646
 GameObject:
   m_ObjectHideFlags: 0
@@ -6176,7 +6220,7 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: a6e4b9fc05805d848b0309009afa3dc1, type: 2}
   - {fileID: 2100000, guid: a491b62f39624a34c8aa7aaa7edb9d7c, type: 2}
-  - {fileID: 2100000, guid: e31fd59401aad3747990f06e06debc6d, type: 2}
+  - {fileID: 2100000, guid: c3768725363d0254ca425e1373b6dcfb, type: 2}
   - {fileID: 2100000, guid: a491b62f39624a34c8aa7aaa7edb9d7c, type: 2}
   - {fileID: 2100000, guid: a491b62f39624a34c8aa7aaa7edb9d7c, type: 2}
   - {fileID: 2100000, guid: a491b62f39624a34c8aa7aaa7edb9d7c, type: 2}
