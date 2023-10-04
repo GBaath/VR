@@ -139,6 +139,10 @@ public class Dragon : MonoBehaviour, IDamageable {
     public AnimationClip prepareAttackAnimation;
     public AnimationClip attackAnimation;
     public AnimationClip dieAnimation;
+
+    [SerializeField] DestructableObject Destruction;
+
+
     [SerializeField] protected string currentState = new IdleDragonState().ToString();
 
     [HideInInspector] public IDragonState previousState = new IdleDragonState();
@@ -250,12 +254,13 @@ public class Dragon : MonoBehaviour, IDamageable {
         newShadow.transform.localScale = Vector3.zero;
         fireballData.shadow = newShadow;
     }
-
+    [ContextMenu("Die")]
     public void CrumbleDown() {
-        originPosition = new Vector3(
-            originPosition.x,
-            Mathf.MoveTowards(originPosition.y, originPosition.y - 6, 3f * Time.deltaTime),
-            originPosition.z);
-        transform.position = originPosition;
+        //originPosition = new Vector3(
+        //    originPosition.x,
+        //    Mathf.MoveTowards(originPosition.y, originPosition.y - 6, 3f * Time.deltaTime),
+        //    originPosition.z);
+        //transform.position = originPosition;
+        Destruction.DestructableDie();
     }
 }
