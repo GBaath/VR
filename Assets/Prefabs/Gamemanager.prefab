@@ -793,6 +793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a4e058b97ac0141929a49a6a36cb2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomsToDragon: 10
   roomBaseList:
   - {fileID: 8737019846826064926, guid: aecc2904fc8583848a83b9301a70154d, type: 3}
   - {fileID: 8737019846826064926, guid: df5f7c9014df77149b2ae66549654d17, type: 3}
@@ -805,6 +806,7 @@ MonoBehaviour:
   corridorList:
   - {fileID: 8737019846826064926, guid: 0c092d3125266a143bb0b99915ee1405, type: 3}
   - {fileID: 8737019846826064926, guid: 54aca98add042ec469ef1ab941151cca, type: 3}
+  dragonRoom: {fileID: 8737019846826064926, guid: da81ec137c3e9004d9ac9012e55aa880, type: 3}
   roomEntrance: {fileID: 5589313593156036153, guid: 4bacded88cbcda340bee83a057cfc761, type: 3}
   nextIsCorridor: 0
   roomsPassed: 0
