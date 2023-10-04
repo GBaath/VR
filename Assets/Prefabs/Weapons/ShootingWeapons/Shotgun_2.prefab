@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 2433064550531741849}
   - component: {fileID: 1372542031672875093}
   - component: {fileID: 2146483944636236206}
+  - component: {fileID: 2564597419815528600}
   m_Layer: 27
   m_Name: Shotgun_2
   m_TagString: Untagged
@@ -538,6 +539,7 @@ MonoBehaviour:
   reloadCanvas: {fileID: 2594057475574606769}
   reloadCircle: {fileID: 892800831235284827}
   canReloadBoost: 1
+  isInChest: 0
 --- !u!114 &1371214933226846401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,6 +854,28 @@ MonoBehaviour:
   speed: 1
   distance: 0.2
   yOffset: 0.5
+--- !u!64 &2564597419815528600
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970626207970751292}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300008, guid: f224a2fc3bf9125448c4d80547c80f57, type: 3}
 --- !u!1 &8459802303933532994
 GameObject:
   m_ObjectHideFlags: 0
