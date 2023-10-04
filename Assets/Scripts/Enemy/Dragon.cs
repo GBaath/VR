@@ -41,9 +41,7 @@ public class IdleDragonState : BaseDragonState, IDragonState {
         throw new System.NotImplementedException();
     }
 
-    IDragonState IDragonState.Die(Dragon dragon) {
-        throw new System.NotImplementedException();
-    }
+    IDragonState IDragonState.Die(Dragon dragon) => ChangeState(new DeadDragonState(), dragon);
 
     IDragonState IDragonState.Idle(Dragon dragon) {
         throw new System.NotImplementedException();
@@ -63,9 +61,7 @@ public class PrepareAttackDragonState : BaseDragonState, IDragonState {
         throw new System.NotImplementedException();
     }
 
-    IDragonState IDragonState.Die(Dragon dragon) {
-        throw new System.NotImplementedException();
-    }
+    IDragonState IDragonState.Die(Dragon dragon) => ChangeState(new DeadDragonState(), dragon);
 
     IDragonState IDragonState.Idle(Dragon dragon) {
         throw new System.NotImplementedException();
@@ -85,9 +81,7 @@ public class AttackDragonState : BaseDragonState, IDragonState {
         throw new System.NotImplementedException();
     }
 
-    IDragonState IDragonState.Die(Dragon dragon) {
-        throw new System.NotImplementedException();
-    }
+    IDragonState IDragonState.Die(Dragon dragon) => ChangeState(new DeadDragonState(), dragon);
 
     IDragonState IDragonState.Idle(Dragon dragon) {
         throw new System.NotImplementedException();
@@ -96,7 +90,7 @@ public class AttackDragonState : BaseDragonState, IDragonState {
     IDragonState IDragonState.Update(Dragon dragon) {
         if (startOfState) {
             startOfState = false;
-            dragon.LaunchFireballs();
+            dragon.LaunchFireball();
         }
         if (dragon.attackAnimation == null || AnimationEnded(dragon, dragon.attackAnimation)) {
             return ChangeState(new IdleDragonState(), dragon);
@@ -113,7 +107,16 @@ public class DeadDragonState : BaseDragonState, IDragonState {
 
     IDragonState IDragonState.Idle(Dragon dragon) => this;
 
-    IDragonState IDragonState.Update(Dragon dragon) => this;
+    IDragonState IDragonState.Update(Dragon dragon) {
+        if (startOfState) {
+            startOfState = false;
+            foreach (Collider item in dragon.GetComponentsInChildren<Collider>()) {
+                item.enabled = false;
+            }
+        }
+        dragon.CrumbleDown();
+        return this;
+    }
 }
 
 public class FireballData {
@@ -146,6 +149,7 @@ public class Dragon : MonoBehaviour, IDamageable {
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer renderer;
     float currentMaterialColor = 0f;
+    Vector3 originPosition = Vector3.zero;
 
     public Animator Animator {
         get { return animator; }
@@ -153,6 +157,7 @@ public class Dragon : MonoBehaviour, IDamageable {
 
     public virtual void TakeDamage(float amount, bool isDead) {
         SetDmgFlash();
+        LaunchFireball();
     }
 
     public virtual void Die(float destroyDelay) {
@@ -177,6 +182,8 @@ public class Dragon : MonoBehaviour, IDamageable {
         propertyBlock.SetColor("_EmissionColor", Color.black);
         propertyBlock.SetFloat("_EmissionIntensity", 0);
         renderer.SetPropertyBlock(propertyBlock);
+
+        originPosition = transform.position;
     }
 
     public static Vector3 RandomPointInBounds(Bounds bounds) {
@@ -222,14 +229,14 @@ public class Dragon : MonoBehaviour, IDamageable {
         }
     }
 
-    public void LaunchFireballs() {
+    public void LaunchFireball() {
         GameObject newFireball = Instantiate(fireballProjectile, firePoint.position, Quaternion.identity);
         Vector3 fireballImpactArea = RandomPointInBounds(fireArea.bounds);
 
         FireballData newFireballData = new();
         newFireballData.fireball = newFireball;
         newFireballData.speed = fireballSpeed;
-        newFireballData.targetPos = new(fireballImpactArea.x, fireballImpactArea.y + 7, fireballImpactArea.z);
+        newFireballData.targetPos = new(fireballImpactArea.x, fireballImpactArea.y + 5, fireballImpactArea.z);
         newFireballData.destination = new(fireballImpactArea.x, fireballImpactArea.y, fireballImpactArea.z);
         newFireball.transform.LookAt(newFireballData.targetPos);
         activeFireballDatas.Add(newFireballData);
@@ -242,5 +249,13 @@ public class Dragon : MonoBehaviour, IDamageable {
         fireballData.destinationDelta = Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination);
         newShadow.transform.localScale = Vector3.zero;
         fireballData.shadow = newShadow;
+    }
+
+    public void CrumbleDown() {
+        originPosition = new Vector3(
+            originPosition.x,
+            Mathf.MoveTowards(originPosition.y, originPosition.y - 6, 3f * Time.deltaTime),
+            originPosition.z);
+        transform.position = originPosition;
     }
 }

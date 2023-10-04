@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public interface IScorpionState {
+    IScorpionState Careless(Scorpion scorpion);
     IScorpionState Flee(Scorpion scorpion);
     IScorpionState Update(Scorpion scorpion);
 }
@@ -18,12 +19,16 @@ public abstract class ScorpionBaseState {
 }
 
 public class CarelessScorpionState : ScorpionBaseState, IScorpionState {
+    IScorpionState IScorpionState.Careless(Scorpion scorpion) => this;
+
     IScorpionState IScorpionState.Flee(Scorpion scorpion) => ChangeState(new FleeingScorpionState(), scorpion);
 
     IScorpionState IScorpionState.Update(Scorpion scorpion) => this;
 }
 
 public class FleeingScorpionState : ScorpionBaseState, IScorpionState {
+    IScorpionState IScorpionState.Careless(Scorpion scorpion) => ChangeState(new CarelessScorpionState(), scorpion);
+
     IScorpionState IScorpionState.Flee(Scorpion scorpion) => this;
 
     IScorpionState IScorpionState.Update(Scorpion scorpion) {
@@ -32,26 +37,94 @@ public class FleeingScorpionState : ScorpionBaseState, IScorpionState {
     }
 }
 
-public class Scorpion : MonoBehaviour {
+public class Scorpion : MonoBehaviour, IDamageable {
     //[HideInInspector] public float animProgress = 0;
     [SerializeField] protected string currentState = new CarelessScorpionState().ToString();
-    IScorpionState state = new FleeingScorpionState();
+    IScorpionState state = new CarelessScorpionState();
     [SerializeField] float movementSpeed = 1;
     [SerializeField] GameObject target;
+
+    MaterialPropertyBlock propertyBlock;
+    new SkinnedMeshRenderer[] renderer;
+    MeshRenderer[] meshRenderer;
+    float currentMaterialColor = 0f;
+
+    void IDamageable.TakeDamage(float amount, bool isDead) {
+        SetDmgFlash();
+    }
+
+    void IDamageable.Die(float destroyDelay) {
+        Destroy(gameObject);
+    }
+
+    void SetDmgFlash() {
+        foreach (var skinnedMeshRenderer in renderer) {
+            currentMaterialColor = 0.4f;
+            propertyBlock.SetColor("_EmissionColor", new Color(currentMaterialColor, currentMaterialColor, currentMaterialColor));
+            propertyBlock.SetFloat("_EmissionIntensity", currentMaterialColor);
+            skinnedMeshRenderer.SetPropertyBlock(propertyBlock);
+        }
+        foreach (var item in meshRenderer) {
+            currentMaterialColor = 0.4f;
+            propertyBlock.SetColor("_EmissionColor", new Color(currentMaterialColor, currentMaterialColor, currentMaterialColor));
+            propertyBlock.SetFloat("_EmissionIntensity", currentMaterialColor);
+            item.SetPropertyBlock(propertyBlock);
+        }
+    }
+    void LessenDmgFlash() {
+        foreach (var skinnedMeshRenderer in renderer) {
+            currentMaterialColor = Mathf.MoveTowards(currentMaterialColor, 0, 1.25f * Time.deltaTime);
+            propertyBlock.SetColor("_EmissionColor", new Color(currentMaterialColor, currentMaterialColor, currentMaterialColor));
+            propertyBlock.SetFloat("_EmissionIntensity", currentMaterialColor);
+            skinnedMeshRenderer.SetPropertyBlock(propertyBlock);
+        }
+        foreach (var item in meshRenderer) {
+            currentMaterialColor = Mathf.MoveTowards(currentMaterialColor, 0, 1.25f * Time.deltaTime);
+            propertyBlock.SetColor("_EmissionColor", new Color(currentMaterialColor, currentMaterialColor, currentMaterialColor));
+            propertyBlock.SetFloat("_EmissionIntensity", currentMaterialColor);
+            item.SetPropertyBlock(propertyBlock);
+        }
+    }
 
     private void Start() {
         if (!target) {
             target = Camera.main.gameObject;
+        }
+
+        renderer = GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach (var skinnedMeshRenderer in renderer) {
+            propertyBlock = new MaterialPropertyBlock();
+            propertyBlock.SetColor("_EmissionColor", Color.black);
+            propertyBlock.SetFloat("_EmissionIntensity", 0);
+            skinnedMeshRenderer.SetPropertyBlock(propertyBlock);
+        }
+        meshRenderer = GetComponentsInChildren<MeshRenderer>();
+        foreach (var item in meshRenderer) {
+            propertyBlock = new MaterialPropertyBlock();
+            propertyBlock.SetColor("_EmissionColor", Color.black);
+            propertyBlock.SetFloat("_EmissionIntensity", 0);
+            item.SetPropertyBlock(propertyBlock);
         }
     }
 
     private void Update() {
         currentState = state.ToString();
         state = state.Update(this);
+
+        if (Vector3.Distance(transform.position, target.transform.position) < 5) {
+            state = state.Flee(this);
+        } else {
+            state = state.Careless(this);
+        }
+
+        LessenDmgFlash();
     }
 
     public void Flee() {
-        transform.LookAt(new Vector3(-target.transform.position.x, transform.position.y, -target.transform.position.z));
-        //transform.Translate(movementSpeed * Time.deltaTime * transform.forward, Space.World);
+        Vector3 targetPosition = new(target.transform.position.x, transform.position.y, target.transform.position.z);
+        Vector3 newPosition = transform.position - targetPosition;
+        Quaternion lookRotation = Quaternion.LookRotation(newPosition);
+        transform.SetPositionAndRotation(transform.position + movementSpeed * Time.deltaTime * transform.forward,
+            Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * movementSpeed));
     }
 }
