@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: c0f2c64743010d64d9d12cdfab51edea
+guid: 2faba54dd3f09c341a67413b5958bda1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: voodoohead_Alt2.014
+    second: {fileID: 2100000, guid: a00375f445ff84a4a858ca5b997c7f56, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -36,7 +41,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 1
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1

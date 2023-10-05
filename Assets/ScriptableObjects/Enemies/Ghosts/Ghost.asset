@@ -15,13 +15,13 @@ MonoBehaviour:
   maxHealth: 15
   attackDamage: 35
   movementSpeed: 1.25
-  attackSpeedMultiplier: 1.5
+  attackSpeedMultiplier: 1
   animProgress: animProgress
-  idleAnimation: {fileID: 7400000, guid: 159f27e82edf2b7478efa768aec6c76e, type: 2}
-  chaseAnimation: {fileID: 7400000, guid: 56c9ac307f7a09d46ad74921abcf5247, type: 2}
-  attackAnimation: {fileID: 7400000, guid: 8fd663a5d992e904db936589ee86e1d0, type: 2}
-  confusedAnimation: {fileID: 7400000, guid: 9ea32605feb4726408e2aa3183064e6c, type: 2}
-  surprisedAnimation: {fileID: 7400000, guid: 520989e89a26d034ca94aed6673e371c, type: 2}
+  idleAnimation: {fileID: 7400000, guid: 21d7fbbdae25e684ba9c204f2c19d588, type: 2}
+  chaseAnimation: {fileID: 7400000, guid: e14d84548d58ef643bf2cd67c9c44889, type: 2}
+  attackAnimation: {fileID: 7400000, guid: ce9b268e2a5e1a847b99a9031da95b0a, type: 2}
+  confusedAnimation: {fileID: 7400000, guid: 1200c71b2f7a3eb489567bb1436e9559, type: 2}
+  surprisedAnimation: {fileID: 7400000, guid: bfc6242ac14ee0d4fa55552fc6c4d374, type: 2}
   idleTrigger: idle
   chaseTrigger: chase
   attackTrigger: attack

@@ -8942,8 +8942,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dda52fe202af264fa0a14e5a71180e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeRadius: 8
-  seeRadiusIncrease: 4
+  seeRadius: 12
+  seeRadiusIncrease: 8
   currentSeeRadiusIncrease: 0
   seeAngle: 360
   attackRadius: 0

@@ -49,7 +49,7 @@ public abstract class BaseEnemyState {
     }
     protected bool AnimationEnded(Enemy enemy, AnimationClip animationClip, float specialAnimationSpeed = 1) {
         if (enemy.animTimer >= AnimationLength(animationClip, specialAnimationSpeed)) {
-            enemy.animTimer = 0;
+            //enemy.animTimer = 0;
             return true;
         } else { return false; }
     }
