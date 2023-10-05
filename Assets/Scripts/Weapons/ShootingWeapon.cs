@@ -23,6 +23,10 @@ public class ShootingWeapon : MonoBehaviour
     [SerializeField] WeaponType currentWeaponType;
 
 
+    //Select stuff
+    private Coroutine deselectCoroutine;
+
+
     //For spining thing
     public bool isSelected;
     [SerializeField]LootFloat lootFloatScript;
@@ -53,7 +57,11 @@ public class ShootingWeapon : MonoBehaviour
         grabbable = GetComponent<XRGrabInteractable>();
         grabbable.activated.AddListener(StartFiring);
         grabbable.deactivated.AddListener(StopFiring);
-        grabbable.selectExited.AddListener(ObjectDropped);
+        //grabbable.lastselectExited.AddListener(ObjectDropped);
+        grabbable.lastSelectExited.AddListener(ObjectDropped);
+        grabbable.lastSelectExited.AddListener(SetSelectFalse);
+        grabbable.firstSelectEntered.AddListener(SetSelectTrue);
+
 
         //SetStats
         hapticScript.duration = weaponStats.hapticDuration;
@@ -147,7 +155,7 @@ public class ShootingWeapon : MonoBehaviour
         }
         StopParticleEffect();
     }
-    public void ObjectDropped(SelectExitEventArgs arg)
+    private void ObjectDropped(SelectExitEventArgs arg)
     {
         isFiring = false; // Stop firing when object is dropped
         StopShootingAnimation();
@@ -322,16 +330,30 @@ public class ShootingWeapon : MonoBehaviour
             fireAnimator.SetBool("Fire", false);
         }
     }
-    private void invokeSelectTrue()
+    //private void invokeSelectTrue()
+    //{
+    //    isSelected = true;
+    //}
+    private void SetSelectTrue(SelectEnterEventArgs arg)
     {
+        if (deselectCoroutine != null)
+        {
+            StopCoroutine(deselectCoroutine);
+            deselectCoroutine = null;
+        }
         isSelected = true;
     }
-    public void SetSelectTrue()
+    private void SetSelectFalse(SelectExitEventArgs arg)
     {
-        Invoke(nameof(invokeSelectTrue), 0.1f);
+        if (deselectCoroutine != null)
+        {
+            StopCoroutine(deselectCoroutine);
+        }
+        deselectCoroutine = StartCoroutine(DeselectAfterDelay());
     }
-    public void SetSelectFalse()
+    private IEnumerator DeselectAfterDelay()
     {
+        yield return new WaitForSeconds(0.3f);
         isSelected = false;
     }
 }
