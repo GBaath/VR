@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5f14e5c18296b74998dcf1ebd3a9426, type: 3}
-  m_Name: BigSkeleton
+  m_Name: Skeleton
   m_EditorClassIdentifier: 
-  maxHealth: 15
-  attackDamage: 75
-  movementSpeed: 0.8
+  maxHealth: 10
+  attackDamage: 50
+  movementSpeed: 1
   attackSpeedMultiplier: 1.5
   animProgress: animProgress
   idleAnimation: {fileID: 7400000, guid: 0f19fc1ff5707b346abc219b02bcef25, type: 2}

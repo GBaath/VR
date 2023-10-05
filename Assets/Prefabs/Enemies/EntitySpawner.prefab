@@ -45,20 +45,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityChanceList:
-  - entity: {fileID: 3438754275894660386, guid: 72687812d34d272438b577562f26641f, type: 3}
+  - entity: {fileID: 3897765033170007592, guid: f24e86684e284954aba9398f84a5fb72, type: 3}
     chance: 5
-  - entity: {fileID: 2275011521590808267, guid: ddf1be5948a8dcc42991a56c02d108c6, type: 3}
-    chance: 5
-  - entity: {fileID: 4884179667896424898, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+  - entity: {fileID: 3777626701335369346, guid: d52d388fb2bee3440b79c07aa2d819c2, type: 3}
     chance: 10
-  - entity: {fileID: 1086190359182233684, guid: 7e0f1f5de1a37bd4db263d10d9cc378a, type: 3}
+  - entity: {fileID: 8154087934347861040, guid: 175965e3992773f408fb723d5246763d, type: 3}
+    chance: 10
+  - entity: {fileID: 2379437508803492731, guid: 1149c1b27632cd746a892daf51420d1b, type: 3}
+    chance: 10
+  - entity: {fileID: 7513170334485277471, guid: 9370e73b65f519a488089cd26d3db709, type: 3}
     chance: 5
-  - entity: {fileID: 8064929054712499686, guid: 198e8244ef1afc347a60a1535d85d438, type: 3}
-    chance: 5
+  - entity: {fileID: 1122791890852951810, guid: 67b365549a06bb645bf3c1e45ec36d1a, type: 3}
+    chance: 20
   - entity: {fileID: 5980850914974078776, guid: 16b640eface79de41874e47e3fe8e62a, type: 3}
-    chance: 25
+    chance: 20
   - entity: {fileID: 4728321696403498725, guid: 49afd1a50d31ee84fbea7aadb4717b06, type: 3}
     chance: 20
-  - entity: {fileID: 1122791890852951810, guid: 67b365549a06bb645bf3c1e45ec36d1a, type: 3}
-    chance: 25
   spawnEntity: 1

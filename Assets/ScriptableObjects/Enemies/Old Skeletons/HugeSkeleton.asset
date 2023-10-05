@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5f14e5c18296b74998dcf1ebd3a9426, type: 3}
-  m_Name: BigSkeleton
+  m_Name: HugeSkeleton
   m_EditorClassIdentifier: 
   maxHealth: 15
   attackDamage: 75
-  movementSpeed: 0.8
+  movementSpeed: 1
   attackSpeedMultiplier: 1.5
   animProgress: animProgress
-  idleAnimation: {fileID: 7400000, guid: 0f19fc1ff5707b346abc219b02bcef25, type: 2}
-  chaseAnimation: {fileID: 7400000, guid: 085b16a7662bd5c478ecbf98fb630575, type: 2}
-  attackAnimation: {fileID: 7400000, guid: 5077f9aeecea8e245981221eff483219, type: 2}
-  confusedAnimation: {fileID: 7400000, guid: f58cef837e4210b4eb38b44fb8131cd0, type: 2}
-  surprisedAnimation: {fileID: 7400000, guid: 8b67034bad8699545b4a3c87b801b1f1, type: 2}
+  idleAnimation: {fileID: 7400000, guid: 159f27e82edf2b7478efa768aec6c76e, type: 2}
+  chaseAnimation: {fileID: 7400000, guid: 56c9ac307f7a09d46ad74921abcf5247, type: 2}
+  attackAnimation: {fileID: 7400000, guid: 8fd663a5d992e904db936589ee86e1d0, type: 2}
+  confusedAnimation: {fileID: 7400000, guid: 9ea32605feb4726408e2aa3183064e6c, type: 2}
+  surprisedAnimation: {fileID: 7400000, guid: 520989e89a26d034ca94aed6673e371c, type: 2}
   idleTrigger: idle
   chaseTrigger: chase
   attackTrigger: attack
