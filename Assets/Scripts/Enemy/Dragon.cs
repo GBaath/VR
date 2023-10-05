@@ -109,11 +109,12 @@ public class DeadDragonState : BaseDragonState, IDragonState {
 
     IDragonState IDragonState.Update(Dragon dragon) {
         if (startOfState) {
-            startOfState = false;
+            
             foreach (Collider item in dragon.GetComponentsInChildren<Collider>()) {
                 item.enabled = false;
             }
             dragon.CrumbleDown();
+            startOfState = false;
         }
         return this;
     }
