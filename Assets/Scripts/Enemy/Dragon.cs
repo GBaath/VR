@@ -225,6 +225,9 @@ public class Dragon : MonoBehaviour, IDamageable {
                     Mathf.MoveTowards(fireballData.fireball.transform.position.y, fireballData.targetPos.y, fireballData.speed * Time.deltaTime),
                     Mathf.MoveTowards(fireballData.fireball.transform.position.z, fireballData.targetPos.z, fireballData.speed * Time.deltaTime));
                 if (fireballData.indicator != null) {
+                    fireballData.indicator.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1, 0, 0, 1f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta));
+                    Debug.Log(fireballData.indicator.GetComponent<MeshRenderer>().material.color);
+                    Debug.Log(new Color(1, 0, 0, 1.5f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta));
                     fireballData.indicator.transform.localScale = new Vector3(
                         1.5f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta, 0,
                         1.5f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta);

@@ -5801,8 +5801,8 @@ MonoBehaviour:
   firePoint: {fileID: 6024394427092477263}
   fireArea: {fileID: 0}
   animator: {fileID: 7525217407933283963}
-  audioSource: {fileID: 0}
-  dieClip: {fileID: 0}
+  audioSource: {fileID: 4003359937826912541}
+  dieClip: {fileID: 8300000, guid: ead2ea67f48e10a44996d278a4a29fdb, type: 3}
   idleAnimation: {fileID: 0}
   prepareAttackAnimation: {fileID: 0}
   attackAnimation: {fileID: 0}
