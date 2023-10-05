@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337f14801569203438732ea278652afe, type: 3}
-  m_Name: SkellyGrunt
+  m_Name: OrcSurprised
   m_EditorClassIdentifier: 
   randomClipList:
-  - {fileID: 8300000, guid: ff96c4275ee3ad946b273a0f366a4ed7, type: 3}
-  - {fileID: 8300000, guid: 103cab4412e70ae4a86a70f5f7d75850, type: 3}
-  - {fileID: 8300000, guid: a7b2065e195241c41a8d4a88c525144d, type: 3}
+  - {fileID: 8300000, guid: 2b8526ab60bf68247b3c423bacbd5fc7, type: 3}
   pitchBase: 1
   pitchRange: 0
-  volume: 0.3
+  volume: 1

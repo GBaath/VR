@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,13 +12,15 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] GameObject deathFX;
     [SerializeReference] FieldOfView fieldOfView;
     [SerializeReference] AudioSource audioSource;
+    //[SerializeReference] AudioClip
 
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
     [SerializeField] protected string currentState = new IdleEnemyState().ToString();
 
     // Public variables
     public GameObject Head {
-        get { if (head) {
+        get {
+            if (head) {
                 return head;
             } else {
                 Debug.LogWarning("Reference to head is missing!");
@@ -103,14 +104,15 @@ public class Enemy : MonoBehaviour, IDamageable {
     }
     public virtual void Die(float delay) {
         state = state.Die(this);
+        Invoke(nameof(SpawnFX), delay - .01f);
         Destroy(gameObject, delay);
         spawnFX = deathFX;
-        Invoke(nameof(SpawnFX), delay);
         isWaitingForOtherEnemies = true;
         if (!hips) { return; }
         RagdollSetActive(true);
     }
     void SpawnFX() {
+        Debug.Log("spawnFX : DeathFX");
         GameObject newFX;
         if (spawnFX) {
             newFX = Instantiate(spawnFX, transform.position, Quaternion.identity);
@@ -224,7 +226,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     public void Chase() {
         transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, movementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
     }
-    public void TryAttack() {
+    public virtual void TryAttack() {
         if (canDamage) {
             canDamage = false;
             attackAnimationLoops++;
