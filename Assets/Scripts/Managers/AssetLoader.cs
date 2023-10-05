@@ -16,16 +16,7 @@ namespace UnityEngine
 
         private void Awake()
         {
-            if (instance && instance != this)
-            {
-                Destroy(this);
-                Destroy(gameObject);
-            }
-            else
-            {
-                instance = this;
-                DontDestroyOnLoad(instance);
-            }
+            instance = this;
         }
 
 

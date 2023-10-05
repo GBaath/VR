@@ -35,10 +35,6 @@ public class ScoreSaver : MonoBehaviour
         {
             _instance = this;
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
     }
     void Start()
     {
