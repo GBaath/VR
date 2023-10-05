@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parts: []
-  explosionPower: 2
+  explosionPower: 1
   explosionRadius: 2
   upwardModifier: 2
   disablePhysicTimer: 10

@@ -37,7 +37,6 @@ public class Crossbow : MonoBehaviour
     }
     public void CheckValue()
     {
-        Debug.Log("Checking Value");
         if (reloadSlider.value == 0)
         {
             //socketInteractor.socketActive = true;
@@ -77,7 +76,6 @@ public class Crossbow : MonoBehaviour
         else
         {
             reloadSlider.value = 1;
-            Debug.Log("Cant shoot");
 
         }
     }

@@ -25,7 +25,7 @@ namespace UnityEngine.XR.Content.Interaction
 
             if (m_ControllingInteractor.startingSelectedInteractable == null)
             {
-                Debug.Log("AutoSocketAttach does not have a starting selected interactable to match its position.", this);
+                //Debug.Log("AutoSocketAttach does not have a starting selected interactable to match its position.", this);
                 return;
             }
 
