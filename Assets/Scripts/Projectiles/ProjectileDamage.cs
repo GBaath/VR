@@ -5,6 +5,7 @@ public class ProjectileDamage : MonoBehaviour {
     public bool isHoming = false;
     public float homingSpeed = 10;
     public bool fromEnemy = false;
+    public bool isFireball = false;
     //public GameObject 
     [HideInInspector] public bool isDead = false;
 
@@ -47,7 +48,11 @@ public class ProjectileDamage : MonoBehaviour {
             return;
         }
         if (fromEnemy && otherTransform.GetComponentInParent<Health>() && otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth)) {
-            DamagePlayer(playerHealth);
+            if (isFireball) {
+                DamagePlayer(playerHealth, true);
+            } else {
+                DamagePlayer(playerHealth);
+            }
             return;
         }
         if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.GetComponentInParent<HealthProperty>().TryGetComponent(out HealthProperty enemyHP)) {
@@ -68,7 +73,12 @@ public class ProjectileDamage : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    private void DamagePlayer(Health playerHealth) {
+    private void DamagePlayer(Health playerHealth, bool fromFireball = false) {
+        if (fromFireball) {
+            if (TryGetComponent(out FireballAudio audio)) {
+                audio.PlayFireballImpact();
+            }
+        }
         playerHealth.TakeDamage(damage);
         Destroy(gameObject);
     }
