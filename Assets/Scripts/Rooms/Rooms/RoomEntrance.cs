@@ -13,7 +13,7 @@ public class RoomEntrance : MonoBehaviour
 
     public RoomBase roomBase;
 
-    [HideInInspector]public RoomEntrance nextRoomEntrance;
+    [HideInInspector] public RoomEntrance nextRoomEntrance;
 
 
 

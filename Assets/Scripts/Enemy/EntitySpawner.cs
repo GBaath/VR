@@ -54,10 +54,10 @@ public class EntitySpawner : MonoBehaviour {
             return;
         }
         if (newEntity.TryGetComponent(out Enemy enemy)) {
-            enemy.movementSpeed += GameManager.instance.roomManager.roomsPassed / 10;
+            enemy.movementSpeed += GameManager.instance.roomManager.roomsPassed * 10;
         }
         if (TryGetComponent(out HealthProperty hp)) {
-            hp.maxHealth += GameManager.instance.roomManager.roomsPassed / 10;
+            hp.Health += GameManager.instance.roomManager.roomsPassed * 10;
         }
     }
 }

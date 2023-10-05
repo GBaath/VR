@@ -10,9 +10,8 @@ public class DestructableObject : MonoBehaviour
 
     public void DestructableDie()
     {
-            destructableObject = Instantiate(destructionPrefab, transform.position, transform.rotation);
-            destructableObject.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
-            Destroy(this.gameObject);
+        destructableObject = Instantiate(destructionPrefab, transform.position, transform.rotation);
+        destructableObject.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
+        Destroy(gameObject);
     }
-
 }

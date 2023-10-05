@@ -103,7 +103,11 @@ public class Health : MonoBehaviour, IDamageable
     private void ResetScene()
     {
         Debug.Log("WTF???");
-        highScoreCanvas.Enable();
+        if (highScoreCanvas != null) {
+            highScoreCanvas.Enable();
+        } else {
+            Debug.LogWarning("Couldn't find highScoreCanvas!");
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: 0
-  dmg: 25
+  dmg: 1
   homingBullet: {fileID: 8149058687345463434, guid: a08dcead2ff2fe14fbd34889510e0d12, type: 3}

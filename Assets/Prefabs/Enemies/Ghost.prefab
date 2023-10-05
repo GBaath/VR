@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 322f44f8dcfb0e748b99dde587f90cbe, type: 2}
     - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: attackRadius
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3441273848279400291, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: m_IsActive
@@ -233,7 +233,7 @@ MonoBehaviour:
   animator: {fileID: 5157817005474641936}
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 322f44f8dcfb0e748b99dde587f90cbe, type: 2}
-  getHitFX: {fileID: 19824050, guid: 581eceb924751f5458eff3649a42d56f, type: 3}
+  deathFX: {fileID: 0}
   fieldOfView: {fileID: 1006400286932616774}
   audioSource: {fileID: 1761307684686403845}
   currentState: IdleEnemyState
@@ -246,7 +246,6 @@ MonoBehaviour:
   canDamage: 1
   isDancer: 0
   isCaster: 0
-  isDead: 0
   animTimer: 0
   movementSpeed: 0
   chaseTurnSpeedMultiplier: 3

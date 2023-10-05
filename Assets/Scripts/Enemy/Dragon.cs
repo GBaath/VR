@@ -113,8 +113,8 @@ public class DeadDragonState : BaseDragonState, IDragonState {
             foreach (Collider item in dragon.GetComponentsInChildren<Collider>()) {
                 item.enabled = false;
             }
+            dragon.CrumbleDown();
         }
-        dragon.CrumbleDown();
         return this;
     }
 }
