@@ -501,6 +501,7 @@ GameObject:
   - component: {fileID: 3062610941619027617}
   - component: {fileID: 790031779029853552}
   - component: {fileID: 2938291536806886017}
+  - component: {fileID: 426200767514493485}
   m_Layer: 27
   m_Name: UZI 1
   m_TagString: Untagged
@@ -632,6 +633,7 @@ MonoBehaviour:
   reloadCanvas: {fileID: 2179915140678237654}
   reloadCircle: {fileID: 3592941640806746428}
   canReloadBoost: 1
+  isInChest: 0
 --- !u!114 &5041919108498934252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,10 +701,10 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8077701157098400404}
-        m_TargetAssemblyTypeName: ShootingWeapon, Assembly-CSharp
-        m_MethodName: SetSelectTrue
-        m_Mode: 1
+      - m_Target: {fileID: 5041919108498934252}
+        m_TargetAssemblyTypeName: HapticInteractable, Assembly-CSharp
+        m_MethodName: SetController
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -714,9 +716,9 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8077701157098400404}
-        m_TargetAssemblyTypeName: ShootingWeapon, Assembly-CSharp
-        m_MethodName: ObjectDropped
+      - m_Target: {fileID: 5041919108498934252}
+        m_TargetAssemblyTypeName: HapticInteractable, Assembly-CSharp
+        m_MethodName: RemoveController
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -728,8 +730,8 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 8077701157098400404}
         m_TargetAssemblyTypeName: ShootingWeapon, Assembly-CSharp
-        m_MethodName: SetSelectFalse
-        m_Mode: 1
+        m_MethodName: ObjectDropped
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -987,6 +989,27 @@ MonoBehaviour:
   speed: 1
   distance: 0.2
   yOffset: 0.5
+--- !u!65 &426200767514493485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568054534775339266}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.06483151, y: 0.07967112, z: 0.5855147}
+  m_Center: {x: -0.0024761145, y: 0.07694415, z: 0.15487128}
 --- !u!1 &6746075797592830295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4962244906548070591, guid: f2876f4d74d269b42b180c81605cdf5b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 91
+      value: 360.5
       objectReference: {fileID: 0}
     - target: {fileID: 4962244906548070591, guid: f2876f4d74d269b42b180c81605cdf5b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1579,7 +1602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5025873414742885411, guid: f2876f4d74d269b42b180c81605cdf5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5025873414742885411, guid: f2876f4d74d269b42b180c81605cdf5b, type: 3}
       propertyPath: m_LocalRotation.w

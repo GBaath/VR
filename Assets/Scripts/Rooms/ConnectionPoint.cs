@@ -6,6 +6,8 @@ public class ConnectionsPoint : MonoBehaviour
 {
     public bool isUsed;
     public RoomBase baseConnection;
+    public bool isEntrance;
+
 
 
     //new random connection module from list

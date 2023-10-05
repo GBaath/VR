@@ -22,6 +22,9 @@ public class Crossbow : MonoBehaviour
     bool isArmed, isLoaded;
     public bool isSelected;
     public bool isInChest;
+
+    //Select stuff
+    private Coroutine deselectCoroutine;
     private void Start()
     {
         grabbable = GetComponent<XRGrabInteractable>();
@@ -29,10 +32,11 @@ public class Crossbow : MonoBehaviour
         hapticScript = GetComponent<HapticInteractable>();
         NotInWeaponSlot();
         grabbable.selectEntered.AddListener(IsInHand);
+        grabbable.lastSelectExited.AddListener(SetSelectFalse);
+        grabbable.firstSelectEntered.AddListener(SetSelectTrue);
     }
     public void CheckValue()
     {
-        Debug.Log("Checking Value");
         if (reloadSlider.value == 0)
         {
             //socketInteractor.socketActive = true;
@@ -72,7 +76,6 @@ public class Crossbow : MonoBehaviour
         else
         {
             reloadSlider.value = 1;
-            Debug.Log("Cant shoot");
 
         }
     }
@@ -126,12 +129,26 @@ public class Crossbow : MonoBehaviour
         reloadArrowPrefab.SetActive(false);
     }
 
-    public void IsSelected()
+    private void SetSelectTrue(SelectEnterEventArgs arg)
     {
+        if (deselectCoroutine != null)
+        {
+            StopCoroutine(deselectCoroutine);
+            deselectCoroutine = null;
+        }
         isSelected = true;
     }
-    public void IsNotSelected()
+    private void SetSelectFalse(SelectExitEventArgs arg)
     {
+        if (deselectCoroutine != null)
+        {
+            StopCoroutine(deselectCoroutine);
+        }
+        deselectCoroutine = StartCoroutine(DeselectAfterDelay());
+    }
+    private IEnumerator DeselectAfterDelay()
+    {
+        yield return new WaitForSeconds(0.3f);
         isSelected = false;
     }
 

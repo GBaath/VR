@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PersonligaScener/Carls.unity
     guid: 6a1131c450047874b92a8362b042c1a7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PersonligaScener/Jovins.unity
     guid: 93efa79c13d023743ac89ff7f6c97f78
   - enabled: 0
     path: Assets/Scenes/PersonligaScener/DemoScene.unity
     guid: b94e3665272597740ac848e4bc3979a2
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/PersonligaScener/Baaths.unity
     guid: 1378d0db034ac014cbf9e84e89d62357
   - enabled: 0

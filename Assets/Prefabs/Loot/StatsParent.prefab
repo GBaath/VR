@@ -27,15 +27,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2234312005205665808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00002299}
+  m_LocalScale: {x: 5.678078, y: 2.6446, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8037260033932279050}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 91, y: 0}
+  m_AnchoredPosition: {x: 360.5, y: 0}
   m_SizeDelta: {x: 150, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2210494557813970683
@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Stats...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
-  m_sharedMaterial: {fileID: 4687939059374929122, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -227,8 +227,8 @@ RectTransform:
   m_GameObject: {fileID: 6810573950024726083}
   m_LocalRotation: {x: 0.16020624, y: -0, z: -0, w: 0.98708355}
   m_LocalPosition: {x: 0, y: 0, z: -0.09100002}
-  m_LocalScale: {x: 0.0019999999, y: 0.0015199997, z: 0.0016399994}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.00072008, y: 0.0012924253, z: 0.0016399994}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4962244906548070591}
   m_Father: {fileID: 5025873414742885411}
@@ -343,8 +343,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b12d44d3217c34c41bc8fa035fa687a4, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8eb69fafe4f719b49bb2dd1a7358aaaa, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

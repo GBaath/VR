@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4499579775920583046}
   - component: {fileID: 4999561167385712723}
   - component: {fileID: 2675432233505248595}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: DismemberBullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -146,3 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a90557ebefd3834c940b8bf3dacf78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
+  isHoming: 0
+  homingSpeed: 10
+  fromEnemy: 0

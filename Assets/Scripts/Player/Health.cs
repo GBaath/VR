@@ -10,6 +10,8 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 200;
     [SerializeField] private float currentHealth;
     [SerializeField] private float healthPercent;
+    [SerializeField] DisableCanvas highScoreCanvas;
+
 
     [FormerlySerializedAs("damageOverlayImg")] [SerializeField] private Animator damageFlashImg;
     [FormerlySerializedAs("damageLoopOverlayImg")] [SerializeField] private Animator damageLoopFlashingImg;
@@ -24,6 +26,7 @@ public class Health : MonoBehaviour, IDamageable
     private float maxDamageCoolTime = 5f;
     private bool isRestoringHealth = false;
     private float timeSinceLastDamage;
+    
     
     void Awake()
     {
@@ -65,7 +68,7 @@ public class Health : MonoBehaviour, IDamageable
         damageLoopFlashingImg.SetBool("DamageLoopOverlay", false);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount, bool isDead = false)
     {
         //onhitDamage();
         isRestoringHealth = false;
@@ -93,11 +96,18 @@ public class Health : MonoBehaviour, IDamageable
     public void Die(float destroyDelay)
     {
         //onDeath();
+        ScoreSaver.Instance.OnDeath();
         Invoke(nameof(ResetScene), destroyDelay);
     }
 
     private void ResetScene()
     {
+        Debug.Log("WTF???");
+        if (highScoreCanvas != null) {
+            highScoreCanvas.Enable();
+        } else {
+            Debug.LogWarning("Couldn't find highScoreCanvas!");
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

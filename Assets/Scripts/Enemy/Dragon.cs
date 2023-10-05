@@ -41,9 +41,7 @@ public class IdleDragonState : BaseDragonState, IDragonState {
         throw new System.NotImplementedException();
     }
 
-    IDragonState IDragonState.Die(Dragon dragon) {
-        throw new System.NotImplementedException();
-    }
+    IDragonState IDragonState.Die(Dragon dragon) => ChangeState(new DeadDragonState(), dragon);
 
     IDragonState IDragonState.Idle(Dragon dragon) {
         throw new System.NotImplementedException();
@@ -51,7 +49,7 @@ public class IdleDragonState : BaseDragonState, IDragonState {
 
     IDragonState IDragonState.Update(Dragon dragon) {
         if (dragon.animProgress >= 2) {
-            return ChangeState(new PrepareAttackDragonState(), dragon);
+            return ChangeState(new AttackDragonState(), dragon);
         } else {
             return this;
         }
@@ -63,9 +61,7 @@ public class PrepareAttackDragonState : BaseDragonState, IDragonState {
         throw new System.NotImplementedException();
     }
 
-    IDragonState IDragonState.Die(Dragon dragon) {
-        throw new System.NotImplementedException();
-    }
+    IDragonState IDragonState.Die(Dragon dragon) => ChangeState(new DeadDragonState(), dragon);
 
     IDragonState IDragonState.Idle(Dragon dragon) {
         throw new System.NotImplementedException();
@@ -85,9 +81,7 @@ public class AttackDragonState : BaseDragonState, IDragonState {
         throw new System.NotImplementedException();
     }
 
-    IDragonState IDragonState.Die(Dragon dragon) {
-        throw new System.NotImplementedException();
-    }
+    IDragonState IDragonState.Die(Dragon dragon) => ChangeState(new DeadDragonState(), dragon);
 
     IDragonState IDragonState.Idle(Dragon dragon) {
         throw new System.NotImplementedException();
@@ -96,7 +90,7 @@ public class AttackDragonState : BaseDragonState, IDragonState {
     IDragonState IDragonState.Update(Dragon dragon) {
         if (startOfState) {
             startOfState = false;
-            dragon.LaunchFireballs();
+            dragon.LaunchFireball();
         }
         if (dragon.attackAnimation == null || AnimationEnded(dragon, dragon.attackAnimation)) {
             return ChangeState(new IdleDragonState(), dragon);
@@ -113,12 +107,19 @@ public class DeadDragonState : BaseDragonState, IDragonState {
 
     IDragonState IDragonState.Idle(Dragon dragon) => this;
 
-    IDragonState IDragonState.Update(Dragon dragon) => this;
+    IDragonState IDragonState.Update(Dragon dragon) {
+        if (startOfState) {
+            
+            startOfState = false;
+            dragon.CrumbleDown();
+        }
+        return this;
+    }
 }
 
 public class FireballData {
     public GameObject fireball;
-    public GameObject shadow = null;
+    public GameObject indicator = null;
     public float speed;
     public Vector3 targetPos;
     public Vector3 destination;
@@ -132,11 +133,16 @@ public class Dragon : MonoBehaviour, IDamageable {
     [SerializeReference] Transform firePoint;
     [SerializeReference] Collider fireArea;
     [SerializeReference] Animator animator;
+    [SerializeReference] AudioSource audioSource;
+    [SerializeReference] AudioClip dieClip;
     public AnimationClip idleAnimation;
     public AnimationClip prepareAttackAnimation;
     public AnimationClip attackAnimation;
     public AnimationClip dieAnimation;
-    [SerializeField] protected string currentState = "IdleDragonState";
+
+    [SerializeField] DestructableObject Destruction;
+
+    [SerializeField] protected string currentState = new IdleDragonState().ToString();
 
     [HideInInspector] public IDragonState previousState = new IdleDragonState();
     [HideInInspector] public float animProgress = 0;
@@ -146,16 +152,17 @@ public class Dragon : MonoBehaviour, IDamageable {
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer renderer;
     float currentMaterialColor = 0f;
+    //Vector3 originPosition = Vector3.zero;
 
     public Animator Animator {
         get { return animator; }
     }
 
-    void IDamageable.TakeDamage(int amount) {
+    public virtual void TakeDamage(float amount, bool isDead) {
         SetDmgFlash();
     }
 
-    void IDamageable.Die(float destroyDelay) {
+    public virtual void Die(float destroyDelay) {
         state = state.Die(this);
     }
 
@@ -177,9 +184,10 @@ public class Dragon : MonoBehaviour, IDamageable {
         propertyBlock.SetColor("_EmissionColor", Color.black);
         propertyBlock.SetFloat("_EmissionIntensity", 0);
         renderer.SetPropertyBlock(propertyBlock);
+        //originPosition = transform.position;
     }
 
-    public static Vector3 RandomPointInBounds(Bounds bounds) {
+    Vector3 RandomPointInBounds(Bounds bounds) {
         Vector3 point = new(
             Random.Range(bounds.min.x, bounds.max.x),
             Random.Range(bounds.min.y, bounds.max.y),
@@ -188,6 +196,7 @@ public class Dragon : MonoBehaviour, IDamageable {
     }
 
     private void Update() {
+        if (state == new DeadDragonState()) { return; }
         currentState = state.ToString();
         state = state.Update(this);
         animProgress += Time.deltaTime;
@@ -195,15 +204,15 @@ public class Dragon : MonoBehaviour, IDamageable {
 
         foreach (FireballData fireballData in activeFireballDatas) {
             if (fireballData.fireball == null) {
-                if (fireballData.shadow != null) {
-                    Destroy(fireballData.shadow);
+                if (fireballData.indicator != null) {
+                    Destroy(fireballData.indicator);
                 }
                 activeFireballDatas.Remove(fireballData);
                 return;
             }
             if (fireballData.fireball.transform.position == fireballData.destination) {
                 Destroy(fireballData.fireball);
-                Destroy(fireballData.shadow);
+                Destroy(fireballData.indicator);
                 return;
             }
             if (fireballData.fireball.transform.position == fireballData.targetPos) {
@@ -213,8 +222,9 @@ public class Dragon : MonoBehaviour, IDamageable {
                     Mathf.MoveTowards(fireballData.fireball.transform.position.x, fireballData.targetPos.x, fireballData.speed * Time.deltaTime),
                     Mathf.MoveTowards(fireballData.fireball.transform.position.y, fireballData.targetPos.y, fireballData.speed * Time.deltaTime),
                     Mathf.MoveTowards(fireballData.fireball.transform.position.z, fireballData.targetPos.z, fireballData.speed * Time.deltaTime));
-                if (fireballData.shadow != null) {
-                    fireballData.shadow.transform.localScale = new Vector3(
+                if (fireballData.indicator != null) {
+                    fireballData.indicator.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta, 0, 0, 1f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta));
+                    fireballData.indicator.transform.localScale = new Vector3(
                         1.5f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta, 0,
                         1.5f - Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination) / fireballData.destinationDelta);
                 }
@@ -222,14 +232,14 @@ public class Dragon : MonoBehaviour, IDamageable {
         }
     }
 
-    public void LaunchFireballs() {
+    public void LaunchFireball() {
+        if (fireArea == null) { return; }
         GameObject newFireball = Instantiate(fireballProjectile, firePoint.position, Quaternion.identity);
         Vector3 fireballImpactArea = RandomPointInBounds(fireArea.bounds);
-
         FireballData newFireballData = new();
         newFireballData.fireball = newFireball;
         newFireballData.speed = fireballSpeed;
-        newFireballData.targetPos = new(fireballImpactArea.x, fireballImpactArea.y + 7, fireballImpactArea.z);
+        newFireballData.targetPos = new(fireballImpactArea.x, fireballImpactArea.y + 5, fireballImpactArea.z);
         newFireballData.destination = new(fireballImpactArea.x, fireballImpactArea.y, fireballImpactArea.z);
         newFireball.transform.LookAt(newFireballData.targetPos);
         activeFireballDatas.Add(newFireballData);
@@ -241,6 +251,16 @@ public class Dragon : MonoBehaviour, IDamageable {
         GameObject newShadow = Instantiate(fireballShadow, fireballData.destination, Quaternion.identity);
         fireballData.destinationDelta = Vector3.Distance(fireballData.fireball.transform.position, fireballData.destination);
         newShadow.transform.localScale = Vector3.zero;
-        fireballData.shadow = newShadow;
+        fireballData.indicator = newShadow;
+    }
+    [ContextMenu("Die")]
+    public void CrumbleDown() {
+        foreach (FireballData item in activeFireballDatas) {
+            Destroy(item.fireball);
+            Destroy(item.indicator);
+        }
+        audioSource.PlayOneShot(dieClip, 2);
+        activeFireballDatas.Clear();
+        Destruction.DestructableDie();
     }
 }

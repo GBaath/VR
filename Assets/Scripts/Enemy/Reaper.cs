@@ -12,7 +12,7 @@ public class Reaper : Enemy {
         animTimer = 1;
         movementSpeed *= 1 + movementSpeedMultiplier;
 
-        if (Vector3.Distance(transform.position, Target.transform.position) < FieldOfView.attackRadius + FieldOfView.currentRadiusIncrease) {
+        if (Vector3.Distance(transform.position, Target.transform.position) < FieldOfView.attackRadius + FieldOfView.currentAttackRadiusIncrease) {
             Attack();
         }
     }

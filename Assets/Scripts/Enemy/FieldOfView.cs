@@ -1,12 +1,14 @@
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour {
-    public float seeRadius;
+    public float seeRadius = 10;
+    public float seeRadiusIncrease = 20;
+    [HideInInspector] public float currentSeeRadiusIncrease;
     [Range(0, 360)] public float seeAngle = 90;
 
     public float attackRadius = 3;
-    public float radiusIncrease = 1;
-    [HideInInspector] public float currentRadiusIncrease;
+    public float attackRadiusIncrease = 1;
+    [HideInInspector] public float currentAttackRadiusIncrease;
 
     public GameObject target;
     public GameObject viewObject;
@@ -21,29 +23,36 @@ public class FieldOfView : MonoBehaviour {
     }
 
     void FOVCheck() {
-        TryGetComponent(out Enemy enemy);
-        if (!target) {
+        if (!target && TryGetComponent(out Enemy enemy)) {
             target = enemy.Target;
-        }
-        if (enemy.Head) {
-            viewObject = enemy.Head;
+            if (enemy.Head) {
+                viewObject = enemy.Head;
+            }
         }
 
-        Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentRadiusIncrease * 5, targetMask);
+        if (canSeeTarget) {
+            currentSeeRadiusIncrease = seeRadiusIncrease;
+        } else {
+            currentSeeRadiusIncrease = 0;
+        }
+        Collider[] rangeChecks = Physics.OverlapSphere(viewObject.transform.position, seeRadius + currentSeeRadiusIncrease, targetMask);
 
         if (rangeChecks.Length != 0) {
-            Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - viewObject.transform.position).normalized;
-
-            if (/*Vector3.Angle(directionToTarget, transform.forward) < seeAngle / 2*/ true) {
-                float distanceToTarget = Vector3.Distance(viewObject.transform.position, target.position);
-                if (!Physics.Raycast(viewObject.transform.position, directionToTarget, distanceToTarget, obstructionMask)) {
-                    canSeeTarget = true;
+            foreach (Collider item in rangeChecks) {
+                Transform target = item.transform;
+                Vector3 directionToTarget = (target.position - viewObject.transform.position).normalized;
+                if (Vector3.Angle(directionToTarget, transform.forward) < seeAngle / 2) {
+                    float distanceToTarget = Vector3.Distance(viewObject.transform.position, target.position);
+                    if (Physics.Raycast(viewObject.transform.position, directionToTarget, distanceToTarget, obstructionMask)) {
+                        canSeeTarget = false;
+                    } else {
+                        canSeeTarget = true;
+                    }
                 } else {
                     canSeeTarget = false;
                 }
             }
-        } else if (canSeeTarget) {
+        } else {
             canSeeTarget = false;
         }
     }

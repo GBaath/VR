@@ -10,11 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2421625486177575476, guid: ac718c28793441a4d8e30a8fe78cd770, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.68
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4488867960337012739, guid: ac718c28793441a4d8e30a8fe78cd770, type: 3}
       propertyPath: m_Name
       value: smoke_poof_small
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494331885613562867, guid: ac718c28793441a4d8e30a8fe78cd770, type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4494331885613562867, guid: ac718c28793441a4d8e30a8fe78cd770, type: 3}
       propertyPath: ShapeModule.type
@@ -170,6 +174,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6878204993148582642, guid: ac718c28793441a4d8e30a8fe78cd770, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8383643151651532590, guid: ac718c28793441a4d8e30a8fe78cd770, type: 3}
+      propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8383643151651532590, guid: ac718c28793441a4d8e30a8fe78cd770, type: 3}

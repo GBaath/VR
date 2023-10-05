@@ -23,6 +23,10 @@ public class ShootingWeapon : MonoBehaviour
     [SerializeField] WeaponType currentWeaponType;
 
 
+    //Select stuff
+    private Coroutine deselectCoroutine;
+
+
     //For spining thing
     public bool isSelected;
     [SerializeField]LootFloat lootFloatScript;
@@ -53,7 +57,11 @@ public class ShootingWeapon : MonoBehaviour
         grabbable = GetComponent<XRGrabInteractable>();
         grabbable.activated.AddListener(StartFiring);
         grabbable.deactivated.AddListener(StopFiring);
-        grabbable.selectExited.AddListener(ObjectDropped);
+        //grabbable.lastselectExited.AddListener(ObjectDropped);
+        grabbable.lastSelectExited.AddListener(ObjectDropped);
+        grabbable.lastSelectExited.AddListener(SetSelectFalse);
+        grabbable.firstSelectEntered.AddListener(SetSelectTrue);
+
 
         //SetStats
         hapticScript.duration = weaponStats.hapticDuration;
@@ -105,6 +113,7 @@ public class ShootingWeapon : MonoBehaviour
                 break;
             case WeaponType.Pistol:
                 FireBullet();
+                Invoke(nameof(StopParticleEffect), 0.05f);
                 break;
             case WeaponType.Shotgun:
                 for (int i = 0; i < weaponStats.shotgunSlugs; i++)
@@ -118,7 +127,7 @@ public class ShootingWeapon : MonoBehaviour
         {
             if (!outOfAmmo)
             {
-                Invoke(nameof(StartReload),0.7f);
+                Invoke(nameof(StartReload),0.4f);
                 outOfAmmo = true;
             }
         }
@@ -146,7 +155,7 @@ public class ShootingWeapon : MonoBehaviour
         }
         StopParticleEffect();
     }
-    public void ObjectDropped(SelectExitEventArgs arg)
+    private void ObjectDropped(SelectExitEventArgs arg)
     {
         isFiring = false; // Stop firing when object is dropped
         StopShootingAnimation();
@@ -218,7 +227,6 @@ public class ShootingWeapon : MonoBehaviour
     }
     private void StartReload()
     {
-        Debug.Log("startreload");
         if (isReloading) return;
         reloadCanvas.enabled = true;
         aS.clip = weaponStats.reloadSound;
@@ -230,7 +238,6 @@ public class ShootingWeapon : MonoBehaviour
     }
     private void StopReload()
     {
-        Debug.Log("stop erload");
         StopCoroutine(ReloadProgress());
         reloadCanvas.enabled = false;
         reloadCircle.fillAmount = 0;
@@ -323,13 +330,30 @@ public class ShootingWeapon : MonoBehaviour
             fireAnimator.SetBool("Fire", false);
         }
     }
-
-    public void SetSelectTrue()
+    //private void invokeSelectTrue()
+    //{
+    //    isSelected = true;
+    //}
+    private void SetSelectTrue(SelectEnterEventArgs arg)
     {
+        if (deselectCoroutine != null)
+        {
+            StopCoroutine(deselectCoroutine);
+            deselectCoroutine = null;
+        }
         isSelected = true;
     }
-    public void SetSelectFalse()
+    private void SetSelectFalse(SelectExitEventArgs arg)
     {
+        if (deselectCoroutine != null)
+        {
+            StopCoroutine(deselectCoroutine);
+        }
+        deselectCoroutine = StartCoroutine(DeselectAfterDelay());
+    }
+    private IEnumerator DeselectAfterDelay()
+    {
+        yield return new WaitForSeconds(0.3f);
         isSelected = false;
     }
 }

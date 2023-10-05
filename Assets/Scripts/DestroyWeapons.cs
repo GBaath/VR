@@ -6,7 +6,8 @@ public class DestroyWeapons : MonoBehaviour
 {
 
     [ContextMenu("Destroy weapons")]
-    public void DestroyWeaponsOnGround()
+
+    private void TheFunctionInoked()
     {
         ShootingWeapon[] foundWeapons = FindObjectsOfType<ShootingWeapon>();
 
@@ -18,12 +19,18 @@ public class DestroyWeapons : MonoBehaviour
             }
         }
         Crossbow[] foundCrossbows = FindObjectsOfType<Crossbow>();
-        foreach(Crossbow crossbow in foundCrossbows)
+        foreach (Crossbow crossbow in foundCrossbows)
         {
-            if (!crossbow.isSelected)
+            if (!crossbow.isSelected && !crossbow.isInChest)
             {
                 Destroy(crossbow.gameObject);
             }
         }
     }
+    public void DestroyWeaponsOnGround()
+    {
+
+        Invoke(nameof(TheFunctionInoked), 0.1f);
+    }
+
 }

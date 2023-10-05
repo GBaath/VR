@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &266572838312962621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3737510623631393655}
+  - component: {fileID: 8508850946472736621}
+  m_Layer: 0
+  m_Name: EntitySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3737510623631393655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266572838312962621}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8508850946472736621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266572838312962621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da07564be715bf40a2ff3dfc4f309ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityChanceList:
+  - entity: {fileID: 3897765033170007592, guid: f24e86684e284954aba9398f84a5fb72, type: 3}
+    chance: 5
+  - entity: {fileID: 3777626701335369346, guid: d52d388fb2bee3440b79c07aa2d819c2, type: 3}
+    chance: 10
+  - entity: {fileID: 8154087934347861040, guid: 175965e3992773f408fb723d5246763d, type: 3}
+    chance: 10
+  - entity: {fileID: 2379437508803492731, guid: 1149c1b27632cd746a892daf51420d1b, type: 3}
+    chance: 10
+  - entity: {fileID: 7513170334485277471, guid: 9370e73b65f519a488089cd26d3db709, type: 3}
+    chance: 5
+  - entity: {fileID: 1122791890852951810, guid: 67b365549a06bb645bf3c1e45ec36d1a, type: 3}
+    chance: 20
+  - entity: {fileID: 5980850914974078776, guid: 16b640eface79de41874e47e3fe8e62a, type: 3}
+    chance: 20
+  - entity: {fileID: 4728321696403498725, guid: 49afd1a50d31ee84fbea7aadb4717b06, type: 3}
+    chance: 20
+  spawnEntity: 1

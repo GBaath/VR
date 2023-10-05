@@ -1,17 +1,20 @@
 using UnityEngine;
 
 public class ProjectileDamage : MonoBehaviour {
-    public int damage = 1;
+    public float damage = 1;
     public bool isHoming = false;
     public float homingSpeed = 10;
     public bool fromEnemy = false;
+    public bool isFireball = false;
+    //public GameObject 
+    [HideInInspector] public bool isDead = false;
 
     void Start() {
         InvokeRepeating(nameof(HomeInOnEnemy), 0, 0.2f);
     }
 
     private void HomeInOnEnemy() {
-        if (!isHoming) { return; }
+        if (!isHoming || isDead) { return; }
         float closestDistance = Mathf.Infinity;
         Transform closestTargetTransform = null;
         if (fromEnemy) {
@@ -19,7 +22,7 @@ public class ProjectileDamage : MonoBehaviour {
         } else {
             if (!FindAnyObjectByType<HealthProperty>()) { return; }
             foreach (HealthProperty hp in FindObjectsOfType<HealthProperty>()) {
-                if (hp.TryGetComponent(out Enemy enemy) && enemy.isDead) { continue; }
+                if (hp.TryGetComponent(out Enemy enemy) && enemy.state == new DeadEnemyState()) { continue; }
                 if (Vector3.Distance(transform.position, hp.transform.position) < closestDistance) {
                     closestDistance = Vector3.Distance(transform.position, hp.transform.position);
                     if (enemy) {
@@ -36,24 +39,55 @@ public class ProjectileDamage : MonoBehaviour {
     }
 
     private void OnHit(Transform otherTransform) {
-        if (fromEnemy) {
-            if (otherTransform.GetComponentInParent<Health>() && otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth)) {
-                playerHealth.TakeDamage(damage);
-                Destroy(gameObject);
-                return;
-            }
-        } else {
-            if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.GetComponentInParent<HealthProperty>().TryGetComponent(out HealthProperty hp)) {
-                hp.LoseHealth(damage);
-                AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, Camera.main.transform.position, 1);
-                Destroy(gameObject);
-                return;
-            }
+        if (!fromEnemy && otherTransform.CompareTag("MainCamera") && otherTransform.GetComponentInParent<Health>()) {
+            Suicide(otherTransform);
+            return;
         }
         if (!fromEnemy && otherTransform.GetComponentInParent<ProjectileDamage>() && otherTransform.GetComponentInParent<ProjectileDamage>().fromEnemy) {
-            Destroy(otherTransform.gameObject);
-            Destroy(gameObject);
+            KillHomingSkull(otherTransform);
+            return;
         }
+        if (fromEnemy && otherTransform.GetComponentInParent<Health>() && otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth)) {
+            if (isFireball) {
+                DamagePlayer(playerHealth, true);
+            } else {
+                DamagePlayer(playerHealth);
+            }
+            return;
+        }
+        if (otherTransform.GetComponentInParent<HealthProperty>() && otherTransform.GetComponentInParent<HealthProperty>().TryGetComponent(out HealthProperty enemyHP)) {
+            DamageEnemy(enemyHP);
+            return;
+        }
+    }
+
+    private void Suicide(Transform otherTransform) {
+        otherTransform.GetComponentInParent<Health>().TryGetComponent(out Health playerHealth);
+        playerHealth.Die(0.2f);
+    }
+
+    private void KillHomingSkull(Transform otherTransform) {
+        otherTransform.GetComponentInParent<ProjectileDamage>().isDead = true;
+        //AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, Camera.main.transform.position, 1);
+        Destroy(otherTransform.GetComponentInParent<ProjectileDamage>().gameObject);
+        Destroy(gameObject);
+    }
+
+    private void DamagePlayer(Health playerHealth, bool fromFireball = false) {
+        if (fromFireball) {
+            if (TryGetComponent(out FireballAudio audio)) {
+                audio.PlayFireballImpact();
+            }
+        }
+        playerHealth.TakeDamage(damage);
+        Destroy(gameObject);
+    }
+
+    private void DamageEnemy(HealthProperty enemyHP) {
+        //if (!enemyHP.isDead)
+        //    AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, Camera.main.transform.position, 1);
+        enemyHP.LoseHealth(damage);
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision other) {

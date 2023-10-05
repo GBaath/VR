@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f14e5c18296b74998dcf1ebd3a9426, type: 3}
+  m_Name: Skeleton
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  attackDamage: 50
+  movementSpeed: 1
+  attackSpeedMultiplier: 1.5
+  animProgress: animProgress
+  idleAnimation: {fileID: 7400000, guid: 0f19fc1ff5707b346abc219b02bcef25, type: 2}
+  chaseAnimation: {fileID: 7400000, guid: 085b16a7662bd5c478ecbf98fb630575, type: 2}
+  attackAnimation: {fileID: 7400000, guid: 5077f9aeecea8e245981221eff483219, type: 2}
+  confusedAnimation: {fileID: 7400000, guid: f58cef837e4210b4eb38b44fb8131cd0, type: 2}
+  surprisedAnimation: {fileID: 7400000, guid: 8b67034bad8699545b4a3c87b801b1f1, type: 2}
+  idleTrigger: idle
+  chaseTrigger: chase
+  attackTrigger: attack
+  confuseTrigger: confuse
+  surpriseTrigger: surprise

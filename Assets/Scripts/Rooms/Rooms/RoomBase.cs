@@ -75,8 +75,13 @@ public class RoomBase : MonoBehaviour
     {
         int r = Random.Range(0, connectionsPoints.Count);
 
-        connectionsPoints[r].isUsed = true;
+        //does roombase have a set entrancepoint?
+        foreach (ConnectionsPoint c in connectionsPoints.Where(cp => !cp.GetComponent<ConnectionsPoint>().isEntrance))
+        {
+            r = connectionsPoints.IndexOf(c);
+        }
 
+        connectionsPoints[r].isUsed = true;
 
         //connect to rotationpoint and connect
         roomBase.parent = connectionsPoints[r].transform;
@@ -90,7 +95,7 @@ public class RoomBase : MonoBehaviour
 
         //rotation transform magic for correct pos
         connectionsPoints[r].transform.position = entrance.spawnpoint.position;
-        connectionsPoints[r].transform.rotation = entrance.spawnpoint.rotation; ;
+        connectionsPoints[r].transform.rotation = entrance.spawnpoint.rotation;
     }
     public void SpawnConnections()
     {

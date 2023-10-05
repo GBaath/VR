@@ -9,7 +9,6 @@ public class HeadsetUtilities : MonoBehaviour
     [SerializeField] Transform cameraOffset;
     [SerializeField] Transform resetTarget;
     [SerializeField] VRWC_FollowTransform followtransform;
-    [SerializeField] VRWC_FollowTransform followtransformtwo;
 
     private float angle;
     public InputActionReference xButton;
@@ -37,12 +36,14 @@ public class HeadsetUtilities : MonoBehaviour
     }
     public void ResetPosition()
     {
+        //followtransform.offsetRotation = Quaternion.Euler(0, -xrCamera.localEulerAngles.y, 0);//Quaternion.Inverse(Quaternion.FromToRotation(xrCamera.eulerAngles,resetTarget.eulerAngles));
         Vector3 desiredCameraPosition = resetTarget.position;
         Vector3 currentHeadPositionRelativeToOffset = cameraOffset.InverseTransformPoint(xrCamera.position);
         Vector3 adjustedPosition = desiredCameraPosition - currentHeadPositionRelativeToOffset;
         cameraOffset.position = adjustedPosition;
         followtransform.OffsetPosition = cameraOffset.position - followtransform.target.position;
-        followtransform.extraVector = Vector3.zero;
+
+
     }
 
 

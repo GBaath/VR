@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4439906669673136653}
   - component: {fileID: 2421349569141299960}
   - component: {fileID: 5275425624528577810}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TNTBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

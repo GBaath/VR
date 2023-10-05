@@ -1,13 +1,13 @@
 using System.Linq;
 using UnityEditor;
 
-[CustomEditor(typeof(EnemySpawner))]
+[CustomEditor(typeof(EntitySpawner))]
 public class EnemySpawnerEditor : Editor {
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
-        EnemySpawner enemySpawner = (EnemySpawner)target;
+        EntitySpawner enemySpawner = (EntitySpawner)target;
         int totalChanceRemaining = 100;
-        foreach (EnemyChance enemyChance in enemySpawner.enemyChanceList.OrderBy(e => e.chance)) {
+        foreach (EntityChance enemyChance in enemySpawner.entityChanceList.OrderBy(e => e.chance)) {
             if (totalChanceRemaining > enemyChance.chance) {
                 totalChanceRemaining -= enemyChance.chance;
             } else {

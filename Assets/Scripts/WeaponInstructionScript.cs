@@ -20,12 +20,9 @@ public class WeaponInstructionScript : MonoBehaviour
     public void SetGrip()
     {        
         handanimtor.SetBool("Grip", true);
-
-        Debug.Log("GripShouldHappen");
     }
     public void RemoveGrip()
     {
         handanimtor.SetBool("Grip", false);
-        Debug.Log("NoGrip");
     }
 }

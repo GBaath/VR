@@ -16,6 +16,7 @@ public class VRWC_FollowTransform : MonoBehaviour
         set { offsetPosition = value; }
     }
     Vector3 offsetPosition;
+    public Quaternion offsetRotation = Quaternion.identity;
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class VRWC_FollowTransform : MonoBehaviour
     {
         Vector3 rotatedOffset = target.localRotation * offsetPosition;
         transform.localPosition = target.localPosition + rotatedOffset + extraVector;
-        transform.rotation = target.rotation;
+        transform.rotation = target.rotation * offsetRotation;
     }
 
 

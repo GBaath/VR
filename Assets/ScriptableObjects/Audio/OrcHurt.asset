@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337f14801569203438732ea278652afe, type: 3}
+  m_Name: OrcHurt
+  m_EditorClassIdentifier: 
+  randomClipList:
+  - {fileID: 8300000, guid: ca85a4f6189483844a70311e22e03208, type: 3}
+  - {fileID: 8300000, guid: c3db74928ea80874dab52a6e0e9cf8aa, type: 3}
+  - {fileID: 8300000, guid: df3bab1decb763145ac2016fc3413a3d, type: 3}
+  - {fileID: 8300000, guid: 361aba58708aa614ea53651bd2ec20e9, type: 3}
+  pitchBase: 1
+  pitchRange: 0
+  volume: 1

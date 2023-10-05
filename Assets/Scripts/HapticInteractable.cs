@@ -10,6 +10,7 @@ public class HapticInteractable : MonoBehaviour
     public float intensity;
     public float duration;
     XRBaseControllerInteractor baseController;
+    XRBaseControllerInteractor oldController;
     public bool shouldNotAutoListen;
     void Start()
     {
@@ -21,7 +22,7 @@ public class HapticInteractable : MonoBehaviour
             interactable.activated.AddListener(SetController);
             //interactable.deactivated.AddListener(RemoveController);
             interactable.hoverEntered.AddListener(HoverEnter);
-            //interactable.hoverExited.AddListener(HoverExit);
+            interactable.hoverExited.AddListener(HoverExit);
         }
 
         }
@@ -48,8 +49,13 @@ public class HapticInteractable : MonoBehaviour
     {
         if (eventArgs.interactorObject is XRBaseControllerInteractor controllerInteractor)
         {
+            if(baseController != null)
+            {
+                oldController = baseController;
+            }
             baseController = controllerInteractor;
             TriggerHaptic(controllerInteractor.xrController);
+            baseController = oldController;
         }
     }
 
@@ -57,7 +63,17 @@ public class HapticInteractable : MonoBehaviour
     {
         if (eventArgs.interactorObject is XRBaseControllerInteractor controllerInteractor)
         {
-            baseController = null;
+            //if(oldController != null)
+            //{
+            //    //baseController = oldController;
+            //    oldController = null;
+            //}
+            //else
+            //{
+            //baseController = null;
+
+            //}
+
         }
     }
 

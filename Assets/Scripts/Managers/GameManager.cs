@@ -18,17 +18,17 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance && instance != this)
-        {
-            Destroy(this);
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-
+        //if (instance && instance != this)
+        //{
+        //    Destroy(this);
+        //    Destroy(gameObject);
+        //}
+        //else
+        //{
+        //    instance = this;
+        //    DontDestroyOnLoad(instance);
+        //}
+        instance = this;
 
         SetAppSettings();
     }

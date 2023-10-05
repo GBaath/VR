@@ -3,14 +3,20 @@ using UnityEngine;
 public class Ghost : Enemy {
     [SerializeReference] GameObject homingHead;
     [SerializeReference] Transform spawnHeadPoint;
-    //[SerializeReference] List<Transform> destroyWhenKilled = new();
 
     //public override void Die(float delay) {
     //    base.Die(delay);
-    //    foreach (Transform item in destroyWhenKilled) {
-    //        Destroy(item.gameObject);
-    //    }
     //}
+
+    public override void TryAttack() {
+        base.TryAttack();
+    }
+
+    protected override void Update() {
+        base.Update();
+        if (state == new DeadEnemyState())
+            transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+    }
 
     protected override void Attack() {
         if (!homingHead || !spawnHeadPoint) { return; }

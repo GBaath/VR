@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,16 +9,19 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] Animator animator;
     [SerializeReference] GameObject target;
     [SerializeReference] EnemyData enemyData;
-    [SerializeReference] ParticleSystem getHitFX;
+    [SerializeReference] AudioData dmgAudioData;
+    [SerializeReference] GameObject deathFX;
     [SerializeReference] FieldOfView fieldOfView;
     [SerializeReference] AudioSource audioSource;
+    //[SerializeReference] AudioClip
 
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
-    [SerializeField] protected string currentState = "IdleEnemyState";
+    [SerializeField] protected string currentState = new IdleEnemyState().ToString();
 
     // Public variables
     public GameObject Head {
-        get { if (head) {
+        get {
+            if (head) {
                 return head;
             } else {
                 Debug.LogWarning("Reference to head is missing!");
@@ -46,6 +48,8 @@ public class Enemy : MonoBehaviour, IDamageable {
     public FieldOfView FieldOfView {
         get { return fieldOfView; }
     }
+
+
     /// <returns>A random limb from body.</returns>
     public GameObject GetRandomLimb() {
         if (!hips) { return gameObject; }
@@ -71,7 +75,6 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public bool canDamage = true;
     [HideInInspector] public bool isDancer = false;
     [HideInInspector] public bool isCaster = false;
-    [HideInInspector] public bool isDead = false;
     [HideInInspector] public float animTimer = 0;
 
     // Stats
@@ -89,22 +92,42 @@ public class Enemy : MonoBehaviour, IDamageable {
     // Private variables
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer renderer;
-    float randomScaleFloat;
+    GameObject spawnFX = null;
 
-    public virtual void TakeDamage(int amount) {
-        FieldOfView.canSeeTarget = true;
-        audioSource.clip = GameManager.instance.audioManager.enemyHit;
-        audioSource.Play();
-
+    //bool IDamageable.IsDead { get => isDead; set => isDead = value; }
+    public virtual void TakeDamage(float amount, bool isDead) {
+        if (dmgAudioData) {
+            audioSource.PlayOneShot(dmgAudioData.GetRandomClip(), 1);
+        } else {
+            audioSource.clip = GameManager.instance.audioManager.enemyHit;
+            audioSource.Play();
+        }
         SetDmgFlash();
+        if (isDead) { return; }
+        FieldOfView.canSeeTarget = true;
+        TakeKnockback(amount, Camera.main.gameObject);
     }
     public virtual void Die(float delay) {
-        Destroy(gameObject, delay);
-        isWaitingForOtherEnemies = true;
         state = state.Die(this);
-        isDead = true;
+        Invoke(nameof(SpawnFX), delay - .01f);
+        Destroy(gameObject, delay);
+        spawnFX = deathFX;
+        isWaitingForOtherEnemies = true;
         if (!hips) { return; }
         RagdollSetActive(true);
+    }
+    void SpawnFX() {
+        Debug.Log("spawnFX : DeathFX");
+        GameObject newFX;
+        if (spawnFX) {
+            newFX = Instantiate(spawnFX, transform.position, Quaternion.identity);
+            foreach (ParticleSystem particleSystem in newFX.GetComponentsInChildren<ParticleSystem>()) {
+                particleSystem.Play();
+            }
+            spawnFX = null;
+        } else {
+            Debug.LogWarning("Missing particle: " + spawnFX);
+        }
     }
     void SetDmgFlash() {
         currentMaterialColor = 0.4f;
@@ -117,6 +140,14 @@ public class Enemy : MonoBehaviour, IDamageable {
         propertyBlock.SetColor("_EmissionColor", new Color(currentMaterialColor, currentMaterialColor, currentMaterialColor));
         propertyBlock.SetFloat("_EmissionIntensity", currentMaterialColor);
         renderer.SetPropertyBlock(propertyBlock);
+    }
+    void TakeKnockback(float dmg, GameObject dmgSource) {
+        if (dmgSource == null) { return; }
+        Vector3 directionVector = new Vector3(
+            transform.position.x, transform.position.y, transform.position.z) -
+            new Vector3(dmgSource.transform.position.x, transform.position.y, dmgSource.transform.position.z);
+
+        transform.position += 0.2f * dmg * (1 / transform.localScale.y) * directionVector.normalized;
     }
     protected virtual void Start() {
         renderer = GetComponentInChildren<SkinnedMeshRenderer>();
@@ -131,7 +162,6 @@ public class Enemy : MonoBehaviour, IDamageable {
         turnSpeed = EnemyData.TurnSpeed;
         attackDamage = EnemyData.AttackDamage;
         movementSpeed = EnemyData.MovementSpeed;
-        //RandomizeSizeAndStats();
 
         if (GameManager.instance.enemiesToChaseAtOnce > 0) {
             InvokeRepeating(nameof(WaitForOtherEnemies), 0, checkWaitRate);
@@ -141,22 +171,23 @@ public class Enemy : MonoBehaviour, IDamageable {
         state = state.Idle(this);
     }
     void RagdollSetActive(bool enable) {
-        //GetComponent<BoxCollider>().enabled = !enable;
+        GetComponent<BoxCollider>().enabled = !enable;
         Animator.enabled = !enable;
         // Get all colliders that also have character joint components
-        foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>().Where(j => j.GetComponent<Collider>())) {
-            joint.enableCollision = enable;
+        foreach (CharacterJoint joint in GetComponentsInChildren<CharacterJoint>()) {
             joint.enablePreprocessing = enable;
             joint.enableProjection = enable;
-            //joint.GetComponent<Collider>().enabled = enable;
+            joint.enableCollision = enable;
+            joint.TryGetComponent(out Collider collider);
+            collider.enabled = enable;
             joint.TryGetComponent(out Rigidbody rb);
-            rb.isKinematic = !enable;
             rb.detectCollisions = enable;
             rb.useGravity = enable;
+            rb.isKinematic = !enable;
         }
     }
     void WaitForOtherEnemies() {
-        if (isDead) { return; }
+        if (state == new DeadEnemyState()) { return; }
         //int enemiesAtOnce = GameManager.instance.enemiesToChaseAtOnce;
 
         // Get enemies closest to the same target
@@ -180,12 +211,12 @@ public class Enemy : MonoBehaviour, IDamageable {
         animTimer += Time.deltaTime;
         LessenDmgFlash();
 
-        if (isDead) { state = state.Die(this); return; }
+        if (state == new DeadEnemyState()) { state = state.Die(this); return; }
         if (!Target || isWaitingForOtherEnemies || !FieldOfView.canSeeTarget) {
             state = state.Idle(this);
             return;
         }
-        if (Vector3.Distance(transform.position, Target.transform.position) < FieldOfView.attackRadius + FieldOfView.currentRadiusIncrease) {
+        if (Vector3.Distance(transform.position, Target.transform.position) < FieldOfView.attackRadius + FieldOfView.currentAttackRadiusIncrease) {
             state = state.Attack(this); return;
         } else {
             state = state.Chase(this); return;
@@ -200,7 +231,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     public void Chase() {
         transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, movementSpeed * Time.deltaTime * Mathf.Clamp(animTimer, 0, 1));
     }
-    public void TryAttack() {
+    public virtual void TryAttack() {
         if (canDamage) {
             canDamage = false;
             attackAnimationLoops++;
