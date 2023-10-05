@@ -1,8 +1,13 @@
 using UnityEngine;
 
 public class HealthProperty : MonoBehaviour {
-    public float maxHealth = 1, deathTimer = 3;
+    [SerializeField] float maxHealth = 1, deathTimer = 3;
+    float healthLost;
     float currentHealth;
+    public float Health {
+        get { return maxHealth - healthLost; }
+        set { currentHealth = value; }
+    }
     [HideInInspector] public bool isDead = false;
 
     private void Start() {
@@ -14,6 +19,7 @@ public class HealthProperty : MonoBehaviour {
 
     public void LoseHealth(float amount, GameObject source = null) {
         currentHealth -= amount;
+        healthLost += amount;
         bool isLastBlow = currentHealth <= 0;
         if (!TryGetComponent(out IDamageable damageable)) {
             return;
