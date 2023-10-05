@@ -2175,6 +2175,7 @@ MonoBehaviour:
   animator: {fileID: 8477073981646678332}
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 322f44f8dcfb0e748b99dde587f90cbe, type: 2}
+  dmgAudioData: {fileID: 11400000, guid: 4841960053ee3f3479b1320527dacc77, type: 2}
   deathFX: {fileID: 7066763031991719493, guid: 36d790134c3367e4bb9cef6d8cea1dd3, type: 3}
   fieldOfView: {fileID: 4595872124357384042}
   audioSource: {fileID: 3044942300333426729}

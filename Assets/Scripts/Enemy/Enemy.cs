@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] Animator animator;
     [SerializeReference] GameObject target;
     [SerializeReference] EnemyData enemyData;
+    [SerializeReference] AudioData dmgAudioData;
     [SerializeReference] GameObject deathFX;
     [SerializeReference] FieldOfView fieldOfView;
     [SerializeReference] AudioSource audioSource;
@@ -95,8 +96,12 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     //bool IDamageable.IsDead { get => isDead; set => isDead = value; }
     public virtual void TakeDamage(float amount, bool isDead) {
-        audioSource.clip = GameManager.instance.audioManager.enemyHit;
-        audioSource.Play();
+        if (dmgAudioData) {
+            audioSource.PlayOneShot(dmgAudioData.GetRandomClip(), 1);
+        } else {
+            audioSource.clip = GameManager.instance.audioManager.enemyHit;
+            audioSource.Play();
+        }
         SetDmgFlash();
         if (isDead) { return; }
         FieldOfView.canSeeTarget = true;

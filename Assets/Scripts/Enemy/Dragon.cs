@@ -135,6 +135,8 @@ public class Dragon : MonoBehaviour, IDamageable {
     [SerializeReference] Transform firePoint;
     [SerializeReference] Collider fireArea;
     [SerializeReference] Animator animator;
+    [SerializeReference] AudioSource audioSource;
+    [SerializeReference] AudioClip dieClip;
     public AnimationClip idleAnimation;
     public AnimationClip prepareAttackAnimation;
     public AnimationClip attackAnimation;
@@ -258,6 +260,7 @@ public class Dragon : MonoBehaviour, IDamageable {
             Destroy(item.fireball);
             Destroy(item.indicator);
         }
+        audioSource.PlayOneShot(dieClip, 1);
         activeFireballDatas.Clear();
         Destruction.DestructableDie();
     }
