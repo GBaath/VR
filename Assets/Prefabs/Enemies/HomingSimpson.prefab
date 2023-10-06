@@ -69,8 +69,6 @@ MonoBehaviour:
   homingSpeed: 2
   fromEnemy: 1
   isFireball: 0
-  deathAudioData: {fileID: 11400000, guid: 5281a940aeb45b544a6f1c317b1a80d0, type: 2}
-  audioSource: {fileID: 5471839737821806925}
   isDead: 0
 --- !u!54 &5936388331521532920
 Rigidbody:
@@ -98,7 +96,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!82 &5471839737821806925
 AudioSource:
   m_ObjectHideFlags: 0

@@ -67,14 +67,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     [HideInInspector] public IEnemyState previousState = new IdleEnemyState();
     [HideInInspector] public IEnemyState state = new IdleEnemyState();
     [HideInInspector] public bool isWaitingForOtherEnemies = false;
-    [HideInInspector] public Color decayColor = Color.white;
-    [HideInInspector] public float maxDanceDistance = 10;
-    [HideInInspector] public bool mayKillTime = true;
-    [HideInInspector] public bool wasSpawned = false;
-    [HideInInspector] public float randomPitch = 1;
     [HideInInspector] public bool canDamage = true;
-    [HideInInspector] public bool isDancer = false;
-    [HideInInspector] public bool isCaster = false;
     [HideInInspector] public float animTimer = 0;
 
     // Stats
@@ -150,7 +143,7 @@ public class Enemy : MonoBehaviour, IDamageable {
             transform.position.x, transform.position.y, transform.position.z) -
             new Vector3(dmgSource.transform.position.x, transform.position.y, dmgSource.transform.position.z);
 
-        transform.position += 0.2f * dmg * (1 / transform.localScale.y) * directionVector.normalized;
+        transform.position += 0.15f * dmg * (1 / transform.localScale.y) * directionVector.normalized;
     }
     protected virtual void Start() {
         renderer = GetComponentInChildren<SkinnedMeshRenderer>();
@@ -250,8 +243,4 @@ public class Enemy : MonoBehaviour, IDamageable {
             }
         }
     }
-
-    //public virtual void Decay() {
-    //    currentMaterialColor = Mathf.MoveTowards(currentMaterialColor, 0, 0.5f * Time.deltaTime);
-    //}
 }

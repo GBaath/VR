@@ -2,6 +2,7 @@ using UnityEngine;
 
 public interface IScorpionState {
     IScorpionState Careless(Scorpion scorpion);
+    IScorpionState Die(Scorpion scorpion);
     IScorpionState Flee(Scorpion scorpion);
     IScorpionState Update(Scorpion scorpion);
 }
@@ -20,6 +21,8 @@ public abstract class ScorpionBaseState {
 public class CarelessScorpionState : ScorpionBaseState, IScorpionState {
     IScorpionState IScorpionState.Careless(Scorpion scorpion) => this;
 
+    IScorpionState IScorpionState.Die(Scorpion scorpion) => ChangeState(new DeadScorpionState(), scorpion);
+
     IScorpionState IScorpionState.Flee(Scorpion scorpion) => ChangeState(new FleeingScorpionState(), scorpion);
 
     IScorpionState IScorpionState.Update(Scorpion scorpion) {
@@ -31,6 +34,8 @@ public class CarelessScorpionState : ScorpionBaseState, IScorpionState {
 public class FleeingScorpionState : ScorpionBaseState, IScorpionState {
     IScorpionState IScorpionState.Careless(Scorpion scorpion) => ChangeState(new CarelessScorpionState(), scorpion);
 
+    IScorpionState IScorpionState.Die(Scorpion scorpion) => ChangeState(new DeadScorpionState(), scorpion);
+
     IScorpionState IScorpionState.Flee(Scorpion scorpion) => this;
 
     IScorpionState IScorpionState.Update(Scorpion scorpion) {
@@ -39,13 +44,24 @@ public class FleeingScorpionState : ScorpionBaseState, IScorpionState {
     }
 }
 
+public class DeadScorpionState : ScorpionBaseState, IScorpionState {
+    IScorpionState IScorpionState.Careless(Scorpion scorpion) => this;
+
+    IScorpionState IScorpionState.Die(Scorpion scorpion) => this;
+
+    IScorpionState IScorpionState.Flee(Scorpion scorpion) => this;
+
+    IScorpionState IScorpionState.Update(Scorpion scorpion) => this;
+}
+
 public class Scorpion : MonoBehaviour, IDamageable {
     [SerializeField] protected string currentState = new CarelessScorpionState().ToString();
-    IScorpionState state = new CarelessScorpionState();
     [SerializeField] float movementSpeed = 1;
-    public GameObject target;
     [SerializeReference] FieldOfView fov;
+    public GameObject target;
+    public GameObject deathFX;
 
+    IScorpionState state = new CarelessScorpionState();
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer[] renderer;
     MeshRenderer[] meshRenderer;
@@ -57,7 +73,23 @@ public class Scorpion : MonoBehaviour, IDamageable {
     }
 
     void IDamageable.Die(float destroyDelay) {
-        Destroy(gameObject);
+        state = state.Die(this);
+        AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, transform.position, 1);
+        Invoke(nameof(SpawnFX), destroyDelay - Time.deltaTime * 2);
+        Destroy(gameObject, destroyDelay);
+    }
+
+    void SpawnFX() {
+        GameObject newFX;
+        if (deathFX != null) {
+            newFX = Instantiate(deathFX, transform.position, Quaternion.identity);
+            foreach (ParticleSystem particleSystem in newFX.GetComponentsInChildren<ParticleSystem>()) {
+                particleSystem.Play();
+            }
+            Destroy(newFX, 3);
+        } else {
+            // Don't spawn particle
+        }
     }
 
     void SetDmgFlash() {
@@ -108,19 +140,20 @@ public class Scorpion : MonoBehaviour, IDamageable {
             propertyBlock.SetFloat("_EmissionIntensity", 0);
             item.SetPropertyBlock(propertyBlock);
         }
+
+        transform.position = new Vector3(transform.position.x, -2.55f, transform.position.z);
     }
 
     private void Update() {
         currentState = state.ToString();
         state = state.Update(this);
+        LessenDmgFlash();
 
         if (fov.canSeeTarget) {
             state = state.Flee(this);
         } else {
             state = state.Careless(this);
         }
-
-        LessenDmgFlash();
     }
 
     public void Flee() {

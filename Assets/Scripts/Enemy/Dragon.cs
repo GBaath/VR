@@ -48,7 +48,7 @@ public class IdleDragonState : BaseDragonState, IDragonState {
     }
 
     IDragonState IDragonState.Update(Dragon dragon) {
-        if (dragon.animProgress >= 2) {
+        if (dragon.animProgress >= 1.5f * Mathf.Clamp(dragon.healthProperty.CurrentHealth / dragon.healthProperty.maxHealth, 0.05f, 2)) {
             return ChangeState(new AttackDragonState(), dragon);
         } else {
             return this;
@@ -56,25 +56,25 @@ public class IdleDragonState : BaseDragonState, IDragonState {
     }
 }
 
-public class PrepareAttackDragonState : BaseDragonState, IDragonState {
-    IDragonState IDragonState.Attack(Dragon dragon) {
-        throw new System.NotImplementedException();
-    }
+//public class PrepareAttackDragonState : BaseDragonState, IDragonState {
+//    IDragonState IDragonState.Attack(Dragon dragon) {
+//        throw new System.NotImplementedException();
+//    }
 
-    IDragonState IDragonState.Die(Dragon dragon) => ChangeState(new DeadDragonState(), dragon);
+//    IDragonState IDragonState.Die(Dragon dragon) => ChangeState(new DeadDragonState(), dragon);
 
-    IDragonState IDragonState.Idle(Dragon dragon) {
-        throw new System.NotImplementedException();
-    }
+//    IDragonState IDragonState.Idle(Dragon dragon) {
+//        throw new System.NotImplementedException();
+//    }
 
-    IDragonState IDragonState.Update(Dragon dragon) {
-        if (dragon.animProgress >= 2) {
-            return ChangeState(new AttackDragonState(), dragon);
-        } else {
-            return this;
-        }
-    }
-}
+//    IDragonState IDragonState.Update(Dragon dragon) {
+//        if (dragon.animProgress >= 0.5f) {
+//            return ChangeState(new AttackDragonState(), dragon);
+//        } else {
+//            return this;
+//        }
+//    }
+//}
 
 public class AttackDragonState : BaseDragonState, IDragonState {
     IDragonState IDragonState.Attack(Dragon dragon) {
@@ -138,6 +138,7 @@ public class Dragon : MonoBehaviour, IDamageable {
     public AnimationClip prepareAttackAnimation;
     public AnimationClip attackAnimation;
     public AnimationClip dieAnimation;
+    public HealthProperty healthProperty;
 
     [SerializeField] DestructableObject Destruction;
 
@@ -258,7 +259,7 @@ public class Dragon : MonoBehaviour, IDamageable {
             Destroy(item.fireball);
             Destroy(item.indicator);
         }
-        audioSource.PlayOneShot(dieClip, 2);
+        audioSource.PlayOneShot(dieClip, 5);
         activeFireballDatas.Clear();
         Destruction.DestructableDie();
     }

@@ -6804,11 +6804,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press X AND Y button
+  m_text: 'Press X AND Y buttons
 
-    simultaneously to reset
+    simultaneously to
 
-    camera position.'
+    relocate & continue'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9f3bcdd3d11dfa042ac3935900dde386, type: 2}
   m_sharedMaterial: {fileID: 6834644060723591062, guid: 9f3bcdd3d11dfa042ac3935900dde386, type: 2}
@@ -6841,7 +6841,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 16
+  m_fontStyle: 8
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

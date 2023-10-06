@@ -5807,6 +5807,7 @@ MonoBehaviour:
   prepareAttackAnimation: {fileID: 0}
   attackAnimation: {fileID: 0}
   dieAnimation: {fileID: 0}
+  healthProperty: {fileID: 4803651933633818444}
   Destruction: {fileID: 4255864950655221465}
   currentState: IdleDragonState
   animProgress: 0

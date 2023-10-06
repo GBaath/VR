@@ -8928,8 +8928,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: CarelessScorpionState
   movementSpeed: 1
-  target: {fileID: 0}
   fov: {fileID: 949172467650389090}
+  target: {fileID: 0}
+  deathFX: {fileID: 7066763031991719493, guid: 36d790134c3367e4bb9cef6d8cea1dd3, type: 3}
 --- !u!114 &949172467650389090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8942,8 +8943,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dda52fe202af264fa0a14e5a71180e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeRadius: 12
-  seeRadiusIncrease: 8
+  seeRadius: 10
+  seeRadiusIncrease: 5
   currentSeeRadiusIncrease: 0
   seeAngle: 360
   attackRadius: 0
@@ -8971,7 +8972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  deathTimer: 3
+  deathTimer: 2
   isDead: 0
 --- !u!95 &973799592033484490
 Animator:

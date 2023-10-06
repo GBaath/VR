@@ -1,10 +1,10 @@
 using UnityEngine;
 
 public class HealthProperty : MonoBehaviour {
-    [SerializeField] float maxHealth = 1, deathTimer = 3;
+    public float maxHealth = 1, deathTimer = 3;
     float healthLost;
     float currentHealth;
-    public float Health {
+    public float CurrentHealth {
         get { return maxHealth - healthLost; }
         set { currentHealth = value; }
     }

@@ -74,10 +74,8 @@ public class ProjectileDamage : MonoBehaviour {
     }
 
     private void DamagePlayer(Health playerHealth, bool fromFireball = false) {
-        if (fromFireball) {
-            if (TryGetComponent(out FireballAudio audio)) {
-                audio.PlayFireballImpact();
-            }
+        if (fromFireball && TryGetComponent(out FireballAudio audio)) {
+            audio.PlayFireballImpact();
         }
         playerHealth.TakeDamage(damage);
         Destroy(gameObject);
