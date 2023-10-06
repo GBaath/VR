@@ -3426,10 +3426,34 @@ PrefabInstance:
       propertyPath: hips
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2190578424470524643, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: deathFX
+      value: 
+      objectReference: {fileID: 7066763031991719493, guid: 36d790134c3367e4bb9cef6d8cea1dd3, type: 3}
+    - target: {fileID: 2190578424470524643, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: deathTimer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: seeAngle
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: seeRadius
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: viewObject
       value: 
       objectReference: {fileID: 5615523841482337511}
+    - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: attackRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: seeRadiusIncrease
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4283345300893703435, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.9955106
@@ -3534,9 +3558,9 @@ MonoBehaviour:
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 67b204d008a83784a90041422dbc8fc2, type: 2}
   dmgAudioData: {fileID: 11400000, guid: 6bea75d998a7bbc45b06145f623fae9a, type: 2}
-  deathFX: {fileID: 7066763031991719493, guid: 36d790134c3367e4bb9cef6d8cea1dd3, type: 3}
   fieldOfView: {fileID: 7157174348771637072}
   audioSource: {fileID: 8562886181552678931}
+  deathFX: {fileID: 7066763031991719493, guid: 36d790134c3367e4bb9cef6d8cea1dd3, type: 3}
   currentState: IdleEnemyState
   isWaitingForOtherEnemies: 0
   decayColor: {r: 1, g: 1, b: 1, a: 1}

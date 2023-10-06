@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f14e5c18296b74998dcf1ebd3a9426, type: 3}
   m_Name: Ghost
   m_EditorClassIdentifier: 
-  maxHealth: 15
-  attackDamage: 35
+  maxHealth: 10
+  attackDamage: 25
   movementSpeed: 1.25
-  attackSpeedMultiplier: 1
+  attackSpeedMultiplier: 0.75
   animProgress: animProgress
   idleAnimation: {fileID: 7400000, guid: 21d7fbbdae25e684ba9c204f2c19d588, type: 2}
   chaseAnimation: {fileID: 7400000, guid: e14d84548d58ef643bf2cd67c9c44889, type: 2}

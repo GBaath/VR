@@ -6,7 +6,6 @@ public class ProjectileDamage : MonoBehaviour {
     public float homingSpeed = 10;
     public bool fromEnemy = false;
     public bool isFireball = false;
-    //public GameObject 
     [HideInInspector] public bool isDead = false;
 
     void Start() {
@@ -67,9 +66,10 @@ public class ProjectileDamage : MonoBehaviour {
     }
 
     private void KillHomingSkull(Transform otherTransform) {
-        otherTransform.GetComponentInParent<ProjectileDamage>().isDead = true;
-        //AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, Camera.main.transform.position, 1);
-        Destroy(otherTransform.GetComponentInParent<ProjectileDamage>().gameObject);
+        ProjectileDamage otherPD = otherTransform.GetComponentInParent<ProjectileDamage>();
+        otherPD.isDead = true;
+        AudioSource.PlayClipAtPoint(GameManager.instance.audioManager.hitFeedback, transform.position, 1);
+        Destroy(otherPD.gameObject);
         Destroy(gameObject);
     }
 

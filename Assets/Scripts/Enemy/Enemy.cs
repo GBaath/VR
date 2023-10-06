@@ -10,9 +10,9 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeReference] GameObject target;
     [SerializeReference] EnemyData enemyData;
     [SerializeReference] AudioData dmgAudioData;
-    [SerializeReference] GameObject deathFX;
     [SerializeReference] FieldOfView fieldOfView;
     [SerializeReference] AudioSource audioSource;
+    public GameObject deathFX;
     //[SerializeReference] AudioClip
 
     [Tooltip("Displays the current state this enemy is in. State cannot be changed outside the EnemyState StateMachine.")]
@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     // Private variables
     MaterialPropertyBlock propertyBlock;
     new SkinnedMeshRenderer renderer;
-    GameObject spawnFX = null;
+    protected GameObject spawnFX;
 
     //bool IDamageable.IsDead { get => isDead; set => isDead = value; }
     public virtual void TakeDamage(float amount, bool isDead) {
@@ -109,24 +109,27 @@ public class Enemy : MonoBehaviour, IDamageable {
     }
     public virtual void Die(float delay) {
         state = state.Die(this);
-        Invoke(nameof(SpawnFX), delay - .01f);
         Destroy(gameObject, delay);
-        spawnFX = deathFX;
         isWaitingForOtherEnemies = true;
+        audioSource.clip = dmgAudioData.GetRandomClip();
+        audioSource.pitch = 0.5f;
+        audioSource.Play();
         if (!hips) { return; }
+        spawnFX = deathFX;
+        Invoke(nameof(SpawnFX), delay - Time.deltaTime * 2);
         RagdollSetActive(true);
     }
-    void SpawnFX() {
-        Debug.Log("spawnFX : DeathFX");
+    protected void SpawnFX() {
         GameObject newFX;
-        if (spawnFX) {
-            newFX = Instantiate(spawnFX, transform.position, Quaternion.identity);
+        if (spawnFX != null) {
+            newFX = Instantiate(spawnFX, hips.transform.position, Quaternion.identity);
+            spawnFX = null;
             foreach (ParticleSystem particleSystem in newFX.GetComponentsInChildren<ParticleSystem>()) {
                 particleSystem.Play();
             }
-            spawnFX = null;
+            Destroy(newFX, 3);
         } else {
-            Debug.LogWarning("Missing particle: " + spawnFX);
+            // Don't spawn particle
         }
     }
     void SetDmgFlash() {
@@ -142,7 +145,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         renderer.SetPropertyBlock(propertyBlock);
     }
     void TakeKnockback(float dmg, GameObject dmgSource) {
-        if (dmgSource == null) { return; }
+        if (dmgSource == null && state != new ChaseEnemyState() && state != new AttackEnemyState()) { return; }
         Vector3 directionVector = new Vector3(
             transform.position.x, transform.position.y, transform.position.z) -
             new Vector3(dmgSource.transform.position.x, transform.position.y, dmgSource.transform.position.z);
@@ -211,8 +214,8 @@ public class Enemy : MonoBehaviour, IDamageable {
         animTimer += Time.deltaTime;
         LessenDmgFlash();
 
-        if (state == new DeadEnemyState()) { state = state.Die(this); return; }
-        if (!Target || isWaitingForOtherEnemies || !FieldOfView.canSeeTarget) {
+        if (state == new DeadEnemyState()) { return; }
+        if (!Target || isWaitingForOtherEnemies || !(FieldOfView.canSeeTarget || Vector3.Distance(transform.position, Target.transform.position) < FieldOfView.attackRadius + FieldOfView.currentAttackRadiusIncrease)) {
             state = state.Idle(this);
             return;
         }
@@ -247,4 +250,8 @@ public class Enemy : MonoBehaviour, IDamageable {
             }
         }
     }
+
+    //public virtual void Decay() {
+    //    currentMaterialColor = Mathf.MoveTowards(currentMaterialColor, 0, 0.5f * Time.deltaTime);
+    //}
 }

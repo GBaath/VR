@@ -5,11 +5,7 @@ public interface IEnemyState {
 
     IEnemyState Chase(Enemy enemy);
 
-    IEnemyState Cheer(Enemy enemy);
-
     IEnemyState Confuse(Enemy enemy);
-
-    IEnemyState Dance(Enemy enemy);
 
     IEnemyState Die(Enemy enemy);
 
@@ -66,11 +62,7 @@ public class IdleEnemyState : BaseEnemyState, IEnemyState {
 
     IEnemyState IEnemyState.Chase(Enemy enemy) => ChangeState(new SurprisedEnemyState(), enemy, true);
 
-    IEnemyState IEnemyState.Cheer(Enemy enemy) => ChangeState(new CheerEnemyState(), enemy);
-
     IEnemyState IEnemyState.Confuse(Enemy enemy) => this;
-
-    IEnemyState IEnemyState.Dance(Enemy enemy) => ChangeState(new DanceEnemyState(), enemy);
 
     IEnemyState IEnemyState.Die(Enemy enemy) => ChangeState(new DeadEnemyState(), enemy);
 
@@ -101,16 +93,8 @@ public class SurprisedEnemyState : BaseEnemyState, IEnemyState {
         if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
     }
 
-    IEnemyState IEnemyState.Cheer(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return ChangeState(new CheerEnemyState(), enemy); } else { return this; }
-    }
-
     IEnemyState IEnemyState.Confuse(Enemy enemy) {
         if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
-    }
-
-    IEnemyState IEnemyState.Dance(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.EnemyData.surprisedAnimation)) { return new DanceEnemyState(); } else { return this; }
     }
 
     IEnemyState IEnemyState.Die(Enemy enemy) => ChangeState(new DeadEnemyState(), enemy);
@@ -138,11 +122,7 @@ public class ChaseEnemyState : BaseEnemyState, IEnemyState {
 
     IEnemyState IEnemyState.Chase(Enemy enemy) => this;
 
-    IEnemyState IEnemyState.Cheer(Enemy enemy) => ChangeState(new CheerEnemyState(), enemy);
-
     IEnemyState IEnemyState.Confuse(Enemy enemy) => ChangeState(new ConfusedEnemyState(), enemy);
-
-    IEnemyState IEnemyState.Dance(Enemy enemy) => ChangeState(new DanceEnemyState(), enemy);
 
     IEnemyState IEnemyState.Die(Enemy enemy) => ChangeState(new DeadEnemyState(), enemy);
 
@@ -172,15 +152,7 @@ public class AttackEnemyState : BaseEnemyState, IEnemyState {
         if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier)) { return ChangeState(new ChaseEnemyState(), enemy, true); } else { return this; }
     }
 
-    IEnemyState IEnemyState.Cheer(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
-    }
-
     IEnemyState IEnemyState.Confuse(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
-    }
-
-    IEnemyState IEnemyState.Dance(Enemy enemy) {
         if (AnimationEnded(enemy, enemy.EnemyData.attackAnimation, enemy.EnemyData.AttackSpeedMultiplier)) { return ChangeState(new ConfusedEnemyState(), enemy); } else { return this; }
     }
 
@@ -215,15 +187,7 @@ public class ConfusedEnemyState : BaseEnemyState, IEnemyState {
 
     IEnemyState IEnemyState.Chase(Enemy enemy) => ChangeState(new SurprisedEnemyState(), enemy);
 
-    IEnemyState IEnemyState.Cheer(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.EnemyData.confusedAnimation)) { return ChangeState(new CheerEnemyState(), enemy); } else { return this; }
-    }
-
     IEnemyState IEnemyState.Confuse(Enemy enemy) => this;
-
-    IEnemyState IEnemyState.Dance(Enemy enemy) {
-        if (AnimationEnded(enemy, enemy.EnemyData.confusedAnimation)) { return ChangeState(new DanceEnemyState(), enemy); } else { return this; }
-    }
 
     IEnemyState IEnemyState.Die(Enemy enemy) => ChangeState(new DeadEnemyState(), enemy);
 
@@ -244,88 +208,12 @@ public class ConfusedEnemyState : BaseEnemyState, IEnemyState {
     }
 }
 
-public class DanceEnemyState : BaseEnemyState, IEnemyState {
-    IEnemyState IEnemyState.Attack(Enemy enemy) {
-        return new SurprisedEnemyState();
-    }
-
-    IEnemyState IEnemyState.Chase(Enemy enemy) {
-        return new SurprisedEnemyState();
-    }
-
-    IEnemyState IEnemyState.Cheer(Enemy enemy) {
-        return new CheerEnemyState();
-    }
-
-    IEnemyState IEnemyState.Confuse(Enemy enemy) {
-        return new SurprisedEnemyState();
-    }
-
-    IEnemyState IEnemyState.Dance(Enemy enemy) => this;
-
-    IEnemyState IEnemyState.Die(Enemy enemy) {
-        return new DeadEnemyState();
-    }
-
-    IEnemyState IEnemyState.Idle(Enemy enemy) {
-        return new IdleEnemyState();
-    }
-
-    IEnemyState IEnemyState.Surprise(Enemy enemy) {
-        return new SurprisedEnemyState();
-    }
-
-    IEnemyState IEnemyState.Update(Enemy enemy) {
-        return this;
-    }
-}
-
-public class CheerEnemyState : BaseEnemyState, IEnemyState {
-    IEnemyState IEnemyState.Attack(Enemy enemy) {
-        return new SurprisedEnemyState();
-    }
-
-    IEnemyState IEnemyState.Chase(Enemy enemy) {
-        return new SurprisedEnemyState();
-    }
-
-    IEnemyState IEnemyState.Cheer(Enemy enemy) => this;
-
-    IEnemyState IEnemyState.Confuse(Enemy enemy) {
-        return new SurprisedEnemyState();
-    }
-
-    IEnemyState IEnemyState.Dance(Enemy enemy) {
-        return new DanceEnemyState();
-    }
-
-    IEnemyState IEnemyState.Die(Enemy enemy) {
-        return new DeadEnemyState();
-    }
-
-    IEnemyState IEnemyState.Idle(Enemy enemy) {
-        return new IdleEnemyState();
-    }
-
-    IEnemyState IEnemyState.Surprise(Enemy enemy) {
-        return new SurprisedEnemyState();
-    }
-
-    IEnemyState IEnemyState.Update(Enemy enemy) {
-        return this;
-    }
-}
-
 public class DeadEnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Attack(Enemy enemy) => this;
 
     IEnemyState IEnemyState.Chase(Enemy enemy) => this;
 
-    IEnemyState IEnemyState.Cheer(Enemy enemy) => this;
-
     IEnemyState IEnemyState.Confuse(Enemy enemy) => this;
-
-    IEnemyState IEnemyState.Dance(Enemy enemy) => this;
 
     IEnemyState IEnemyState.Die(Enemy enemy) {
         // Remain dead if dead
@@ -339,7 +227,9 @@ public class DeadEnemyState : BaseEnemyState, IEnemyState {
     IEnemyState IEnemyState.Update(Enemy enemy) {
         if (startOfState) {
             startOfState = false;
+            AnimateState(enemy, enemy.EnemyData.attackTrigger);
         }
+        //enemy.Decay();
         // Decay
         return this;
     }

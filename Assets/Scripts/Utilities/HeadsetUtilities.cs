@@ -3,16 +3,16 @@ using UnityEngine.InputSystem;
 
 public class HeadsetUtilities : MonoBehaviour
 {
-
-
     [SerializeField] Transform xrCamera;
     [SerializeField] Transform cameraOffset;
     [SerializeField] Transform resetTarget;
     [SerializeField] VRWC_FollowTransform followtransform;
 
-    private float angle;
     public InputActionReference xButton;
     public InputActionReference yButton;
+
+    [SerializeReference] Canvas resetCameraPositionReminder;
+    //bool hasResetOnce = false;
 
     private void OnEnable()
     {
@@ -30,6 +30,8 @@ public class HeadsetUtilities : MonoBehaviour
     {
         if (xButton.action.triggered && yButton.action.IsPressed() || xButton.action.IsPressed() && yButton.action.triggered)
         {
+            if (resetCameraPositionReminder)
+                resetCameraPositionReminder.gameObject.SetActive(false);
             ResetPosition();
         }
 

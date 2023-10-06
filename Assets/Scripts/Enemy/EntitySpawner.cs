@@ -12,6 +12,7 @@ public class EntityChance {
 public class EntitySpawner : MonoBehaviour {
     public List<EntityChance> entityChanceList = new();
     [SerializeField] bool spawnEntity = false;
+    [SerializeField] int overallSpawnChance = 25;
 
     GameObject GetRandomEnemyByChance() {
         int chanceIncrease = 0;
@@ -42,7 +43,7 @@ public class EntitySpawner : MonoBehaviour {
         GameObject newEntity;
 
         int randomSpawnChance = Random.Range(1, 100) + GameManager.instance.roomManager.roomsPassed * 5;
-        int chanceToSpawn = 100 - 50;
+        int chanceToSpawn = 100 - overallSpawnChance;
         if (randomSpawnChance < chanceToSpawn) { return; }
 
         if (spawnEntity) {

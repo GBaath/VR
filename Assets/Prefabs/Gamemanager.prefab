@@ -1138,7 +1138,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.047, y: 0.631}
+  m_AnchoredPosition: {x: -0.053, y: 0.74}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5358520337849099739
@@ -1169,7 +1169,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: < SHOOT ME
+  m_text: '< SHOOT US
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9f3bcdd3d11dfa042ac3935900dde386, type: 2}
   m_sharedMaterial: {fileID: 6834644060723591062, guid: 9f3bcdd3d11dfa042ac3935900dde386, type: 2}
@@ -4617,6 +4619,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.024999976
       objectReference: {fileID: 0}
+    - target: {fileID: 7759594846339791658, guid: fd1e2165a2044e0469b88f64aafe3100, type: 3}
+      propertyPath: voiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f77afa74574dbe7429d5123c4e4f913e, type: 3}
     - target: {fileID: 7808834547713008498, guid: fd1e2165a2044e0469b88f64aafe3100, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.024999976
@@ -4767,6 +4773,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.024999976
       objectReference: {fileID: 0}
+    - target: {fileID: 7759594846339791658, guid: fd1e2165a2044e0469b88f64aafe3100, type: 3}
+      propertyPath: voiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4a0824da070a3f7469542bf178bf8aa3, type: 3}
     - target: {fileID: 7808834547713008498, guid: fd1e2165a2044e0469b88f64aafe3100, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.024999976

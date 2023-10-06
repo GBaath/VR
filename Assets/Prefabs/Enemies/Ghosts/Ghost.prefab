@@ -597,7 +597,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 574d911bd444fe04097cacf3e07c3c3a, type: 2}
+  - {fileID: 2100000, guid: efb9fc6bdd4a0864386a75af53af30cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2036,9 +2036,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2190578424470524643, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: deathFX
+      value: 
+      objectReference: {fileID: 7066763031991719493, guid: 36d790134c3367e4bb9cef6d8cea1dd3, type: 3}
+    - target: {fileID: 2190578424470524643, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: deathTimer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
+      propertyPath: seeAngle
+      value: 270
+      objectReference: {fileID: 0}
     - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: seeRadius
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: viewObject
@@ -2046,11 +2058,11 @@ PrefabInstance:
       objectReference: {fileID: 2307321519575934858}
     - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: attackRadius
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3391077371947669904, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: seeRadiusIncrease
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4283345300893703435, guid: 3f077759a57cb1140ae77006b58ef595, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2176,9 +2188,9 @@ MonoBehaviour:
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 322f44f8dcfb0e748b99dde587f90cbe, type: 2}
   dmgAudioData: {fileID: 11400000, guid: 4841960053ee3f3479b1320527dacc77, type: 2}
-  deathFX: {fileID: 7066763031991719493, guid: 36d790134c3367e4bb9cef6d8cea1dd3, type: 3}
   fieldOfView: {fileID: 4595872124357384042}
   audioSource: {fileID: 3044942300333426729}
+  deathFX: {fileID: 7066763031991719493, guid: 36d790134c3367e4bb9cef6d8cea1dd3, type: 3}
   currentState: IdleEnemyState
   isWaitingForOtherEnemies: 0
   decayColor: {r: 1, g: 1, b: 1, a: 1}

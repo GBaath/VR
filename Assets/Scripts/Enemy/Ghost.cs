@@ -4,18 +4,25 @@ public class Ghost : Enemy {
     [SerializeReference] GameObject homingHead;
     [SerializeReference] Transform spawnHeadPoint;
 
-    //public override void Die(float delay) {
-    //    base.Die(delay);
-    //}
-
-    public override void TryAttack() {
-        base.TryAttack();
+    public override void Die(float delay) {
+        state = state.Die(this);
+        spawnFX = deathFX;
+        Invoke(nameof(SpawnFX), delay - Time.deltaTime * 2);
+        Destroy(gameObject, delay);
+        isWaitingForOtherEnemies = true;
     }
 
     protected override void Update() {
+        if (state == new DeadEnemyState()) {
+            Debug.Log("shrinking");
+            transform.localScale -= new Vector3(1f, 1f, 1f);
+            return;
+        }
         base.Update();
-        if (state == new DeadEnemyState())
-            transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+    }
+
+    public override void TryAttack() {
+        base.TryAttack();
     }
 
     protected override void Attack() {

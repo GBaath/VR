@@ -109,7 +109,6 @@ public class DeadDragonState : BaseDragonState, IDragonState {
 
     IDragonState IDragonState.Update(Dragon dragon) {
         if (startOfState) {
-            
             startOfState = false;
             dragon.CrumbleDown();
         }
