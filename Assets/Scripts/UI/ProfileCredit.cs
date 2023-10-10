@@ -9,6 +9,9 @@ public class ProfileCredit : MonoBehaviour {
 
     private void OnCollisionEnter(Collision other) {
         EnableThis();
+        if (other.transform.TryGetComponent(out ProjectileDamage pd)) {
+            Destroy(other.gameObject);
+        }
     }
 
     private void Update() {
